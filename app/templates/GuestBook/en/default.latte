@@ -1,0 +1,88 @@
+{block content}
+              
+    {snippet form}
+    {form questionForm}     
+    
+    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+    
+         <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+                <tr>                                        
+                    <td class="td_input_label_guestb">{label name /} &nbsp</td>                    
+                    <td class="td_input_default">{input name}</td>
+                </tr>
+                <tr>
+                    <td class="td_input_label_guestb">{label question /}</td>                    
+                    <td class="td_input_default">{input question}</td>
+                </tr>                
+         </table>                  
+         <table cellspacing="0">                
+                <tr>                       
+                    <td class="td_input_submit_guestb_name">{input submit} &nbsp {input reset}</td> 
+                </tr>
+         </table>         
+         <hr>
+    {/form questionForm}     
+    {/snippet} 
+
+    {snippet list}	
+        {if $data}                              
+            
+            {if $countQuestions >= 5}         
+            <div id="paginate">
+            {control paginator}
+            </div>            
+            <h2></h2>
+            {else}
+            <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+            </table>
+            {/if}
+         
+            {foreach $data as $dat}                                
+                {if $dat[0]}                       
+                    <div id="comments">
+                        <div class="comment">
+                        <div class="contain">
+                                <h4><span>{$dat[0]->name}</span></h4>
+                                <em class="date">{$dat[0]->dateTime}</em>
+                        </div>
+                        <div class="content_q">
+                            {!$dat[0]->question|escape|nl2br}                                 
+                        </div>
+                        </div> 
+                    </div>
+                {/if}
+                {if $dat[1]}                    
+                    <div id="comments">
+                        <div class="comment answ" id="answ-{$dat[1]->idguestBook_a}">
+                        <div class="contain">
+                                <h4><span>{$guestBookUserName}</span></h4>
+                                <em class="date">{$dat[1]->dateTime}</em>
+                        </div>
+                        <div class="content_q">
+                            {!$dat[1]->answer|escape|nl2br}         
+                        </div>
+                        </div>         
+                    </div>                        
+                {/if}                
+            {/foreach}
+            
+            <h2></h2>            
+            {if $countQuestions >= 5}
+            <div id="paginate_bottom">
+            {control paginator}
+            </div>               
+            {/if}           
+        
+        {else}
+            
+            <div id="paginate">
+                Litujeme, ale momentálně nejsou k dispozici žádné příspěvky.
+            </div>            
+            <h2></h2>   
+            
+        {/if}    
+    {/snippet}   
+
+{/block}

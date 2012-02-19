@@ -1,0 +1,183 @@
+{block content}
+              
+    <h2>Základní nastavení stránky</h2>
+    
+    {snippet form}
+    {form editForm}
+	 <table cellspacing="0">            
+                <tr style="height: 10px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="2">Nastavení vzhledu</td>
+                    
+                    <td class="td_input_label_default">Aktivní vzhled:</td>                    
+                    <td class="td_status">{$layout_desc}</td>                    
+                </tr>
+                <tr>
+                    <td class="td_input_label_default">{label layouts /}</td>                    
+                    <td class="td_input_default_select">{input layouts}</td>                    
+                </tr>    
+                <tr style="height: 15px;"><td></td></tr>
+         </table>         
+         <h2></h2>         
+         <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="2">Nastavení nadpisů</td>
+                    
+                    <td class="td_input_label_default">{label header1 /} &nbsp</td>                    
+                    <td class="td_input_default">{input header1}</td>
+                </tr>
+                <tr>
+                    <td class="td_input_label_default">{label header2 /}</td>                    
+                    <td class="td_input_default">{input header2}</td>
+                </tr>
+                <tr style="height: 20px;"><td></td></tr>
+         </table>         
+         <h2></h2>    
+         <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="6">Nastavení stránky</td>
+                    
+                    <td class="td_input_label_default">{label title /} &nbsp</td>                    
+                    <td class="td_input_default">{input title}</td>        
+                    <td id="title_help_click" class="icon icon-help"></td>
+                </tr>
+                <tr id="title_help" class="title_help" colspan="2">                    
+                    <td class="td_input_label_default"></td>
+                    <td class="td_input_default">
+                        <div class="title_help_content">
+                            V názvu stránky použijte nejdůležitější klíčová slova nebo fráze
+                            a dodržte délku 10 až 64 znaků včetně mezer. Doporučujeme:<br />
+                            - minimalizovat použití spojky 'a',<br />
+                            - vyhnout se použití slov, které se na stránce nevyskytují.
+                        </div>
+                        <div class="title_help_content_divider"></div>
+                    </td>                    
+                </tr>
+                <tr>
+                    <td class="td_input_label_default_desc">{label description /} &nbsp</td>                    
+                    <td class="td_input_default">{input description}</td>                
+                    <td id="desc_help_click" class="icon icon-help"></td>
+                </tr>
+                <tr id="desc_help" class="desc_help" colspan="2">                    
+                    <td class="td_input_label_default"></td>
+                    <td class="td_input_default">
+                        <div class="desc_help_content">
+                            Popis stránky představuje stručný opis, který by mněl nejenom 
+                            pro účely vyhledávačů, ale především lidských návštevníků jednoznačně
+                            popisovat účel stránky.<br />                            
+                            Jeho délka musí být delší než 50 znaků a nesmí být delší než
+                            149 znaků včetně mezer. 
+                            Ujistěte se, že popis je relevantný k obsahu stránky, tzn. 
+                            neobsahuje zbytečně slová nevyskytující se v obsahu
+                            stránky.
+                        </div>
+                        <div class="desc_help_content_divider"></div>
+                    </td>                    
+                </tr>                
+                <tr>
+                    <td class="td_input_label_default">{label keywords /} &nbsp</td>                    
+                    <td class="td_input_default">{input keywords}</td>                
+                    <td id="keywords_help_click" class="icon icon-help"></td>
+                </tr>                
+                <tr id="keywords_help" class="keywords_help" colspan="2">                    
+                    <td class="td_input_label_default"></td>
+                    <td class="td_input_default">
+                        <div class="keywords_help_content">
+                            Klíčová slova představují seznam slov a fráz týkajících se
+                            obsahu Vaší stránky, sloužící jako další zdroj textu pro vyhledávače.
+                            Doporučený rozsah je 4 až 8 slov nebo fráz, které  
+                            oddělíte použitím čárky ','.
+                        </div>
+                        <div class="keywords_help_content_divider"></div>
+                    </td>                    
+                </tr>                
+                <tr style="height: 15px;"><td></td></tr>
+         </table>
+         <h2></h2>
+         <table cellspacing="0">                
+                <tr>                            
+                    <td class="td_input_default_submit">{input submit} &nbsp&nbsp </td> 
+                </tr>
+         </table> 
+         <h2></h2>         
+    {/form editForm}     
+    {/snippet} 
+
+    <script type="text/javascript">     
+//        $(document).ready(function()
+//        {           
+//           $('#frmeditForm-title').qtip({
+//                content: {
+//                    text: 'V názvu stránky použijte nejdůležitější klíčová slova nebo fráze\n\
+//                    a dodržte délku 10 až 64 znaků včetně mezer. Doporučujeme:\n\
+//                    - Snažte se minimalizovat použití spojky "a"              \n\
+//                    - vyhněte se použití slov, které se na stránce nenacházejí.//',
+//                    width: '200'
+//                },
+//                position: {
+//                    my: 'bottom left',
+//                    at: 'top left'
+//                },
+//                show: {
+//                    event: 'mouseenter',
+//                    ready: false                 
+//                },
+//                hide: {
+//                    event: 'unfocus'
+//                },                
+//                style: {
+//                    classes: 'ui-tooltip-shadow ui-tooltip-jtools'                    
+//                }            
+//           });            
+//        });     
+        
+      var clicked = 0;
+      var clicked_desc = 0;
+      var clicked_keys = 0;      
+      $("#title_help_click").click(function () {                    
+          clicked++;
+          $("#desc_help").hide();
+          $("#keywords_help").hide();
+          if (clicked == 1) {                            
+            clicked_desc = 0;
+            clicked_keys = 0;
+            $("#title_help").fadeIn(1000);          
+          } else {
+            $("#title_help").fadeOut(1000);          
+            clicked = 0;            
+          }          
+      });                        
+      
+      $("#desc_help_click").click(function () {          
+          clicked_desc++;
+          $("#title_help").hide();                    
+          $("#keywords_help").hide();
+          if (clicked_desc == 1) {                                          
+            clicked = 0;
+            clicked_keys = 0;
+            $("#desc_help").fadeIn(1000);          
+          } else {
+            $("#desc_help").fadeOut(1000);          
+            clicked_desc = 0;
+          }
+      }); 
+      
+      $("#keywords_help_click").click(function () {                    
+          clicked_keys++;
+          $("#title_help").hide();
+          $("#desc_help").hide(1000);          
+          if (clicked_keys == 1) {                           
+            clicked = 0;
+            clicked_desc = 0;
+            $("#keywords_help").fadeIn(1000);                  
+          } else {
+            $("#keywords_help").fadeOut(1000);          
+            clicked_keys = 0;
+          }
+      });      
+
+    </script>
+         
+{/block}

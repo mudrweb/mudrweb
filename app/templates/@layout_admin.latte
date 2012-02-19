@@ -1,0 +1,126 @@
+{**
+ * Mudrweb AdminModule layout template.
+ *
+ * @copyright  Copyright (c) 2012 Zippo
+ * @package    mudrweb
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs" xmlns:og="http://opengraphprotocol.org/schema/">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Language" content="cs">
+
+	<meta name="description" content="Admin panel mudrweb.cz">
+        <meta name="robots" content="noindex">
+        
+	<title>MUDRweb.cz - Admin panel</title>
+	        	
+        <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../../css/admin.css" type="text/css">        
+        
+	<script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery.nette.js"></script>
+        <script type="text/javascript" src="../../js/jquery.livequery.js"></script>
+        <script type="text/javascript" src="../../js/jquery.ajaxform.js"></script>        
+        <script type="text/javascript" src="../../js/live-form-validation.js"></script>
+        <script type="text/javascript" src="../../js/jquery.pstrength.js"></script>
+
+        <script type="text/javascript">
+            $(function() { $('.password').pstrength(); $('.password_regUserPanel').pstrength(); $(".color-picker").miniColors({ letterCase: 'uppercase' }); });                    
+        </script>
+        
+        <script type="text/javascript" src="../../ckeditor/ckeditor.js"></script>        
+
+        <script type="text/javascript" src="../../js/jquery.dataTables.min.js"></script>        
+        <script type="text/javascript" src="../../js/jquery.dataTables.editable.js"></script>        
+        <script type="text/javascript" src="../../js/jquery.jeditable.mini.js"></script>
+        <script type="text/javascript" src="../../js/jquery.jeditable.masked.js"></script>   
+
+        <script type="text/javascript" src="../../js/jquery.maskedinput-1.3.js"></script>   
+        <script type="text/javascript" src="../../js/jquery.jeditable.datepicker.js"></script>   
+        <script type="text/javascript" src="../../js/jquery.validate.js"></script>   
+        <script type="text/javascript" src="../../js/additional-methods.js"></script>           
+        
+        <script type="text/javascript" src="../../js/jquery.miniColors.js"></script>                   
+	{block head}{/block}
+</head>
+
+    <body>	
+        <div id="wrapper">
+            <div id="header">
+                <div class="container">
+                    <div class="grid_header_l">
+                    {if $user->isLoggedIn() && $userRole != 'admin'}
+                        <a href="{link :Default:default}">Návrat na hlavní stránku</a> <span>|</span> <a href="{link :Admin:Default:}">Admin panel</a> {if $user->isLoggedIn()} <span>|</span> <a href="{$preview}" target="_blank">Náhled stránky</a>{/if}
+                    {elseif $user->isLoggedIn() && $userRole == 'admin'}
+                        <a href="{link :Admin:AdminDefault:}">Admin panel</a>
+                    {else}                        
+                        <a href="{link :Default:default}">Návrat na hlavní stránku</a>
+                    {/if}
+                    </div>                
+                    <div class="grid_header_r">
+                    {if $user->isLoggedIn()}<span class="icon-ui-black icon-ui-black-user"></span>Jste přihlášen jako {$userName} ({$userRole}) <span>|</span> <a href="{plink :Admin:Login:logout}">Odhlásit</a>{/if}        
+                    </div>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+
+            {if $user->isLoggedIn()}
+            <div id="nav-container"> 
+                <div class="container_nav">    
+                        {widget navigation}                            
+                </div>    
+            </div>
+            <div class="clear">&nbsp;</div>
+            {snippet flashes}
+                <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+            {/snippet}
+            {/if}
+
+            <div id="main" class="container">
+                {if $user->isLoggedIn()}
+                <div class="grid_content">
+                    <div id="content">                
+                            {include #content}                        
+                    </div>
+                </div>                   
+                {elseif $presenter_name === 'ForgottenPassword'}
+                <div class="grid_content_fpass">                                                                           
+                    <div id="content_fpass">                            
+                            {include #content}                                
+                    </div>                        
+                </div>       
+                {else}                    
+                <div class="grid_content_log">                                                                        
+                    <div id="content_log">                            
+                            {include #content}                                
+                    </div>                        
+                </div>
+                {/if}
+                <div class="clear">&nbsp;</div>
+            </div>	        
+
+            <div id="footer">   
+                <div class="container">
+                    <div class="grid_footer_l">
+                        Optimalizováno pro prohlížeče IE9+, Firefox 8+ a Google Chrome 16+<br />
+                        {if $user->isLoggedIn()}
+                        Aktualizováno dne 16.02.2012; verze beta1 
+                        {/if}
+                    </div>
+                    <div class="grid_footer_r">            
+                    {if $user->isLoggedIn()}<span class="icon-ui icon-ui-key"></span><span>Poslední úspěšné přihlášení: {$lastSuccessfulLogin}</span>{/if}                                                                                                
+                    </div>
+                    <div class="clear">&nbsp;</div>
+                </div>
+            </div>
+        </div>                
+    </body>
+    
+</html>

@@ -1,0 +1,56 @@
+{var $robots = noindex}
+{layout none}
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex">
+<style>
+        body { font-size: 13px; font-family: Arial, sans-serif; background-color: #ffffff; background-image: url("{$sharedBasePath}/images/b.jpg"); background-repeat: no-repeat; line-height:1.5; height: 100%; }        
+        #wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px; }
+        .container { margin-left: auto; margin-right: auto; width: 920px; }
+        #header { width: auto; font-size: 11px; background-color: #0099CC; padding: 3px 0px 3px 0px; color: #eee; border-bottom: 1px solid #003366; }
+        #header a { color: #eee; text-decoration: none; }
+        #header a:hover { text-decoration: underline; }
+        #header span { color: #eee; }
+        .grid_header_l { display: inline; float: left; margin-left: 50px; margin-top: 40px; }
+        .grid_header_r { display: inline; float: right; margin-right: 10px; width: 670px; padding-left: 40px; }
+        #main { margin-top: 10px; margin-bottom: 5px;}
+        #main #content { margin-top: 51px; margin-bottom: 27px; min-height: 510px; background: #FFFFFF; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
+        .grid_content { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 900px }
+        .grid_content_l { display: inline; float: left; margin-left: 10px; }
+        #log_logo_holder { padding: 10px; padding-top: 25px; }
+        #log_notifier_holder { font-size: 200%; padding:10px; color: #003366; margin-left: 10px; width: 840px; background-color: #E4F4F5; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+        #log_text_wrapper { font-size: 100%; padding-top: 30px; float: left;}        
+        .clear { clear: both; display: block; overflow: hidden; visibility: hidden; width: 0; height:0; }
+</style>
+
+<div id="wrapper">
+
+    <div id="main" class="container">
+        <div class="grid_content">                                                                        
+            <div id="content">   
+                <div class="grid_content_l">
+                    <div id="log_logo_holder">
+                        <a href="http://mudrweb.cz"><img src="{$sharedBasePath}/images/logo.png" class="noborder" alt="Návrat na hlavní stránku mudrweb.cz" /></a>
+                    </div>
+                    <div id="log_notifier_holder">
+                        Přístup zamítnut
+                    </div>
+                    <div id="log_text_wrapper">
+                        <div class="grid_header_l">
+                            <img src="{$sharedBasePath}/images/sad_smiley.jpg" alt="Přístup zamítnut - mudrweb.cz" />
+                        </div>        
+                        <div class="grid_header_r">
+                            <p>Nemáte potřebné právo k prohlížení této stránky. Prosím, vraťte se tlačítkem zpět ve Vašem prohlížeči.                                
+                                <br /><br />
+                                Váš MUDRweb tým.
+                            </p>     
+                            <p><small>error 403</small></p>
+                        </div>   
+                        <div class="clear">&nbsp;</div>
+                    </div>       
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

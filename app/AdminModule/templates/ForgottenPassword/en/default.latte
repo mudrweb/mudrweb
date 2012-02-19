@@ -1,0 +1,40 @@
+{var $robots = noindex}
+
+{block content}
+
+<h1>Odeslání jména a hesla</h1>
+
+<br />
+
+{form forgottenPasswordForm}
+	 <table cellspacing="0">            
+                <tr>
+                    <td class="td_input_label_fpass">{label subdomain /}</td>                    
+                    <td class="td_input_fpass_small">{input subdomain}</td>                    
+                </tr>
+                <tr>
+                    <td class="td_input_label_fpass_captcha" colspan="2">{label antispamtextcaptcha /}</td>                                                                                
+                </tr>
+                <tr>
+                    <td class="td_input_fpass_error" colspan="2">
+                        <div class="errors_fpass" n:if="$form->hasErrors()">
+                            <li n:foreach="$form->errors as $error">{$error}</li>
+                        </div>
+                    </td>
+                </tr>                
+                <tr>
+                    <td class="td_input_fpass" colspan="2">{input antispamtextcaptcha}</td>
+                </tr>
+                <tr>       
+                    <td class="td_input_fpass_buttons" colspan="2">{input send} &nbsp&nbsp {input back}</td>                    
+                </tr>                
+         </table>
+{/form}
+
+{block howto}
+    <div class="forgotten_password_send">
+        Zadejte prosím název Vaší stránky ve tvaru 'mojestranka' (bez 
+        části '.mudrweb.cz').
+    </div>
+{/block}
+{/block}

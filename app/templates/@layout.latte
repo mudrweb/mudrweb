@@ -1,0 +1,109 @@
+{**
+ * Mudrweb main layout template.
+ *
+ * @copyright  Copyright (c) 2012 Zippo
+ * @package    mudrweb
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs" xmlns:og="http://opengraphprotocol.org/schema/">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="cs" />            
+
+	<meta name="description" content="" />
+        <meta name="keywords" content="" />            
+	<meta name="robots" content="index,follow" />        
+        <meta name="author" content="HTML code: MUDRweb.cz; e-mail: support@mudrweb.cz" />        
+
+	<title>MUDRweb.cz - Místo pro Váš web</title>
+
+	<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../css/main.css" type="text/css">
+<!--        <link rel="stylesheet" href="../css/jquery-ui-1.8.16.custom.css" type="text/css">        -->
+        
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.nette.js"></script>
+        <script type="text/javascript" src="../js/jquery.livequery.js"></script>
+        <script type="text/javascript" src="../js/jquery.ajaxform.js"></script>        
+        <script type="text/javascript" src="../js/live-form-validation.js"></script>
+        <script type="text/javascript" src="../js/jquery.pstrength.js"></script>    
+      
+ 	<script type="text/javascript" src="../js/slides.min.jquery.js"></script>
+	<script type="text/javascript">
+                 $(document).ready(function() { $('#slides').slides({ preload: true, preloadImage: '../images/ajax-loader.gif', play: 6000, pause: 1, hoverPause: true });
+                 $('.password').pstrength(); $('.password_regUserPanel').pstrength(); });
+	</script>                   
+	{block head}{/block}
+</head>
+
+<body>
+
+<div id="wrapper">
+
+
+    <div id="header">
+        <div class="container">
+            <div class="grid_header_l">                                         
+                <a href="{link :Admin:Default:}" class="login" title="Přihlášení"><span></span>Přihlášení do Admin panelu</a> &nbsp;&nbsp;                                                 
+            </div>                
+                <a href="{link :Registration:}" class="registration" title="Registrace"><span></span>Registrace</a>            
+            <div class="grid_header_r">
+                <a href="{link :Default: lang=>cs}" class="lang" title="Český jazyk"><span></span></a>                 
+            </div>
+            <div class="clear">&nbsp;</div>
+        </div>
+    </div>           
+
+    {snippet flashes}
+        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+    {/snippet}    
+    <div id="main" class="container">  
+        <div class="grid_main_content">
+            <div id="content">                
+
+
+                <div class="grid_main_header_l">
+                    <a href="{link :Default:}"><img src="../images/logo.png" class="noborder" alt="MUDRweb.cz - Místo pro Váš web" /></a>
+                </div>  <!--grid_header_l-->              
+                <div class="grid_main_header_r">
+                    <div class="mainmenu">  
+                        <div class="mainmenu_firstbtn"></div>
+                        <!--menu items-->
+                        <div class="mainmenu_btn">Ukázky WEBů</div>
+                        <div class="mainmenu_btn">Cenník služeb</div>
+                        <div class="mainmenu_lastbtn">Kontakt</div>
+                    </div> <!--end of mainmenu-->   
+                </div> <!--end of grid_header_r--> 
+                <div class="clear">&nbsp;</div>                                    
+                
+                <div class="space"><hr></div>                                
+                {include #content}                                                                                
+            </div>
+        </div>                   
+        <div class="clear">&nbsp;</div>
+    </div>
+
+
+    <div id="footer">
+        <div class="container">
+            <div class="grid_footer_l">
+                © Copyright 2012
+            </div>
+            <div class="grid_footer_r">
+                Domů | Cenník | Kontakty
+            </div>
+            <div class="clear">&nbsp;</div>
+        </div>
+    </div>            
+
+        
+</div> 
+    
+</body>
+</html>

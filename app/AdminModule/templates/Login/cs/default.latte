@@ -1,0 +1,88 @@
+{var $robots = noindex}
+
+{block content}
+
+<div class="grid_content_log_r">
+
+    <div id="log_flashes_holder">
+        {snippet flashes_main}
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        {/snippet}    
+    </div>        
+    
+    <h1>Přihlášení</h1>
+
+    <br />
+    
+    {form signInForm}
+
+        <div class="errors_log" n:if="$form->hasErrors()">
+            <div colspan="2" n:foreach="$form->errors as $error">{$error}</div>
+        </div>
+
+        <table cellspacing="0">            
+                <tr>
+                    <td class="td_input_label_log">{label username /}</td>                    
+                    <td class="td_input_log">{input username}</td>                    
+                </tr>                
+                <tr>
+                    <td class="td_input_label_log">{label password /}</td>                    
+                    <td class="td_input_log">{input password}</td>                    
+                </tr>                
+                <tr>
+                    <td></td>
+                    <td class="td_input_log_remember">{input remember} {label remember /}</td>                    
+                </tr>      
+                <tr>       
+                    <td></td>
+                    <td class="td_input_log">{input send}</td>                    
+                </tr>                
+        </table>
+
+    {block forgot}
+        <div class="forgotten_password">    
+            <a href="{plink :Admin:ForgottenPassword:}" class="f_password">Zapomněl jsem jméno a heslo</a>
+        </div>
+    {/block}
+
+    {/form}
+
+</div>
+
+<div class="grid_content_log_l">
+    <div id="log_logo_holder">
+        <a href="{link :Default: lang=>cs}"><img src="../../images/admin/logo.png" class="noborder" alt="Návrat na hlavní stránku mudrweb.cz" /></a>
+    </div>
+    <div id="log_notifier_holder">
+        Pokud už jste naším klientem, do svého účtu se <strong>přihlásíte pomocí uživatelského jména a hesla</strong>.
+    </div>
+    <div id="log_text_wrapper">
+        <div class="grid_header_log_l_text">
+            <img src="../../images/admin/security.png" width="89" height="140" alt="Bezpečnost vašich dat na mudrweb.cz" />
+        </div>        
+        <div class="grid_header_log_r_text">
+            <strong>Pamatujte:</strong> 
+            Nikdy nebudeme žádat zaslání Vašich přihlašovacích údajů e-mailem nebou jakoukoliv 
+            jinou formou.
+            <br /><br />
+            Odkaz pro přihlášení do Vašeho účtu nikdy neposíláme e-mailem. 
+            Pokud jste se sem dostali jinak než z našich webových stránek, ujistěte se prosím, 
+            že jste u nás správně.
+            <br /><br />
+            V kolonce s internetovou adresou byste vždy měli vidět <strong>mudrweb.cz/admin/login/</strong>.                                    
+        </div>   
+        <div class="clear">&nbsp;</div>
+    </div>   
+        
+    <div id="log_separator">               
+    </div>    
+    
+    <div id="log_register_holder">        
+        <a href="http://mudrweb.cz/">
+            <input id="register" class="button" type="submit" value="Chci si založit účet&nbsp;" name="register"></input>
+        </a>
+    </div>    
+</div>
+<div class="clear">&nbsp;</div>
+
+{/block}

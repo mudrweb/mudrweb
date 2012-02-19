@@ -1,0 +1,133 @@
+{block head}
+    <script type="text/javascript" src="../../js/jquery.admin.js"></script>
+{/block}
+{block content}
+              
+    <h2>Správa návštěvní knihy</h2>
+        
+    {snippet form}
+    {form editForm}                       
+         <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+                <tr>
+                    <td class="td_input_label">Status:</td>
+                    {if $status}
+                        <td class="td_menuItemPublished">Tato položka je poublikována.</td>                    
+                    {else}
+                        <td class="td_menuItemNotPublished">Tato položka není poublikována.</td>                    
+                    {/if}    
+                </tr>  
+                <tr>                                        
+                    <td class="td_input_label_guestb">{label adminName /} &nbsp</td>                    
+                    <td class="td_input_guestb">{input adminName}</td>
+                </tr>
+                <tr>                
+                    <td></td>                    
+                    <td class="td_input_guestb_submit">{input submit} &nbsp&nbsp {input publish}</td>                    
+                </tr>                                 
+         </table>    
+         <table cellspacing="0">                
+                <tr style="height: 10px;"><td></td></tr>
+         </table>
+         <h2></h2>               
+    {/form editForm}     
+    {/snippet} 
+        
+    {snippet formResponse}
+    <div id="respondForm">
+    {form respondForm}                       
+         <table cellspacing="0">                
+                <tr style="height: 8px;"><td></td></tr>
+         </table>
+         <h2></h2>
+         <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+                <tr>
+                    <td class="td_input_label_guestb_answ">{label answer /}</td>                    
+                    <td class="td_input_guestb_answ">{input answer}</td>
+                </tr>                
+         </table>         
+         <h2></h2>
+         <table cellspacing="0">                
+                <tr>                            
+                    <td class="td_input_submit_guestb_answ">{input submitResponse} &nbsp&nbsp {input back}</td> 
+                </tr>
+         </table>                 
+    {/form respondForm}     
+    </div>
+    {/snippet}         
+               
+    {snippet list}	
+        {if $data}                                                   
+            {if $countQuestions >= 5}         
+            <div id="paginate">
+            {control paginator}
+            </div>            
+            <h2></h2>
+            <table cellspacing="0">                
+                <tr style="height: 12px;"><td></td></tr>
+            </table>            
+            {else}
+            <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+            </table>
+            {/if}
+         
+            {foreach $data as $dat}                                
+                {if $dat[0]}                       
+                    <div id="comments">
+                        <div class="comment">
+                        <div class="contain">
+                                <h4><span>{$dat[0]->name}</span></h4>
+                                <em class="date">{date_format($dat[0]->dateTime, 'd.m.Y H:i:s')}</em>
+                        </div>
+                        <div class="content_q" id="quest-{$dat[0]->id}">
+                            {!$dat[0]->question|escape|nl2br}
+                            <div style="padding-top: 15px;"></div>
+                            <div class="actions_q">
+                                <span class="questAction ajax" id="questAction-{$dat[0]->id}">Odpovědet</span>  |  <a href="{link deleteQuestion! $dat[0]->id}" class="questHref ajax">Smazat</a>
+                            </div>                                    
+                        </div>
+                        </div> 
+                    </div>
+                {/if}
+                {if $dat[1]}                    
+                    <div id="comments">
+                        <div class="comment answ" id="answ-{$dat[1]->id}">
+                        <div class="contain">
+                                <h4><span>{$guestBookUserName}</span></h4>
+                                <em class="date">{date_format($dat[1]->dateTime, 'd.m.Y H:i:s')}</em>
+                        </div>
+                        <div class="content_q">
+                            {!$dat[1]->answer|escape|nl2br}
+                            <div style="padding-top: 15px;"></div>
+                            <div class="actions_q">
+                                <a href="{link deleteAnswer! $dat[1]->id}" class="questHref ajax">Smazat</a>
+                            </div>                                    
+                        </div>
+                        </div>         
+                    </div>                        
+                {/if}                
+            {/foreach}
+            
+            <table cellspacing="0">                
+                <tr style="height: 5px;"><td></td></tr>
+            </table>
+            <h2></h2>
+            {if $countQuestions >= 5}
+            <div id="paginate_bottom">
+            {control paginator}
+            </div>               
+            {/if}
+        
+        {else}
+            
+            <div id="paginate">
+                Litujeme, ale momentálně nejsou k dispozici žádné příspěvky.
+            </div>            
+            <h2></h2>    
+            
+        {/if}    
+    {/snippet}                          
+{/block}   
+   

@@ -1,0 +1,38 @@
+{block content}
+
+    <h2>Editace položky v menu</h2>
+    <br />
+    
+    {snippet form}
+    {form editForm}
+	 <table cellspacing="0">
+                <tr>
+                    <td class="td_input_label">Status:</td>
+                    <td class="td_menuItemPublished">Publikování této položky nelze změnit. Její použití je povinné!</td>                                        
+                </tr>                
+                <tr>
+                    <td class="td_input_label">{label itemName /}</td>                    
+                    <td class="td_input">{input itemName} &nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="td_input_label">{label text /}</td>                    
+                    <td class="td_input">{input text}</td>
+                </tr>
+                <tr>
+                    <td></td>                    
+                    <td class="td_input">{input submit} &nbsp&nbsp </td>                    
+                </tr>
+         </table>
+    {/form editForm}     
+    {/snippet}  
+
+    <script type="text/javascript">        
+        jQuery(document).ready(function() {
+            CKEDITOR.replace('frmeditForm-text', {
+                contentsCss : '{!$sharedBasePath}/css/{!$pathToEditorCSS}',
+                extraPlugins : 'autogrow'
+            });                
+        });       
+    </script>
+    
+{/block}

@@ -1,0 +1,365 @@
+/*MAIN*/
+body {
+margin:10px;
+font:10px Verdana, Arial, Helvetica;
+background-image: url("../../../images/layout_kardio1/bck.jpg");
+background-color: white; 
+background-repeat: repeat;
+text-align: left;
+}
+
+h1 {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 18px;
+font-style: normal;
+color: #999999;
+text-decoration: none;
+text-align: left;
+padding-top: 40px;
+padding-left: 400px;
+margin: 0px;
+}
+
+#topspace {
+width:800px; height:30px;
+padding:0px;
+margin:0 auto }
+          
+#header {
+width:800px; height:150px;
+background:white;
+background-image: url("../../../images/layout_kardio1/header.jpg"); 
+background-repeat: no-repeat;
+padding:0px;
+margin:0 auto} 
+
+#header h1 {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 28px;
+font-style: normal;
+color: #999999;
+text-decoration: none;
+text-align: left;
+padding-top: 40px;
+padding-left: 400px;
+margin: 0px;
+}
+
+#header h2 {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-style: normal;
+color: #999999;
+text-decoration: none;
+text-align: left;
+padding-top: 0px;
+padding-left: 400px;
+margin: 0px;
+}
+
+#menu {
+width:800px;   height:30px;
+background:white;
+background-image: url("../../../images/layout_kardio1/menu.jpg"); 
+background-repeat: no-repeat;  
+padding: 0px;
+margin:0 auto;
+padding-top: 6px;
+} 
+
+#menu h1 {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+font-style: normal;
+color: #000000;
+text-decoration: none;
+text-align: left;
+padding-top: 10px;
+padding-left: 30px;
+margin: 0px;
+}
+
+.menu
+{        
+    /*background-color: #1a1a1a;*/
+    height: 2.3em;    
+    width: auto;
+    display: inline;    
+}
+
+.menu li 
+{    
+    list-style-type: none;
+    float: left;    
+    padding: 3px;   
+    margin-left: 6px;
+}
+
+.active
+{
+    background-color: #3c3c3c;
+    padding: 6px 6px 6px;
+    height: 20px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.menu a
+{
+    /*background-color: #1a1a1a;    */
+    color:#FFF;
+    padding: 6px 6px 6px;
+    height: 10px;    
+}
+
+.menu a:hover
+{
+    background-color: #3c3c3c;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#main {
+width:800px;  
+background:white;
+/*background-image: url("../../../images/layout_kardio1/main.jpg"); */
+background-repeat: no-repeat;
+padding-left: 0px;
+margin:0 auto;
+} 
+
+#content {
+padding: 5px;    
+padding-left: 10px;
+}
+
+#main h1
+{font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 18px;
+font-style: normal;
+color: #000000;
+text-decoration: none;
+text-align: left;
+padding-top: 0px;
+padding-left: 30px;
+margin: 0px;
+}
+
+#main h2
+{font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-style: normal;
+color: #000000;
+text-decoration: none;
+text-align: left;
+padding-top: 0px;
+padding-left: 0px;
+margin: 0px;
+}
+
+#main p
+{font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+font-style: normal;
+color: #000000;
+text-decoration: none;
+text-align: left;
+padding-top: 0px;
+padding-left: 0px;
+padding-right: 0px;
+padding-bottom: 0px;
+margin: 0px;
+}
+
+#main table
+{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 10px;
+font-style: normal;
+color: #000000;
+text-decoration: none;
+text-align: left;
+vertical-align: top;
+border-spacing: 0px;
+margin-top: 10px;
+margin-bottom: 10px;
+margin-left: 20px;
+margin-right: 20px;
+padding: 0px;
+}
+
+#main td {vertical-align: top}
+              
+.bold {
+font-weight:bold;
+}
+
+.italic {
+font-style:italic;        
+}   
+   
+#foot {
+width:800px; height: 30px;
+background-image: url("../../../images/layout_kardio1/footer.jpg");
+background-repeat: no-repeat; 
+background-repeat: no-repeat;
+padding:0px; 
+margin:0 auto}
+
+A:link {text-decoration: none; color: black;}
+
+A:visited {text-decoration: none; color: black;}
+
+A:active {text-decoration: none; color: black;}
+
+A:hover {text-decoration: none; color: white; background-color: black}
+
+#comments {    
+    clear:both;        
+    min-height: 100px;
+}
+#comments .comment {    
+    float:left;
+    padding-bottom:20px;
+    width:100%
+}
+#comments .comment .contain{
+    float:left;
+/*    margin-top:5px;*/
+    width:153px;    
+    
+}
+#comments .comment h4{
+    color:#fff;
+    float:right;
+    margin-bottom:10px;
+} 
+#comments .comment h4 span{
+    background:rgba(0, 0, 0, 0.35);
+    display:block;
+    padding:5px;
+}
+#comments .comment .date{
+    background:rgba(0, 0, 0, 0.25);
+    clear:right;
+    display:block;
+    float:right;
+    padding:5px
+}
+#comments .comment .content_q{
+    background:rgba(0,0,0,.10);
+    border:1px solid rgba(0,0,0,0.35);
+    border-radius:5px;
+    float:left;
+/*    font-size:12px;*/
+    -moz-border-radius:5px;
+    min-height:40px;
+    padding:20px;
+    -webkit-border-radius:5px;
+    width:530px;
+}
+#comments .answ .content_q{
+    background:rgba(116,224,27,.50);
+    width:510px;
+}
+#comments .answ .contain{
+    float:left;
+    margin-top:5px;
+    width:200px;
+}
+
+#paginate {
+    text-align: center;
+    padding-bottom: 10px; 
+    padding-top: 1px;
+}
+#paginate_bottom {
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 0px;    
+}
+
+.textarea_guestb_name {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 90%;
+    padding: 3px;
+    height: 25px;
+    width: 220px;            
+    border: 1px solid #000000;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px;    
+}
+.textarea_default_desc {        
+    font-family:Verdana, Arial, Helvetica;
+    overflow: auto;
+    font-size: 90%;    
+    padding: 4px;
+    height: 80px;
+    width: 350px;        
+    border: 1px solid #000000;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 10px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 10px;
+    max-width: 600px;
+}
+.td_input_label_guestb {    
+    width: 135px;
+    padding-bottom: 5px;
+    padding-left: 0px;    
+    padding-top: 7px;
+}
+.td_input_guestb {    
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+
+.td_input_submit_guestb_name {
+    padding-left: 140px;
+    padding-bottom: 17px;
+    padding-top: 0px;
+}
+
+div.flash, div.info {
+    color: #000;
+    background: #FFF9D7;
+    border: 1px solid #E2C822;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 720px;
+}
+
+/*
+	(c) 2009 David Grudl. All rights reserved.
+*/
+.paginator {
+	margin: 1em 0;
+	font-size: 90%;
+}
+
+.paginator a, .paginator span {
+	margin-right: 0.1em;
+	padding: 0.2em 0.5em;
+	color: #C2BCBD;
+}
+
+.paginator a {
+	border: 1px solid #000000;
+	text-decoration: none;
+	color: #000000;
+}
+
+.paginator span.buttonLast {
+	border: 1px solid #C2BCBD;        
+}
+
+.paginator span.buttonFirst {
+	border: 1px solid #C2BCBD;
+}
+
+.paginator .current {
+	background: #000000;
+	border: 1px solid #000000;
+	color: white;
+	font-weight: bold;
+}
+

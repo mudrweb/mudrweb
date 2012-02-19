@@ -1,0 +1,88 @@
+{block content}
+              
+    <h2>Nastavení uživatelského profilu</h2>
+    
+    {snippet formPass}
+    {form editPassForm}
+	 <table cellspacing="0">          
+                <tr style="height: 5px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="4">Změna hesla</td>
+                    
+                    <td class="td_input_label_changePass">{label oldPassword /} &nbsp</td>                    
+                    <td class="td_input_actualPass">{input oldPassword}</td>                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_changePass">{label newPassword /} &nbsp</td>                    
+                    <td class="td_input_top">{input newPassword}</td>
+                </tr>
+                <tr>
+                    <td class="td_input_label_changePass">{label newPassword1 /} &nbsp</td>                    
+                    <td class="td_input_actualPass">{input newPassword1}</td>
+                </tr>     
+                <tr>                    
+                    <td class="td_input_changePassDesc" colspan="2">*Délka nového hesla musí být minimálně 8 znaků.</td>
+                </tr>
+                <tr style="height: 15px;"><td></td></tr>
+         </table>                                
+         <h2></h2>            
+         <table cellspacing="0">                
+                <tr>                            
+                    <td class="td_input_changePass">{input submit} &nbsp&nbsp </td> 
+                </tr>
+         </table>
+         <h2></h2>                 
+    {/form editPassForm}     
+    {/snippet} 
+
+    {snippet formPInfo}
+    {form editPInfoForm}        
+	 <table cellspacing="0">          
+                <tr style="height: 5px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="8">Změna osobních údajů</td>
+                    
+                    <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input name}</td>                    
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label surname /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input surname}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label title /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input title}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label street /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input street}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label city /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input city}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label zip /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input zip}</td>                                                      
+                </tr>                
+                <tr>
+                    <td class="td_input_label_pinfo">{label phone /} &nbsp</td>                                        
+                    <td class="td_input_pinfo_phone">+420 &nbsp{input phone}</td>                                                      
+                </tr>        
+                <tr>
+                    <td class="td_input_label_pinfo">{label email /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input email}</td>                                                    
+                </tr>                   
+                <tr style="height: 15px;"><td></td></tr>
+         </table>    
+         <h2></h2> 
+         <table cellspacing="0">                
+                <tr>                            
+                    <td class="td_input_changePass">{input submit} &nbsp&nbsp </td> 
+                </tr>
+         </table>
+         <h2></h2>          
+    {/form editPInfoForm}     
+    {/snippet}          
+         
+{/block}

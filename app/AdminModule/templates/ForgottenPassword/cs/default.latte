@@ -1,0 +1,91 @@
+{var $robots = noindex}
+
+{block content}
+
+<div class="grid_content_fpass_r">
+
+    <div id="log_flashes_holder">
+        {snippet flashes_main}
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        {/snippet}    
+    </div>  
+    
+    <h1>Odeslání jména a hesla</h1>
+
+    <br />
+
+    {form forgottenPasswordForm}
+             <table cellspacing="0">            
+                    <tr>
+                        <td class="td_input_label_fpass">{label subdomain /}</td>                    
+                        <td class="td_input_fpass_small">{input subdomain}</td>                    
+                    </tr>
+                    <tr>
+                        <td class="td_input_label_fpass_captcha" colspan="2">{label antispamtextcaptcha /}</td>                                                                                
+                    </tr>
+                    <tr>
+                        <td class="td_input_fpass_error" colspan="2">
+                            <div class="errors_fpass" n:if="$form->hasErrors()">
+                                <div n:foreach="$form->errors as $error">{$error}</div>
+                            </div>
+                        </td>
+                    </tr>                
+                    <tr>
+                        <td class="td_input_fpass" colspan="2">{input antispamtextcaptcha}</td>
+                    </tr>
+                    <tr>       
+                        <td class="td_input_fpass_buttons" colspan="2">{input send} &nbsp&nbsp {input back}</td>                    
+                    </tr>                
+             </table>
+    {/form}
+
+    {block howto}
+        <div class="forgotten_password_send">
+            Název stránky stačí zadat ve tvaru 'vasestranka' 
+            <br />
+            (<strong>není nutné</strong> zadávat 
+            celou adresu 'vasestranka.mudrweb.cz'). 
+        </div>
+    {/block}
+
+</div>
+
+<div class="grid_content_fpass_l">
+    <div id="log_logo_holder">
+        <a href="{link :Default: lang=>cs}"><img src="../../images/admin/logo.png" class="noborder" alt="Návrat na hlavní stránku mudrweb.cz" /></a>
+    </div>
+    <div id="log_notifier_holder">
+        Pokud jste zapomněli přihlašovací jméno nebo heslo        
+        <strong>můžete jednoduše zažádat o jejich zaslání</strong>.
+    </div>
+    <div id="log_text_wrapper">
+        <div class="grid_header_log_l_text">
+            <div id="fpass_pic_holder">
+                <img src="../../images/admin/resend.png" width="90" height="90" alt="Bezpečnost vašich dat na mudrweb.cz" />
+            </div>
+        </div>        
+        <div class="grid_header_log_r_text">
+            <strong>Pamatujte:</strong> 
+            Pokud jste přihlašovací jméno nebo heslo opravdu zapomněli, my vám je neprozradíme. 
+            Po vyplnění názvu Vaší stránky a zodpovězení jednoduché bezpečnostní otázky  
+            Vám ale budou zaslány na e-mailovou adresu zadanou při registraci. Následně
+            si při příštím přihlášení budete moci heslo jednoduše změnit.                        
+            <br /><br />
+            Nikdy neukládejte svá hesla na nechráněná místa jako jsou textové či jiné 
+            soubory ve Vašem počítači. 
+        </div>   
+        <div class="clear">&nbsp;</div>
+    </div>   
+        
+    <div id="log_separator">               
+    </div>    
+    
+    <div id="log_register_holder">        
+        <a href="http://mudrweb.cz/">
+            <input id="register" class="button" type="submit" value="Chci si založit účet&nbsp;" name="register"></input>
+        </a>
+    </div>     
+</div>
+<div class="clear">&nbsp;</div>
+
+{/block}
