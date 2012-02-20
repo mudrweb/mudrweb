@@ -13,5 +13,5 @@ $("#keywords_help_click").live("click", function () {clicked_keys++;$("#title_he
 clicked = 0;clicked_desc = 0;$("#keywords_help").fadeIn(1000);} else {$("#keywords_help").fadeOut(1000);clicked_keys = 0;}});   
 
 // guest book
-$('span[id|="questAction"]').live("click", function () { var questionId = $(this).attr("id"); var hyphen = questionId.indexOf('-'); var id = questionId.substr(hyphen + 1, questionId.length);
-$('#respondForm').hide().appendTo('#quest-' + id).show("drop", { direction: "left" }, 600); $('#frmrespondForm-questionId').val(id); $('#frmrespondForm-answer').val(''); });   
+$('span[id|="questAction"]').live("click", function () {var questionId = $(this).attr("id");var hyphen = questionId.indexOf('-');var id = questionId.substr(hyphen + 1, questionId.length);
+$('#respondForm').hide().appendTo('#quest-' + id).show("drop", {direction: "left"}, 600);$('#frmrespondForm-questionId').val(id);$('#frmrespondForm-answer').val('');});   
