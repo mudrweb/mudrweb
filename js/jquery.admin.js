@@ -1,8 +1,16 @@
 // default (site settings)
-$("#frmeditForm-headerImage-0").live("click",function () {$("#headerImageId").hide(1005);}); 
-$("#frmeditForm-headerImage-1").live("click",function () {$("#headerImageId").fadeIn(1000);});      
-$("#frmeditForm-colourScheme-0").live("click",function () {$("#colourSchemeId").hide(1000);});       
-$("#frmeditForm-colourScheme-1").live("click",function () {$("#colourSchemeId").fadeIn(1000);});  
+$("#frmeditForm-headerImage-0").live("click",function () {$("#headerImageId").animate({
+  opacity: "hide"
+}, 800);}); 
+$("#frmeditForm-headerImage-1").live("click",function () {$("#headerImageId").animate({
+  opacity: "show"
+}, 800);});      
+$("#frmeditForm-colourScheme-0").live("click",function () {$("#colourSchemeId").animate({
+  opacity: "hide"
+}, 800);});       
+$("#frmeditForm-colourScheme-1").live("click",function () {$("#colourSchemeId").animate({
+  opacity: "show"
+}, 800);});  
 
 var clicked = 0;var clicked_desc = 0;var clicked_keys = 0;$("#title_help_click").live("click", function () {                        
 clicked++;$("#desc_help").hide();$("#keywords_help").hide();if (clicked == 1) {clicked_desc = 0;clicked_keys = 0;
