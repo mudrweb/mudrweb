@@ -1,23 +1,23 @@
-<?php //netteCache[01]000371a:2:{s:4:"time";s:21:"0.84788800 1329420313";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:49:"C:\xampp\htdocs\app\templates\@layout_admin.latte";i:2;i:1329420224;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000371a:2:{s:4:"time";s:21:"0.67969100 1330252928";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:49:"C:\xampp\htdocs\app\templates\@layout_admin.latte";i:2;i:1329772509;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\templates\@layout_admin.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'br0izeeop1')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'u9tyg2hngs')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb2536498422_head')) { function _lb2536498422_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbfcb3e1ddd1_head')) { function _lbfcb3e1ddd1_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block _flashes
 //
-if (!function_exists($_l->blocks['_flashes'][] = '_lb730c72bbf2__flashes')) { function _lb730c72bbf2__flashes($_l, $_args) { extract($_args); $_control->validateControl('flashes')
+if (!function_exists($_l->blocks['_flashes'][] = '_lb946c119a41__flashes')) { function _lb946c119a41__flashes($_l, $_args) { extract($_args); $_control->validateControl('flashes')
 ;$iterations = 0; foreach ($flashes as $flash): ?>                <div class="flash <?php echo htmlSpecialChars($flash->type) ?>
 "><?php echo Nette\Templating\Helpers::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; endforeach ;
@@ -152,7 +152,7 @@ call_user_func(reset($_l->blocks['head']), $_l, get_defined_vars())  ?>
                     <div class="grid_footer_l">
                         Optimalizováno pro prohlížeče IE9+, Firefox 8+ a Google Chrome 16+<br />
 <?php if ($user->isLoggedIn()): ?>
-                        Aktualizováno dne 12.02.2012; verze beta1 
+                        Aktualizováno dne 16.02.2012; verze beta1 
 <?php endif ?>
                     </div>
                     <div class="grid_footer_r">            

@@ -1,16 +1,16 @@
-<?php //netteCache[01]000393a:2:{s:4:"time";s:21:"0.17005600 1329255971";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:71:"C:\xampp\htdocs\app\AdminModule\templates\AdminDefault\cs\default.latte";i:2;i:1328615391;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000393a:2:{s:4:"time";s:21:"0.03818100 1330262293";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:71:"C:\xampp\htdocs\app\AdminModule\templates\AdminDefault\cs\default.latte";i:2;i:1328615391;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\AdminModule\templates\AdminDefault\cs\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '1f9by9zsj5')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'v0b4j126en')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb77aabcfaaf_content')) { function _lb77aabcfaaf_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb6ad23266c2_content')) { function _lb6ad23266c2_content($_l, $_args) { extract($_args)
 ?>              
     <h2>Registrace nového uživatele</h2>
     
@@ -22,7 +22,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb77aabcfaaf_content')) { func
 //
 // block _formRegUser
 //
-if (!function_exists($_l->blocks['_formRegUser'][] = '_lb7a118b8ad1__formRegUser')) { function _lb7a118b8ad1__formRegUser($_l, $_args) { extract($_args); $_control->validateControl('formRegUser')
+if (!function_exists($_l->blocks['_formRegUser'][] = '_lbcd0859a91b__formRegUser')) { function _lbcd0859a91b__formRegUser($_l, $_args) { extract($_args); $_control->validateControl('formRegUser')
 ;Nette\Latte\Macros\FormMacros::renderFormBegin($form = $_form = $_control["regUserForm"], array()) ?>
 
         <table cellspacing="0">          
@@ -186,7 +186,7 @@ if (!function_exists($_l->blocks['_formRegUser'][] = '_lb7a118b8ad1__formRegUser
 //
 // block _dispPass
 //
-if (!function_exists($_l->blocks['_dispPass'][] = '_lb1c2d9d99c6__dispPass')) { function _lb1c2d9d99c6__dispPass($_l, $_args) { extract($_args); $_control->validateControl('dispPass')
+if (!function_exists($_l->blocks['_dispPass'][] = '_lb7009c4f0a4__dispPass')) { function _lb7009c4f0a4__dispPass($_l, $_args) { extract($_args); $_control->validateControl('dispPass')
 ;echo Nette\Templating\Helpers::escapeHtml($passwordToDisplay, ENT_NOQUOTES) ;
 }}
 

@@ -1,16 +1,16 @@
-<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.12904100 1329253034";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"C:\xampp\htdocs\app\templates\Default\cs\default.latte";i:2;i:1328127437;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.73686200 1330250147";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"C:\xampp\htdocs\app\templates\Default\cs\default.latte";i:2;i:1328127437;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\templates\Default\cs\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'cpz7u260ot')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'hre22f55xl')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb15af9801ed_content')) { function _lb15af9801ed_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb50beb7b443_content')) { function _lb50beb7b443_content($_l, $_args) { extract($_args)
 ?>    
 <div id="slides">
     <div class="slides_container">

@@ -1,16 +1,16 @@
-<?php //netteCache[01]000374a:2:{s:4:"time";s:21:"0.51159900 1329253051";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:52:"C:\xampp\htdocs\app\components\Navigation\menu.phtml";i:2;i:1327757479;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000374a:2:{s:4:"time";s:21:"0.13169000 1330262293";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:52:"C:\xampp\htdocs\app\components\Navigation\menu.phtml";i:2;i:1327757479;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\components\Navigation\menu.phtml
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'r07j0ugrre')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'n5pil40v4w')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block menu
 //
-if (!function_exists($_l->blocks['menu'][] = '_lb9ee4432961_menu')) { function _lb9ee4432961_menu($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['menu'][] = '_lb38fc51951a_menu')) { function _lb38fc51951a_menu($_l, $_args) { extract($_args)
 ;$iterations = 0; foreach ($iterator = $_l->its[] = new Nette\Iterators\CachingIterator($children) as $item): ?>	<li>
 <?php if ($item->isCurrent): ?>
 		<span class="active"><strong><?php echo Nette\Templating\Helpers::escapeHtml($item->label, ENT_NOQUOTES) ?></strong></span>

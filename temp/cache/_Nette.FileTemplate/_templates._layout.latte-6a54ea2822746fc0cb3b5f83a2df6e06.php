@@ -1,23 +1,23 @@
-<?php //netteCache[01]000365a:2:{s:4:"time";s:21:"0.88324600 1329420315";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:43:"C:\xampp\htdocs\app\templates\@layout.latte";i:2;i:1329420201;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000365a:2:{s:4:"time";s:21:"0.79396700 1330250147";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:43:"C:\xampp\htdocs\app\templates\@layout.latte";i:2;i:1330212568;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '94u8dq63z8')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'gyqrhfhdxl')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb212e1b35b2_head')) { function _lb212e1b35b2_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbb99565b9c2_head')) { function _lbb99565b9c2_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block _flashes
 //
-if (!function_exists($_l->blocks['_flashes'][] = '_lbcde7b3c1d8__flashes')) { function _lbcde7b3c1d8__flashes($_l, $_args) { extract($_args); $_control->validateControl('flashes')
+if (!function_exists($_l->blocks['_flashes'][] = '_lb5801a2225d__flashes')) { function _lb5801a2225d__flashes($_l, $_args) { extract($_args); $_control->validateControl('flashes')
 ;$iterations = 0; foreach ($flashes as $flash): ?>        <div class="flash <?php echo htmlSpecialChars($flash->type) ?>
 "><?php echo Nette\Templating\Helpers::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; endforeach ;
@@ -88,7 +88,7 @@ call_user_func(reset($_l->blocks['head']), $_l, get_defined_vars())  ?>
             <div class="grid_header_l">                                         
                 <a href="<?php echo htmlSpecialChars($_control->link(":Admin:Default:")) ?>" class="login" title="Přihlášení"><span></span>Přihlášení do Admin panelu</a> &nbsp;&nbsp;                                                 
             </div>                
-                <a href="<?php echo htmlSpecialChars($_control->link(":Registration:")) ?>" class="registration" title="Registrace"><span></span>Registrace</a>            
+                <a href="<?php echo htmlSpecialChars($_control->link(":Registration:")) ?>" class="registration" title="Registrace"><span></span>Objednávka</a>            
             <div class="grid_header_r">
                 <a href="<?php echo htmlSpecialChars($_control->link(":Default:", array('lang'=>'cs'))) ?>" class="lang" title="Český jazyk"><span></span></a>                 
             </div>

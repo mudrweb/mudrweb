@@ -1,16 +1,16 @@
-<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.63488200 1329253037";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\app\AdminModule\templates\Login\cs\default.latte";i:2;i:1328617434;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000386a:2:{s:4:"time";s:21:"0.59963300 1330252928";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:64:"C:\xampp\htdocs\app\AdminModule\templates\Login\cs\default.latte";i:2;i:1328617434;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\AdminModule\templates\Login\cs\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ne562q2egw')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'r6e584audb')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbc5f9ac251c_content')) { function _lbc5f9ac251c_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbdb32735e9a_content')) { function _lbdb32735e9a_content($_l, $_args) { extract($_args)
 ?>
 <div class="grid_content_log_r">
 
@@ -98,7 +98,7 @@ if (!function_exists($_l->blocks['content'][] = '_lbc5f9ac251c_content')) { func
 //
 // block _flashes_main
 //
-if (!function_exists($_l->blocks['_flashes_main'][] = '_lbadf5848d71__flashes_main')) { function _lbadf5848d71__flashes_main($_l, $_args) { extract($_args); $_control->validateControl('flashes_main')
+if (!function_exists($_l->blocks['_flashes_main'][] = '_lb3b1a0937d2__flashes_main')) { function _lb3b1a0937d2__flashes_main($_l, $_args) { extract($_args); $_control->validateControl('flashes_main')
 ;$iterations = 0; foreach ($flashes as $flash): ?>            <div class="flash <?php echo htmlSpecialChars($flash->type) ?>
 "><?php echo Nette\Templating\Helpers::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; endforeach ;
@@ -107,7 +107,7 @@ if (!function_exists($_l->blocks['_flashes_main'][] = '_lbadf5848d71__flashes_ma
 //
 // block forgot
 //
-if (!function_exists($_l->blocks['forgot'][] = '_lb5a88d419a6_forgot')) { function _lb5a88d419a6_forgot($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['forgot'][] = '_lb044b0c6eb0_forgot')) { function _lb044b0c6eb0_forgot($_l, $_args) { extract($_args)
 ?>        <div class="forgotten_password">    
             <a href="<?php echo htmlSpecialChars($_presenter->link(":Admin:ForgottenPassword:")) ?>" class="f_password">Zapomněl jsem jméno a heslo</a>
         </div>

@@ -16,6 +16,8 @@ h1 { font-size: 13px; font-family: Arial, sans-serif; }
 h2 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 28px; font-weight: normal; border-bottom: 1px dotted #8C8989; margin: 0px 0px 10px 0px;}
 hr { border: 0; border-bottom: 1px solid #003366; height: 1px; }
 
+strong { font-weight: bold; }
+
 #wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px;}
 .container{margin-left:auto;margin-right:auto;width:920px;}
 .clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
@@ -210,6 +212,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .button:hover,.button_ok:hover,.button_cancel:hover { border-color:#FFF #AFAFB4 #AFAFB4 #FFF; color:#333; }
 
 /* user registration - main */
+/** personal info */
 .td_input_label_pinfo { padding-bottom: 15px; padding-left: 20px; }
 .input_style_pinfo { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 220px; border: 1px solid #000000;
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;    
@@ -233,6 +236,17 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; }
 .td_input_changePass { padding-left: 150px; padding-bottom: 15px; padding-top: 5px; }
 .td_right_img {  padding-left: 70px; }
+
+/** program */
+.terms { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 0px;
+    -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
+}
+.td_input_terms { padding-left: 20px; padding-bottom: 15px; width: 445px; }
+
+/** confirmation */
+.td_input_confirm { padding-left: 0px; padding-bottom: 5px; padding-top: 5px; }
+.td_input_confirm_rev_0 { padding-top: 5px; padding-bottom: 5px; padding-left: 20px; width: 150px; }
+.td_input_confirm_rev { padding-bottom: 5px; padding-left: 20px; }
 
 /**
 * Live validation

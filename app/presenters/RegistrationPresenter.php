@@ -22,10 +22,14 @@ class RegistrationPresenter extends BasePresenter {
     }
     
     /**
-     * renderDefault for Registration presenter. 
+     * renderDefault for Program selection. 
      */
     public function renderDefault() {            
-        $this->template->passwordToDisplay = $this->password;     
+        $session = $this->getService('session');
+        $section = $session->getSection('Reg');
+        $section->step1Completed = 0;        
+        $section->step2Completed = 0; 
+        $section->step3Completed = 0;                 
     }                
     
     /**
@@ -85,17 +89,71 @@ class RegistrationPresenter extends BasePresenter {
     }     
     
     /**
-     * Create form for new user registration.
+     * Create form for program selection.
      * 
      * @return \Nette\Application\UI\Form 
      */
-    protected function createComponentRegUserForm() {
+    protected function createComponentRegUserForm1() {
+        $form = new \Nette\Application\UI\Form;       
+
+        $form->getElementPrototype()->class('ajax');        
+        
+        $form->addRadioList('program', '', array(
+                'demo' => 'DEMO zdarma - 3 měsíce - ZDARMA',
+                'basic' => 'Základní verze - 1 rok - 1000 Kč',
+                ))
+                ->setDefaultValue('demo')
+                ->setAttribute('class', 'headerImage');   
+        
+        $form->addCheckbox('terms')
+                ->addRule(Form::FILLED, 'Musíte souhlasit se Smluvními podmínkami MUDRweb.cz.')
+                ->setAttribute('class', 'terms');   
+        
+        $form->addSubmit('submit1', 'Pokračovat')
+                ->setAttribute('class', 'button')
+                ->onClick[] = callback($this, 'getProgramData');               
+
+        $form->addProtection('Vypršel časový limit, odešlete prosím formulář znovu.', 900);               
+        
+        return $form;        
+    }     
+    
+    /**
+     * Get Program data.
+     * 
+     * @param \Nette\Forms\Controls\Button $button 
+     */
+    public function getProgramData(\Nette\Forms\Controls\Button $button)
+    {   
+        // get data from form
+        $data = $button->form->getValues();  
+
+        // store selected program and redirect to Step2
+        $session = $this->getService('session');
+        $section = $session->getSection('Reg');
+        $section->step1Completed = 1;
+        
+        if ($data->program == 'demo') {
+            $section->program = 'DEMO zdarma - 3 měsíce - ZDARMA';
+        } elseif ($data->program == 'basic') {
+            $section->program = 'Základní verze - 1 rok - 1000 Kč';
+        }       
+        
+        $this->redirect('Registration:personal');
+    }        
+    
+    /**
+     * Create form for personal info.
+     * 
+     * @return \Nette\Application\UI\Form 
+     */
+    protected function createComponentRegUserForm2() {
         $form = new \Nette\Application\UI\Form;       
 
         $form->getElementPrototype()->class('ajax');        
         
         // login data
-        $form->addText('username', 'Uživatelské jméno:', 20, 20)                
+        $form->addText('username', 'Uživatelské jméno:', 20, 20)             
                 ->addRule(Form::FILLED, 'Musíte zadat uživatelské jméno.')
                 ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka uživatelského jména je 8 znaků.', 8)                
                 ->addRule(Form::MAX_LENGTH, 'Uživatelské jméno: Maximální povolená délka uživatelského jména je 20 znaků.', 20)               
@@ -175,15 +233,200 @@ class RegistrationPresenter extends BasePresenter {
                 ->addRule(Form::MAX_LENGTH, 'Telefon: Maximální povolená délka telefonního čísla je 9 znaků.', 9)                
                 ->setAttribute('class', 'input_style_pinfo');                 
                                         
-        $form->addSubmit('submit', 'Registrovat uživatele')
+        $form->addSubmit('submit2', 'Pokračovat')
                 ->setAttribute('class', 'button')
-                ->onClick[] = callback($this, 'registerUser');               
+                ->onClick[] = callback($this, 'getPersonalInfo');               
 
         $form->addProtection('Vypršel časový limit, odešlete prosím formulář znovu.', 900);               
         
         return $form;
-    }    
+    }      
+        
+    /**
+     * Get Personal info.
+     * 
+     * @param \Nette\Forms\Controls\Button $button 
+     */
+    public function getPersonalInfo(\Nette\Forms\Controls\Button $button)
+    {   
+        // get data from form
+        $data = $button->form->getValues();  
 
+        $session = $this->getService('session');
+        $section = $session->getSection('Reg');
+        
+        // prepare data for user reg            
+        $salt = $this->extraMethods->generateSalt();
+        $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));                
+                        
+        if ($data->newPassword == $data->newPassword1) {
+            $section->step2Completed = 1;            
+            
+            // store data to session
+            $section->username = $data->username;
+            $section->hashedPassword = $hashedPassword;
+            $section->salt = $salt;
+            $section->subdomain = $data->subdomain;
+            
+            $dataArray_users_data = array('', $data->name, $data->surname,
+                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
+                $data->phone);
+            
+            $section->dataArray_users_data = $dataArray_users_data;
+            
+//            //1. user
+//            $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain);            
+//            $this->db_users->addUser($dataArray_user);
+//
+//            //2. users_data
+//            $user = $this->db_users->getUserBySubdomain($data->subdomain);
+//            $dataArray_users_data = array($user->id, $data->name, $data->surname,
+//                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
+//                $data->phone);
+//            $this->db_users->addUserData($dataArray_users_data);
+//
+//            //3. users_websiteData        
+//            $dataArray_users_websiteData = array($user->id, 'layout_kardio1', 'kardio',
+//                $data->name . ' ' . $data->surname, 'Ambulance', $data->name . ' ' . $data->surname . ' - ' . 'Ambulance',
+//                '', '');
+//            $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
+//
+//            //4. menuItems set
+//            $this->db_menuItems->addNewMenuItemsSet($user->id);
+//
+//            //5. guestBook                      
+//            $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
+//            $this->db_guestBook->addGuestBook($dataArray_guestBook);
+//
+//            //6. www part - folders, files
+//            $this->registerUserWWW($data->subdomain);
+//
+//            //7. set subdomain status from N/A -> to valid
+//            $this->db_users->updateSubdomainStatus($user->id, 'Valid');                                               
+            
+            if (!$this->isAjax()) {
+                $this->redirect('this');
+            } else {
+                $this->invalidateControl('formRegUser');
+                $this->invalidateControl('dispPass');
+                $button->getForm()->setValues(array(), TRUE);
+                $this->redirect('Registration:final');
+            }            
+        } else {
+            $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                        
+        }       
+    }      
+    
+    /**
+     * Create form for order confirmation.
+     * 
+     * @return \Nette\Application\UI\Form 
+     */
+    protected function createComponentRegUserForm3() {
+        $form = new \Nette\Application\UI\Form;       
+
+        $form->getElementPrototype()->class('ajax');        
+        
+        $form->addSubmit('submit3', 'Potvrdit objednávku')
+                ->setAttribute('class', 'button')
+                ->onClick[] = callback($this, 'confirmOrder');               
+
+        $form->addProtection('Vypršel časový limit, odešlete prosím formulář znovu.', 900);               
+        
+        return $form;        
+    }     
+    
+    /**
+     * Confirm order.
+     * 
+     * @param \Nette\Forms\Controls\Button $button 
+     */
+    public function confirmOrder(\Nette\Forms\Controls\Button $button)
+    {           
+        // store confirmation and send email
+        $session = $this->getService('session');
+        $section = $session->getSection('Reg');
+        $section->step3Completed = 1;         
+                                
+        //1. user
+        $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, $section->subdomain);
+        $this->db_users->addUser($dataArray_user);
+
+        //2. users_data
+        $user = $this->db_users->getUserBySubdomain($section->subdomain);
+        $dataArray_users_data = $section->dataArray_users_data;
+        $dataArray_users_data[0] = $user->id;
+        $this->db_users->addUserData($dataArray_users_data);
+        
+        //3. users_websiteData        
+        // actual user's data
+        $user_data = $this->db_users->getUsersDataById(intval($user->id));        
+        $dataArray_users_websiteData = array($user->id, 'layout_kardio1', 'kardio',
+            $user_data->name . ' ' . $user_data->surname, 'Ambulance', $user_data->name . ' ' . $user_data->surname . ' - ' . 'Ambulance',
+            '', '');
+        $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
+
+        //4. menuItems set
+        $this->db_menuItems->addNewMenuItemsSet($user->id);
+
+        //5. guestBook                      
+        $dataArray_guestBook = array($user->id, $user_data->name . ' ' . $user_data->surname);
+        $this->db_guestBook->addGuestBook($dataArray_guestBook);        
+
+        $section->dataArray_users_data = null;
+        
+        $this->redirect('this');
+    }        
+    
+    /************************** Personal info *********************************/
+    
+    public function actionPersonal() {
+    }
+    
+    /**
+     * renderProgram for Program selection. 
+     */    
+    public function renderPersonal()
+    {        
+        $session = $this->getService('session');
+        $section = $session->getSection('Reg');        
+        
+        if ($section->step1Completed != 1) {
+            $this->redirect(':Registration:');
+        }     
+        
+        $section->step2Completed = 0; 
+        $section->step3Completed = 0;        
+        
+        $this->template->passwordToDisplay = $this->password;     
+    }       
+    
+    /*************************** Confirmation *********************************/
+    
+    public function actionFinal() {        
+    }
+    
+    /**
+     * renderProgram for Program selection. 
+     */    
+    public function renderFinal()
+    {
+        $session = $this->getService('session');
+        $section = $session->getSection('Reg');
+
+        if ($section->step2Completed != 1) {
+            $this->redirect(':Registration:');
+        }      
+        
+        $this->template->done = $section->step3Completed;        
+        $this->template->program = $section->program;        
+        $this->template->name = $section->dataArray_users_data[1] . $section->dataArray_users_data[2];
+        $this->template->email = $section->dataArray_users_data[5];
+        $this->template->subdomain = $section->subdomain;
+    }      
+    
+    /*************************** Ext Methods **********************************/    
+    
     /**
      * Generate password handler (ajax)
      */
@@ -196,68 +439,8 @@ class RegistrationPresenter extends BasePresenter {
         } else {
             $this->invalidateControl('dispPass');
         }
-    }    
+    }         
     
-    /**
-     * Register user.
-     * 
-     * @param \Nette\Forms\Controls\Button $button 
-     */
-    public function registerUser(\Nette\Forms\Controls\Button $button)
-    {   
-        // get data from form
-        $data = $button->form->getValues();
-
-        // prepare data for user reg            
-        $salt = $this->extraMethods->generateSalt();
-        $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));
-
-        
-        if ($data->newPassword == $data->newPassword1) {
-            //1. user
-            $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain);
-            $this->db_users->addUser($dataArray_user);
-
-            //2. users_data
-            $user = $this->db_users->getUserBySubdomain($data->subdomain);
-            $dataArray_users_data = array($user->id, $data->name, $data->surname,
-                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                $data->phone);
-            $this->db_users->addUserData($dataArray_users_data);
-
-            //3. users_websiteData        
-            $dataArray_users_websiteData = array($user->id, 'layout_kardio1', 'kardio',
-                $data->name . ' ' . $data->surname, 'Ambulance', $data->name . ' ' . $data->surname . ' - ' . 'Ambulance',
-                '', '');
-            $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
-
-            //4. menuItems set
-            $this->db_menuItems->addNewMenuItemsSet($user->id);
-
-            //5. guestBook                      
-            $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
-            $this->db_guestBook->addGuestBook($dataArray_guestBook);
-
-            //6. www part - folders, files
-            $this->registerUserWWW($data->subdomain);
-
-            //7. set subdomain status from N/A -> to valid
-            $this->db_users->updateSubdomainStatus($user->id, 'Valid');
-
-            $this->flashMessage('Registrace uživatele proběhla úspěšně.', 'info');
-            
-            if (!$this->isAjax()) {
-                $this->redirect('this');
-            } else {
-                $this->invalidateControl('formRegUser');
-                $this->invalidateControl('dispPass');
-                $button->getForm()->setValues(array(), TRUE);
-            }            
-        } else {
-            $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');            
-        }       
-    }
-
     /**
      * Username / subdomain availability check signal handler (called by 
      * ajax request from adequate template).
@@ -304,70 +487,70 @@ class RegistrationPresenter extends BasePresenter {
         }        
             
         $this->terminate();
-    }
+    }    
     
-    /**
-     * Register user - www part (folders, files).
-     * 
-     * @param string $subdomain 
-     */
-    public function registerUserWWW($subdomain) {
-        $subd = $subdomain;
-        $wwwDir = WWW_DIR;        
-        $pathToNewDir = $wwwDir . '/' . $subd;        
-        try {            
-            // delete dir if it already exists
-            $this->extraMethods->deleteSubdomain($subdomain);             
-            
-            // create subdomain root
-            if ($this->extraMethods->createSubdomain($subdomain)) {
-                // create admin folder and index.php for redirect (copy from)
-                mkdir($pathToNewDir . '/admin');
-                copy($wwwDir . '/user_data/admin.index.php', $pathToNewDir . '/admin/index.php');
-                // copy files to subdomain root
-                copy($wwwDir . '/user_data/.htaccess', $pathToNewDir . '/.htaccess');                
-                copy($wwwDir . '/user_data/robots.txt', $pathToNewDir . '/robots.txt');
-                copy($wwwDir . '/user_data/header.css', $pathToNewDir . '/header.css');
-                copy($wwwDir . '/user_data/colour_scheme.css', $pathToNewDir . '/colour_scheme.css');                
-                copy($wwwDir . '/user_data/favicon.ico', $pathToNewDir . '/favicon.ico');
-                
-                // open index.php file, replace subdomain part string (toBeReplaced) and save it to subdomain root
-                $indexFile = fopen($wwwDir . '/user_data/index.php', 'r');
-                $indexContent = fread($indexFile, filesize($wwwDir . '/user_data/index.php'));
-                fclose($indexFile);
-
-                $updatedIndexContent = str_replace('toBeReplaced', $subd, $indexContent);
-
-                $updatedFile = fopen($pathToNewDir . '/index.php', 'w+');
-                fwrite($updatedFile, $updatedIndexContent);
-                fclose($updatedFile);
-
-                // open sitemap.xml, replace subdomain part string (toBeReplaced) and save it to subdomain root
-                $sitemapFile = fopen($wwwDir . '/user_data/sitemap.xml', 'r');
-                $sitemapContent = fread($sitemapFile, filesize($wwwDir . '/user_data/sitemap.xml'));
-                fclose($sitemapFile);
-
-                $updatedSitemapContent = str_replace('toBeReplaced', $subd, $sitemapContent);
-
-                $updatedSitemap = fopen($pathToNewDir . '/sitemap.xml', 'w+');
-                fwrite($updatedSitemap, $updatedSitemapContent);
-                fclose($updatedSitemap);         
-
-                // -----------------------------------------------------------------
-                // real subdomain part files
-                // open realSubdomain.index.php, replace subdomain part string (toBeReplaced) and save it to subdomain root            
-                $realIndexFile = fopen($wwwDir . '/user_data_realSub/realSubdomain.index.php', 'r');
-                $realIndexContent = fread($realIndexFile, filesize($wwwDir . '/user_data_realSub/realSubdomain.index.php'));
-                fclose($realIndexFile);
-
-                $updatedRealIndexContent = str_replace('toBeReplaced', $subd, $realIndexContent);
-
-                $updatedRealIndex = fopen($pathToNewDir . '/realSubdomain.index.php', 'w+');
-                fwrite($updatedRealIndex, $updatedRealIndexContent);
-                fclose($updatedRealIndex);   
-            }            
-        } catch (Exception $e) {
-            throw new \Nette\Application\ToolException('Unable to register user (www part) (AdminModule - adminDefault presenter). ' . $e, 500);
-        }        
-    }     
+//    /**
+//     * Register user - www part (folders, files).
+//     * 
+//     * @param string $subdomain 
+//     */
+//    public function registerUserWWW($subdomain) {
+//        $subd = $subdomain;
+//        $wwwDir = WWW_DIR;        
+//        $pathToNewDir = $wwwDir . '/' . $subd;        
+//        try {            
+//            // delete dir if it already exists
+//            $this->extraMethods->deleteSubdomain($subdomain);             
+//            
+//            // create subdomain root
+//            if ($this->extraMethods->createSubdomain($subdomain)) {
+//                // create admin folder and index.php for redirect (copy from)
+//                mkdir($pathToNewDir . '/admin');
+//                copy($wwwDir . '/user_data/admin.index.php', $pathToNewDir . '/admin/index.php');
+//                // copy files to subdomain root
+//                copy($wwwDir . '/user_data/.htaccess', $pathToNewDir . '/.htaccess');                
+//                copy($wwwDir . '/user_data/robots.txt', $pathToNewDir . '/robots.txt');
+//                copy($wwwDir . '/user_data/header.css', $pathToNewDir . '/header.css');
+//                copy($wwwDir . '/user_data/colour_scheme.css', $pathToNewDir . '/colour_scheme.css');                
+//                copy($wwwDir . '/user_data/favicon.ico', $pathToNewDir . '/favicon.ico');
+//                
+//                // open index.php file, replace subdomain part string (toBeReplaced) and save it to subdomain root
+//                $indexFile = fopen($wwwDir . '/user_data/index.php', 'r');
+//                $indexContent = fread($indexFile, filesize($wwwDir . '/user_data/index.php'));
+//                fclose($indexFile);
+//
+//                $updatedIndexContent = str_replace('toBeReplaced', $subd, $indexContent);
+//
+//                $updatedFile = fopen($pathToNewDir . '/index.php', 'w+');
+//                fwrite($updatedFile, $updatedIndexContent);
+//                fclose($updatedFile);
+//
+//                // open sitemap.xml, replace subdomain part string (toBeReplaced) and save it to subdomain root
+//                $sitemapFile = fopen($wwwDir . '/user_data/sitemap.xml', 'r');
+//                $sitemapContent = fread($sitemapFile, filesize($wwwDir . '/user_data/sitemap.xml'));
+//                fclose($sitemapFile);
+//
+//                $updatedSitemapContent = str_replace('toBeReplaced', $subd, $sitemapContent);
+//
+//                $updatedSitemap = fopen($pathToNewDir . '/sitemap.xml', 'w+');
+//                fwrite($updatedSitemap, $updatedSitemapContent);
+//                fclose($updatedSitemap);         
+//
+//                // -----------------------------------------------------------------
+//                // real subdomain part files
+//                // open realSubdomain.index.php, replace subdomain part string (toBeReplaced) and save it to subdomain root            
+//                $realIndexFile = fopen($wwwDir . '/user_data_realSub/realSubdomain.index.php', 'r');
+//                $realIndexContent = fread($realIndexFile, filesize($wwwDir . '/user_data_realSub/realSubdomain.index.php'));
+//                fclose($realIndexFile);
+//
+//                $updatedRealIndexContent = str_replace('toBeReplaced', $subd, $realIndexContent);
+//
+//                $updatedRealIndex = fopen($pathToNewDir . '/realSubdomain.index.php', 'w+');
+//                fwrite($updatedRealIndex, $updatedRealIndexContent);
+//                fclose($updatedRealIndex);   
+//            }            
+//        } catch (Exception $e) {
+//            throw new \Nette\Application\ToolException('Unable to register user (www part) (AdminModule - adminDefault presenter). ' . $e, 500);
+//        }        
+//    }       
 }

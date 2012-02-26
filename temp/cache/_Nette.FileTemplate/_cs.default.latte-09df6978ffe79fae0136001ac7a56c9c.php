@@ -1,150 +1,110 @@
-<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.40909800 1329420318";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"C:\xampp\htdocs\app\templates\Registration\cs\default.latte";i:2;i:1329420310;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
+<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.39443300 1330251789";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"C:\xampp\htdocs\app\templates\Registration\cs\default.latte";i:2;i:1330251788;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"013c8ee released on 2012-02-03";}}}?><?php
 
 // source file: C:\xampp\htdocs\app\templates\Registration\cs\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ms2v00higx')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ip2mfj4715')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb6524591dc8_content')) { function _lb6524591dc8_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb8d4b7d53bd_content')) { function _lb8d4b7d53bd_content($_l, $_args) { extract($_args)
 ?>              
-    <h2>Registrace nového uživatele</h2>
+    <table cellspacing="0">
+        <tr>            
+            <td width="140" style="font-weight:bold;font-size:16px;padding-left:110px;">                
+                1. Volba programu
+            </td>
+            <td>
+                <img src="../images/main/man_fillin.png" width="50" />                            
+            </td>
+            <td width="120" style="font-weight:bold;font-size:16px;padding-left:45px;color:#666666;">                
+                2. Osobní údaje                                
+            </td>
+            <td>
+                <img src="../images/main/man_magnifier_nocolor.png" width="50" />                            
+            </td>            
+            <td width="100" style="font-weight:bold;font-size:16px;padding-left:45px;color:#666666;">                
+                3. Potvrzení
+            </td>
+            <td>
+                <img src="../images/main/man_send_nocolor.png" width="70" />                            
+            </td>                        
+        </tr>
+        <tr height="15"></tr>
+    </table>
+    <h2></h2> 
     
-<div id="<?php echo $_control->getSnippetId('formRegUser') ?>"><?php call_user_func(reset($_l->blocks['_formRegUser']), $_l, $template->getParameters()) ?>
-</div>         
+<div id="<?php echo $_control->getSnippetId('formRegUser1') ?>"><?php call_user_func(reset($_l->blocks['_formRegUser1']), $_l, $template->getParameters()) ?>
+</div>    
 <?php
 }}
 
 //
-// block _formRegUser
+// block _formRegUser1
 //
-if (!function_exists($_l->blocks['_formRegUser'][] = '_lbf3373d0514__formRegUser')) { function _lbf3373d0514__formRegUser($_l, $_args) { extract($_args); $_control->validateControl('formRegUser')
-;Nette\Latte\Macros\FormMacros::renderFormBegin($form = $_form = $_control["regUserForm"], array()) ?>
+if (!function_exists($_l->blocks['_formRegUser1'][] = '_lb7e671055d0__formRegUser1')) { function _lb7e671055d0__formRegUser1($_l, $_args) { extract($_args); $_control->validateControl('formRegUser1')
+;Nette\Latte\Macros\FormMacros::renderFormBegin($form = $_form = $_control["regUserForm1"], array()) ?>
 
         <table cellspacing="0">          
                 <tr style="height: 5px;"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" rowspan="6">Přihlašovací údaje</td>
-                    
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["username"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_username_regUserPanel"><?php echo $_form["username"]->getControl()->addAttributes(array()) ?></td>    
-                    <td width="300" align="left" valign="top"><div id="usernameAvailableStatus"></div></td>
-                </tr>                 
-                <tr>
-                    <td class="td_input_label_changePass"><?php if ($_label = $_form["subdomain"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_subdomain_regUserPanel"><?php echo $_form["subdomain"]->getControl()->addAttributes(array()) ?></td>
-                    <td width="300" align="left" valign="top"><div id="subdomainAvailableStatus"></div></td>                    
-                </tr>
-                <tr>
-                    <td class="td_input_label_changePass"><?php if ($_label = $_form["email"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel"><?php echo $_form["email"]->getControl()->addAttributes(array()) ?></td>
-                </tr>
-                <tr>
-                    <td class="td_input_label_changePass"><?php if ($_label = $_form["newPassword"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_top_regUserPanel"><?php echo $_form["newPassword"]->getControl()->addAttributes(array()) ?></td>
-                </tr>
-                <tr>
-                    <td class="td_input_label_changePass"><?php if ($_label = $_form["newPassword1"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel"><?php echo $_form["newPassword1"]->getControl()->addAttributes(array()) ?></td>
-                </tr>     
-                <tr>                    
-                    <td class="td_input_generatePass" colspan="2">*Délka hesla musí být minimálně 8 znaků.                    
-                        <br />
-                        <a href="<?php echo htmlSpecialChars($_control->link("generatePass!")) ?>" class="ajax">Generovat heslo</a>
-                        <div class="generatedPass"><div id="<?php echo $_control->getSnippetId('dispPass') ?>
-"><?php call_user_func(reset($_l->blocks['_dispPass']), $_l, $template->getParameters()) ?>
-</div></div>
-                    </td>
+                    <td class="td_verticalSeparator" rowspan="4">Volba programu</td>                                        
                 </tr>    
+                <tr>
+                    <td width="20"></td>
+                    <td style="background-color:#ffffff;padding-left:20px;width:685px;">
+                        <div style="display:inline-table;height:60px;vertical-align:top;padding-top:45px;">
+                            <?php echo Nette\Templating\Helpers::escapeHtml($form['program']->getControl('demo'), ENT_NOQUOTES) ?>
+
+                        </div>
+                        <div style="display:inline-table;padding-left:105px;">
+                            <img src="../images/main/man_gift.png" width="90" />
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:5px;"><td></td></tr>
+                <tr>
+                    <td width="20"></td>
+                    <td style="background-color:#ffffff;padding-left:20px;width:685px;">
+                        <div style="display:inline-table;height:60px;vertical-align:top;padding-top:45px;">
+                            <?php echo Nette\Templating\Helpers::escapeHtml($form['program']->getControl('basic'), ENT_NOQUOTES) ?>
+
+                        </div>
+                        <div style="display:inline-table;padding-left:160px;">
+                            <img src="../images/main/man_basic.png" width="90" />
+                        </div>
+                    </td>
+                </tr>   
                 <tr style="height: 15px;"><td></td></tr>
-         </table>    
-         <h2></h2>     
-         <table cellspacing="0">          
-                <tr style="height: 5px;"><td></td></tr>
+         </table>   
+         <h2></h2> 
+	 <table cellspacing="0">            
+                <tr style="height: 10px;"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" rowspan="8">Osobní údaje</td>
-                    
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["name"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["name"]->getControl()->addAttributes(array()) ?></td>         
-                    
-                    <td class="td_right_img" rowspan="8"><img src="../images/main/man_registration.png" /></td>
+                    <td class="td_verticalSeparator" rowspan="3">Smluvní podmínky</td>
+                </tr>
+                <tr>                    
+                    <td colspan="3" style="padding-left:40px;">
+                        Smluvní podmínky MUDRweb.cz naleznete na odkaze <a href="<?php echo htmlSpecialChars($_presenter->link(":Default:")) ?>" target=_blank">Smluvní podmínky.</a>
+                    </td>                    
                 </tr>
                 <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["surname"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["surname"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>
-                <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["titleBefore"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["titleBefore"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>                
-                <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["titleAfter"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["titleAfter"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>                
-                <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["street"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["street"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>
-                <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["city"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["city"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>
-                <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["zip"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1"><?php echo $_form["zip"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>                
-                <tr>
-                    <td class="td_input_label_pinfo"><?php if ($_label = $_form["phone"]->getLabel()) echo $_label->addAttributes(array()) ?> &nbsp</td>                    
-                    <td class="td_input_phone_regUserPanel">+420 &nbsp;<?php echo $_form["phone"]->getControl()->addAttributes(array()) ?></td>                                                      
-                </tr>                                
+                    <td width="20"></td>
+                    <td class="td_input_terms"><?php echo $_form["terms"]->getControl()->addAttributes(array()) ?> &nbsp; Pročetl jsem si smluvní podmínky, porozuměl jsem jim a akceptuji je! </td>
+                </tr>      
                 <tr style="height: 15px;"><td></td></tr>
-         </table>             
+         </table>           
          <h2></h2>         
          <table cellspacing="0">                
                 <tr>                            
-                    <td class="td_input_changePass"><?php echo $_form["submit"]->getControl()->addAttributes(array()) ?> &nbsp&nbsp </td> 
+                    <td class="td_input_changePass"><?php echo $_form["submit1"]->getControl()->addAttributes(array()) ?> &nbsp;&nbsp; </td> 
                 </tr>
          </table>
          <h2></h2>       
-<?php Nette\Latte\Macros\FormMacros::renderFormEnd($_form) ?>
-         
-<script type="text/javascript">     
-    
-    $('#frmregUserForm-username').change(function(event) { if ($('#frmregUserForm-username').val().length >= 8) { $.getJSON(<?php echo Nette\Templating\Helpers::escapeJs($_control->link("availCheck!")) ?>,{'text':$('#frmregUserForm-username').val(), 'flag':'username'},function(payload) { if (payload.availCheck[0] == 'notok') { $("#frmregUserForm-username").removeClass("object_ok"); $("#frmregUserForm-username").addClass("object_error"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-red icon-ui-red-close"></span><span>Jméno je již použito, zvolte prosím jiné</span>');                
-    } else { $("#frmregUserForm-username").removeClass('form-control-error'); $("#frmregUserForm-username").removeClass('object_error'); $("#frmregUserForm-username").addClass("object_ok"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-green icon-ui-green-tick"></span><span>Jméno je k dispozici</span>'); } }); } });         
-    
-
-    $('#frmregUserForm-subdomain').change(function(event) {
-        if ($('#frmregUserForm-subdomain').val().length >= 6) {
-            $.getJSON(<?php echo Nette\Templating\Helpers::escapeJs($_control->link("availCheck!")) ?>,{'text':$('#frmregUserForm-subdomain').val(), 'flag':'subdomain'},function(payload) {            
-                if (payload.availCheck[0] == 'notok') {
-                    $("#frmregUserForm-subdomain").removeClass("object_ok"); // if necessary
-                    $("#frmregUserForm-subdomain").addClass("object_error");                
-                    $("#subdomainAvailableStatus").html('&nbsp;<span class="icon-ui-red icon-ui-red-close"></span><span>Název stránky je již použit, zvolte prosím jiný</span>');                
-                } else {
-                    $("#frmregUserForm-subdomain").removeClass('form-control-error'); // if necessary
-                    $("#frmregUserForm-subdomain").removeClass('object_error'); // if necessary
-                    $("#frmregUserForm-subdomain").addClass("object_ok");                
-                    $("#subdomainAvailableStatus").html('&nbsp;<span class="icon-ui-green icon-ui-green-tick"></span><span>Název stránky je k dispozici</span>');
-                }
-            });
-        }
-    });         
-
-</script>                         
-         
-<?php
-}}
-
-//
-// block _dispPass
-//
-if (!function_exists($_l->blocks['_dispPass'][] = '_lb74dcd6f28d__dispPass')) { function _lb74dcd6f28d__dispPass($_l, $_args) { extract($_args); $_control->validateControl('dispPass')
-;echo Nette\Templating\Helpers::escapeHtml($passwordToDisplay, ENT_NOQUOTES) ;
+<?php Nette\Latte\Macros\FormMacros::renderFormEnd($_form) ;
 }}
 
 //

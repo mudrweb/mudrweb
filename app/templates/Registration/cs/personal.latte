@@ -1,0 +1,127 @@
+{block content}
+                      
+    <table cellspacing="0">
+        <tr>            
+            <td width="140" style="font-weight:bold;font-size:16px;padding-left:110px;">                
+                1. Volba programu
+            </td>
+            <td>
+                <img src="../images/main/man_fillin.png" width="50"/>                            
+            </td>
+            <td width="120" style="font-weight:bold;font-size:16px;padding-left:45px;">                
+                2. Osobní údaje                                
+            </td>
+            <td>
+                <img src="../images/main/man_magnifier.png" width="50"/>                            
+            </td>            
+            <td width="100" style="font-weight:bold;font-size:16px;padding-left:45px;color:#666666;">                
+                3. Potvrzení
+            </td>
+            <td>
+                <img src="../images/main/man_send_nocolor.png" width="70"/>                            
+            </td>                        
+        </tr>
+        <tr height="15"></tr>
+    </table>
+    <h2></h2>
+    
+{snippet formRegUser2}
+{form regUserForm2}        
+
+        <table cellspacing="0">          
+                <tr style="height: 5px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="6">Přihlašovací údaje</td>
+                    
+                    <td class="td_input_label_pinfo">{label username /} &nbsp</td>                    
+                    <td class="td_input_username_regUserPanel">{input username}</td>    
+                    <td width="300" align="left" valign="top"><div id="usernameAvailableStatus"></div></td>
+                </tr>                 
+                <tr>
+                    <td class="td_input_label_changePass">{label subdomain /} &nbsp</td>                    
+                    <td class="td_input_subdomain_regUserPanel">{input subdomain}</td>
+                    <td width="300" align="left" valign="top"><div id="subdomainAvailableStatus"></div></td>                    
+                </tr>
+                <tr>
+                    <td class="td_input_label_changePass">{label email /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel">{input email}</td>
+                </tr>
+                <tr>
+                    <td class="td_input_label_changePass">{label newPassword /} &nbsp</td>                    
+                    <td class="td_input_top_regUserPanel">{input newPassword}</td>
+                </tr>
+                <tr>
+                    <td class="td_input_label_changePass">{label newPassword1 /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel">{input newPassword1}</td>
+                </tr>     
+                <tr>                    
+                    <td class="td_input_generatePass" colspan="2">*DĂ©lka hesla musĂ­ bĂ˝t minimĂˇlnÄ› 8 znakĹŻ.                    
+                        <br />
+                        <a href="{link generatePass!}" class="ajax">Generovat heslo</a>
+                        <div class="generatedPass">{snippet dispPass}{$passwordToDisplay}{/snippet}</div>
+                    </td>
+                </tr>    
+                <tr style="height: 15px;"><td></td></tr>
+         </table>    
+         <h2></h2>  
+         <table cellspacing="0">          
+                <tr style="height: 5px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="8">Osobní údaje</td>
+                    
+                    <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input name}</td>         
+                    
+                    <td class="td_right_img" rowspan="8"><img src="../images/main/man_registration.png" /></td>
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label surname /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input surname}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label titleBefore /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input titleBefore}</td>                                                      
+                </tr>                
+                <tr>
+                    <td class="td_input_label_pinfo">{label titleAfter /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input titleAfter}</td>                                                      
+                </tr>                
+                <tr>
+                    <td class="td_input_label_pinfo">{label street /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input street}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label city /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input city}</td>                                                      
+                </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label zip /} &nbsp</td>                    
+                    <td class="td_input_regUserPanel_1">{input zip}</td>                                                      
+                </tr>                
+                <tr>
+                    <td class="td_input_label_pinfo">{label phone /} &nbsp</td>                    
+                    <td class="td_input_phone_regUserPanel">+420 &nbsp;{input phone}</td>                                                      
+                </tr>                                
+                <tr style="height: 15px;"><td></td></tr>
+         </table>                    
+         <h2></h2>         
+         <table cellspacing="0">                
+                <tr>                            
+                    <td class="td_input_changePass">{input submit2} &nbsp&nbsp </td> 
+                </tr>
+         </table>
+         <h2></h2>       
+{/form regUserForm2}     
+         
+<script type="text/javascript">         
+    $('#frmregUserForm2-username').change(function(event) { if ($('#frmregUserForm2-username').val().length >= 8) { $.getJSON({link availCheck!},{'text':$('#frmregUserForm2-username').val(), 'flag':'username'},function(payload) { if (payload.availCheck[0] == 'notok') { $("#frmregUserForm2-username").removeClass("object_ok"); $("#frmregUserForm-username").addClass("object_error"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-red icon-ui-red-close"></span><span>Jméno je již použito, zvolte prosím jiné</span>');                
+    } else { $("#frmregUserForm2-username").removeClass('form-control-error'); $("#frmregUserForm2-username").removeClass('object_error'); $("#frmregUserForm2-username").addClass("object_ok"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-green icon-ui-green-tick"></span><span>Jméno je k dispozici</span>'); } }); } });         
+    
+
+    $('#frmregUserForm2-subdomain').change(function(event) { if ($('#frmregUserForm2-subdomain').val().length >= 6) { $.getJSON({link availCheck!},{'text':$('#frmregUserForm-subdomain').val(), 'flag':'subdomain'},function(payload) { if (payload.availCheck[0] == 'notok') { $("#frmregUserForm2-subdomain").removeClass("object_ok");  $("#frmregUserForm-subdomain").addClass("object_error"); $("#subdomainAvailableStatus").html('&nbsp;<span class="icon-ui-red icon-ui-red-close"></span><span>Název stránky je již použit, zvolte prosím jiný</span>');                
+    } else { $("#frmregUserForm2-subdomain").removeClass('form-control-error'); $("#frmregUserForm2-subdomain").removeClass('object_error'); $("#frmregUserForm2-subdomain").addClass("object_ok"); $("#subdomainAvailableStatus").html('&nbsp;<span class="icon-ui-green icon-ui-green-tick"></span><span>Název stránky je k dispozici</span>'); } }); } });         
+</script>                         
+         
+{/snippet}        
+         
+{/block}

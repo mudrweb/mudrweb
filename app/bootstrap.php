@@ -84,7 +84,7 @@ $router[] = $route = new FilterRoute('[<lang cs>/]<presenter>[/<action>]', array
                 Route::FILTER_IN => null,
                 Route::FILTER_OUT => null
             ),
-            'action' => 'default',
+            'action' => 'default',            
         ));
 
 $route->addFilter('presenter', 'BasePresenter::urlToPresenter', 'BasePresenter::presenterToUrl');
