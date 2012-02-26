@@ -2,26 +2,26 @@
                       
     <table cellspacing="0">
         <tr>            
-            <td width="145" style="font-weight:bold;font-size:16px;padding-left:110px;">                
+            <td class="td_reg_step1_active">                
                 1. Volba programu
             </td>
             <td>
                 <img src="../images/main/man_fillin.png" width="50"/>                            
             </td>
-            <td width="120" style="font-weight:bold;font-size:16px;padding-left:45px;">                
+            <td class="td_reg_step2_active">                
                 2. Osobní údaje                                
             </td>
             <td>
                 <img src="../images/main/man_magnifier.png" width="50"/>                            
             </td>            
-            <td width="100" style="font-weight:bold;font-size:16px;padding-left:45px;">                
+            <td class="td_reg_step3_active">                
                 3. Potvrzení
             </td>
             <td>
                 <img src="../images/main/man_send.png" width="70"/>                            
             </td>                        
         </tr>
-        <tr height="15"></tr>
+        <tr class="tr_reg_height15"></tr>
     </table>
     <h2></h2>          
          
@@ -30,53 +30,53 @@
             <h1>Vážená paní doktorko/Vážený pane doktore,</h1>
             <br><br>
             {if $done == 0}
-            zkontrolujte si prosím nejdůležitejší položky objednávky a potvrďte ji tlačítkem
-            <br />
-            <strong>'Potvrdit objednávku'</strong>:
-            <br /><br />
-                
-                {snippet formRegUser3}
-                {form regUserForm3}  
-                <table cellspacing="0" width="530">
-                    <tr style="background-color:#ffffff;">
-                        <td class="td_input_confirm_rev_0">Zvolený program:</td><td class="td_input_confirm_rev">{$program}</td>
-                    </tr>
-                    <tr style="height:5px;"><td></td></tr>
-                    <tr style="background-color:#ffffff;">
-                        <td class="td_input_confirm_rev_0">Jméno:</td><td class="td_input_confirm_rev">{$name}</td>
-                    </tr>
-                    <tr style="height:5px;"><td></td></tr>
-                    <tr style="background-color:#ffffff;">
-                        <td class="td_input_confirm_rev_0">Kontaktní e-mail:</td><td class="td_input_confirm_rev">{$email}</td>
-                    </tr>                        
-                    <tr style="height:5px;"><td></td></tr>
-                    <tr style="background-color:#ffffff;">
-                        <td class="td_input_confirm_rev_0">Název stránky:</td><td class="td_input_confirm_rev">{$subdomain}</td>
-                    </tr>                                                
-                    <tr style="height:20px;"><td></td></tr>                    
-                    <tr>                            
-                        <td class="td_input_confirm">{input submit3} &nbsp;&nbsp; </td> 
-                    </tr>                    
-                </table>
-                {/form regUserForm3}                                         
-                {/snippet}  
-            
-            <br />
-            Ihned po potvrzení objednávky obdržíte na e-mailovou adresu 
-            zadanou při registraci informační e-mail. V případě jakýchkoliv otázek se 
-            obraťte na naši podporu - support@mudrweb.cz.
-            <br /><br />
+                zkontrolujte si prosím nejdůležitejší položky objednávky a potvrďte ji tlačítkem
+                <br />
+                <strong>'Potvrdit objednávku'</strong>:
+                <br /><br />
+
+                    {snippet formRegUser3}
+                    {form regUserForm3}  
+                    <table cellspacing="0" width="530">
+                        <tr class="tr_reg_final_rev">
+                            <td class="td_input_confirm_rev_0">Zvolený program:</td><td class="td_input_confirm_rev">{$program}</td>
+                        </tr>
+                        <tr class="tr_reg_height5"><td></td></tr>
+                        <tr class="tr_reg_final_rev">
+                            <td class="td_input_confirm_rev_0">Jméno:</td><td class="td_input_confirm_rev">{$name}</td>
+                        </tr>
+                        <tr class="tr_reg_height5"><td></td></tr>
+                        <tr class="tr_reg_final_rev">
+                            <td class="td_input_confirm_rev_0">Kontaktní e-mail:</td><td class="td_input_confirm_rev">{$email}</td>
+                        </tr>                        
+                        <tr class="tr_reg_height5"><td></td></tr>
+                        <tr class="tr_reg_final_rev">
+                            <td class="td_input_confirm_rev_0">Název stránky:</td><td class="td_input_confirm_rev">{$subdomain}</td>
+                        </tr>                                                
+                        <tr class="tr_reg_height20"><td></td></tr>                    
+                        <tr>                            
+                            <td class="td_input_confirm">{input submit3} &nbsp;&nbsp; </td> 
+                        </tr>                    
+                    </table>
+                    {/form regUserForm3}                                         
+                    {/snippet}  
+
+                <br />
+                Ihned po potvrzení objednávky obdržíte na e-mailovou adresu 
+                zadanou při registraci informační e-mail. V případě jakýchkoliv otázek se 
+                obraťte na naši podporu - support@mudrweb.cz.
+                <br /><br />
             {else}
-            Vaše objednávka byla úspěsně odeslána. O jejím stavu Vás 
-            budeme informovat prostřednictviím e-mailu.            
-            <br /><br />
-            Vážíme si Vašeho rozhodnutí stát se klientem MUDRweb.cz a rádi 
-            bychom Vás přivítali v naší skupině.                                  
-            <br /><br />            
-            S pozdravem
-            <br /><br />
-            Váš MUDRweb tým
-            <br />
+                Vaše objednávka byla úspěsně odeslána. O jejím stavu Vás 
+                budeme informovat prostřednictviím e-mailu.            
+                <br /><br />
+                Vážíme si Vašeho rozhodnutí stát se klientem MUDRweb.cz a rádi 
+                bychom Vás přivítali v naší skupině.                                  
+                <br /><br />            
+                S pozdravem
+                <br /><br />
+                Váš MUDRweb tým
+                <br />
             {/if}
         </p>     
     </div> <!--end of grid_mainleft-->      

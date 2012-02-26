@@ -84,19 +84,19 @@ class AdminUsersPresenter extends AdminPresenter {
                     break;           
             }           
             
-            // actual user
-            $user = $this->db_users->getUserById(intval($id));
-            if ($user) {
-                if ($user->subdomainStatus == 'N/A') {
-                    //6. www part - folders, files
-                    $this->registerUserWWW($user->subdomain);
-
-                    //7. set subdomain status from N/A -> to valid
-                    $this->db_users->updateSubdomainStatus($user->id, 'Valid');                       
-                }
+//            // actual user
+//            $user = $this->db_users->getUserById(intval($id));
+//            if ($user) {
+//                if ($user->subdomainStatus == 'N/A') {
+//                    //6. www part - folders, files
+//                    $this->registerUserWWW($user->subdomain);
+//
+//                    //7. set subdomain status from N/A -> to valid
+//                    $this->db_users->updateSubdomainStatus($user->id, 'Valid');                       
+//                }
                 
                 $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);
-            }                        
+//            }                        
         }
 
         // dateFrom

@@ -129,6 +129,8 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
             // set last successful login datetime 
             if ($userFromDB->lastLogin) {
                 $this->template->lastSuccessfulLogin = date_format($userFromDB->lastLogin, 'd.m.Y H:i:s');
+            } else {
+                $this->template->lastSuccessfulLogin = 'N/A';
             }
         }        
         

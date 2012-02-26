@@ -99,11 +99,11 @@ class RegistrationPresenter extends BasePresenter {
         $form->getElementPrototype()->class('ajax');        
         
         $form->addRadioList('program', '', array(
-                'demo' => 'DEMO zdarma - 3 měsíce - ZDARMA',
+                'demo' => 'DEMO verze - 3 měsíce - ZDARMA',
                 'basic' => 'Základní verze - 1 rok - 1000 Kč',
                 ))
                 ->setDefaultValue('demo')
-                ->setAttribute('class', 'headerImage');   
+                ->setAttribute('class', 'programs');
         
         $form->addCheckbox('terms')
                 ->addRule(Form::FILLED, 'Musíte souhlasit se Smluvními podmínkami MUDRweb.cz.')
@@ -325,7 +325,7 @@ class RegistrationPresenter extends BasePresenter {
     protected function createComponentRegUserForm3() {
         $form = new \Nette\Application\UI\Form;       
 
-        $form->getElementPrototype()->class('ajax');        
+//        $form->getElementPrototype()->class('ajax');        
         
         $form->addSubmit('submit3', 'Potvrdit objednávku')
                 ->setAttribute('class', 'button')
@@ -373,6 +373,12 @@ class RegistrationPresenter extends BasePresenter {
         $dataArray_guestBook = array($user->id, $user_data->name . ' ' . $user_data->surname);
         $this->db_guestBook->addGuestBook($dataArray_guestBook);        
 
+        //6. www part - folders, files
+        $this->registerUserWWW($user->subdomain);
+
+        //7. set subdomain status from N/A -> to valid
+        $this->db_users->updateSubdomainStatus($user->id, 'Valid');          
+        
         $section->dataArray_users_data = null;
         
         $this->redirect('this');
@@ -489,68 +495,68 @@ class RegistrationPresenter extends BasePresenter {
         $this->terminate();
     }    
     
-//    /**
-//     * Register user - www part (folders, files).
-//     * 
-//     * @param string $subdomain 
-//     */
-//    public function registerUserWWW($subdomain) {
-//        $subd = $subdomain;
-//        $wwwDir = WWW_DIR;        
-//        $pathToNewDir = $wwwDir . '/' . $subd;        
-//        try {            
-//            // delete dir if it already exists
-//            $this->extraMethods->deleteSubdomain($subdomain);             
-//            
-//            // create subdomain root
-//            if ($this->extraMethods->createSubdomain($subdomain)) {
-//                // create admin folder and index.php for redirect (copy from)
-//                mkdir($pathToNewDir . '/admin');
-//                copy($wwwDir . '/user_data/admin.index.php', $pathToNewDir . '/admin/index.php');
-//                // copy files to subdomain root
-//                copy($wwwDir . '/user_data/.htaccess', $pathToNewDir . '/.htaccess');                
-//                copy($wwwDir . '/user_data/robots.txt', $pathToNewDir . '/robots.txt');
-//                copy($wwwDir . '/user_data/header.css', $pathToNewDir . '/header.css');
-//                copy($wwwDir . '/user_data/colour_scheme.css', $pathToNewDir . '/colour_scheme.css');                
-//                copy($wwwDir . '/user_data/favicon.ico', $pathToNewDir . '/favicon.ico');
-//                
-//                // open index.php file, replace subdomain part string (toBeReplaced) and save it to subdomain root
-//                $indexFile = fopen($wwwDir . '/user_data/index.php', 'r');
-//                $indexContent = fread($indexFile, filesize($wwwDir . '/user_data/index.php'));
-//                fclose($indexFile);
-//
-//                $updatedIndexContent = str_replace('toBeReplaced', $subd, $indexContent);
-//
-//                $updatedFile = fopen($pathToNewDir . '/index.php', 'w+');
-//                fwrite($updatedFile, $updatedIndexContent);
-//                fclose($updatedFile);
-//
-//                // open sitemap.xml, replace subdomain part string (toBeReplaced) and save it to subdomain root
-//                $sitemapFile = fopen($wwwDir . '/user_data/sitemap.xml', 'r');
-//                $sitemapContent = fread($sitemapFile, filesize($wwwDir . '/user_data/sitemap.xml'));
-//                fclose($sitemapFile);
-//
-//                $updatedSitemapContent = str_replace('toBeReplaced', $subd, $sitemapContent);
-//
-//                $updatedSitemap = fopen($pathToNewDir . '/sitemap.xml', 'w+');
-//                fwrite($updatedSitemap, $updatedSitemapContent);
-//                fclose($updatedSitemap);         
-//
-//                // -----------------------------------------------------------------
-//                // real subdomain part files
-//                // open realSubdomain.index.php, replace subdomain part string (toBeReplaced) and save it to subdomain root            
-//                $realIndexFile = fopen($wwwDir . '/user_data_realSub/realSubdomain.index.php', 'r');
-//                $realIndexContent = fread($realIndexFile, filesize($wwwDir . '/user_data_realSub/realSubdomain.index.php'));
-//                fclose($realIndexFile);
-//
-//                $updatedRealIndexContent = str_replace('toBeReplaced', $subd, $realIndexContent);
-//
-//                $updatedRealIndex = fopen($pathToNewDir . '/realSubdomain.index.php', 'w+');
-//                fwrite($updatedRealIndex, $updatedRealIndexContent);
-//                fclose($updatedRealIndex);   
-//            }            
-//        } catch (Exception $e) {
-//            throw new \Nette\Application\ToolException('Unable to register user (www part) (AdminModule - adminDefault presenter). ' . $e, 500);
-//        }        
-//    }       
+    /**
+     * Register user - www part (folders, files).
+     * 
+     * @param string $subdomain 
+     */
+    public function registerUserWWW($subdomain) {
+        $subd = $subdomain;
+        $wwwDir = WWW_DIR;        
+        $pathToNewDir = $wwwDir . '/' . $subd;        
+        try {            
+            // delete dir if it already exists
+            $this->extraMethods->deleteSubdomain($subdomain);             
+            
+            // create subdomain root
+            if ($this->extraMethods->createSubdomain($subdomain)) {
+                // create admin folder and index.php for redirect (copy from)
+                mkdir($pathToNewDir . '/admin');
+                copy($wwwDir . '/user_data/admin.index.php', $pathToNewDir . '/admin/index.php');
+                // copy files to subdomain root
+                copy($wwwDir . '/user_data/.htaccess', $pathToNewDir . '/.htaccess');                
+                copy($wwwDir . '/user_data/robots.txt', $pathToNewDir . '/robots.txt');
+                copy($wwwDir . '/user_data/header.css', $pathToNewDir . '/header.css');
+                copy($wwwDir . '/user_data/colour_scheme.css', $pathToNewDir . '/colour_scheme.css');                
+                copy($wwwDir . '/user_data/favicon.ico', $pathToNewDir . '/favicon.ico');
+                
+                // open index.php file, replace subdomain part string (toBeReplaced) and save it to subdomain root
+                $indexFile = fopen($wwwDir . '/user_data/index.php', 'r');
+                $indexContent = fread($indexFile, filesize($wwwDir . '/user_data/index.php'));
+                fclose($indexFile);
+
+                $updatedIndexContent = str_replace('toBeReplaced', $subd, $indexContent);
+
+                $updatedFile = fopen($pathToNewDir . '/index.php', 'w+');
+                fwrite($updatedFile, $updatedIndexContent);
+                fclose($updatedFile);
+
+                // open sitemap.xml, replace subdomain part string (toBeReplaced) and save it to subdomain root
+                $sitemapFile = fopen($wwwDir . '/user_data/sitemap.xml', 'r');
+                $sitemapContent = fread($sitemapFile, filesize($wwwDir . '/user_data/sitemap.xml'));
+                fclose($sitemapFile);
+
+                $updatedSitemapContent = str_replace('toBeReplaced', $subd, $sitemapContent);
+
+                $updatedSitemap = fopen($pathToNewDir . '/sitemap.xml', 'w+');
+                fwrite($updatedSitemap, $updatedSitemapContent);
+                fclose($updatedSitemap);         
+
+                // -----------------------------------------------------------------
+                // real subdomain part files
+                // open realSubdomain.index.php, replace subdomain part string (toBeReplaced) and save it to subdomain root            
+                $realIndexFile = fopen($wwwDir . '/user_data_realSub/realSubdomain.index.php', 'r');
+                $realIndexContent = fread($realIndexFile, filesize($wwwDir . '/user_data_realSub/realSubdomain.index.php'));
+                fclose($realIndexFile);
+
+                $updatedRealIndexContent = str_replace('toBeReplaced', $subd, $realIndexContent);
+
+                $updatedRealIndex = fopen($pathToNewDir . '/realSubdomain.index.php', 'w+');
+                fwrite($updatedRealIndex, $updatedRealIndexContent);
+                fclose($updatedRealIndex);   
+            }            
+        } catch (Exception $e) {
+            throw new \Nette\Application\ToolException('Unable to register user (www part) (AdminModule - adminDefault presenter). ' . $e, 500);
+        }        
+    }       
 }

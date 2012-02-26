@@ -212,6 +212,34 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .button:hover,.button_ok:hover,.button_cancel:hover { border-color:#FFF #AFAFB4 #AFAFB4 #FFF; color:#333; }
 
 /* user registration - main */
+/** common */
+.td_reg_step1_active { font-weight: bold; font-size: 16px; padding-left: 110px; width: 145px; }
+.td_reg_step1_inactive { font-weight: bold; font-size: 16px; padding-left: 110px; width: 145px; color: #666666; }
+.td_reg_step2_active { font-weight: bold; font-size: 16px; padding-left: 45px; width: 120px; }
+.td_reg_step2_inactive { font-weight: bold; font-size: 16px; padding-left: 45px; width: 120px; color: #666666; }
+.td_reg_step3_active { font-weight: bold; font-size: 16px; padding-left: 45px; width: 100px; }
+.td_reg_step3_inactive { font-weight: bold; font-size: 16px; padding-left: 45px; width: 100px; color: #666666; }
+.tr_reg_height5 { height: 5px; }
+.tr_reg_height10 { height: 10px; }
+.tr_reg_height15 { height: 15px; }
+.tr_reg_height20 { height: 20px; }
+.td_reg_width20 { width: 20px; }
+
+/** program */
+.td_reg_programs { background-color: #ffffff; padding-left: 20px; width: 685px; }
+.div_reg_program_text_demo { display: inline-table; height: 60px; vertical-align: top; padding-top: 45px; }
+.div_reg_program_image_demo { display: inline-table; padding-left: 115px; }
+.div_reg_program_text_basic{ display: inline-table; height: 60px; vertical-align: top; padding-top: 45px; }
+.div_reg_program_image_basic { display: inline-table; padding-left: 160px; }
+.programs { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 2px;
+    -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
+}
+.terms { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 0px;
+    -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
+}
+.td_input_terms { padding-left: 20px; padding-bottom: 15px; width: 445px; }
+.terms_text { padding-left: 40px; }
+
 /** personal info */
 .td_input_label_pinfo { padding-bottom: 15px; padding-left: 20px; }
 .input_style_pinfo { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 220px; border: 1px solid #000000;
@@ -237,16 +265,11 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .td_input_changePass { padding-left: 150px; padding-bottom: 15px; padding-top: 5px; }
 .td_right_img {  padding-left: 70px; }
 
-/** program */
-.terms { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 0px;
-    -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
-}
-.td_input_terms { padding-left: 20px; padding-bottom: 15px; width: 445px; }
-
 /** confirmation */
 .td_input_confirm { padding-left: 0px; padding-bottom: 5px; padding-top: 5px; }
 .td_input_confirm_rev_0 { padding-top: 5px; padding-bottom: 5px; padding-left: 20px; width: 150px; }
 .td_input_confirm_rev { padding-bottom: 5px; padding-left: 20px; }
+.tr_reg_final_rev { background-color: #ffffff; }
 
 /**
 * Live validation

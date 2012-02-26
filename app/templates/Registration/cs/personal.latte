@@ -2,26 +2,26 @@
                       
     <table cellspacing="0">
         <tr>            
-            <td width="145" style="font-weight:bold;font-size:16px;padding-left:110px;">                
+            <td class="td_reg_step1_active">                
                 1. Volba programu
             </td>
             <td>
                 <img src="../images/main/man_fillin.png" width="50"/>                            
             </td>
-            <td width="120" style="font-weight:bold;font-size:16px;padding-left:45px;">                
+            <td class="td_reg_step2_active">                
                 2. Osobní údaje                                
             </td>
             <td>
                 <img src="../images/main/man_magnifier.png" width="50"/>                            
             </td>            
-            <td width="100" style="font-weight:bold;font-size:16px;padding-left:45px;color:#666666;">                
+            <td class="td_reg_step3_inactive">                
                 3. Potvrzení
             </td>
             <td>
                 <img src="../images/main/man_send_nocolor.png" width="70"/>                            
             </td>                        
         </tr>
-        <tr height="15"></tr>
+        <tr class="tr_reg_height15"></tr>
     </table>
     <h2></h2>
     
@@ -29,7 +29,7 @@
 {form regUserForm2}        
 
         <table cellspacing="0">          
-                <tr style="height: 5px;"><td></td></tr>
+                <tr class="tr_reg_height5"><td></td></tr>
                 <tr>
                     <td class="td_verticalSeparator" rowspan="6">Přihlašovací údaje</td>
                     
@@ -61,11 +61,11 @@
                         <div class="generatedPass">{snippet dispPass}{$passwordToDisplay}{/snippet}</div>
                     </td>
                 </tr>    
-                <tr style="height: 15px;"><td></td></tr>
+                <tr class="tr_reg_height15"><td></td></tr>
          </table>    
          <h2></h2>  
          <table cellspacing="0">          
-                <tr style="height: 5px;"><td></td></tr>
+                <tr class="tr_reg_height5"><td></td></tr>
                 <tr>
                     <td class="td_verticalSeparator" rowspan="8">Osobní údaje</td>
                     
@@ -102,7 +102,7 @@
                     <td class="td_input_label_pinfo">{label phone /} &nbsp</td>                    
                     <td class="td_input_phone_regUserPanel">+420 &nbsp;{input phone}</td>                                                      
                 </tr>                                
-                <tr style="height: 15px;"><td></td></tr>
+                <tr class="tr_reg_height15"><td></td></tr>
          </table>                    
          <h2></h2>         
          <table cellspacing="0">                
