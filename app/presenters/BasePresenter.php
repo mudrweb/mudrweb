@@ -214,6 +214,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 $UtoPArray['smluvni-podminky'] = 'Terms';
                 $UtoPArray['o-nas'] = 'AboutUs';
                 $UtoPArray['kontakt'] = 'Contact';
+                $UtoPArray['hledani'] = 'Search';
+                $UtoPArray['dotazy'] = 'QandA';
             }
             $UtoPArray['Default'] = 'Default';
         }        
@@ -292,6 +294,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                     $PtoUArray['Terms'] = 'smluvni-podminky';
                     $PtoUArray['AboutUs'] = 'o-nas';
                     $PtoUArray['Contact'] = 'kontakt';                    
+                    $PtoUArray['Search'] = 'hledani';                  
+                    $PtoUArray['QandA'] = 'dotazy';                  
                 }                
             }            
             $PtoUArray['Default'] = 'Default';

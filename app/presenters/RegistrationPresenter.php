@@ -96,7 +96,7 @@ class RegistrationPresenter extends BasePresenter {
     protected function createComponentRegUserForm1() {
         $form = new \Nette\Application\UI\Form;       
 
-        $form->getElementPrototype()->class('ajax');        
+//        $form->getElementPrototype()->class('ajax');        
         
         $form->addRadioList('program', '', array(
                 'demo' => 'DEMO verze - 3 měsíce - ZDARMA',
@@ -150,7 +150,7 @@ class RegistrationPresenter extends BasePresenter {
     protected function createComponentRegUserForm2() {
         $form = new \Nette\Application\UI\Form;       
 
-        $form->getElementPrototype()->class('ajax');        
+//        $form->getElementPrototype()->class('ajax');        
         
         // login data
         $form->addText('username', 'Uživatelské jméno:', 20, 20)             
@@ -304,14 +304,14 @@ class RegistrationPresenter extends BasePresenter {
 //            //7. set subdomain status from N/A -> to valid
 //            $this->db_users->updateSubdomainStatus($user->id, 'Valid');                                               
             
-            if (!$this->isAjax()) {
-                $this->redirect('this');
-            } else {
+//            if (!$this->isAjax()) {
+//                $this->redirect('this');
+//            } else {
                 $this->invalidateControl('formRegUser');
                 $this->invalidateControl('dispPass');
                 $button->getForm()->setValues(array(), TRUE);
                 $this->redirect('Registration:final');
-            }            
+//            }            
         } else {
             $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                        
         }       
