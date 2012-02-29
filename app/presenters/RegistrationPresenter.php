@@ -29,7 +29,7 @@ class RegistrationPresenter extends BasePresenter {
         $section = $session->getSection('Reg');
         $section->step1Completed = 0;        
         $section->step2Completed = 0; 
-        $section->step3Completed = 0;                 
+        $section->step3Completed = 0;                        
     }                
     
     /**
@@ -134,7 +134,7 @@ class RegistrationPresenter extends BasePresenter {
         $section->step1Completed = 1;
         
         if ($data->program == 'demo') {
-            $section->program = 'DEMO zdarma - 3 měsíce - ZDARMA';
+            $section->program = 'DEMO verze - 3 měsíce - ZDARMA';
         } elseif ($data->program == 'basic') {
             $section->program = 'Základní verze - 1 rok - 1000 Kč';
         }       
@@ -349,7 +349,11 @@ class RegistrationPresenter extends BasePresenter {
         $section->step3Completed = 1;         
                                 
         //1. user
-        $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, $section->subdomain);
+        $token = $this->extraMethods->generatePassword();
+        $salt = $this->extraMethods->generateSalt();
+        $regToken = $this->extraMethods->calculateHash($token, $salt);
+        $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, 
+            $section->subdomain, $section->program, $regToken);
         $this->db_users->addUser($dataArray_user);
 
         //2. users_data
@@ -380,6 +384,24 @@ class RegistrationPresenter extends BasePresenter {
         $this->db_users->updateSubdomainStatus($user->id, 'Valid');          
         
         $section->dataArray_users_data = null;
+        
+        //8. send info email to user        
+        $template = parent::createTemplate();
+        $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/reg_user_done.latte');
+        $template->registerFilter(new Nette\Latte\Engine());        
+
+        if ($section->program == 'demo') {
+            $template->program = 'DEMO verze';
+        } elseif ($section->program = 'basic') {
+            $template->program = 'Základní verze';
+        }
+        $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
+        
+        $mail = new \Nette\Mail\Message;
+        $mail->setFrom('MUDRweb.cz - objednávka <registration@mudrweb.cz>')
+                ->addTo($user_data->email)                
+                ->setHtmlBody($template)
+                ->send();        
         
         $this->redirect('this');
     }        

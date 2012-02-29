@@ -301,3 +301,11 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .icon-ui-red-close { background-position: -80px -128px; }
 .icon-ui-green { background-image: url('images/ui-icons_8dc262_256x240.png'); float: none; margin: -3px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: inline-block; overflow: hidden; }
 .icon-ui-green-tick { background-position: -64px -144px; }
+
+/**
+ * TERMS
+ */
+#terms{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
+.terms_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
+.terms_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: normal;}
+.terms_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;} 

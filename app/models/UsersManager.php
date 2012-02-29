@@ -158,6 +158,8 @@ class UsersManager extends Nette\Object {
                'superUserActive' => 0,
                'subdomain' => $dataArray[3],
                'dateOfRegistration' => $registrationDateTime,
+               'program' => $dataArray[4],
+               'registrationToken' => $dataArray[5],
                'passwordResent' => '1971-00-00 00:00:00',
                'maintenanceMode' => 'off',
                'subdomainStatus' => 'N/A',
