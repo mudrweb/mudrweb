@@ -309,3 +309,12 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .terms_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
 .terms_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: normal;}
 .terms_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;} 
+
+/**
+ * CONTACT
+ */
+#contact{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
+.contact_h0 {font-family: Arial, sans-serif; color: #000; font-size: 20px; font-weight: normal;}
+.contact_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
+.contact_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
+.contact_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
