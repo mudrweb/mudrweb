@@ -13,15 +13,16 @@ div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; paddi
 #ajax-spinner { margin: 15px 0 0 15px; padding: 18px; background: url('../images/ajax-loader.gif') no-repeat 50% 50%; font-size: 0; z-index: 1000; position: absolute; top: 50%; left: 50%; }
 
 h1 { font-size: 13px; font-family: Arial, sans-serif; }
-h2 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 28px; font-weight: normal; border-bottom: 1px dotted #8C8989; margin: 0px 0px 10px 0px;}
+h2 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 28px; font-weight: normal; border-bottom: 1px dotted #8C8989; margin: 0px 20px 10px 0px;}
 hr { border: 0; border-bottom: 1px solid #003366; height: 1px; }
+.separator { border-bottom: 1px dotted #003066; margin: 10px 0px 0px 0px; }
 
 strong { font-weight: bold; }
 
 #wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px;}
 .container{margin-left:auto;margin-right:auto;width:920px;}
 .clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
-.noborder { border-style: none; }
+.noborder { border-style: none;}
 
 /**************************************
  * Header
@@ -314,7 +315,19 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
  * CONTACT
  */
 #contact{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
-.contact_h0 {font-family: Arial, sans-serif; color: #000; font-size: 20px; font-weight: normal;}
+.contact_h0 {font-family: Arial, sans-serif; color: #003066; font-size: 16px; font-weight: normal;}
 .contact_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
 .contact_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
 .contact_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
+.contact_im {margin-left: 70px;}
+
+/**
+ * FAQ
+ */
+#faq{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
+.faq_h0 {font-family: Arial, sans-serif; color: #000; font-size: 20px; font-weight: normal;}
+.faq_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
+.faq_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
+.faq_h3q {font-family: Arial, sans-serif; color: #000000; font-size: 12px; font-weight: bold;}
+.faq_h3a {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
+.faq_im {margin-top: 50px; margin-left: 20px;}

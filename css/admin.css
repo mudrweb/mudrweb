@@ -28,7 +28,7 @@ span { font:inherit; }
 
 hr { border: 0; border-bottom: 1px solid #AFAFB4; height: 1px; }
 
-h2 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 28px; font-weight: normal; border-bottom: 1px dotted #8C8989; margin: 0px 0px 10px 0px;}
+h2 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 28px; font-weight: normal; border-bottom: 1px dotted #8C8989; margin: 0px 20px 10px 0px;}
 h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16px; font-weight: bold; }
 
 .bold { font-weight:700; }
