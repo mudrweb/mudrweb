@@ -215,7 +215,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 $UtoPArray['o-nas'] = 'AboutUs';
                 $UtoPArray['kontakt'] = 'Contact';
                 $UtoPArray['hledani'] = 'Search';
-                $UtoPArray['dotazy'] = 'QandA';
+                $UtoPArray['dotazy'] = 'Faq';
             }
             $UtoPArray['Default'] = 'Default';
         }        
@@ -295,7 +295,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                     $PtoUArray['AboutUs'] = 'o-nas';
                     $PtoUArray['Contact'] = 'kontakt';                    
                     $PtoUArray['Search'] = 'hledani';                  
-                    $PtoUArray['QandA'] = 'dotazy';                  
+                    $PtoUArray['Faq'] = 'dotazy';                  
                 }                
             }            
             $PtoUArray['Default'] = 'Default';

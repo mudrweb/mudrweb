@@ -3,12 +3,12 @@
 use \BasePresenter as BasePresenter;
 
 /**
- * QandA presenter.
+ * Faq presenter.
  *
  * @author     Zippo
  * @package    MainModule
  */
-class QandAPresenter extends BasePresenter
+class FaqPresenter extends BasePresenter
 {    
     /**
      * Startup settings.
