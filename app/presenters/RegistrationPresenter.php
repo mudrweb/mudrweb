@@ -99,7 +99,7 @@ class RegistrationPresenter extends BasePresenter {
 //        $form->getElementPrototype()->class('ajax');        
         
         $form->addRadioList('program', '', array(
-                'demo' => 'DEMO verze - 3 měsíce - ZDARMA',
+                'demo' => 'DEMOverze - 3 měsíce - ZDARMA',
                 'basic' => 'Základní verze - 1 rok - 1000 Kč',
                 ))
                 ->setDefaultValue('demo')
@@ -133,11 +133,7 @@ class RegistrationPresenter extends BasePresenter {
         $section = $session->getSection('Reg');
         $section->step1Completed = 1;
         
-        if ($data->program == 'demo') {
-            $section->program = 'DEMO verze - 3 měsíce - ZDARMA';
-        } elseif ($data->program == 'basic') {
-            $section->program = 'Základní verze - 1 rok - 1000 Kč';
-        }       
+        $section->program = $data->program;
         
         $this->redirect('Registration:personal');
     }        
@@ -272,37 +268,7 @@ class RegistrationPresenter extends BasePresenter {
                 $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
                 $data->phone);
             
-            $section->dataArray_users_data = $dataArray_users_data;
-            
-//            //1. user
-//            $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain);            
-//            $this->db_users->addUser($dataArray_user);
-//
-//            //2. users_data
-//            $user = $this->db_users->getUserBySubdomain($data->subdomain);
-//            $dataArray_users_data = array($user->id, $data->name, $data->surname,
-//                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-//                $data->phone);
-//            $this->db_users->addUserData($dataArray_users_data);
-//
-//            //3. users_websiteData        
-//            $dataArray_users_websiteData = array($user->id, 'layout_kardio1', 'kardio',
-//                $data->name . ' ' . $data->surname, 'Ambulance', $data->name . ' ' . $data->surname . ' - ' . 'Ambulance',
-//                '', '');
-//            $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
-//
-//            //4. menuItems set
-//            $this->db_menuItems->addNewMenuItemsSet($user->id);
-//
-//            //5. guestBook                      
-//            $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
-//            $this->db_guestBook->addGuestBook($dataArray_guestBook);
-//
-//            //6. www part - folders, files
-//            $this->registerUserWWW($data->subdomain);
-//
-//            //7. set subdomain status from N/A -> to valid
-//            $this->db_users->updateSubdomainStatus($user->id, 'Valid');                                               
+            $section->dataArray_users_data = $dataArray_users_data;                                                        
             
 //            if (!$this->isAjax()) {
 //                $this->redirect('this');
@@ -391,8 +357,8 @@ class RegistrationPresenter extends BasePresenter {
         $template->registerFilter(new Nette\Latte\Engine());        
 
         if ($section->program == 'demo') {
-            $template->program = 'DEMO verze';
-        } elseif ($section->program = 'basic') {
+            $template->program = 'DEMOverze';
+        } elseif ($section->program == 'basic') {
             $template->program = 'Základní verze';
         }
         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');

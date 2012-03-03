@@ -93,33 +93,13 @@ class ForgottenPasswordPresenter extends AdminPresenter
             $hashedPassword = $this->extraMethods->calculateHash($newPassword, $newSalt);
             // prepare data for user's profile update - password hash and salt           
             $dataArray = array(intval($userFromDB->id), $hashedPassword, $newSalt);
-            // update user's profile
-//            $this->getService('model')->changePassword($dataArray);
-            
-//            // set up mailer
-//            $mailer = new \Nette\Mail\SmtpMailer(array(
-//                'host' => 'smtp.gmail.com',
-//                'username' => 'zvak.martin@gmail.com',
-//                'password' => 'martoa14',
-//                'secure' => 'ssl',
-//            ));
-//            
-//            // send email
-//            $mail = new \Nette\Mail\Message;
-//            $mail->setMailer($mailer);
-//            $mail->setFrom('Test <zvakma@gmail.com>')
-//                ->addTo('zvak.martin@gmail.com')                
-//                ->setSubject('Změna hesla - mudrweb.cz')
-//                ->setBody("Dobrý den,\n asdfasdf.");
-//                ->send();
             
             // get user's data
             $userFromDB_data = $this->db_users->getUsersDataById($userFromDB->id);
             if ($userFromDB_data) {            
                 // check password resent limit
-                $nowDateTime = new \Nette\DateTime("now");
-                $resentDateTime = $userFromDB->passwordResent;
-                $resentDateTime = $resentDateTime->format("Y-m-d H:i:s");
+                $nowDateTime = new \Nette\DateTime("now");                
+                $resentDateTime = date_format($userFromDB->passwordResent, "Y-m-d H:i:s");
                 if ((strtotime($nowDateTime->format("Y-m-d H:i:s")) - strtotime($resentDateTime)) > 86400) {
                     // store resent datetime
                     $this->db_users->passwordResentDateTime($userFromDB->id);
@@ -145,6 +125,24 @@ class ForgottenPasswordPresenter extends AdminPresenter
                     $message = 'Nové heslo bylo úspěšně odesláno na Váš e-mail: ';
                     $message .= $emailPartToDisplay;
 
+                    // update user's profile
+                    $this->db_users->changePassword($dataArray);                    
+                    
+                    // send email
+                    $template = parent::createTemplate();
+                    $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/pass_resend.latte');
+                    $template->registerFilter(new \Nette\Latte\Engine());        
+                    
+                    $template->username = $userFromDB->username;
+                    $template->password = $newPassword;
+                    $template->subdomain = $userFromDB->subdomain . '.mudrweb.cz';        
+
+                    $mail = new \Nette\Mail\Message;
+                    $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
+                            ->addTo($userFromDB_data->email)                
+                            ->setHtmlBody($template)
+                            ->send();                     
+                    
                     $this->flashMessage($message, 'info_fpass');
                     $this->redirect('this');
                 } else {

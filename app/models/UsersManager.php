@@ -178,8 +178,13 @@ class UsersManager extends Nette\Object {
      * @param string $status 
      */    
     public function updateRegistrationProcessStatus($id, $status) {
-        if (is_numeric($id) && is_string($status)) {            
-            $this->database->exec('UPDATE users SET accountStatus=? WHERE id=?', $status, $id);                        
+        if (is_numeric($id) && is_string($status)) {  
+            if ($status == 'active') {
+                $registrationDateTime = date("Y-m-d H:i:s");
+                $this->database->exec('UPDATE users SET accountStatus=?, dateOfActivation=? WHERE id=?', $status, $registrationDateTime, $id);                        
+            } else {
+                $this->database->exec('UPDATE users SET accountStatus=? WHERE id=?', $status, $id);                        
+            }
         } else {
             throw new \Nette\Application\ToolException('Unable to update user reg process status.
                     Wrong input. method: updateRegistrationProcessStatus($id, $status)', 500);

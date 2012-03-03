@@ -84,19 +84,61 @@ class AdminUsersPresenter extends AdminPresenter {
                     break;           
             }           
             
-//            // actual user
-//            $user = $this->db_users->getUserById(intval($id));
-//            if ($user) {
-//                if ($user->subdomainStatus == 'N/A') {
-//                    //6. www part - folders, files
-//                    $this->registerUserWWW($user->subdomain);
-//
-//                    //7. set subdomain status from N/A -> to valid
-//                    $this->db_users->updateSubdomainStatus($user->id, 'Valid');                       
-//                }
+            if ($newStatus == 'active') {
+                // actual user
+                $user = $this->db_users->getUserById(intval($id));
+                if ($user && !$user->dateOfActivation) {      
+                    $user_data = $this->db_users->getUsersDataById(intval($id));
+                    
+                    // send email
+                    $template = parent::createTemplate();
+                    $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_active.latte');
+                    $template->registerFilter(new \Nette\Latte\Engine());        
+                    
+                    if ($user->program == 'demo') {
+                        $template->program = 'DEMOverze';
+                    } elseif ($user->program == 'basic') {
+                        $template->program = 'Základní verze';
+                    }
+                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                    
+                    
+                    $template->subdomain = $user->subdomain . '.mudrweb.cz';        
+                    
+                    $mail = new \Nette\Mail\Message;
+                    $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
+                            ->addTo($user_data->email)                
+                            ->setHtmlBody($template)
+                            ->send();   
+                }
+            } elseif ($newStatus == 'inactive') {
+                // actual user
+                $user = $this->db_users->getUserById(intval($id));
+                if ($user) {      
+                    $user_data = $this->db_users->getUsersDataById(intval($id));
+                    
+                    // send email
+                    $template = parent::createTemplate();
+                    $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_inactive.latte');
+                    $template->registerFilter(new \Nette\Latte\Engine());        
+                    
+                    if ($user->program == 'demo') {
+                        $template->program = 'DEMOverze';
+                    } elseif ($user->program == 'basic') {
+                        $template->program = 'Základní verze';
+                    }
+                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                    
+                    
+                    $template->subdomain = $user->subdomain . '.mudrweb.cz';        
+                    
+                    $mail = new \Nette\Mail\Message;
+                    $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
+                            ->addTo($user_data->email)                
+                            ->setHtmlBody($template)
+                            ->send();   
+                }                
+            }
                 
-                $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);
-//            }                        
+            $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
         }
 
         // dateFrom

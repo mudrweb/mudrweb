@@ -66,7 +66,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                         $this->setView('inactive');
                     } else {
                         $this->template->conditions = false;
-                        $dateTo = date_format($user->dateTo, 'd.m.Y');                        
+                        if ($user->dateTo) {
+                            $dateTo = date_format($user->dateTo, 'd.m.Y');                        
+                        } else {
+                            $dateTo = 'N/A';
+                        }
                         $this->template->dateTo = $dateTo;
                         $this->setView('inactive');
                     }

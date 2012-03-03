@@ -45,8 +45,8 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 /**************************************
  * Main Box
  */
-#main { margin-top: 10px; margin-bottom: 5px;}
-#main #content { margin-top: 27px; margin-bottom: 27px; min-height: 510px; background: #E4F4F5; padding: 15px 0px 15px 20px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
+#main { margin-top: 10px; margin-bottom: 0px;}
+#main #content { margin-top: 27px; margin-bottom: 10px; min-height: 510px; background: #E4F4F5; padding: 15px 0px 15px 20px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
 
 /*header in main*/
 .main_header_container  {margin-left:auto; margin-right:auto; width:880px;}
@@ -61,7 +61,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .mainmenu_btn:hover {cursor: pointer; background: url('../images/main/menu_c.png') 0px 25px;}
 .mainmenu_lastbtn {float:left; width: 60px; height: 21px; background: url('../images/main/menu.png') -70px 0px; font-size: 12px; padding: 4px 10px 0px 10px;}
 .mainmenu_lastbtn:hover {cursor: pointer; background: url('../images/main/menu.png') -70px 25px;}
-
+.a {color: #000; text-decoration: none; }
 .space{margin-left:0px;margin-right:0px;margin-top: 10px; margin-bottom: 20px; width:860px;background-color: #fff;}
 
 
@@ -197,8 +197,8 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 /**************************************
  * Footer
  */
-#footer { position: relative; width: auto; text-align: center; background-color: transparent; padding: 3px 0px 15px 0px; color: #000; height: 20px; }
-#footer a { color: #000; text-decoration: none; }
+#footer { font-size: 11px; position: relative; width: auto; text-align: center; background-color: transparent; padding: 3px 0px 50px 15px; color: #000; height: 20px; }
+#footer a { font-size: 11px; color: #000; text-decoration: none; }
 #footer a:hover { text-decoration: underline; }
 .grid_footer_l{display:inline;float:left;margin-left:10px;}
 .grid_footer_r{display:inline;float:right;margin-right:30px}
@@ -331,3 +331,38 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .faq_h3q {font-family: Arial, sans-serif; color: #000000; font-size: 12px; font-weight: bold;}
 .faq_h3a {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
 .faq_im {margin-top: 50px; margin-left: 20px;}
+
+/**
+ * ABOUT US
+ */
+#aboutus{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
+.aboutus_h0 {font-family: Arial, sans-serif; color: #003066; font-size: 16px; font-weight: normal;}
+.aboutus_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
+.aboutus_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
+.aboutus_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
+.aboutus_im {margin-left: 40px;}
+
+/**
+ * PRICE LIST
+ */
+#pricelist{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
+.pricelist_h0 {font-family: Arial, sans-serif; color: #003066; font-size: 16px; font-weight: normal;}
+.pricelist_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
+.pricelist_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
+.pricelist_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
+.pricelist_im {margin-left: 10px;}
+
+/**
+ * SEARCH
+ */      
+#search{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
+.search_h0 {font-family: Arial, sans-serif; color: #003066; font-size: 16px; font-weight: normal;}
+.search_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
+.search_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
+.search_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
+.search_im {margin-left: 40px;} 
+.img_ma { border: 0px none; padding: 0px; margin: 0px; }
+#ma { padding: 0px; background: #009ACD url(../images/main/map/poz.gif) top left no-repeat; width: 200px; font-size: 1px; }
+.input_style_log { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 150px; border: 1px solid #000000;   
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
+} 

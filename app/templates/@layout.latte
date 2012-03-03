@@ -38,7 +38,23 @@
 	<script type="text/javascript">
                  $(document).ready(function() { $('#slides').slides({ preload: true, preloadImage: '../images/ajax-loader.gif', play: 6000, pause: 1, hoverPause: true });
                  $('.password').pstrength(); $('.password_regUserPanel').pstrength(); });
-	</script>                   
+	</script> 
+	
+  <!--KLIKACI MAPA-->
+  <script language="JavaScript" type="text/javascript">
+      <!--
+        function mapa(kolik) {
+          if(kolik < 8) {
+            document.getElementById('ma').style.backgroundPosition = "0px -"+(kolik*160)+"px";
+          } else {
+            document.getElementById('ma').style.backgroundPosition = "-200px -"+((kolik-7)*160)+"px";
+          }
+        }
+      // -->
+    </script>
+  
+  
+                    
 	{block head}{/block}
 </head>
 
@@ -50,11 +66,11 @@
     <div id="header">
         <div class="container">
             <div class="grid_header_l">                                         
-                <a href="{link :Admin:Default:}" class="login" title="Přihlášení"><span></span>Přihlášení do Admin panelu</a> &nbsp;&nbsp;                                                 
+                <a href="{plink :Admin:Default:}" class="login" title="Přihlášení"><span></span>Přihlášení do Admin panelu</a> &nbsp;&nbsp;                                                 
             </div>                
-                <a href="{link :Registration:}" class="registration" title="Registrace"><span></span>Objednávka</a>            
+                <a href="{plink :Registration:}" class="registration" title="Registrace"><span></span>Objednávka</a>            
             <div class="grid_header_r">
-                <a href="{link :Default: lang=>cs}" class="lang" title="Český jazyk"><span></span></a>                 
+                <a href="{plink :Default: lang=>cs}" class="lang" title="Český jazyk"><span></span></a>                 
             </div>
             <div class="clear">&nbsp;</div>
         </div>
@@ -69,15 +85,18 @@
 
 
                 <div class="grid_main_header_l">
-                    <a href="{link :Default:}"><img src="../images/logo.png" class="noborder" alt="MUDRweb.cz - Místo pro Váš web" /></a>
+                    <a href="{plink Default:}"><img src="../images/logo.png" class="noborder" alt="MUDRweb.cz - Místo pro Váš web" /></a>
                 </div>  <!--grid_header_l-->              
                 <div class="grid_main_header_r">
                     <div class="mainmenu">  
-                        <div class="mainmenu_firstbtn"></div>
+                        <div class="mainmenu_firstbtn" onclick="location.href='/'"></div>
                         <!--menu items-->
-                        <div class="mainmenu_btn">Ukázky WEBů</div>
-                        <div class="mainmenu_btn">Cenník služeb</div>
-                        <div class="mainmenu_lastbtn">Kontakt</div>
+                        <div class="mainmenu_btn"><a href="{plink AboutUs:}" class="a">O nás</a></div>
+                        <div class="mainmenu_btn"><a href="{plink Search:}" class="a">Hledat lékaře</a></div>
+                  <!--  <div class="mainmenu_btn"><a href="/" class="a">Ukázky WEBů</a></div>   -->
+                        <div class="mainmenu_btn"><a href="{plink Faq:}" class="a">FAQ</a></div>
+                        <div class="mainmenu_btn"><a href="{plink PriceList:}" class="a">Cenník služeb</a></div>
+                        <div class="mainmenu_lastbtn"><a href="{plink Contact:}" class="a">Kontakt</a></div>
                     </div> <!--end of mainmenu-->   
                 </div> <!--end of grid_header_r--> 
                 <div class="clear">&nbsp;</div>                                    
@@ -96,19 +115,16 @@
                 © Copyright 2012
             </div>
             <div class="grid_footer_r">
-                <a href="/">Domů</a>
-                |
-                <a href="/o-nas">O nás</a>
-                |
-                <a href="/hledani">Hledat</a>
+              
+                <a href="{plink Search:}">Hledat</a>
                 |  
-                <a href="/cennik">Cenník</a>
+                <a href="{plink PriceList:}">Cenník</a>
                 |
-                 <a href="/dotazy">Časté dotazy</a>
+                <a href="{plink Faq:}">Často kladené otázky</a>
                 | 
-                <a href="/smluvni-podminky">Smluvní podmínky</a>
+                <a href="{plink Terms:}">Smluvní podmínky</a>
                 |
-                <a href="/kontakt">Kontakt</a>
+                <a href="{plink Contact:}">Kontakt</a>
             </div>
             <div class="clear">&nbsp;</div>
         </div>
