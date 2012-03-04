@@ -157,6 +157,5 @@ class GuestBookPresenter extends BasePresenter
             $this->invalidateControl('list');
             $button->getForm()->setValues(array(), TRUE);            
         }    
-//        $this->redirect('this');
     }       
 }
