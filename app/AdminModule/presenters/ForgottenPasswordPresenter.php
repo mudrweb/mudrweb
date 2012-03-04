@@ -135,7 +135,8 @@ class ForgottenPasswordPresenter extends AdminPresenter
                     
                     $template->username = $userFromDB->username;
                     $template->password = $newPassword;
-                    $template->subdomain = $userFromDB->subdomain . '.mudrweb.cz';        
+                    $template->subdomain = 'http://' . $userFromDB->subdomain . '.mudrweb.cz';                                    
+                    $template->subdomain_name = $userFromDB->subdomain . '.mudrweb.cz';        
 
                     $mail = new \Nette\Mail\Message;
                     $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')

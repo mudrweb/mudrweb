@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>MUDRweb.cz - Potvrzení objednávky</title>
+<title>MUDRweb.cz - Deaktivace účtu</title>
 </head>
 
 <body>
@@ -19,12 +19,12 @@
                                     <tr>
                                         <td valign="top">
                                             <div>
-                                                Přijetí objednávky na vytvoření {$program} stránky.
+                                                Deaktivace účtu pro stránku <a href={$subdomain} target="_blank">{$subdomain_name}</a>.
                                             </div>
                                         </td>
                                         <td valign="top" width="280">
                                             <div>
-                                                Pokud se Vám tenhle e-mail nezobrazil správně, klikněte prosím na <a href="http://mudrweb.cz/emails?token={$token}" target="_blank" class="color:#336699;font-weight:normal;text-decoration:underline;">tento odkaz</a>.
+                                                MUDRweb.cz
                                             </div>
                                         </td>
                                     </tr>
@@ -44,9 +44,9 @@
                             <!--HEADER TEXT-->
                             <td height="65" width="325" valign="top" style="font-family:Arial, Verdana; font-size:18px; color:#FFF; font-weight:bold;" bgcolor="#3bbbe9" background="../../../images/xemails/bluefade_left.gif">
                                 <span style="font-size:10px;"<br /><br /></span>
-                                <div style="padding-top:9px;">
+                                <div style="padding-top:17px;">
                                 &nbsp;&nbsp;&nbsp;
-                                Potvrzení objednávky
+                                Deaktivace účtu
                                 </div>
                             </td>
                             <!--LEFT DIVIDER-->
@@ -86,16 +86,34 @@
                             <td width="337" valign="top" style="font-family:Verdana, Arial; font-size:12px; padding-left:10px; padding-right:10px;">                                
                                 Dobrý den,<br/><br />
                                 
-                                chceme Vás informovat o přijetí objednávky na vytvoření <b>{$program}</b> stránky ze dne <b>{$dateOfReg}</b>.
-                                <br /><br />
-                                Objednávka bude zpracována do 48 hodin od provedení registrace a splnění všech podmínek pro 
-                                registraci.
+                                {if $program=='DEMOverze'}                                                                
+                                chceme Vás informovat o deaktivaci Vašeho účtu pro <b>DEMOverzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain_name}</a>.
                                 <br />
-                                Vážíme si Vašeho rozhodnutí stát se klientem MUDRweb.cz a rádi bychom Vás přivítali v 
-                                naší skupině.
-                                <br />
-                                Smluvní podmínky je možné nalézt na hlavní stránke v sekci <a href="http://mudrweb.cz/smluvni-podminky">Smluvní podmínky</a>.
+                                (Vygenerováno na základě Vaší objednávky na vytvoření <b>DEMOverze</b> stránky ze dne <b>{$dateOfReg}</b>
+                                a uplynutí doby její platnosti - 3 měsíce.)
                                 <br /><br />
+                                Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
+                                V případě zájmu o přechod na jeden z našich placených programů nás neváhejte kontaktovat na 
+                                adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
+                                777 861 159 (Po - Pá: 18:00 - 22:00).
+                                <br />
+                                Těšíme se na další společnou spolupráci.
+                                <br /><br />
+                                {elseif $program=='basic'}
+                                chceme Vás informovat o deaktivaci Vašeho účtu pro <b>Základní verzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain_name}</a>.
+                                <br />
+                                (Vygenerováno na základě Vaší objednávky na vytvoření <b>Základní verze</b> stránky ze dne <b>{$dateOfReg}</b>
+                                a uplynutí doby její platnosti - 1 rok.)
+                                <br /><br />
+                                Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
+                                V případě zájmu o prodloužení platnosti aktuálního programu nebo o přechod na 
+                                jiný program z našeho portfolia nás neváhejte kontaktovat na 
+                                adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
+                                777 861 159 (Po - Pá: 18:00 - 22:00).
+                                <br />
+                                Těšíme se na další společnou spolupráci.
+                                <br /><br />                                
+                                {/if}                                                                                                
                                 S pozdravem
                                 <br /><br />
                                 Váš MUDRweb tým

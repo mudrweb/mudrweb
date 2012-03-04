@@ -362,6 +362,7 @@ class RegistrationPresenter extends BasePresenter {
             $template->program = 'Základní verze';
         }
         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
+        $template->token = 'rc' . $user->registrationToken;
         
         $mail = new \Nette\Mail\Message;
         $mail->setFrom('MUDRweb.cz - objednávka <registration@mudrweb.cz>')

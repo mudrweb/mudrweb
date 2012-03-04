@@ -220,6 +220,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                 $UtoPArray['kontakt'] = 'Contact';
                 $UtoPArray['hledani'] = 'Search';
                 $UtoPArray['dotazy'] = 'Faq';
+                $UtoPArray['emails'] = 'Emails';
             }
             $UtoPArray['Default'] = 'Default';
         }        
@@ -300,6 +301,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                     $PtoUArray['Contact'] = 'kontakt';                    
                     $PtoUArray['Search'] = 'hledani';                  
                     $PtoUArray['Faq'] = 'dotazy';                  
+                    $PtoUArray['Emails'] = 'emails';
                 }                
             }            
             $PtoUArray['Default'] = 'Default';

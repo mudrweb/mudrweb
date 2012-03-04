@@ -19,12 +19,12 @@
                                     <tr>
                                         <td valign="top">
                                             <div>
-                                                Informace o vypršení platnosti účtu pro stránku <a href={$subdomain} target="_blank">{$subdomain}</a>.
+                                                Informace o vypršení platnosti účtu pro stránku <a href={$subdomain} target="_blank">{$subdomain_name}</a>.
                                             </div>
                                         </td>
                                         <td valign="top" width="280">
                                             <div>
-                                                Pokud se Vám tenhle e-mail nezobrazil správně, klikněte prosím na <a href="http://mudrweb.cz" target="_blank" class="color:#336699;font-weight:normal;text-decoration:underline;">tento odkaz</a>.
+                                                Pokud se Vám tenhle e-mail nezobrazil správně, klikněte prosím na <a href="http://mudrweb.cz/emails?token={$token}" target="_blank" class="color:#336699;font-weight:normal;text-decoration:underline;">tento odkaz</a>.
                                             </div>
                                         </td>
                                     </tr>
@@ -87,7 +87,7 @@
                                 Dobrý den,<br/><br />
                                 
                                 {if $program=='DEMOverze'}                                                                
-                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>DEMOverzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain}</a>,
+                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>DEMOverzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
                                 ke kterému dojde dne <b>{$validTo}</b>.
                                 <br />
                                 (Vygenerováno na základě Vaší objednávky na vytvoření <b>DEMOverze</b> stránky ze dne <b>{$dateOfReg}</b>,
@@ -101,7 +101,7 @@
                                 Těšíme se na další společnou spolupráci.
                                 <br /><br />
                                 {elseif $program=='basic'}
-                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>Základní verzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain}</a>,
+                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>Základní verzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
                                 ke kterému dojde dne <b>{$validTo}</b>.
                                 <br />
                                 (Vygenerováno na základě Vaší objednávky na vytvoření <b>Základní verze</b> stránky ze dne <b>{$dateOfReg}</b>.

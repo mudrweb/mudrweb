@@ -27,8 +27,10 @@ class CronJobRunner1Presenter extends BasePresenter
                 }
                 
                 // check dateTo - set user's account status from active->inactive
-                $dateToStopIt = date('Y-m-d', strtotime('-1 day'));
+                $dateToStopIt = date('Y-m-d', strtotime('-1 day'));                
                 $dateTo = date_format($user->dateTo, 'Y-m-d');
+                
+                // account deactivation START //////////////////////////////////
                 if (($user->accountStatus == 'active') && ($dateToStopIt >= $dateTo)) {
                     $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'inactive');
                     
@@ -47,7 +49,9 @@ class CronJobRunner1Presenter extends BasePresenter
                         }
                         
                         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
-                        $template->subdomain = $user->subdomain . '.mudrweb.cz';
+                        $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                                                            
+                        $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
+                        $template->token = 'ad' . $user->registrationToken;
 
                         $mail = new \Nette\Mail\Message;
                         $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
@@ -56,13 +60,14 @@ class CronJobRunner1Presenter extends BasePresenter
                                 ->send();
                     }                    
                 }
+                // account deactivation END ////////////////////////////////////
                 
-                // account deactivation START //////////////////////////////////
+                // account deactivation notification START /////////////////////
                 // 1st notification -> 14 days before
                 $dateFor1stNotification = strtotime($dateTo);
                 $dateFor1stNotification = strtotime("-14 days", $dateFor1stNotification);
                 $dateFor1stNotification = date('Y-m-d', $dateFor1stNotification);        
-                if ($dateFor1stNotification == $todaysDate) {                    
+                if (($user->accountStatus == 'active') && ($dateFor1stNotification == $todaysDate)) {                    
                     if ($user) {
                         $user_data = $this->db_users->getUsersDataById(intval($user->id));
 
@@ -78,8 +83,10 @@ class CronJobRunner1Presenter extends BasePresenter
                         }
                         
                         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
-                        $template->subdomain = $user->subdomain . '.mudrweb.cz';
+                        $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                                                            
+                        $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                         $template->validTo = date_format($user->dateTo, 'd.m.Y');                        
+                        $template->token = 'an' . $user->registrationToken;
                         
                         $mail = new \Nette\Mail\Message;
                         $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
@@ -95,7 +102,7 @@ class CronJobRunner1Presenter extends BasePresenter
                 $dateFor2ndtNotification = strtotime($dateTo);
                 $dateFor2ndtNotification = strtotime("-7 days", $dateFor2ndtNotification);
                 $dateFor2ndtNotification = date('Y-m-d', $dateFor2ndtNotification);        
-                if ($dateFor2ndtNotification == $todaysDate) {                    
+                if (($user->accountStatus == 'active') && ($dateFor2ndtNotification == $todaysDate)) {                    
                     if ($user) {
                         $user_data = $this->db_users->getUsersDataById(intval($user->id));
 
@@ -111,8 +118,10 @@ class CronJobRunner1Presenter extends BasePresenter
                         }
                         
                         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
-                        $template->subdomain = $user->subdomain . '.mudrweb.cz';
+                        $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                                                            
+                        $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                         $template->validTo = date_format($user->dateTo, 'd.m.Y');                        
+                        $template->token = 'an' . $user->registrationToken;
                         
                         $mail = new \Nette\Mail\Message;
                         $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
@@ -128,7 +137,7 @@ class CronJobRunner1Presenter extends BasePresenter
                 $dateFor3rdNotification = strtotime($dateTo);
                 $dateFor3rdNotification = strtotime("-1 day", $dateFor3rdNotification);
                 $dateFor3rdNotification = date('Y-m-d', $dateFor3rdNotification);        
-                if ($dateFor3rdNotification == $todaysDate) {                    
+                if (($user->accountStatus == 'active') && ($dateFor3rdNotification == $todaysDate)) {                    
                     if ($user) {
                         $user_data = $this->db_users->getUsersDataById(intval($user->id));
 
@@ -144,8 +153,10 @@ class CronJobRunner1Presenter extends BasePresenter
                         }
                         
                         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
-                        $template->subdomain = $user->subdomain . '.mudrweb.cz';
+                        $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                                                            
+                        $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                         $template->validTo = date_format($user->dateTo, 'd.m.Y');                        
+                        $template->token = 'an' . $user->registrationToken;
                         
                         $mail = new \Nette\Mail\Message;
                         $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')

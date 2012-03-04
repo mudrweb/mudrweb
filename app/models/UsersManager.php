@@ -84,6 +84,23 @@ class UsersManager extends Nette\Object {
     }    
     
     /**
+     * Get user by $registrationToken.
+     * 
+     * @param string $registrationToken
+     * @return user 
+     */
+    public function getUserByRegistrationToken($registrationToken) {
+        if ($registrationToken) {
+            $user = $this->database->table('users')
+                    ->where('registrationToken', $registrationToken)->fetch();
+            return $user;
+        } else {
+            throw new \Nette\Application\ToolException('Unable to get User.
+                    Wrong input. method: getUserByRegistrationToken($registrationToken)', 500);
+        }
+    }    
+    
+    /**
      * Save last login datetime for current user.
      * 
      * @param int $id

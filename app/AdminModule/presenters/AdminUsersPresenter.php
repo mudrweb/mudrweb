@@ -100,9 +100,10 @@ class AdminUsersPresenter extends AdminPresenter {
                     } elseif ($user->program == 'basic') {
                         $template->program = 'Základní verze';
                     }
-                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                    
-                    
-                    $template->subdomain = $user->subdomain . '.mudrweb.cz';        
+                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                                        
+                    $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                
+                    $template->subdomain_name = $user->subdomain . '.mudrweb.cz';        
+                    $template->token = 'aa' . $user->registrationToken;
                     
                     $mail = new \Nette\Mail\Message;
                     $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
@@ -110,33 +111,34 @@ class AdminUsersPresenter extends AdminPresenter {
                             ->setHtmlBody($template)
                             ->send();   
                 }
-            } elseif ($newStatus == 'inactive') {
-                // actual user
-                $user = $this->db_users->getUserById(intval($id));
-                if ($user) {      
-                    $user_data = $this->db_users->getUsersDataById(intval($id));
-                    
-                    // send email
-                    $template = parent::createTemplate();
-                    $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_inactive.latte');
-                    $template->registerFilter(new \Nette\Latte\Engine());        
-                    
-                    if ($user->program == 'demo') {
-                        $template->program = 'DEMOverze';
-                    } elseif ($user->program == 'basic') {
-                        $template->program = 'Základní verze';
-                    }
-                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                    
-                    
-                    $template->subdomain = $user->subdomain . '.mudrweb.cz';        
-                    
-                    $mail = new \Nette\Mail\Message;
-                    $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
-                            ->addTo($user_data->email)                
-                            ->setHtmlBody($template)
-                            ->send();   
-                }                
-            }
+            } 
+//            elseif ($newStatus == 'inactive') {
+//                // actual user
+//                $user = $this->db_users->getUserById(intval($id));
+//                if ($user) {      
+//                    $user_data = $this->db_users->getUsersDataById(intval($id));
+//                    
+//                    // send email
+//                    $template = parent::createTemplate();
+//                    $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_inactive.latte');
+//                    $template->registerFilter(new \Nette\Latte\Engine());        
+//                    
+//                    if ($user->program == 'demo') {
+//                        $template->program = 'DEMOverze';
+//                    } elseif ($user->program == 'basic') {
+//                        $template->program = 'Základní verze';
+//                    }
+//                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                    
+//                    
+//                    $template->subdomain = $user->subdomain . '.mudrweb.cz';        
+//                    
+//                    $mail = new \Nette\Mail\Message;
+//                    $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
+//                            ->addTo($user_data->email)                
+//                            ->setHtmlBody($template)
+//                            ->send();   
+//                }                
+//            }
                 
             $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
         }
