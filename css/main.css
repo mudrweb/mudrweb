@@ -23,11 +23,11 @@ strong { font-weight: bold; }
 .container{margin-left:auto;margin-right:auto;width:920px;}
 .clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
 .noborder { border-style: none;}
+* :focus { outline: 0; }
 
 /**************************************
  * Header
  */
- 
 #header { width: auto; height: 20px; font-size: 11px; background-color: #0099CC; padding: 5px 0px 3px 0px; color: #eee; border-bottom: 1px solid #003366; }
 #header a { color: #eee; text-decoration: none; }
 #header a:hover { text-decoration: underline; }
@@ -46,29 +46,33 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
  * Main Box
  */
 #main { margin-top: 10px; margin-bottom: 0px;}
-#main #content { margin-top: 27px; margin-bottom: 10px; min-height: 510px; background: #E4F4F5; padding: 15px 0px 15px 20px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
+#main #content { margin-top: 27px; margin-bottom: 10px; min-height: 510px; background: #E4F4F5; padding: 15px 0px 15px 20px; 
+                 -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
 
 /*header in main*/
 .main_header_container  {margin-left:auto; margin-right:auto; width:880px;}
 .grid_main_header_l{display:inline;float:left; margin:10px 0px 0px 0px;}
 .grid_main_header_r{display:inline;float:right; margin:10px 20px 0px 0px;}
 .grid_main_content{display:inline;float:left;margin-left:10px;margin-right:auto;width:900px}
+
 /*mainmenu*/
 .mainmenu {margin-top: 25px;}
 .mainmenu_firstbtn {float:left; width: 50px; height: 25px; background: url('../images/main/menu.png') 0px 0px; }
-.mainmenu_firstbtn:hover {cursor: pointer; background: url('../images/main/menu.png') 0px 25px;}
-.mainmenu_btn {float:left; width: auto; height: 21px; background: url('../images/main/menu_c.png') 0px 0px; background-repeat: repeat; font-size: 12px; padding: 4px 10px 0px 10px;}
-.mainmenu_btn:hover {cursor: pointer; background: url('../images/main/menu_c.png') 0px 25px;}
-.mainmenu_lastbtn {float:left; width: 60px; height: 21px; background: url('../images/main/menu.png') -70px 0px; font-size: 12px; padding: 4px 10px 0px 10px;}
-.mainmenu_lastbtn:hover {cursor: pointer; background: url('../images/main/menu.png') -70px 25px;}
+.mainmenu_firstbtn:hover {cursor: pointer; background: url('../images/main/menu.png') 0px 25px; }
+.mainmenu_firstbtn_active {float:left; width: 50px; height: 25px; background: url('../images/main/menu.png') 0px 0px; }
+.mainmenu_btn {float:left; width: auto; height: 21px; background: url('../images/main/menu_c.png') 0px 0px; background-repeat: repeat; font-size: 12px; padding: 4px 10px 0px 10px; }
+.mainmenu_btn:hover {cursor: pointer; background: url('../images/main/menu_c.png') 0px 25px; }
+.mainmenu_btn_active {float:left; width: auto; height: 21px; background: url('../images/main/menu_c.png') 0px 25px; background-repeat: repeat; font-size: 12px; padding: 4px 10px 0px 10px; }
+.mainmenu_lastbtn {float:left; width: 60px; height: 21px; background: url('../images/main/menu.png') -70px 0px; font-size: 12px; padding: 4px 10px 0px 10px; }
+.mainmenu_lastbtn:hover {cursor: pointer; background: url('../images/main/menu.png') -70px 25px; }
+.mainmenu_lastbtn_active {float:left; width: 60px; height: 21px; background: url('../images/main/menu.png') -70px 25px; font-size: 12px; padding: 4px 10px 0px 10px; }
 .a {color: #000; text-decoration: none; }
-.space{margin-left:0px;margin-right:0px;margin-top: 10px; margin-bottom: 20px; width:860px;background-color: #fff;}
+.space{margin-left:0px;margin-right:0px;margin-top: 10px; margin-bottom: 20px; width:860px;background-color: #fff; }
 
 
 /**
  * Main
  */
-
 .grid_mainleft {height: auto; width: 530px; background-color: transparent; float:left; margin: 10px 10px 10px 30px; text-align: justify;}
 .grid_mainright {height: auto; width: 250px; background-color: transparent; float:right; margin: 10px 50px 10px 10px;}
 
@@ -76,116 +80,34 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 /**
  * Slides
  */
-
-#slides {
-	position:relative;
-	top:0px;
-	left:28px;
-	z-index:100;                
-}
-
+#slides { position:relative; top:0px; left:28px; z-index:100; }
 .grid_slidesleft {height: 250; width: 300px; float:left; margin: 50px 0px 0px 50px;}
 .grid_slidesright {height: 250; width: 300px; float:right; margin: 30px 50px 0px 40px;} 
 .slides_h1 {font-family: Arial, sans-serif; color: #003366; font-size: 24px;}
 .slides_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 12px;}
+.slides_container { height:250px; width:800px;     overflow: hidden; background-image: url("../images/main/slides/slides_bck.png"); }
+.slides_container a { width:800px; height:250px; display:block; }
+.slides_container a img { display:block; }
 
-/*
-	Slides container
-	Important:
-	Set the width of your slides container
-	Set to display none, prevents content flash
-*/
-
-.slides_container {           
-        height:250px;
-	width:800px;    
-        overflow: hidden;
-	background-image: url("../images/main/slides/slides_bck.png");
-}
-
-/*
-	Each slide
-	Important:
-	Set the width of your slides
-	If height not specified height will be set by the slide content
-	Set to display block
-*/
-
-.slides_container a {
-	width:800px;
-	height:250px;
-	display:block;
-}
-
-.slides_container a img {
-	display:block;
-}
-
-/*
-	Next/prev buttons
-*/
-
-#slides .next,#slides .prev {
-	position:absolute;
-	top:94px;
-	left:-23px;
-	width:23px;
-	height:41px;
-	display:block;
-	z-index:101;
-}
-
-#slides .next {
-	left:800px;
-}
-
+/**
+ * Next/prev buttons
+ */
+#slides .next,#slides .prev { position:absolute; top:94px; left:-23px; width:23px; height:41px; display:block; z-index:101; }
+#slides .next { left:800px; }
 .next {background: url("../images/main/slides/arrows.png") 23px 0px}
 .next:hover {background: url("../images/main/slides/arrows.png") 23px 41px;}
 .prev {background: url("../images/main/slides/arrows.png") 0px 0px;}
 .prev:hover {background: url("../images/main/slides/arrows.png") 0px 41px;}
 
-
-
-/*
-	Pagination
-*/
-
-.pagination {
-	margin:5px 0px 40px 360px;
-	width:500px;
-	
-}
-
-.pagination li {
-	float:left;
-	margin:0px 9px;
-	list-style:none;
-}
-
-.pagination li a {
-	display:block;
-	width:14px;
-	height:0;
-	padding-top:14px;
-	background-image:url("../images/main/slides/slider_buttons.png");
-	background-position:0 0px;
-	float:left;
-	overflow:hidden;
-}
-
-.pagination li.current a {
-	background-position:0 -14px;
-}
- 
-.pagination li a:hover {
-	background-position:0 -28px;
-}    
-.pagination li.current a:hover {
-	background-position:0 -28px;
-}   
+/* Pagination */
+.pagination { margin:5px 0px 40px 360px; width:500px; }
+.pagination li { float:left; margin:0px 9px; list-style:none; }
+.pagination li a { display:block; width:14px; height:0; padding-top:14px; background-image:url("../images/main/slides/slider_buttons.png"); background-position:0 0px; float:left; overflow:hidden; }
+.pagination li.current a { background-position:0 -14px; } 
+.pagination li a:hover { background-position:0 -28px; }    
+.pagination li.current a:hover { background-position:0 -28px; }   
 
 /* BIG BUTTONS */
-
 .bigbtn_new {margin: 10px 10px 30px 10px; width: 228px; height: 86px; background: url('../images/main/new_acount.png') 0px 88px; }
 .bigbtn_new:hover {cursor: pointer; background: url('../images/main/new_acount.png') 0px 00px;}
 .bigbtn_search {margin: 10px 20px 30px 10px; width: 228px; height: 86px; background: url('../images/main/search_doctor.png') 0px 88px; }

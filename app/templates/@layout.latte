@@ -38,24 +38,22 @@
 	<script type="text/javascript">
                  $(document).ready(function() { $('#slides').slides({ preload: true, preloadImage: '../images/ajax-loader.gif', play: 6000, pause: 1, hoverPause: true });
                  $('.password').pstrength(); $('.password_regUserPanel').pstrength(); });
-	</script> 
-	
-  <!--KLIKACI MAPA-->
-  <script language="JavaScript" type="text/javascript">
-      <!--
-        function mapa(kolik) {
-          if(kolik < 8) {
-            document.getElementById('ma').style.backgroundPosition = "0px -"+(kolik*160)+"px";
-          } else {
-            document.getElementById('ma').style.backgroundPosition = "-200px -"+((kolik-7)*160)+"px";
-          }
-        }
-      // -->
-    </script>
+        </script> 
+
+        <!--KLIKACI MAPA-->
+        <script language="JavaScript" type="text/javascript">
+            <!--
+              function mapa(kolik) {
+                if(kolik < 8) {
+                  document.getElementById('ma').style.backgroundPosition = "0px -"+(kolik*160)+"px";
+                } else {
+                  document.getElementById('ma').style.backgroundPosition = "-200px -"+((kolik-7)*160)+"px";
+                }
+              }
+        // -->
+        </script>
   
-  
-                    
-	{block head}{/block}
+        {block head}{/block}
 </head>
 
 <body>
@@ -88,15 +86,15 @@
                     <a href="{plink Default:}"><img src="../images/logo.png" class="noborder" alt="MUDRweb.cz - Místo pro Váš web" /></a>
                 </div>  <!--grid_header_l-->              
                 <div class="grid_main_header_r">
-                    <div class="mainmenu">  
-                        <div class="mainmenu_firstbtn" onclick="location.href='/'"></div>
+                    <div class="mainmenu">                          
+                        <div n:class="$presenter->isLinkCurrent('Default:*') ? mainmenu_firstbtn_active : mainmenu_firstbtn"><a href="{plink Default:}" class="a">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>                        
                         <!--menu items-->
-                        <div class="mainmenu_btn"><a href="{plink AboutUs:}" class="a">O nás</a></div>
-                        <div class="mainmenu_btn"><a href="{plink Search:}" class="a">Hledat lékaře</a></div>
-                  <!--  <div class="mainmenu_btn"><a href="/" class="a">Ukázky WEBů</a></div>   -->
-                        <div class="mainmenu_btn"><a href="{plink Faq:}" class="a">FAQ</a></div>
-                        <div class="mainmenu_btn"><a href="{plink PriceList:}" class="a">Cenník služeb</a></div>
-                        <div class="mainmenu_lastbtn"><a href="{plink Contact:}" class="a">Kontakt</a></div>
+                        <div n:class="$presenter->isLinkCurrent('AboutUs:*') ? mainmenu_btn_active : mainmenu_btn"><a href="{plink AboutUs:}" class="a">O nás</a></div>
+                        <div n:class="$presenter->isLinkCurrent('Search:*') ? mainmenu_btn_active : mainmenu_btn"><a href="{plink Search:}" class="a">Hledat lékaře</a></div>
+                        <div n:class="$presenter->isLinkCurrent('Faq:*') ? mainmenu_btn_active : mainmenu_btn"><a href="{plink Faq:}" class="a">FAQ</a></div>
+                        <div n:class="$presenter->isLinkCurrent('PriceList:*') ? mainmenu_btn_active : mainmenu_btn"><a href="{plink PriceList:}" class="a">Cenník služeb</a></div>
+                        <div n:class="$presenter->isLinkCurrent('Contact:*') ? mainmenu_lastbtn_active : mainmenu_lastbtn"><a href="{plink Contact:}" class="a">Kontakt</a></div>
                     </div> <!--end of mainmenu-->   
                 </div> <!--end of grid_header_r--> 
                 <div class="clear">&nbsp;</div>                                    
