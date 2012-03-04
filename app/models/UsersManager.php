@@ -163,7 +163,8 @@ class UsersManager extends Nette\Object {
                'passwordResent' => '1971-00-00 00:00:00',
                'maintenanceMode' => 'off',
                'subdomainStatus' => 'N/A',
-               'realSubdomainStatus' => 'N/A'
+               'realSubdomainStatus' => 'N/A',
+               'notificationCounter' => 0
             ));                 
         } else {            
             throw new \Nette\Application\ToolException('Unable to add new user.
@@ -279,7 +280,24 @@ class UsersManager extends Nette\Object {
             throw new \Nette\Application\ToolException('Unable to update super user activity status.
                     Wrong input. method: updateSuperUserActivityStatus($id, $status)', 500);
         }
-    }        
+    }  
+    
+    /**
+     * Update account deactivation notification counter and datetime.
+     * 
+     * @param int $id
+     * @param int $notifyNumber
+     * @throws \Nette\Application\ToolException 
+     */
+    public function updateAccDeactNotificationCounter($id, $notifyNumber) {
+        if (is_numeric($id) && is_numeric($notifyNumber)) {   
+            $updateDateTime = date("Y-m-d H:i:s");
+            $this->database->exec('UPDATE users SET notificationCounter=?, notificationDate=? WHERE id=?', $notifyNumber, $updateDateTime, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update notification counter.
+                    Wrong input. method: updateAccDeactNotificationCounter($id, $notifyNumber)', 500);
+        }
+    }      
     
     /**************************** UsersData ***********************************/           
     

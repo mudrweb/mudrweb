@@ -18,7 +18,7 @@ class RegistrationPresenter extends BasePresenter {
      */
     public function startup()
     {
-        parent::startup();       
+        parent::startup();                
     }
     
     /**
@@ -29,7 +29,7 @@ class RegistrationPresenter extends BasePresenter {
         $section = $session->getSection('Reg');
         $section->step1Completed = 0;        
         $section->step2Completed = 0; 
-        $section->step3Completed = 0;                        
+        $section->step3Completed = 0;      
     }                
     
     /**
