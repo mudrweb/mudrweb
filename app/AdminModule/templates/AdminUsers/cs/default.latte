@@ -12,6 +12,7 @@
                         <th>Subd.</th>
                         <th>Registrace</th>
                         <th>Status</th>                        
+                        <th>Aktivace</th>
                         <th>Platnost od</th>
                         <th>Platnost do</th>                        
                         <th>Real Subd.</th>
@@ -45,7 +46,8 @@
                                     <td id="status{$user[0]}" class="red bold">
                                 {/if}
                                     {$user[5]}</td>                                
-                                <td>{$user[6]}</td>                                
+                                <td>{$user[11]}</td>
+                                <td>{$user[6]}</td>                                                                
                                 <td>{$user[7]}</td>
                                 <td>
                                     <a href="https://admin.securitynet.cz/" class="user_list" target="_blank">Vytvořit real sub</a>
@@ -103,6 +105,7 @@
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },                    
                     { "bSortable": false },
                     { "asSorting": [ "desc", "asc" ] }                                        
@@ -121,6 +124,7 @@
                     data: "{'0':'active', '1':'pending', '2':'inactive'}",
                     submit: 'OK&nbsp'                    
                 },
+                    null, 
                 {
                     type      : "datepicker",
                     cssclass  : "dateITA"
@@ -137,7 +141,7 @@
 //                    mask      : "99/99/9999",
 //                    submit    : 'OK&nbsp'                     
                 },
-                null,
+                    null,
                 {
                     cssclass: 'status_change',
                     indicator: 'Saving ...',

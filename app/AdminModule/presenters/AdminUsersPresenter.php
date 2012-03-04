@@ -47,8 +47,8 @@ class AdminUsersPresenter extends AdminPresenter {
                        }                       
                        
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
-                            $user->subdomain, date_format($user->dateOfRegistration, 'd.m.Y H:i:s'), $user->accountStatus, $dateFrom, $dateTo, 
-                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus);                
+                            $user->subdomain, date_format($user->dateOfRegistration, 'd/m/Y H:i:s'), $user->accountStatus, $dateFrom, $dateTo, 
+                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, date_format($user->dateOfActivation, 'd/m/Y H:i:s'));                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminUsers presenter).', 404);                    
                     }
