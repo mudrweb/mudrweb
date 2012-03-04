@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>MUDRweb.cz - Vypršení platnosti účtu</title>
+</head>
+
+<body>
+    <center>
+        <table cellpadding="0" cellspacing="0" border="0" width="600" style="text-align:left;">
+            <tr>
+                <td>
+                    <table border="0" cellpadding="10" cellspacing="0" width="600" id="templatePreheader">
+                        <tr>
+                            <td valign="top" style="color:#505050; font-family:Arial, Verdana; font-size:10px; line-height:100%; text-align:left;">
+
+                                <!--Preheader-->
+                                <table border="0" cellpadding="10" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td valign="top">
+                                            <div>
+                                                Informace o vypršení platnosti účtu pro stránku <a href={$subdomain} target="_blank">{$subdomain}</a>.
+                                            </div>
+                                        </td>
+                                        <td valign="top" width="280">
+                                            <div>
+                                                Pokud se Vám tenhle e-mail nezobrazil správně, klikněte prosím na <a href="http://mudrweb.cz" target="_blank" class="color:#336699;font-weight:normal;text-decoration:underline;">tento odkaz</a>.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!--EndPreheader-->
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr height="65">
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" height="65" width="100%">
+                        <tr>
+
+                            <!--HEADER TEXT-->
+                            <td height="65" width="325" valign="top" style="font-family:Arial, Verdana; font-size:18px; color:#FFF; font-weight:bold;" bgcolor="#3bbbe9" background="../../../images/xemails/bluefade_left.gif">
+                                <span style="font-size:10px;"<br /><br /></span>
+                                <div style="padding-top:9px;">
+                                &nbsp;&nbsp;&nbsp;
+                                Vypršení platnosti účtu
+                                </div>
+                            </td>
+                            <!--LEFT DIVIDER-->
+                            <td height="65" width="1" bgcolor="#3bbbe9" background="../../../images/xemails/blueborder.gif"><div style="line-height:0px; font-size:1px; position:absolute;">&nbsp;</div></td>
+                            <td height="65" width="125" bgcolor="#3bbbe9" valign="middle" background="../../../images/xemails/bluefade_right.gif">
+                                <a href="http://mudrweb.cz" target="_blank">                                  
+                                    <img src="../../../images/logo.png" bgcolor="#3bbbe9" align="left" alt="" border="0" width="100" style="padding-left:20px;padding-top:5px;"/>
+                                </a>	
+                            </td>
+                            <!--DOWNLOAD LINK AREA-->
+                            <td height="65" width="186" bgcolor="#3bbbe9" valign="middle" background="../../../images/xemails/bluefade_right.gif">
+                                <span style="font-size:10px;"><br /></span>                                
+                                <div style="padding-top:13px;font-family:Arial,Verdana;font-size:10px;color:#ffffff;">
+                                ...místo pro Váš web
+                                </div>                                
+                            </td>
+                            <!--RIGHT DIVIDER-->
+                            <td height="65" width="1" bgcolor="#3bbbe9" background="../../../images/xemails/blueborder.gif"><div style="line-height:0px; font-size:1px; position:absolute;">&nbsp;</div></td>
+                            <!--RIGHT BAR EDGE-->
+                            <td height="65" width="9" bgcolor="#3bbbe9" background="../../../images/xemails/bluefade_left.gif">
+                                <div style="line-height:0px; font-size:1px; position:absolute;">&nbsp;</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!--SPACER-->
+            <tr>
+                <td height="26"><div style="line-height:0px; font-size:1px; position:absolute;">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td>
+                    <!--CONTENT TABLE-->
+                    <table cellpadding="0" width="600" cellspacing="0" border="0">
+                        <tr>
+                            <!--LEFT COLUMN CONTENT-->
+                            <td width="337" valign="top" style="font-family:Verdana, Arial; font-size:12px; padding-left:10px; padding-right:10px;">                                
+                                Dobrý den,<br/><br />
+                                
+                                {if $program=='DEMOverze'}                                                                
+                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>DEMOverzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain}</a>,
+                                ke kterému dojde dne <b>{$validTo}</b>.
+                                <br />
+                                (Vygenerováno na základě Vaší objednávky na vytvoření <b>DEMOverze</b> stránky ze dne <b>{$dateOfReg}</b>,
+                                s dobou platnosti 3 měsíce.)
+                                <br /><br />
+                                Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
+                                V případě zájmu o přechod na jeden z našich placených programů nás neváhejte kontaktovat na 
+                                adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
+                                777 861 159 (Po - Pá: 18:00 - 22:00).
+                                <br />
+                                Těšíme se na další společnou spolupráci.
+                                <br /><br />
+                                {elseif $program=='basic'}
+                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>Základní verzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain}</a>,
+                                ke kterému dojde dne <b>{$validTo}</b>.
+                                <br />
+                                (Vygenerováno na základě Vaší objednávky na vytvoření <b>Základní verze</b> stránky ze dne <b>{$dateOfReg}</b>.
+                                s dobou platnosti 1 rok.)
+                                <br /><br />
+                                Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
+                                V případě zájmu o prodloužení platnosti aktuálního programu nebo o přechod na 
+                                jiný program z našeho portfolia nás neváhejte kontaktovat na 
+                                adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
+                                777 861 159 (Po - Pá: 18:00 - 22:00).
+                                <br />
+                                Těšíme se na další společnou spolupráci.
+                                <br /><br />                                
+                                {/if}                                                                                                
+                                S pozdravem
+                                <br /><br />
+                                Váš MUDRweb tým
+                                <br /><br />
+                                <div style="font-family:Verdana, Arial; font-size:8px; font-weight:normal;">                                    
+                                    Tento email byl vygenerován automaticky, prosíme, neodpovídejte na něj.
+                                    V případě jakýchkoliv otázek se obraťte na naši podporu - <a href="mailto:support@mudrweb.cz">support@mudrweb.cz</a>.                                    
+                                </div>                                
+                            </td>
+                        </tr>
+                    </table>
+                <br />
+                </td>                
+            </tr>
+
+            <!--FOOTER-->
+            <tr>
+                <td height="3" style="border-top:3px double #e4e4e4; text-align:center; font-family:Verdana, Arial; font-size:12px;">
+                    <br />
+                    <div style="color:#505050;font-family:Arial, Verdana;font-size:10px;line-height:100%;text-align:center;">
+                    <strong>MUDRweb.cz</strong><br /><br />
+                    e-mail: office@mudrweb.cz
+                    <br />
+                    URL: <a href="http://mudrweb.cz" target="_blank">www.mudrweb.cz</a>
+                    <br />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
