@@ -59,7 +59,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .mainmenu {margin-top: 25px;}
 .mainmenu_firstbtn {float:left; width: 50px; height: 25px; background: url('../images/main/menu.png') 0px 0px; }
 .mainmenu_firstbtn:hover {cursor: pointer; background: url('../images/main/menu.png') 0px 25px; }
-.mainmenu_firstbtn_active {float:left; width: 50px; height: 25px; background: url('../images/main/menu.png') 0px 0px; }
+.mainmenu_firstbtn_active {float:left; width: 50px; height: 25px; background: url('../images/main/menu.png') 0px 25px; }
 .mainmenu_btn {float:left; width: auto; height: 21px; background: url('../images/main/menu_c.png') 0px 0px; background-repeat: repeat; font-size: 12px; padding: 4px 10px 0px 10px; }
 .mainmenu_btn:hover {cursor: pointer; background: url('../images/main/menu_c.png') 0px 25px; }
 .mainmenu_btn_active {float:left; width: auto; height: 21px; background: url('../images/main/menu_c.png') 0px 25px; background-repeat: repeat; font-size: 12px; padding: 4px 10px 0px 10px; }
