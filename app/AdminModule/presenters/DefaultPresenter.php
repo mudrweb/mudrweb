@@ -219,7 +219,7 @@ class DefaultPresenter extends AdminPresenter {
             fclose($indexFile);
 
             // update its content            
-            $updatedIndexContent = "#header h1 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 28px; font-style: normal; color: ". $data->colour1 . "; text-decoration: none; text-align: left; padding-top: 40px; padding-left: 400px; margin: 0px; }";
+            $updatedIndexContent = "#header h1 { color: ". $data->colour1 . "; }";
                 
             $updatedFile = fopen($pathToUserSpecificDir . '/colour_scheme.css', 'w+');
             fwrite($updatedFile, $updatedIndexContent);

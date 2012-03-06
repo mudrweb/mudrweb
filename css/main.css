@@ -288,3 +288,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .input_style_log { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 150px; border: 1px solid #000000;   
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 } 
+.td_input_search { padding-left: 0px; padding-bottom: 15px; width: 300px;}
+.search_h3_areas { font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold; display: none; }
+#search_areas_list { display: none; }
+#search_separator { display: none; }

@@ -31,11 +31,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * Startup settings.
      */    
     public function startup() {
-        parent::startup();       
-//        $session = $this->context->container->getService('session');
-//        $section = $session->getSection('myCounter');
-//        $section->count++;
-//        dump($section->count);      
+        parent::startup();                     
         
         // extra methods holder
         $this->extraMethods = new ExtraMethods;        
