@@ -18,39 +18,50 @@
         {/if}
         {if $pathToColourSchemeCSS}
             <link rel="stylesheet" href="{$basePath}/colour_scheme.css" type="text/css">
-        {/if}                
+        {/if}           
 	<script type="text/javascript" src="{$sharedBasePath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="{$sharedBasePath}/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="{$sharedBasePath}/js/jquery.nette.js"></script>
         <script type="text/javascript" src="{$sharedBasePath}/js/jquery.livequery.js"></script>
         <script type="text/javascript" src="{$sharedBasePath}/js/jquery.ajaxform.js"></script>        
+<!--	<script type="text/javascript" src="{$sharedBasePath}/js/netteForms.js"></script>-->
         <script type="text/javascript" src="{$sharedBasePath}/js/live-form-validation.js"></script>
         <script type="text/javascript" src="{$sharedBasePath}/js/jquery.pstrength.js"></script>        
 	{block head}{/block}
 </head>
 
-<body>        
-    <div id="topspace">
+
+
+
+<body>     
+ <div id="topspace">
     </div>   
-    
+     
+<div id="wrapper">
+     
+
     <div id="header">
-    <h1>{$header}
-    </h1>
-    <h2>{$underHeader}
-    </h2>
+      <h1>{$header}
+      </h1>
+      <h2>{$underHeader}
+      </h2>
     </div>
     
-    <div id="menu"> 
-        {widget navigation}
-    </div>
     <div id="main">
+            
+        <div id="menu"> 
+            {widget navigation}
+        </div>
+            
         <div id="content">
-            {include #content}
-        </div>        
+            {include #content}                
+        </div>      
+          
     </div>
     
-    <div id="foot"> 
-        
+    <div id="foot">      
     </div>
+
+</div>        
 </body>
 </html>
