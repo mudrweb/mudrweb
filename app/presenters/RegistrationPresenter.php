@@ -223,6 +223,10 @@ class RegistrationPresenter extends BasePresenter {
                 ->addRule(Form::MAX_LENGTH, 'PSČ: Maximální povolená délka PSČ je 5 znaků.', 5)                
                 ->setAttribute('class', 'input_style_pinfo');         
         
+        $form->addSelect('region', 'Kraj:', $this->regionsList)                    
+                ->setDefaultValue('jihocesky')
+                ->setAttribute('class', 'input_style_select');          
+        
         $form->addText('phone', 'Telefon:', 9, 9)                
                 ->addRule(Form::FILLED, 'Musíte zadat telefonní číslo.')                                                
                 ->addRule(Form::INTEGER, 'Telefonní číslo musí být číslo.')                
@@ -266,7 +270,7 @@ class RegistrationPresenter extends BasePresenter {
             
             $dataArray_users_data = array('', $data->name, $data->surname,
                 $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                $data->phone);
+                $data->region, $data->phone);
             
             $section->dataArray_users_data = $dataArray_users_data;                                                        
             
@@ -318,8 +322,9 @@ class RegistrationPresenter extends BasePresenter {
         $token = $this->extraMethods->generatePassword();
         $salt = $this->extraMethods->generateSalt();
         $regToken = $this->extraMethods->calculateHash($token, $salt);
+        $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
         $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, 
-            $section->subdomain, $section->program, $regToken);
+            $section->subdomain, $section->program, $regToken, $sponsoringNumber);
         $this->db_users->addUser($dataArray_user);
 
         //2. users_data

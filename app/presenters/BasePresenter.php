@@ -27,11 +27,32 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     
     protected $extraMethods;    
 
+    // list of regions
+    protected $regionsList;    
+    
     /**
      * Startup settings.
      */    
     public function startup() {
         parent::startup();                     
+        
+        // list of regions
+        $this->regionsList = array(
+            'jihocesky' => 'Jihočeský',
+            'jihomoravsky' => 'Jihomoravský',
+            'karlovarsky' => 'Karlovarský',
+            'kralovohradecky' => 'Královéhradecký',
+            'liberecky' => 'Liberecký',
+            'moravskoslezsky' => 'Moravskoslezský',
+            'olomoucky' => 'Olomoucký',
+            'pardubicky' => 'Pardubický',
+            'plzensky' => 'Plzeňský',
+            'praha' => 'Praha',
+            'stredocesky' => 'Středočeský',
+            'ustecky' => 'Ústecký',
+            'vysocina' => 'Vysočina',
+            'zlinsky' => 'Zlínský'
+        );        
         
         // extra methods holder
         $this->extraMethods = new ExtraMethods;        

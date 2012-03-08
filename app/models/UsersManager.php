@@ -171,7 +171,8 @@ class UsersManager extends Nette\Object {
                'username' => $dataArray[0],
                'password' => $dataArray[1],
                'salt' => $dataArray[2],
-               'role' => 'uživatel',       
+               'role' => 'uživatel',     
+               'usersSponsoringNumber' => $dataArray[6],
                'superUserActive' => 0,
                'subdomain' => $dataArray[3],
                'dateOfRegistration' => $registrationDateTime,
@@ -344,8 +345,8 @@ class UsersManager extends Nette\Object {
             $changeDateTime = date("Y-m-d H:i:s");
             $this->database->exec('
                 UPDATE users_data SET 
-                name=?, surname=?, titleBefore=?, titleAfter=?, street=?, city=?, zip=?, phone=?, email=?, lastChange=? WHERE idusers=?', 
-                $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5], $dataArray[6], $dataArray[7], $dataArray[8], $dataArray[9], $changeDateTime, $dataArray[0]);            
+                name=?, surname=?, titleBefore=?, titleAfter=?, street=?, city=?, zip=?, region=?, phone=?, email=?, lastChange=? WHERE idusers=?', 
+                $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5], $dataArray[6], $dataArray[7], $dataArray[8], $dataArray[9], $dataArray[10], $changeDateTime, $dataArray[0]);            
         } else {            
             throw new \Nette\Application\ToolException('Unable to update user profile info.
                     Wrong input. method: changeUserProfileInfo($dataArray)', 500);
@@ -369,7 +370,8 @@ class UsersManager extends Nette\Object {
                'street' => $dataArray[6],                
                'city' => $dataArray[7],                
                'zip' => $dataArray[8],  
-               'phone' => $dataArray[9],                
+               'zip' => $dataArray[9],  
+               'phone' => $dataArray[10]                
             ));                 
         } else {            
             throw new \Nette\Application\ToolException('Unable to add new user data.

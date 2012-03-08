@@ -147,6 +147,9 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .tr_reg_height15 { height: 15px; }
 .tr_reg_height20 { height: 20px; }
 .td_reg_width20 { width: 20px; }
+.input_style_select { font-size: 95%; font-family: arial; padding: 1px; padding-top: 2px; height: 24px; border: 1px solid #000000;
+    -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 10px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 10px; box-shadow: rgba(200,200,200,1) 0 1px 10px;
+}
 
 /** program */
 .td_reg_programs { background-color: #ffffff; padding-left: 20px; width: 685px; }

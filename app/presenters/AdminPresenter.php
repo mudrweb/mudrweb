@@ -38,6 +38,9 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
     
     protected $extraMethods;
 
+    // list of regions
+    protected $regionsList;
+    
     /**
      * Startup settings.
      */
@@ -47,6 +50,23 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         // ********************************************************************
         // Website settings start
         // ********************************************************************
+        // list of regions
+        $this->regionsList = array(
+            'jihocesky' => 'Jihočeský',
+            'jihomoravsky' => 'Jihomoravský',
+            'karlovarsky' => 'Karlovarský',
+            'kralovohradecky' => 'Královéhradecký',
+            'liberecky' => 'Liberecký',
+            'moravskoslezsky' => 'Moravskoslezský',
+            'olomoucky' => 'Olomoucký',
+            'pardubicky' => 'Pardubický',
+            'plzensky' => 'Plzeňský',
+            'praha' => 'Praha',
+            'stredocesky' => 'Středočeský',
+            'ustecky' => 'Ústecký',
+            'vysocina' => 'Vysočina',
+            'zlinsky' => 'Zlínský'
+        );
         
         // define basic layout groups
         $this->layout_groups = array(

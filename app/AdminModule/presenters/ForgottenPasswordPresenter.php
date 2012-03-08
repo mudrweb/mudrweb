@@ -98,7 +98,7 @@ class ForgottenPasswordPresenter extends AdminPresenter
             $userFromDB_data = $this->db_users->getUsersDataById($userFromDB->id);
             if ($userFromDB_data) {            
                 // check password resent limit
-                $nowDateTime = new \Nette\DateTime("now");                
+                $nowDateTime = new \Nette\DateTime("now");                                
                 $resentDateTime = date_format($userFromDB->passwordResent, "Y-m-d H:i:s");
                 if ((strtotime($nowDateTime->format("Y-m-d H:i:s")) - strtotime($resentDateTime)) > 86400) {
                     // store resent datetime

@@ -20,6 +20,7 @@ class ProfilePresenter extends AdminPresenter {
     private $street;
     private $city;
     private $zip;
+    private $region;
     private $phone;
     private $email;
 
@@ -47,6 +48,7 @@ class ProfilePresenter extends AdminPresenter {
             $this->street = $userData->street;
             $this->city = $userData->city;
             $this->zip = $userData->zip;
+            $this->region = $userData->region;
             $this->phone = $userData->phone;
             $this->email = $userData->email;
         } else {
@@ -140,6 +142,10 @@ class ProfilePresenter extends AdminPresenter {
                 ->setDefaultValue($this->zip)
                 ->setAttribute('class', 'input_style_pinfo');         
         
+        $form->addSelect('region', 'Kraj:', $this->regionsList)                
+                ->setDefaultValue($this->region)
+                ->setAttribute('class', 'input_style_select');                
+        
         $form->addText('phone', 'Telefon:', 9, 9)                
                 ->addRule(Form::FILLED, 'Musíte zadat telefonní číslo.')                                                
                 ->addRule(Form::INTEGER, 'Telefonní číslo musí být číslo.')                                
@@ -218,7 +224,7 @@ class ProfilePresenter extends AdminPresenter {
         // prepare data for update
         $dataArray = array(intval($data->userId), $data->name, $data->surname, 
                      $data->titleBefore, $data->titleAfter, $data->street, $data->city, $data->zip,
-                     $data->phone, $data->email);  
+                     $data->region, $data->phone, $data->email);  
         
         // update user profile        
         $this->db_users->changeUserProfileInfo($dataArray);

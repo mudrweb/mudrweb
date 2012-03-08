@@ -169,7 +169,11 @@ class AdminDefaultPresenter extends AdminPresenter {
                 ->addRule(Form::INTEGER, 'PSČ musí být číslo.')
                 ->addRule(Form::MIN_LENGTH, 'PSČ: Minimální požadovaná délka PSČ je 5 znaků.', 5)                                
                 ->addRule(Form::MAX_LENGTH, 'PSČ: Maximální povolená délka PSČ je 5 znaků.', 5)                
-                ->setAttribute('class', 'input_style_pinfo');         
+                ->setAttribute('class', 'input_style_pinfo');   
+        
+        $form->addSelect('region', 'Kraj:', $this->regionsList)                    
+                ->setDefaultValue('jihocesky')
+                ->setAttribute('class', 'input_style_select');  
         
         $form->addText('phone', 'Telefon:', 9, 9)                
                 ->addRule(Form::FILLED, 'Musíte zadat telefonní číslo.')                                                
@@ -254,16 +258,20 @@ class AdminDefaultPresenter extends AdminPresenter {
         $salt = $this->extraMethods->generateSalt();
         $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));
 
-
         //1. user
-        $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain);
+        $token = $this->extraMethods->generatePassword();
+        $salt = $this->extraMethods->generateSalt();
+        $regToken = $this->extraMethods->calculateHash($token, $salt);
+        $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();        
+        $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
+                $data->program, $regToken, $sponsoringNumber);
         $this->db_users->addUser($dataArray_user);
 
         //2. users_data
         $user = $this->db_users->getUserBySubdomain($data->subdomain);
         $dataArray_users_data = array($user->id, $data->name, $data->surname,
             $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-            $data->phone);
+            $data->region, $data->phone);
         $this->db_users->addUserData($dataArray_users_data);
 
         //3. users_websiteData

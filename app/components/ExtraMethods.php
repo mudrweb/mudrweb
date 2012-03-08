@@ -58,6 +58,25 @@ class ExtraMethods extends Nette\Object {
     }   
     
     /**
+     * Generates sponsoring number.
+     * 
+     * @return password 
+     */
+    public function generateSponsoringNumber() {
+        $args = array(
+        'length'                =>   4,
+        'alpha_upper_include'   =>   TRUE,
+        'alpha_lower_include'   =>   TRUE,
+        'number_include'        =>   TRUE,
+        'symbol_include'        =>   FALSE,
+        );
+        $data = new chip_password_generator($args);
+        
+        $password = $data->get_password();
+        return $password;
+    }       
+    
+    /**
      * Copy current file to real subdomain (in ftp root):
      * - .htaccess, robots.txt from user_data_realSub folder      
      * - sitemap.xml, index.php from subodmain folder
