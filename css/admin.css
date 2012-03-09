@@ -260,6 +260,8 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
 .td_input_username_regUserPanel { padding-left: 48px; padding-bottom: 15px; width: 10px; }
 .td_input_subdomain_regUserPanel { padding-left: 48px; padding-bottom: 15px; width: 10px;  }
 .td_input_regUserPanel_1 { padding-left: 83px; padding-bottom: 15px; width: 20px; }
+.td_input_referral_regUserPanel { padding-left: 0px; padding-bottom: 5px; width: 20px; }
+.td_input_label_referral_regUserPanel { padding-bottom: 0px; padding-left: 0px; width: 350px; }
 .td_input_phone_regUserPanel { padding-left: 46px; padding-bottom: 15px; width: 20px; }
 .td_input_top_regUserPanel { padding-left: 48px; padding-bottom: 15px; padding-top: 7px; width: 20px; }
 .td_input_settings_regUserPanel { padding-bottom: 15px; width: 10px; }
@@ -271,6 +273,10 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
 }
 .generatedPass { display:inline; float:right; padding-right: 80px; font-size: 130%; color: red; }
 .td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; }
+.td_input_program_regUserPanel { padding-left: 18px; padding-bottom: 0px; width: 250px; }
+.programs { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 2px; margin-left: 65px;
+    -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
+}
 
 /* user list - admin panel */
 a.user_list:link {text-decoration: underline;}

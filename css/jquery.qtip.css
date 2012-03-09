@@ -247,7 +247,7 @@
 .ui-tooltip-red .ui-tooltip-titlebar,
 .ui-tooltip-red .ui-tooltip-content{
 	border-color: #D95252;
-	color: #912323;
+	color: #912323;        
 }
 
 	.ui-tooltip-red .ui-tooltip-content{
@@ -295,15 +295,15 @@
 .ui-tooltip-blue .ui-tooltip-titlebar,
 .ui-tooltip-blue .ui-tooltip-content{
 	border-color: #ADD9ED;
-	color: #5E99BD;
+	color: #FFFFFF;
 }
 
 	.ui-tooltip-blue .ui-tooltip-content{
-		background-color: #E5F6FE;
+		background-color: #0099CC;
 	}
 
 	.ui-tooltip-blue .ui-tooltip-titlebar{
-		background-color: #D0E9F5;
+		background-color: #0099CC;
 	}
 
 	.ui-tooltip-blue .ui-state-default .ui-tooltip-icon{

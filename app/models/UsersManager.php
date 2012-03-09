@@ -101,6 +101,24 @@ class UsersManager extends Nette\Object {
     }    
     
     /**
+     * Get user by $usersSponsoringNumber.
+     * 
+     * @param string $usersSponsoringNumber
+     * @return user
+     * @throws \Nette\Application\ToolException 
+     */
+    public function getUserBySponsoringNumber($usersSponsoringNumber) {
+        if ($usersSponsoringNumber) {
+            $user = $this->database->table('users')
+                    ->where('usersSponsoringNumber', $usersSponsoringNumber)->fetch();
+            return $user;
+        } else {
+            throw new \Nette\Application\ToolException('Unable to get User.
+                    Wrong input. method: getUserBySponsoringNumber($usersSponsoringNumber)', 500);
+        }
+    }        
+    
+    /**
      * Save last login datetime for current user.
      * 
      * @param int $id
@@ -171,7 +189,8 @@ class UsersManager extends Nette\Object {
                'username' => $dataArray[0],
                'password' => $dataArray[1],
                'salt' => $dataArray[2],
-               'role' => 'uživatel',     
+               'role' => 'uživatel',   
+               'usersSponsor' => $dataArray[7],
                'usersSponsoringNumber' => $dataArray[6],
                'superUserActive' => 0,
                'subdomain' => $dataArray[3],

@@ -44,6 +44,8 @@
                                     <td id="status{$user[0]}" class="orange bold">    
                                 {elseif $user[5] == 'inactive'}
                                     <td id="status{$user[0]}" class="red bold">
+                                {elseif $user[5] == 'archive'}
+                                    <td id="status{$user[0]}" class="bold">                                        
                                 {/if}
                                     {$user[5]}</td>                                
                                 <td>{$user[11]}</td>
@@ -54,7 +56,6 @@
                                     <br />
                                     <a href="{link copyFilesToRealSubdomain! $user[0], $user[3]}" class="user_list ajax">Kopírovat data</a>
                                     <br />
-<!--                                    { snippet realSubStatus}-->
                                     Satus: 
                                     {if $user[10] == 'Valid'}
                                         <span class="green">{$user[10]}</span>
@@ -63,7 +64,6 @@
                                     {elseif $user[10] == 'Invalid'}
                                         <span class="red">{$user[10]}</span>                                        
                                     {/if}
-<!--                                    { /snippet}-->
                                 </td>                                
                                 {if $user[8] == 'on'}
                                     <td id="mmode{$user[0]}" class="green bold">
@@ -121,7 +121,7 @@
                     cssclass: 'status_change',
                     indicator: 'Saving ...',
                     type: 'select',
-                    data: "{'0':'active', '1':'pending', '2':'inactive'}",
+                    data: "{'0':'active', '1':'pending', '2':'inactive', '3':'archive'}",
                     submit: 'OK&nbsp'                    
                 },
                     null, 
@@ -177,6 +177,10 @@
                     $("#" + statusId).css("color","#ff0000");
                     $("#" + statusId).addClass("bold");
                 }      
+                if (select.value == '3') {
+                    $("#" + statusId).css("color","#000000");
+                    $("#" + statusId).addClass("bold");
+                }                    
             }
         }
         

@@ -31,7 +31,7 @@ class CronJobRunner1Presenter extends BasePresenter
                     $dateToStopIt = date('Y-m-d', strtotime('-1 day'));
                     $dateTo = date_format($user->dateTo, 'Y-m-d');
 
-                    // account deactivation START //////////////////////////////////
+                    // account deactivation START //////////////////////////////
                     if (($user->accountStatus == 'active') && ($dateToStopIt >= $dateTo)) {
                         $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'inactive');
 
@@ -61,8 +61,9 @@ class CronJobRunner1Presenter extends BasePresenter
                                     ->send();
                         }
                     }
-                    // account deactivation END ////////////////////////////////////
-                    // account deactivation notification START /////////////////////
+                    // account deactivation END ////////////////////////////////
+                    
+                    // account deactivation notification START /////////////////
                     // 1st notification -> 14 days before
                     $dateFor1stNotification = strtotime($dateTo);
                     $dateFor1stNotification = strtotime("-14 days", $dateFor1stNotification);
@@ -167,7 +168,15 @@ class CronJobRunner1Presenter extends BasePresenter
                             $this->db_users->updateAccDeactNotificationCounter(intval($user->id), 3);
                         }
                     }
-                    // account deactivation END ////////////////////////////////////
+                    // account deactivation END ////////////////////////////////
+                                        
+                    // account archivation /////////////////////////////////////
+                    // after 1 month of inactive status move from inactive->archive
+                    $dateForArchivation = strtotime($dateTo);
+                    $dateForArchivation = strtotime("+1 month", $dateForArchivation);
+                    if (($user->accountStatus == 'inactive') && ($todaysDate >= $dateForArchivation)) {
+                        $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'archive');
+                    }
                 }
             }
         } else {

@@ -181,6 +181,13 @@ class AdminDefaultPresenter extends AdminPresenter {
                 ->addRule(Form::MAX_LENGTH, 'Telefon: Maximální povolená délka telefonního čísla je 9 znaků.', 9)                
                 ->setAttribute('class', 'input_style_pinfo');                 
         
+        $form->addRadioList('program', 'Program:', array(
+                'demo' => 'DEMOverze - 3 měsíce - ZDARMA',
+                'basic' => 'Základní verze - 1 rok - 1000 Kč',
+                ))
+                ->setDefaultValue('demo')
+                ->setAttribute('class', 'programs');        
+        
         // website data
         // list of layouts
         $listOfLayoutsArray = array();
@@ -209,17 +216,21 @@ class AdminDefaultPresenter extends AdminPresenter {
                 ->setAttribute('class', 'input_style_pinfo');          
         $form->addTextArea('pageTitle', 'Název stránky (title):', 52, 64)                
 //                ->addRule(Form::FILLED, 'Musíte zadat název stránky.')                
-                ->addRule(Form::MIN_LENGTH, 'Název stránky: Minimální požadovaná délka názvu stránky je 10 znaků.', 10)
+//                ->addRule(Form::MIN_LENGTH, 'Název stránky: Minimální požadovaná délka názvu stránky je 10 znaků.', 10)
                 ->addRule(Form::MAX_LENGTH, 'Název stránky: Maximální povolená délka názvu stránky je 64 znaků.', 64)                
                 ->setAttribute('class', 'textarea_default_title');
         $form->addTextArea('description', 'Popis stránky (description):', 52, 40)                
 //                ->addRule(Form::FILLED, 'Musíte zadat popis stránky.')   
-                ->addRule(Form::MIN_LENGTH, 'Popis stránky: Minimální požadovaná délka popisu stránky je 50 znaků.', 50)
+//                ->addRule(Form::MIN_LENGTH, 'Popis stránky: Minimální požadovaná délka popisu stránky je 50 znaků.', 50)
                 ->addRule(Form::MAX_LENGTH, 'Popis stránky: Maximální povolená délka popisu stránky je 149 znaků.', 149)                
                 ->setAttribute('class', 'textarea_default_desc');        
         $form->addTextArea('keywords', 'Klíčová slova (keywords):', 52, 40)                
 //                ->addRule(Form::FILLED, 'Musíte zadat klíčová slova stránky.')                                
                 ->setAttribute('class', 'textarea_default_keywords');              
+        
+        $form->addText('referral', 'Refer číslo:', 50, 40)                
+                ->addRule(Form::MAX_LENGTH, 'Referenční číslo: Maximální povolená délka referral number je 4 znaků.', 4)                
+                ->setAttribute('class', 'input_style_pinfo');           
         
         $form->addSubmit('submit', 'Registrovat uživatele')
                 ->setAttribute('class', 'button')
@@ -258,50 +269,69 @@ class AdminDefaultPresenter extends AdminPresenter {
         $salt = $this->extraMethods->generateSalt();
         $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));
 
-        //1. user
-        $token = $this->extraMethods->generatePassword();
-        $salt = $this->extraMethods->generateSalt();
-        $regToken = $this->extraMethods->calculateHash($token, $salt);
-        $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();        
-        $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
-                $data->program, $regToken, $sponsoringNumber);
-        $this->db_users->addUser($dataArray_user);
-
-        //2. users_data
-        $user = $this->db_users->getUserBySubdomain($data->subdomain);
-        $dataArray_users_data = array($user->id, $data->name, $data->surname,
-            $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-            $data->region, $data->phone);
-        $this->db_users->addUserData($dataArray_users_data);
-
-        //3. users_websiteData
-        $layout = $this->db_users->getLayoutById($data->layouts);
-        $dataArray_users_websiteData = array($user->id, $layout->layout, $layout->layout_group,
-            $data->header1, $data->header2, $data->pageTitle, $data->description,
-            $data->keywords);
-        $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
-
-        //4. menuItems set
-        $this->db_menuItems->addNewMenuItemsSet($user->id);
-
-        //5. guestBook                      
-        $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
-        $this->db_guestBook->addGuestBook($dataArray_guestBook);
-
-        //6. www part - folders, files
-        $this->registerUserWWW($data->subdomain);
-        
-        //7. set subdomain status from N/A -> to valid
-        $this->db_users->updateSubdomainStatus($user->id, 'Valid');
-        
-        $this->flashMessage('Registrace uživatele proběhla úspěšně.', 'info');
-
-        if (!$this->isAjax()) {
-            $this->redirect('this');
+        // check if there is the user with filled Sponsoring Number
+        if ($data->referral != '') {
+            $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
+            if ($sponsor) {
+                $usersSponsor = $sponsor->id;
+            } else {
+                $usersSponsor = -1;
+            }
         } else {
-            $this->invalidateControl('formRegUser');
-            $this->invalidateControl('dispPass');
-            $button->getForm()->setValues(array(), TRUE);
+            $usersSponsor = 0;
+        }
+        
+        if ($usersSponsor >= 0) {
+            //1. user
+            $token = $this->extraMethods->generatePassword();
+            $salt = $this->extraMethods->generateSalt();
+            $regToken = $this->extraMethods->calculateHash($token, $salt);
+            $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
+            if ($usersSponsor == 0) {
+                $usersSponsor = NULL;
+            }
+            $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
+                $data->program, $regToken, $sponsoringNumber, $usersSponsor);
+            $this->db_users->addUser($dataArray_user);
+
+            //2. users_data
+            $user = $this->db_users->getUserBySubdomain($data->subdomain);
+            $dataArray_users_data = array($user->id, $data->name, $data->surname,
+                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
+                $data->region, $data->phone);
+            $this->db_users->addUserData($dataArray_users_data);
+
+            //3. users_websiteData
+            $layout = $this->db_users->getLayoutById($data->layouts);
+            $dataArray_users_websiteData = array($user->id, $layout->layout, $layout->layout_group,
+                $data->header1, $data->header2, $data->pageTitle, $data->description,
+                $data->keywords);
+            $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
+
+            //4. menuItems set
+            $this->db_menuItems->addNewMenuItemsSet($user->id);
+
+            //5. guestBook                      
+            $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
+            $this->db_guestBook->addGuestBook($dataArray_guestBook);
+
+            //6. www part - folders, files
+            $this->registerUserWWW($data->subdomain);
+
+            //7. set subdomain status from N/A -> to valid
+            $this->db_users->updateSubdomainStatus($user->id, 'Valid');
+
+            $this->flashMessage('Registrace uživatele proběhla úspěšně.', 'info');
+
+            if (!$this->isAjax()) {
+                $this->redirect('this');
+            } else {
+                $this->invalidateControl('formRegUser');
+                $this->invalidateControl('dispPass');
+                $button->getForm()->setValues(array(), TRUE);
+            }
+        } else {
+            $this->flashMessage('Zadané referenční číslo je neplatné!', 'warning');
         }
     }
 
@@ -320,6 +350,7 @@ class AdminDefaultPresenter extends AdminPresenter {
             // get all usernames 
             $usernamesArray = array();
             foreach ($users as $user) {
+                if ($user->accountStatus != 'archive')
                 $usernamesArray[] = $user->username;
             }
 

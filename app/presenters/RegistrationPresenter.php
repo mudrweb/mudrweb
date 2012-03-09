@@ -232,7 +232,11 @@ class RegistrationPresenter extends BasePresenter {
                 ->addRule(Form::INTEGER, 'Telefonní číslo musí být číslo.')                
                 ->addRule(Form::MAX_LENGTH, 'Telefon: Maximální povolená délka telefonního čísla je 9 znaků.', 9)                
                 ->setAttribute('class', 'input_style_pinfo');                 
-                                        
+                     
+        $form->addText('referral', 'Pokud jste se o nás dozvědeli od známého, zadejte ', 50, 40)                
+                ->addRule(Form::MAX_LENGTH, 'Referenční číslo: Maximální povolená délka referral number je 4 znaků.', 4)                
+                ->setAttribute('class', 'input_style_pinfo');           
+        
         $form->addSubmit('submit2', 'Pokračovat')
                 ->setAttribute('class', 'button')
                 ->onClick[] = callback($this, 'getPersonalInfo');               
@@ -260,28 +264,45 @@ class RegistrationPresenter extends BasePresenter {
         $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));                
                         
         if ($data->newPassword == $data->newPassword1) {
-            $section->step2Completed = 1;            
+            // check if there is the user with filled Sponsoring Number
+            if ($data->referral != '') {
+                $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
+                if ($sponsor) {
+                    $usersSponsor = $sponsor->id;
+                } else {
+                    $usersSponsor = -1;
+                }
+            } else {
+                $usersSponsor = 0;
+            }         
             
-            // store data to session
-            $section->username = $data->username;
-            $section->hashedPassword = $hashedPassword;
-            $section->salt = $salt;
-            $section->subdomain = $data->subdomain;
-            
-            $dataArray_users_data = array('', $data->name, $data->surname,
-                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                $data->region, $data->phone);
-            
-            $section->dataArray_users_data = $dataArray_users_data;                                                        
-            
-//            if (!$this->isAjax()) {
-//                $this->redirect('this');
-//            } else {
-                $this->invalidateControl('formRegUser');
-                $this->invalidateControl('dispPass');
-                $button->getForm()->setValues(array(), TRUE);
-                $this->redirect('Registration:final');
-//            }            
+            if ($usersSponsor >= 0) {
+                $section->step2Completed = 1;            
+
+                // store data to session
+                $section->username = $data->username;
+                $section->hashedPassword = $hashedPassword;
+                $section->salt = $salt;
+                $section->subdomain = $data->subdomain;
+                $section->usersSponsor = $usersSponsor;
+
+                $dataArray_users_data = array('', $data->name, $data->surname,
+                    $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
+                    $data->region, $data->phone);
+
+                $section->dataArray_users_data = $dataArray_users_data;                                                        
+
+    //            if (!$this->isAjax()) {
+    //                $this->redirect('this');
+    //            } else {
+                    $this->invalidateControl('formRegUser');
+                    $this->invalidateControl('dispPass');
+                    $button->getForm()->setValues(array(), TRUE);
+                    $this->redirect('Registration:final');
+    //            }        
+            } else {
+                $this->flashMessage('Zadané referenční číslo je neplatné!', 'warning');
+            }
         } else {
             $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                        
         }       
@@ -323,8 +344,13 @@ class RegistrationPresenter extends BasePresenter {
         $salt = $this->extraMethods->generateSalt();
         $regToken = $this->extraMethods->calculateHash($token, $salt);
         $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
+        if ($section->usersSponsor == 0) {
+            $usersSponsor = NULL;
+        } else {
+            $usersSponsor = $section->usersSponsor;
+        }
         $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, 
-            $section->subdomain, $section->program, $regToken, $sponsoringNumber);
+            $section->subdomain, $section->program, $regToken, $sponsoringNumber, $usersSponsor);
         $this->db_users->addUser($dataArray_user);
 
         //2. users_data

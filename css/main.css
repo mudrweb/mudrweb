@@ -190,6 +190,8 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; }
 .td_input_changePass { padding-left: 150px; padding-bottom: 15px; padding-top: 5px; }
 .td_right_img {  padding-left: 70px; }
+.td_input_referral_regUserPanel { padding-left: 30px; padding-bottom: 15px; width: 20px; }
+.qtip_content { font-size: 105%; font-weight: bold; }
 
 /** confirmation */
 .td_input_confirm { padding-left: 0px; padding-bottom: 5px; padding-top: 5px; }

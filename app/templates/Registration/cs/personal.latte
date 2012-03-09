@@ -34,12 +34,14 @@
                     <td class="td_verticalSeparator" rowspan="6">Přihlašovací údaje</td>
                     
                     <td class="td_input_label_pinfo">{label username /} &nbsp</td>                    
-                    <td class="td_input_username_regUserPanel">{input username}</td>    
+                    <td class="td_input_username_regUserPanel">{input username}</td>
+                    <td width="1" id="tip_username"></td>
                     <td width="300" align="left" valign="top"><div id="usernameAvailableStatus"></div></td>
                 </tr>                 
                 <tr>
                     <td class="td_input_label_changePass">{label subdomain /} &nbsp</td>                    
                     <td class="td_input_subdomain_regUserPanel">{input subdomain}</td>
+                    <td width="1" id="tip_subdomain"></td>
                     <td width="300" align="left" valign="top"><div id="subdomainAvailableStatus"></div></td>                    
                 </tr>
                 <tr>
@@ -107,7 +109,19 @@
                     <td class="td_input_phone_regUserPanel">+420 &nbsp;{input phone}</td>                                                      
                 </tr>                                
                 <tr class="tr_reg_height15"><td></td></tr>
-         </table>                    
+         </table>    
+         <h2></h2>  
+         <table cellspacing="0">          
+                <tr class="tr_reg_height5"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="1">Reference</td>
+                    
+                    <td class="td_input_label_pinfo">{label referral /} <br /> prosím jeho referenční číslo:
+                        {input referral}
+                    </td>                                                                              
+                </tr>  
+                <tr class="tr_reg_height15"><td></td></tr>
+         </table>         
          <h2></h2>         
          <table cellspacing="0">                
                 <tr>                            
@@ -117,7 +131,59 @@
          <h2></h2>       
 {/form regUserForm2}     
          
-<script type="text/javascript">         
+<script type="text/javascript">    
+        $(document).ready(function()
+        {           
+           $('#frmregUserForm2-username').qtip({
+                content: {
+                    text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu.</span>',
+                    width: '200'                    
+                },
+                position: {
+                    my: 'left top',
+                    at: 'right top',
+                    target: $('#tip_username')
+                },
+                show: {
+                    event: 'mouseenter',
+                    ready: false                 
+                },
+                hide: {
+                    event: 'mouseleave'
+                },                
+                style: {
+                    classes: 'ui-tooltip-shadow ui-tooltip-blue'                    
+                }            
+           });            
+        });  
+        
+$(document).ready(function()
+        {           
+           $('#frmregUserForm2-subdomain').qtip({
+                content: {
+                             text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší stránky, proto jeho výběr pečlivě zvažte. <br /><br /> \n\
+                             Napr.: Uživatel při registraci zadal název ve tvaru "richard.pokorny", \n\
+                             adresa jeho stránky bude tedy "richard.pokorny.mudrweb.cz".</span>',
+                    width: '200'                    
+                },
+                position: {
+                    my: 'left top',
+                    at: 'right top',
+                    target: $('#tip_subdomain')
+                },
+                show: {
+                    event: 'mouseenter',
+                    ready: false                 
+                },
+                hide: {
+                    event: 'mouseleave'
+                },                
+                style: {
+                    classes: 'ui-tooltip-shadow ui-tooltip-blue'                    
+                }            
+           });            
+        });        
+    
     $('#frmregUserForm2-username').change(function(event) { if ($('#frmregUserForm2-username').val().length >= 8) { $.getJSON({link availCheck!},{'text':$('#frmregUserForm2-username').val(), 'flag':'username'},function(payload) { if (payload.availCheck[0] == 'notok') { $("#frmregUserForm2-username").removeClass("object_ok"); $("#frmregUserForm-username").addClass("object_error"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-red icon-ui-red-close"></span><span>Jméno je již použito, zvolte prosím jiné</span>');                
     } else { $("#frmregUserForm2-username").removeClass('form-control-error'); $("#frmregUserForm2-username").removeClass('object_error'); $("#frmregUserForm2-username").addClass("object_ok"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-green icon-ui-green-tick"></span><span>Jméno je k dispozici</span>'); } }); } });         
     

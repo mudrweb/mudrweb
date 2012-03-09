@@ -45,10 +45,20 @@ class AdminUsersPresenter extends AdminPresenter {
                        } else {
                             $dateTo = '00/00/0000';
                        }                       
-                       
+                      
+                       if ($user->dateOfRegistration) {
+                           $dateOfRegistration = date_format($user->dateOfRegistration, 'd/m/Y H:i:s');
+                       } else {
+                           $dateOfRegistration = NULL;
+                       }                
+                       if ($user->dateOfActivation) {
+                           $dateOfActivation = date_format($user->dateOfActivation, 'd/m/Y H:i:s');
+                       } else {
+                           $dateOfActivation = NULL;
+                       }
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
-                            $user->subdomain, date_format($user->dateOfRegistration, 'd/m/Y H:i:s'), $user->accountStatus, $dateFrom, $dateTo, 
-                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, date_format($user->dateOfActivation, 'd/m/Y H:i:s'));                
+                            $user->subdomain, $dateOfRegistration, $user->accountStatus, $dateFrom, $dateTo, 
+                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, $dateOfActivation);                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminUsers presenter).', 404);                    
                     }
@@ -82,36 +92,60 @@ class AdminUsersPresenter extends AdminPresenter {
                 case 2:
                     $newStatus = 'inactive';
                     break;           
+                case 3:
+                    $newStatus = 'archive';
+                    break;                
             }           
             
+            // actual user
+            $user = $this->db_users->getUserById(intval($id));            
             if ($newStatus == 'active') {
-                // actual user
-                $user = $this->db_users->getUserById(intval($id));
                 if ($user && !$user->dateOfActivation) {      
-                    $user_data = $this->db_users->getUsersDataById(intval($id));
-                    
-                    // send email
-                    $template = parent::createTemplate();
-                    $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_active.latte');
-                    $template->registerFilter(new \Nette\Latte\Engine());        
-                    
-                    if ($user->program == 'demo') {
-                        $template->program = 'DEMOverze';
-                    } elseif ($user->program == 'basic') {
-                        $template->program = 'Základní verze';
+                    // if archived, it cannot be changed manually via admin menu
+                    if ($user->accountStatus != 'archive') {                    
+                        $user_data = $this->db_users->getUsersDataById(intval($id));
+
+                        // send email
+                        $template = parent::createTemplate();
+                        $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_active.latte');
+                        $template->registerFilter(new \Nette\Latte\Engine());        
+
+                        if ($user->program == 'demo') {
+                            $template->program = 'DEMOverze';
+                        } elseif ($user->program == 'basic') {
+                            $template->program = 'Základní verze';
+                        }
+                        $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                                        
+                        $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                
+                        $template->subdomain_name = $user->subdomain . '.mudrweb.cz';        
+                        $template->token = 'aa' . $user->registrationToken;
+
+                        $mail = new \Nette\Mail\Message;
+                        $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
+                                ->addTo($user_data->email)                
+                                ->setHtmlBody($template)
+                                ->send();   
+
+                        $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
                     }
-                    $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                                        
-                    $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                
-                    $template->subdomain_name = $user->subdomain . '.mudrweb.cz';        
-                    $template->token = 'aa' . $user->registrationToken;
-                    
-                    $mail = new \Nette\Mail\Message;
-                    $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
-                            ->addTo($user_data->email)                
-                            ->setHtmlBody($template)
-                            ->send();   
                 }
-            } 
+            } elseif ($newStatus == 'pending') {
+                // if archived, it cannot be changed manually via admin menu
+                if ($user->accountStatus != 'archive') {
+                    $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                }
+            } elseif ($newStatus == 'inactive') {
+                // if archived, it cannot be changed manually via admin menu
+                if ($user->accountStatus != 'archive') {
+                    $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                }
+            } elseif ($newStatus == 'archive') {                
+                if ($user->accountStatus == 'inactive') {
+                    $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                }                
+            } else {                
+            }
+            
 //            elseif ($newStatus == 'inactive') {
 //                // actual user
 //                $user = $this->db_users->getUserById(intval($id));
@@ -138,9 +172,7 @@ class AdminUsersPresenter extends AdminPresenter {
 //                            ->setHtmlBody($template)
 //                            ->send();   
 //                }                
-//            }
-                
-            $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+//            }           
         }
 
         // dateFrom
