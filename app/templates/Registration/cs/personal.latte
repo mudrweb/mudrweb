@@ -139,26 +139,9 @@
                     text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu.</span>',
                     width: '200'                    
                 },
-                position: {
-                    my: 'left top',
-                    at: 'right top',
-                    target: $('#tip_username')
-                },
-                show: {
-                    event: 'mouseenter',
-                    ready: false                 
-                },
-                hide: {
-                    event: 'mouseleave'
-                },                
-                style: {
-                    classes: 'ui-tooltip-shadow ui-tooltip-blue'                    
-                }            
-           });            
-        });  
-        
-$(document).ready(function()
-        {           
+                position: { my: 'left top', at: 'right top', target: $('#tip_username') }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
+           });             
+           
            $('#frmregUserForm2-subdomain').qtip({
                 content: {
                              text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší internetové prezentace, proto jeho výběr pečlivě zvažte. <br /><br /> \n\
@@ -166,21 +149,7 @@ $(document).ready(function()
                              adresa jeho stránky bude tedy "richard.pokorny.mudrweb.cz".</span>',
                     width: '200'                    
                 },
-                position: {
-                    my: 'left top',
-                    at: 'right top',
-                    target: $('#tip_subdomain')
-                },
-                show: {
-                    event: 'mouseenter',
-                    ready: false                 
-                },
-                hide: {
-                    event: 'mouseleave'
-                },                
-                style: {
-                    classes: 'ui-tooltip-shadow ui-tooltip-blue'                    
-                }            
+                position: { my: 'left top', at: 'right top', target: $('#tip_subdomain') }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
            });            
         });        
     

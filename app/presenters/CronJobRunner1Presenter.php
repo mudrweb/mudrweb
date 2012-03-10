@@ -25,6 +25,7 @@ class CronJobRunner1Presenter extends BasePresenter
                     $dateFrom = date_format($user->dateFrom, 'Y-m-d');
                     if (($user->accountStatus == 'pending') && ($todaysDate >= $dateFrom)) {
                         $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'active');
+                        $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly activated. [cron]');
                     }
 
                     // check dateTo - set user's account status from active->inactive
@@ -33,8 +34,8 @@ class CronJobRunner1Presenter extends BasePresenter
 
                     // account deactivation START //////////////////////////////
                     if (($user->accountStatus == 'active') && ($dateToStopIt >= $dateTo)) {
-                        $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'inactive');
-
+                        $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'inactive');                       
+                        
                         if ($user) {
                             $user_data = $this->db_users->getUsersDataById(intval($user->id));
 
@@ -59,6 +60,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                     ->addTo($user_data->email)
                                     ->setHtmlBody($template)
                                     ->send();
+                            
+                            $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly deactivated. [cron]');
                         }
                     }
                     // account deactivation END ////////////////////////////////
@@ -96,6 +99,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                     ->send();
 
                             $this->db_users->updateAccDeactNotificationCounter(intval($user->id), 1);
+                            
+                            $this->logger->logMessage(ILogger::INFO, '>>> 1st notification for subodmain' . $user->subdomain . ' successfuly sent. [cron]');
                         }
                     }
 
@@ -131,6 +136,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                     ->send();
 
                             $this->db_users->updateAccDeactNotificationCounter(intval($user->id), 2);
+                            
+                            $this->logger->logMessage(ILogger::INFO, '>>> 2nd notification for subodmain' . $user->subdomain . ' successfuly sent. [cron]');
                         }
                     }
 
@@ -166,6 +173,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                     ->send();
 
                             $this->db_users->updateAccDeactNotificationCounter(intval($user->id), 3);
+                            
+                            $this->logger->logMessage(ILogger::INFO, '>>> 3rd notification for subodmain' . $user->subdomain . ' successfuly sent. [cron]');
                         }
                     }
                     // account deactivation END ////////////////////////////////
@@ -180,6 +189,8 @@ class CronJobRunner1Presenter extends BasePresenter
                         
                         // archive subomdain using ftp
                         $this->extraMethods->archiveSubdomain($user->subdomain);
+                        
+                        $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly archived. [cron]');
                     }
                 }
             }

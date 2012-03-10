@@ -41,11 +41,13 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
     // list of regions
     protected $regionsList;
     
+    protected $logger;
+    
     /**
      * Startup settings.
      */
     public function startup() {
-        parent::startup();                                         
+        parent::startup();                                                
         
         // ********************************************************************
         // Website settings start
@@ -79,6 +81,10 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         // ********************************************************************
         // Website settings end
         // ********************************************************************
+        
+        // logger
+        $this->logger = $this->getService('logger');    
+        $this->logger->logDir = WWW_DIR . '/log_cron';   
         
         // extra methods holder
         $this->extraMethods = new ExtraMethods;

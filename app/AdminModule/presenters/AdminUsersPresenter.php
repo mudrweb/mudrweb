@@ -127,17 +127,23 @@ class AdminUsersPresenter extends AdminPresenter {
                                 ->send();   
 
                         $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                        
+                        $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly activated. [manual]');
                     }
                 }
             } elseif ($newStatus == 'pending') {
                 // if archived, it cannot be changed manually via admin menu
                 if ($user->accountStatus != 'archive') {
                     $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                    
+                    $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly set to pending. [manual]');
                 }
             } elseif ($newStatus == 'inactive') {
                 // if archived, it cannot be changed manually via admin menu
                 if ($user->accountStatus != 'archive') {
-                    $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                    $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);   
+                    
+                    $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly deactivated. [manual]');
                 }
             } elseif ($newStatus == 'archive') {                
                 if ($user->accountStatus == 'inactive') {
@@ -146,6 +152,8 @@ class AdminUsersPresenter extends AdminPresenter {
                         // archive subomdain using ftp
                         $this->extraMethods->archiveSubdomain($user->subdomain);
                     }
+                    
+                    $this->logger->logMessage(ILogger::INFO, '>>> Subodmain' . $user->subdomain . ' successfuly archived. [manual]');
                 }                
             } else {                
             }

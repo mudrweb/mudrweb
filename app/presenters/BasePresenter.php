@@ -30,6 +30,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     // list of regions
     protected $regionsList;    
     
+    protected $logger;    
+    
     /**
      * Startup settings.
      */    
@@ -53,6 +55,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             'vysocina' => 'Vysočina',
             'zlinsky' => 'Zlínský'
         );        
+        
+        // logger
+        $this->logger = $this->getService('logger');    
+        $this->logger->logDir = WWW_DIR . '/log_cron';         
         
         // extra methods holder
         $this->extraMethods = new ExtraMethods;                                
