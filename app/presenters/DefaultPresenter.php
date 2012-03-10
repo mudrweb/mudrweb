@@ -19,10 +19,10 @@ class DefaultPresenter extends BasePresenter
     if (DOMAIN != 'main') {
             // get user by domain name
             $user = $this->db_users->getUserBySubdomain(DOMAIN);    
-            
+                        
             // if user exists get published menuItems
             if ($user) {
-                $menuItems = $this->db_menuItems->getPublishedMenuItemsByIdusers($user->id)->order('itemId');                                        
+                $menuItems = $this->db_menuItems->getPublishedMenuItemsBySubdomain(DOMAIN);                                        
                 $menuItemIndex = 1;
                 $menuItemsArray = array();
                 // get Id of first published menuItem                

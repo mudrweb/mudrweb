@@ -37,7 +37,7 @@ class MenuItemsManager extends Nette\Object {
      */
     public function getPublishedMenuItemsByIdusers($idusers) {
         if (is_numeric($idusers)) {
-            $menuItem = $this->database->query('SELECT id, itemId FROM menuItems WHERE idusers=? ORDER BY itemId ASC', $idusers)->fetchAll();                                             
+            $menuItems = $this->database->query('SELECT id, itemId FROM menuItems WHERE idusers=? ORDER BY itemId ASC', $idusers)->fetchAll();                                             
             return $menuItems;               
         } else {            
             throw new \Nette\Application\ToolException('Unable to get MenuItems.

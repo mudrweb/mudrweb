@@ -34,7 +34,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * Startup settings.
      */    
     public function startup() {
-        parent::startup();                     
+        parent::startup();                                    
         
         // list of regions
         $this->regionsList = array(
@@ -55,7 +55,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         );        
         
         // extra methods holder
-        $this->extraMethods = new ExtraMethods;        
+        $this->extraMethods = new ExtraMethods;                                
         
         // create DB driver to access db manager methods
         $this->db_users = $this->getService('usersmanager');
@@ -92,6 +92,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                         $this->setView('inactive');
                     }
                 }
+            } elseif ($user->accountStatus == 'archive') {
             }                        
             
             // if user exists set specific layout

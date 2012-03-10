@@ -174,8 +174,12 @@ class CronJobRunner1Presenter extends BasePresenter
                     // after 1 month of inactive status move from inactive->archive
                     $dateForArchivation = strtotime($dateTo);
                     $dateForArchivation = strtotime("+1 month", $dateForArchivation);
+                    $dateForArchivation = date('Y-m-d', $dateForArchivation);
                     if (($user->accountStatus == 'inactive') && ($todaysDate >= $dateForArchivation)) {
                         $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'archive');
+                        
+                        // archive subomdain using ftp
+                        $this->extraMethods->archiveSubdomain($user->subdomain);
                     }
                 }
             }

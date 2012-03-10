@@ -168,7 +168,8 @@ class ExtraMethods extends Nette\Object {
     }    
     
     /**
-     *
+     * Delete subdomain.
+     * 
      * @param string $subdomain
      * @return bool status
      */
@@ -297,5 +298,49 @@ class ExtraMethods extends Nette\Object {
             }
         }
         return $array;
-    }       
+    }
+    
+    /**
+     * Archive subdomain -> rename it to subdomain_archivationToken
+     * 
+     * @param string $subdomain
+     * @return bool status
+     */
+    public function archiveSubdomain($subdomain) {
+      //data
+      $paths = "";      
+      $ftp_server = "eam.hukot.cz";
+      $ftp_user_name = "mudrweb.cz";
+      $ftp_user_pass = "p40PL7yaX";            
+      
+      set_time_limit(80);      
+      // set up a connection to ftp server
+      $conn_id = ftp_connect($ftp_server);
+      // login with username and password
+      $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+      
+      // check connection and login result
+      if ((!$conn_id) || (!$login_result)) {
+             \Nette\Diagnostics\Debugger::log('FTP connection has encountered an error!'); 
+             ftp_quit($Connect);
+             exit;
+         } else {
+             \Nette\Diagnostics\Debugger::log('FTP connection was successful - archive subdomain!');                           
+      }          
+            
+      $fileList = ftp_nlist($conn_id, "/www");                 
+      
+      if (in_array('/www/' . $subdomain, $fileList)) {            
+          $archivationToken = $this->generatePassword();
+          if (ftp_rename($conn_id, '/www/' . $subdomain, '/www/' . $subdomain . '_' . $archivationToken)) {
+              \Nette\Diagnostics\Debugger::log('Subdomain: ' . $subdomain . ' was successfuly archived.');
+              return TRUE;
+          } else {
+              \Nette\Diagnostics\Debugger::log('Unable to archive Subdomain: ' . $subdomain);                                               
+              return FALSE;
+          }
+      }
+         
+      ftp_close($conn_id);        
+    }    
 }    

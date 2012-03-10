@@ -18,7 +18,7 @@ class RegistrationPresenter extends BasePresenter {
      */
     public function startup()
     {
-        parent::startup();                
+        parent::startup();             
     }
     
     /**

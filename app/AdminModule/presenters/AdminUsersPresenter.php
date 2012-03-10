@@ -142,6 +142,10 @@ class AdminUsersPresenter extends AdminPresenter {
             } elseif ($newStatus == 'archive') {                
                 if ($user->accountStatus == 'inactive') {
                     $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                    if ($user->accountStatus != 'archive') {
+                        // archive subomdain using ftp
+                        $this->extraMethods->archiveSubdomain($user->subdomain);
+                    }
                 }                
             } else {                
             }
