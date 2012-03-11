@@ -62,6 +62,8 @@ class SearchPresenter extends BasePresenter
 
 //        $form->getElementPrototype()->class('ajax');        
         
+        $form->addHidden('searchItems', null);        
+        
         $form->addText('searchInput', 'Hledaný výraz:', 30, 30)                
                 ->addRule(Form::FILLED, 'Musíte zadat hledaný výraz.')                
                 ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka hledaného výrazu jsou 3 znaky.', 3)                
@@ -71,7 +73,7 @@ class SearchPresenter extends BasePresenter
                 ->setAttribute('class', 'button')
                 ->onClick[] = callback($this, 'searchFor');               
 
-        $form->addProtection('Vypršel časový limit, odešlete prosím formulář znovu.', 900);               
+//        $form->addProtection('Vypršel časový limit, odešlete prosím formulář znovu.', 900);               
         
         return $form;        
     }     

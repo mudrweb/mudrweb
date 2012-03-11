@@ -293,5 +293,23 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .input_style_log { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 150px; border: 1px solid #000000;   
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 } 
-.td_input_search { padding-left: 0px; padding-bottom: 15px; width: 300px;}
-.search_h3_areas {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
+.td_input_search { padding-left: 0px; padding-bottom: 15px; width: 300px; }
+/*#areas { display: block; }
+.search_h3_areas { font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold; }*/
+/*#search_areas_list { display: inline; max-width: 500px; }*/
+/*.search_item { background-color: #003066; color: #eee; padding-top: 3px; padding-left: 6px; margin-bottom: 10px; margin-right: 6px; height: 20px; display: inline; overflow: hidden; min-width: 30px; 
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}*/
+
+#search_area_cell { display: none; }
+#search_area { max-width: 360px; min-height: 26px; background-color: #E4F4F5; float: left; padding-bottom: 10px; padding-top: 20px; }
+.search_areas_list { height: 2.3em; width: auto; display: block; }
+.search_areas_list li { background-color: #003066; color: #eee; list-style-type: none; float: left; padding-top: 3px; padding-left: 6px; margin-bottom: 10px; margin-right: 6px; height: 20px; min-width: 30px; 
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.search_item:hover { background-color: #0099CC; }
+.search_item_close { color: #000000; padding-left: 8px; padding-right: 5px; cursor: pointer; }

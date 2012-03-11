@@ -145,7 +145,7 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
 #colourSchemeId { display: none; }
 
 /* admin default settings - title */
-#title_help_click { vertical-align: top; cursor: hand; cursor: pointer;     }
+#title_help_click { vertical-align: top; cursor: hand; cursor: pointer; }
 #title_help { display: none; }
 .title_help_content { 
 /*    background: #6EADC2; */

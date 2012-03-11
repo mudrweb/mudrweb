@@ -196,22 +196,44 @@ browser.statusDir = function() {
     for (var i = 0, size = 0; i < this.files.length; i++)
         size += parseInt(this.files[i].size);
     size_real = size;
-    size = this.humanSize(size);    
-    
-    if (size_real > 52428800) {
-        document.getElementById("upload_mod").style.display = 'none';
-        $('#fileinfo').html(
-        'Počet souborů: ' +
-        this.files.length + ' ' + 
-        ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (50MB)!</span>');
+    size = this.humanSize(size);        
+
+    function oc(a)
+    {
+        var o = {};
+        for(var i=0;i<a.length;i++)
+        {
+            o[a[i]]='';
+        }
+        return o;
+    }
+    premiumUsers = ['/user_uploads/xa'];
+
+    // check if current user is in premuium users pool
+    if (this.uploadURL in oc(premiumUsers) == true) {    
+            size_left_real = 52428800 - size_real;
+            size_left = this.humanSize(size_left_real);
+            document.getElementById("upload_mod").style.display = 'block';
+            $('#fileinfo').html(
+            'Počet souborů: ' +
+            this.files.length + ' ' +         
+            ' (' + size + ') . <span style="color: green;">Kapacita Vaší stránky není omezena.</span>');
     } else {
-        size_left_real = 52428800 - size_real;
-        size_left = this.humanSize(size_left_real);
-        document.getElementById("upload_mod").style.display = 'block';
-        $('#fileinfo').html(
-        'Počet souborů: ' +
-        this.files.length + ' ' +         
-        ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
+        if (size_real > 52428800) {
+            document.getElementById("upload_mod").style.display = 'none';
+            $('#fileinfo').html(
+            'Počet souborů: ' +
+            this.files.length + ' ' + 
+            ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (50MB)!</span>');
+        } else {
+            size_left_real = 52428800 - size_real;
+            size_left = this.humanSize(size_left_real);
+            document.getElementById("upload_mod").style.display = 'block';
+            $('#fileinfo').html(
+            'Počet souborů: ' +
+            this.files.length + ' ' +         
+            ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
+        }        
     }
 };
 
