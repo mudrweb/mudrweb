@@ -1,17 +1,13 @@
 {block content}
-  <div id="main" class="container">  
        
-    <div id="search">
-    
-    <table width="840" border="0"><tr><td colspan="2">
+    <div id="search">    
+    <table width="840" border="0"><tr><td colspan="3">
       <div class="search_h1">Hledej</div>
       <div class="search_h2">Vyledávání internetových prezentací naších zákazníků</div> 
       <div class="separator"></div><br>
       </td></tr>
-      <tr><td valign="top" width="320">
-      
-        <div class="search_h3">Vyberte kraj</div> 
-        
+      <tr><td valign="top" width="320">      
+        <div class="search_h3">Vyberte kraj</div>         
         <div id="ma">
         <img src="../images/main/map/m.png" alt="mapka" usemap="#mapka" class="img_ma"/>
         <map name="mapka">
@@ -27,21 +23,15 @@
           <area onmousemove="mapa('10');" onmouseout="mapa('0');" onClick="prepareSearchData(1,10)" href="#" alt="Plzeňský kraj"        title="Plzeňský kraj"        shape="poly"   coords="48,111,53,100,55,90,54,81,56,73,42,66,23,73,19,80,30,95" />
           <area onmousemove="mapa('11');" onmouseout="mapa('0');" onClick="prepareSearchData(1,11)" href="#" alt="Středočeský kraj"     title="Středočeský kraj"     shape="poly"   coords="44,65,64,55,75,48,88,44,98,58,102,75,87,89,56,90,56,73" />
           <area onmousemove="mapa('12');" onmouseout="mapa('0');" onClick="prepareSearchData(1,12)" href="#" alt="Ústecký kraj"         title="Ústecký kraj"         shape="poly"   coords="44,63,40,55,36,52,47,44,74,32,76,30,77,32,71,42,75,47" />
-          <area onmousemove="mapa('13');" onmouseout="mapa('0');" onClick="prepareSearchData(1,13)" href="#" alt="Vysočina"             title="Vysočina"             shape="poly"   coords="123,108,127,86,102,76,86,90,88,100,104,107,105,114" />
+          <area onmousemove="mapa('13');" onmouseout="mapa('0');" onClick="prepareSearchData(1,13)" href="#" alt="Kraj Vysočina"             title="Kraj Vysočina"             shape="poly"   coords="123,108,127,86,102,76,86,90,88,100,104,107,105,114" />
           <area onmousemove="mapa('14');" onmouseout="mapa('0');" onClick="prepareSearchData(1,14)" href="#" alt="Zlínský kraj"         title="Zlínský kraj"         shape="poly"   coords="149,98,160,94,170,88,183,93,176,99,174,109,162,116,162,116" />
         </map>
         </div>
       
         {snippet formSearchForm}
         {form searchForm}        
-            <table cellspacing="0">               
-                <tr>                            
-
-                </tr>
-            </table>                      
-            
             <script language="javaScript" type="text/javascript">
-                var regions = ['', 'Praha', 'Jihočeský', 'Jihomoravský', 'Karlovarský', 'Královéhradecký', 'Liberecký', 'Moravskoslezský', 'Olomoucký', 'Pardubický', 'Plzeňský', 'Středočeský', 'Ústecký', 'Vysočina', 'Zlínský'];
+                var regions = ['', 'Hlavní město Praha', 'Jihočeský', 'Jihomoravský', 'Karlovarský', 'Královéhradecký', 'Liberecký', 'Moravskoslezský', 'Olomoucký', 'Pardubický', 'Plzeňský', 'Středočeský', 'Ústecký', 'Vysočina', 'Zlínský'];
                 
                 index = 0;
                 searchRegions = [''];
@@ -49,10 +39,9 @@
                 {
                     if (flag == 1) {
                         $('#search_area_cell').fadeIn(1000);
-                        if (regions[id] in oc(searchRegions) == false) { 
-    //                      $('#areas').fadeIn(1000);                  
+                        if (regions[id] in oc(searchRegions) == false) {                     
                             $('<li id="search_item_' + id + '" class="search_item"><span>' + regions[id] + '</span><span class="search_item_close" onClick="prepareSearchData(2,'+ id +')">x</span></li>').hide().appendTo($('.search_areas_list')).show("drop", { direction: "left" }, 400);
-                            searchRegions.push(regions[id]);
+                            searchRegions.push(regions[id]);                                                        
                             $('#frmsearchForm-searchItems').val(searchRegions);
                         }
                     } else if (flag == 2) {
@@ -77,7 +66,6 @@
             </script>                                     
         
             <table cellspacing="0">          
-<!--                <tr class="tr_reg_height5"><td></td></tr>-->
                     <tr>                            
                         <td class="td_input_search"><div class="search_h3">a zadejte hledaný výraz:</div>{input searchInput} &nbsp; {input submit}</td>
                     </tr>    
@@ -86,35 +74,89 @@
         {/form searchForm} 
         {/snippet}         
               
-      </td>
-      <td valign="top" width="360" id="search_area_cell">
+        </td>
+        <td valign="top" id="search_area_cell">
           <div id="search_area">        
               <ul class="search_areas_list"></ul>                
           </div>
-      </td>
-      <td valign="top">
-        <div class="search_im">
-            <img src="../images/main/man_search.png"  alt="MUDRweb.cz - Místo pro Váš web" width="150" />
-        </div>
-      </td></tr>
-        <tr><td colspan="2"><div class="separator"></div><br>
-      </td></tr>      
-    </table>                  
-    
+        </td><td valign="top">
+            <div class="search_im">
+                <img src="../images/main/man_search.png"  alt="MUDRweb.cz - Místo pro Váš web" width="150" />
+            </div>
+        </td></tr><tr><td colspan="3">
+            <div class="separator"></div><br>
+        </td></tr>      
+    </table>                      
     </div>
-
-  </div>    
                          
 <div class="clear">&nbsp;</div>
 
 {snippet list}
+<div id="search_results_area">    
     {if $data}
-        {control paginator}    
-            {foreach $data as $dat}
-                <div>{$dat}</div>
+<!--        { if $countQuestions >= 5}         
+            <div id="paginate">
+                { control paginator}
+            </div>            
+            <div class="separator_search"></div>
+        { else}
+            <table cellspacing="0">                
+                <tr style="height: 15px;"><td></td></tr>
+            </table>
+        { /if}-->
+    
+            <div class="container">
+                <div class="grid_search_l"> 
+                    <span id="searchedForCaption">Hledaný výraz</span>
+                    <span id="searchedFor">
+                        {$stringToSearchFor}    
+                    </span>
+                    <img src="../images/main/man_search_result.png"  alt="MUDRweb.cz - Místo pro Váš web" width="190" />
+                </div>
+                <div class="grid_search_r"> 
+                {foreach $data as $dat}
+                    <div class="search_results">
+                        <div class="search_result">
+                            <span class="credents">{$dat[0]} {$dat[1]} {$dat[2]}, {$dat[3]}</span> - <a href='http://{$dat[9]}.mudrweb.cz' target="_blank">{$dat[9]}.mudrweb.cz</a>
+                            <br />
+                            {if $dat[7] == 'Hlavní město Praha'}
+                                {$dat[5]}, {$dat[6]}, Hlavní město Praha
+                            {elseif $dat[7] == 'Vysočina'}
+                                {$dat[5]}, {$dat[6]}, Kraj {$dat[7]}
+                            {else}
+                                {$dat[5]}, {$dat[6]}, {$dat[7]} kraj
+                            {/if}
+                            <br />
+                        </div>
+                    </div>
+                    <br />
+                {/foreach}     
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+    
+            <div class="separator_search"></div>            
+            
+        {if $countQuestions >= 5}
+            <div id="paginate_bottom">
+                {control paginator}
+            </div>               
+        {/if}                 
+    {else}
+        {if $isNotFirstSearch}
+            <div id="paginate">
+                Litujeme, ale nebyly nalezeny žádné prezentace které by obsahovali slovo <strong>{$stringToSearchFor}</strong>.
                 <br />
-            {/foreach}
-    {/if}
+                Zkuste prosím vyhledáváni zopakovat s jiným výrazem.
+                <br /><br />
+                Při vyhledávaní podle spojení, například jména a příjmení, zadejte prosím samostatně jen jméno nebo příjmení (např. 
+                pokud chcete hledat osobu "Richard Pokorný" a vyhledávání se nezdařilo, zadejte jen "Richard" nebo jen "Pokorný").
+            </div>            
+            <div class="separator_search"></div>   
+        {else}            
+        {/if}
+    {/if}      
+</div>
 {/snippet}
 
 {/block}

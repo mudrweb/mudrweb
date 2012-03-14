@@ -49,7 +49,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             'olomoucky' => 'Olomoucký',
             'pardubicky' => 'Pardubický',
             'plzensky' => 'Plzeňský',
-            'praha' => 'Praha',
+            'praha' => 'Hlavní město Praha',
             'stredocesky' => 'Středočeský',
             'ustecky' => 'Ústecký',
             'vysocina' => 'Vysočina',

@@ -545,4 +545,20 @@ class UsersManager extends Nette\Object {
                     Wrong input. method: getLayoutsBylayoutGroup($group)', 500);
         }         
     }    
+    
+    /**
+     * Search for data according to user input (conditions included in query string).
+     * 
+     * @param query string $queryString
+     * @throws \Nette\Application\ToolException 
+     */
+    public function searchForSomething($queryString) {
+        if (isset($queryString)) {               
+            $results = $this->database->query($queryString)->fetchAll();
+            return $results;
+        } else {            
+            throw new \Nette\Application\ToolException('Unable to perform search procedure.
+                    Wrong input. method: searchForSomething($queryString)', 500);
+        }             
+    }
 }

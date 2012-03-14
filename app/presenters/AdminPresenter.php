@@ -228,7 +228,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         // users' admin part
         if ($menuItems) {
             if ($this->user->isLoggedIn() && $this->checkAccess(array('uživatel'), TRUE)) {                
-                $sec = $nav->add("Nastavení stránky", $this->link(":Admin:Default:"), 'yes');
+                $sec = $nav->add("Nastavení stránky", $this->link(":Admin:Default:"), 'no');
                 if ($this->name === 'Admin:Default') {
                     $nav->setCurrent($sec);
                 }
