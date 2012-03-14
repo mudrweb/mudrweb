@@ -37,12 +37,13 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
 .green { color:#3CE01B; }
 .gray { color:gray; }
 .noborder { border-style: none; }
+* :focus { outline: 0; }
 
 #wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px;}
 .container { margin-left: auto; margin-right: auto; width: 920px; }
 .grid_header_l { display: inline; float: left; margin-left: 10px; }
 .grid_header_r { display: inline; float: right; margin-right: 10px  }
-.grid_content { display:i nline; float: left; margin-left: 10px; margin-right: auto; width: 900px }
+.grid_content { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 900px }
 /* login start */
 .grid_content_log { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 900px; }
 .grid_content_log_l { display: inline; float: left; margin-left: 10px; }
@@ -330,8 +331,8 @@ a.f_password:hover {text-decoration: underline; color: black;}
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-}
-a.isPublished { background-color: #E4F4F5; color: #000; font-weight: bold; padding: 6px 6px 6px; height: 20px;
+}/*E4F4F5*/
+a.isPublished { background-color: #B8EDB2; color: #000; font-weight: bold; padding: 6px 6px 6px; height: 20px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;        

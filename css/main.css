@@ -32,10 +32,10 @@ strong { font-weight: bold; }
 #header a { color: #eee; text-decoration: none; }
 #header a:hover { text-decoration: underline; }
 #header span { color: #eee; }
-#header hr {color: #003366;}
-.grid_header_l{display:inline;float:left;margin-left:10px;}
-.grid_header_r{display:inline;float:right;margin-right:10px}
-.grid_content{display:inline;float:left;margin-left:10px;margin-right:auto;width:900px}
+#header hr {color: #003366; }
+.grid_header_l{display:inline;float:left;margin-left:10px; }
+.grid_header_r{display:inline;float:right;margin-right:10px; }
+.grid_content{display:inline;float:left;margin-left:10px;margin-right:auto;width:900px; }
 a.login span { background-image: url('images/ui-icons_eeeeee_256x240.png'); background-position: -112px -128px; float: left; margin: 1px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }
 a.login:hover span { background-image: url('images/ui-icons_222222_256x240.png'); background-position: -112px -128px; float: left; margin: 1px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }
 a.registration span { background-image: url('images/ui-icons_eeeeee_256x240.png'); background-position: -64px -112px; float: left; margin: 1px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: inline-block; overflow: hidden; }
@@ -50,7 +50,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
                  -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
 
 /*header in main*/
-.main_header_container  {margin-left:auto; margin-right:auto; width:880px;}
+.main_header_container {margin-left:auto; margin-right:auto; width:880px;}
 .grid_main_header_l{display:inline;float:left; margin:10px 0px 0px 0px;}
 .grid_main_header_r{display:inline;float:right; margin:10px 20px 0px 0px;}
 .grid_main_content{display:inline;float:left;margin-left:10px;margin-right:auto;width:900px}
@@ -235,7 +235,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
  */
 #terms{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
 .terms_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
-.terms_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: normal;}
+.terms_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
 .terms_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;} 
 
 /**
@@ -282,28 +282,19 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 /**
  * SEARCH
  */      
-#search{width: 835px; padding: 0px 0px 10px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px;}
-.search_h0 {font-family: Arial, sans-serif; color: #003066; font-size: 16px; font-weight: normal;}
-.search_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
-.search_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
-.search_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
-.search_im {margin-left: 40px;} 
+#search{ width: 835px; padding: 0px 0px 0px 10px; text-align:justify; font-family: Arial, sans-serif; color: #000; font-size: 12px; }
+.search_h0 { font-family: Arial, sans-serif; color: #003066; font-size: 16px; font-weight: normal; }
+.search_h1 { font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold; }
+.search_h2 { font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold; }
+.search_h3 { font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold; }
+.search_im { margin-left: 40px; }  
 .img_ma { border: 0px none; padding: 0px; margin: 0px; }
 #ma { padding: 0px; background: #009ACD url(../images/main/map/poz.gif) top left no-repeat; width: 200px; font-size: 1px; }
 .input_style_log { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 150px; border: 1px solid #000000;   
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 } 
 .td_input_search { padding-left: 0px; padding-bottom: 15px; width: 300px; }
-/*#areas { display: block; }
-.search_h3_areas { font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold; }*/
-/*#search_areas_list { display: inline; max-width: 500px; }*/
-/*.search_item { background-color: #003066; color: #eee; padding-top: 3px; padding-left: 6px; margin-bottom: 10px; margin-right: 6px; height: 20px; display: inline; overflow: hidden; min-width: 30px; 
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-}*/
-
-#search_area_cell { display: none; }
+#search_area_cell { display: none; width: 360px; max-width: 360px; }
 #search_area { max-width: 360px; min-height: 26px; background-color: #E4F4F5; float: left; padding-bottom: 10px; padding-top: 20px; }
 .search_areas_list { height: 2.3em; width: auto; display: block; }
 .search_areas_list li { background-color: #003066; color: #eee; list-style-type: none; float: left; padding-top: 3px; padding-left: 6px; margin-bottom: 10px; margin-right: 6px; height: 20px; min-width: 30px; 
@@ -313,3 +304,26 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 }
 .search_item:hover { background-color: #0099CC; }
 .search_item_close { color: #000000; padding-left: 8px; padding-right: 5px; cursor: pointer; }
+#paginate { text-align: left; padding-bottom: 17px; padding-top: 1px; width: 500px; padding-left: 180px; }
+#paginate_bottom { text-align: center; padding-top: 7px; padding-bottom: 0px; }
+#search_results_area { padding-left: 12px; }
+#search_results_area .paginator { margin: 1em 0; font-size: 90%; }
+#search_results_area .paginator a, .paginator span { background-color:#F3F3F3; border:2px solid #D1D1D1; color:#767A7C; cursor:pointer; display:inline; font-weight: bold; margin:0px; padding:6px 6px;
+        -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 2px 6px; -webkit-box-shadow: rgba(200,200,200,1) 0 2px 6px;
+}
+#search_results_area .paginator a { border: 1px solid #756C6E; text-decoration: none; color: #000000; }
+#search_results_area .paginator span.buttonLast { border: 1px solid #CFCACB; }
+#search_results_area .paginator span.buttonFirst { border: 1px solid #CFCACB; }
+#search_results_area .paginator .current { background: #000000; border: 1px solid #000000; color: white; font-weight: bold; }
+.separator_search { border-bottom: 1px dotted #003066; margin: 0px 33px 10px 1px; }
+
+#search_results_area .search_results .search_result { background: rgba(254,254,254,100); border: 1px solid rgba(0,0,0,0.35); font-size: 12px; min-height: 40px; padding: 10px; width: 570px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;    
+    border-radius: 5px;
+}
+.grid_search_l{ display: inline; float: left; margin-left: 10px; }
+.grid_search_r{ display: inline; float: right; margin-right: 85px; }
+#searchedForCaption { font-family: Arial; font-size: 14px; font-weight: bold; word-wrap: break-word; position: absolute; top: 644px; left: 325px; }
+#searchedFor { text-align: center; color: #0099CC; font-weight: bold; word-wrap: break-word; position: absolute; top: 665px; left: 310px; width: 130px; }
+.credents { color: #003066; font-weight: bold; }
