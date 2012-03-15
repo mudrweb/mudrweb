@@ -39,7 +39,15 @@
                     {form regUserForm3}  
                     <table cellspacing="0" width="530">
                         <tr class="tr_reg_final_rev">
-                            <td class="td_input_confirm_rev_0">Zvolený program:</td><td class="td_input_confirm_rev">{$program}</td>
+                            <td class="td_input_confirm_rev_0">Zvolený program:</td><td class="td_input_confirm_rev">
+                                {if $program == 'demo'}
+                                    DEMOverze
+                                {elseif $program == 'basic'}
+                                    Základní verze
+                                {elseif $program == 'premium'}
+                                    Premium verze
+                                {/if}
+                            </td>
                         </tr>
                         <tr class="tr_reg_height5"><td></td></tr>
                         <tr class="tr_reg_final_rev">

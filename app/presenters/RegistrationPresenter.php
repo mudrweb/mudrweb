@@ -73,6 +73,7 @@ class RegistrationPresenter extends BasePresenter {
         
         $subdomainsArray = array();
         foreach ($users as $user) {
+            if ($user->accountStatus != 'archive')
             $subdomainsArray[] = $user->subdomain;
         }
         
@@ -100,7 +101,8 @@ class RegistrationPresenter extends BasePresenter {
         
         $form->addRadioList('program', '', array(
                 'demo' => 'DEMOverze - 3 měsíce - ZDARMA',
-                'basic' => 'Základní verze - 1 rok - 1000 Kč',
+                'basic' => 'Základní verze - 1 rok - 990 Kč',
+                'premium' => 'Premium verze - 1 rok - 1100 Kč',
                 ))
                 ->setDefaultValue('demo')
                 ->setAttribute('class', 'programs');
@@ -303,8 +305,8 @@ class RegistrationPresenter extends BasePresenter {
             } else {
                 $this->flashMessage('Zadané referenční číslo je neplatné!', 'warning');
             }
-        } else {
-            $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                        
+        } else {                
+            $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                         
         }       
     }      
     
@@ -391,6 +393,8 @@ class RegistrationPresenter extends BasePresenter {
             $template->program = 'DEMOverze';
         } elseif ($section->program == 'basic') {
             $template->program = 'Základní verze';
+        } elseif ($section->program == 'premium') {
+            $template->program = 'Premium verze';
         }
         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
         $template->token = 'rc' . $user->registrationToken;
@@ -481,7 +485,7 @@ class RegistrationPresenter extends BasePresenter {
         if ($flag == 'username') {
             // get all usernames 
             $usernamesArray = array();
-            foreach ($users as $user) {
+            foreach ($users as $user) {                
                 $usernamesArray[] = $user->username;
             }
 
@@ -498,6 +502,7 @@ class RegistrationPresenter extends BasePresenter {
             // get all subdomains 
             $subdomainsArray = array();
             foreach ($users as $user) {
+                if ($user->accountStatus != 'archive')
                 $subdomainsArray[] = $user->subdomain;
             }
 

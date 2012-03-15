@@ -25,30 +25,6 @@ class SearchPresenter extends BasePresenter
      * renderDefault for search presenter. 
      */        
     public function renderDefault() {
-//        // paginator setup        
-//        $paginator = $this['paginator']->getPaginator();    
-//        $this->template->countQuestions = 6;
-//        $paginator->itemCount = 6;
-        
-//        $dataBuffer = array(
-//            '0' => 'test0',
-//            '1' => 'test1',
-//            '2' => 'test2',
-//            '3' => 'test3',
-////            '4' => 'test4',
-////            '5' => 'test5',
-//        );
-                
-//        $index = 0;
-//        // number of items from DB >= number of items per page
-//        if (count($dataBuffer) < $paginator->itemsPerPage) {
-//            $paginator->itemsPerPage = count($dataBuffer);
-//        }
-//        for ($i = $paginator->offset; $i < $paginator->offset + $paginator->itemsPerPage; $i++) {
-//            $data[$index] = $dataBuffer[$i];
-//            $index++;
-//        }
-//
         $this->template->data = $this->searchResultsForUser;                
         $this->template->isNotFirstSearch = $this->isNotFirstSearch;
         $this->invalidateControl();

@@ -72,6 +72,7 @@ class AdminDefaultPresenter extends AdminPresenter {
         
         $subdomainsArray = array();
         foreach ($users as $user) {
+            if ($user->accountStatus != 'archive')
             $subdomainsArray[] = $user->subdomain;
         }
         
@@ -183,7 +184,8 @@ class AdminDefaultPresenter extends AdminPresenter {
         
         $form->addRadioList('program', 'Program:', array(
                 'demo' => 'DEMOverze - 3 měsíce - ZDARMA',
-                'basic' => 'Základní verze - 1 rok - 1000 Kč',
+                'basic' => 'Základní verze - 1 rok - 990 Kč',
+                'premium' => 'Premium verze - 1 rok - 1100 Kč',
                 ))
                 ->setDefaultValue('demo')
                 ->setAttribute('class', 'programs');        
@@ -349,8 +351,7 @@ class AdminDefaultPresenter extends AdminPresenter {
         if ($flag == 'username') {
             // get all usernames 
             $usernamesArray = array();
-            foreach ($users as $user) {
-                if ($user->accountStatus != 'archive')
+            foreach ($users as $user) {                
                 $usernamesArray[] = $user->username;
             }
 
@@ -367,6 +368,7 @@ class AdminDefaultPresenter extends AdminPresenter {
             // get all subdomains 
             $subdomainsArray = array();
             foreach ($users as $user) {
+                if ($user->accountStatus != 'archive')
                 $subdomainsArray[] = $user->subdomain;
             }
 
