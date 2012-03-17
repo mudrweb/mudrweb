@@ -58,8 +58,6 @@ class SearchPresenter extends BasePresenter
                 ->setAttribute('class', 'button')
                 ->onClick[] = callback($this, 'searchFor');               
         
-        // getElementPrototype()->onsubmit('alert("asdf");');
-        
         return $form;        
     }     
 
