@@ -291,7 +291,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .search_h3 { font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold; }
 .search_im { margin-left: 40px; }  
 .img_ma { border: 0px none; padding: 0px; margin: 0px; }
-#ma { cursor: pointer; padding: 0px; background: #009ACD url(../images/main/map/poz.gif) top left no-repeat; width: 200px; font-size: 1px; }
+#ma { padding: 0px; background: #009ACD url(../images/main/map/poz.gif) top left no-repeat; width: 200px; font-size: 1px; }
 .input_style_log { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 150px; border: 1px solid #000000;   
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 } 

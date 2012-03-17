@@ -58,6 +58,8 @@ class SearchPresenter extends BasePresenter
                 ->setAttribute('class', 'button')
                 ->onClick[] = callback($this, 'searchFor');               
         
+        // getElementPrototype()->onsubmit('alert("asdf");');
+        
         return $form;        
     }     
 
@@ -74,6 +76,8 @@ class SearchPresenter extends BasePresenter
         $inputItems = $data->searchItems;        
         $dbInputs = explode(',', $inputItems);        
         unset($dbInputs[0]);               
+        
+        \Nette\Diagnostics\Debugger::firelog($dbInputs);
         
         // user selected some region/s
         if (count($dbInputs) > 0) {
@@ -110,41 +114,46 @@ class SearchPresenter extends BasePresenter
 
             $dbQuery = "SELECT id FROM users WHERE " . $conditions;
             $results1 = $this->db_users->searchForSomething($dbQuery);              
-            
+                       
             $resultsFromUsersTable = array();
             foreach ($results1 as $result1) {
                 $resultsFromUsersTable[] = $result1[0];
             }
             
-            // arrays merging
-            $serachResults = array_merge($resultsFromUsersDataTable, $resultsFromUsersTable);           
-            
-            // paginator setup
-            $paginator = $this['paginator']->getPaginator();
-            $numberOfResults = count($serachResults);
-            $this->template->countQuestions = $numberOfResults;
-            $paginator->itemCount = $numberOfResults;                       
-            
-            // number of items from DB < number of items per page ? update paginator
-            if ($numberOfResults < $paginator->itemsPerPage) {
-                $paginator->itemsPerPage = $numberOfResults;
-            }
-            
-            // process search results to get data to be displayed to user as result
-            $searchResultsPostProcessing = array();
-            foreach ($serachResults as $serachResult) {
-                $user = $this->db_users->getUserById(intval($serachResult));
-                $users_data = $this->db_users->getUsersDataById(intval($serachResult));
-                if ($user && $users_data) {
-                    $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
-                            $users_data->surname, $users_data->titleAfter, $users_data->email, 
-                            $users_data->street, $users_data->city, $this->regionsList[$users_data->region],
-                            $users_data->phone, $user->subdomain);
+            // arrays merging and removing duplicities
+            // primary is finding by region; if the result == null, than cancel the process
+            if ($resultsFromUsersDataTable) {
+                $serachResults = array_unique(array_merge($resultsFromUsersDataTable, $resultsFromUsersTable));           
+           
+                // paginator setup
+                $paginator = $this['paginator']->getPaginator();
+                $numberOfResults = count($serachResults);
+                $this->template->countQuestions = $numberOfResults;
+                $paginator->itemCount = $numberOfResults;                       
+
+                // number of items from DB < number of items per page ? update paginator
+                if ($numberOfResults < $paginator->itemsPerPage) {
+                    $paginator->itemsPerPage = $numberOfResults;
                 }
-            }            
-            
-            $this->searchResultsForUser = $searchResultsPostProcessing;
-            $this->invalidateControl();            
+
+                // process search results to get data to be displayed to user as result
+                $searchResultsPostProcessing = array();
+                foreach ($serachResults as $serachResult) {
+                    $user = $this->db_users->getUserById(intval($serachResult));
+                    $users_data = $this->db_users->getUsersDataById(intval($serachResult));
+                    if ($user && $users_data) {                    
+                        $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
+                                $users_data->surname, $users_data->titleAfter, $users_data->email, 
+                                $users_data->street, $users_data->city, $this->regionsList[$users_data->region],
+                                $users_data->phone, $user->subdomain);
+                    }
+                }            
+
+                $this->searchResultsForUser = $searchResultsPostProcessing;
+                $this->invalidateControl();           
+            } else {
+                $this->searchResultsForUser = null;
+            }                
         } else {
             //---------------------- prepare query to search in users_data table
             $index = 1;
@@ -175,8 +184,8 @@ class SearchPresenter extends BasePresenter
                 $resultsFromUsersTable[] = $result1[0];
             }
             
-            // arrays merging
-            $serachResults = array_merge($resultsFromUsersDataTable, $resultsFromUsersTable);           
+            // arrays merging and removing duplicities
+            $serachResults = array_unique(array_merge($resultsFromUsersDataTable, $resultsFromUsersTable));                                             
             
             // paginator setup
             $paginator = $this['paginator']->getPaginator();

@@ -389,7 +389,7 @@ class UsersManager extends Nette\Object {
                'street' => $dataArray[6],                
                'city' => $dataArray[7],                
                'zip' => $dataArray[8],  
-               'zip' => $dataArray[9],  
+               'region' => $dataArray[9],  
                'phone' => $dataArray[10]                
             ));                 
         } else {            
