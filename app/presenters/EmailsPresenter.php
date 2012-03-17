@@ -28,7 +28,10 @@ class EmailsPresenter extends BasePresenter
                     $this->template->program = 'DEMOverze';
                 } elseif ($user->program == 'basic') {
                     $this->template->program = 'Základní verze';
+                } elseif ($user->program == 'premium') {
+                    $this->template->program = 'Premium verze';
                 }
+                
                 $this->template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                
                 $this->setView('reg_user_done');
             } else {
@@ -43,7 +46,10 @@ class EmailsPresenter extends BasePresenter
                     $this->template->program = 'DEMOverze';
                 } elseif ($user->program == 'basic') {
                     $this->template->program = 'Základní verze';
+                } elseif ($user->program == 'premium') {
+                    $this->template->program = 'Premium verze';
                 }
+                
                 $this->template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                 $this->template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                 $this->template->subdomain_name = $user->subdomain . '.mudrweb.cz';
@@ -60,11 +66,17 @@ class EmailsPresenter extends BasePresenter
                     $this->template->program = 'DEMOverze';
                 } elseif ($user->program == 'basic') {
                     $this->template->program = 'Základní verze';
+                } elseif ($user->program == 'premium') {
+                    $this->template->program = 'Premium verze';
                 }
 
                 $this->template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                 $this->template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                
                 $this->template->subdomain_name = $user->subdomain . '.mudrweb.cz';
+                $renewTo = strtotime($user->dateTo);
+                $renewTo = strtotime("+1 month", $renewTo);
+                $renewTo = date('d.m.Y', $renewTo);                
+                $this->template->renewTo = $renewTo;                
                 $this->setView('acc_inactive');
             } else {
                 $this->redirect('Default:default');
@@ -78,12 +90,18 @@ class EmailsPresenter extends BasePresenter
                     $this->template->program = 'DEMOverze';
                 } elseif ($user->program == 'basic') {
                     $this->template->program = 'Základní verze';
+                } elseif ($user->program == 'premium') {
+                    $this->template->program = 'Premium verze';
                 }
 
                 $this->template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                 $this->template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                 $this->template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                 $this->template->validTo = date_format($user->dateTo, 'd.m.Y');
+                $renewTo = strtotime($user->dateTo);
+                $renewTo = strtotime("+1 month", $renewTo);
+                $renewTo = date('d.m.Y', $renewTo);                
+                $this->template->renewTo = $renewTo;
                 $this->setView('acc_notify1');
             } else {
                 $this->redirect('Default:default');

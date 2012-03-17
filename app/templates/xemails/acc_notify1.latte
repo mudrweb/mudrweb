@@ -84,38 +84,56 @@
                         <tr>
                             <!--LEFT COLUMN CONTENT-->
                             <td width="337" valign="top" style="font-family:Verdana, Arial; font-size:12px; padding-left:10px; padding-right:10px;">                                
-                                Dobrý den,<br/><br />
+                                Vážená paní doktorko/Vážený pane doktore,<br/><br />
                                 
                                 {if $program=='DEMOverze'}                                                                
-                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>DEMOverzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
+                                rádi bychom Vás informovali o blížícím se vypršení platnosti Vaší stránky <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
                                 ke kterému dojde dne <b>{$validTo}</b>.
                                 <br />
                                 (Vygenerováno na základě Vaší objednávky na vytvoření <b>DEMOverze</b> stránky ze dne <b>{$dateOfReg}</b>,
                                 s dobou platnosti 3 měsíce.)
+                                <br /><br />
+                                Stránku lze opět aktivovat přechodem na placenou verzi programu. Po aktivaci do <b>{$renewTo}</b>
+                                bude obnoven původní vzhled včetně všech textů, který byl vytvořen ve zkušební DEMOverzi.                                
                                 <br /><br />
                                 Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
                                 V případě zájmu o přechod na jeden z našich placených programů nás neváhejte kontaktovat na 
                                 adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
                                 777 861 159 (Po - Pá: 18:00 - 22:00).
                                 <br />
-                                Těšíme se na další společnou spolupráci.
+                                Těšíme se na další spolupráci.
                                 <br /><br />
-                                {elseif $program=='basic'}
-                                chceme Vás informovat o blížícím se vypršení platnosti Vašeho účtu pro <b>Základní verzi stránky</b> <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
+                                {elseif $program=='Základní verze'}
+                                rádi bychom Vás informovali o blížícím se vypršení platnosti Vaší stránky <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
                                 ke kterému dojde dne <b>{$validTo}</b>.
                                 <br />
                                 (Vygenerováno na základě Vaší objednávky na vytvoření <b>Základní verze</b> stránky ze dne <b>{$dateOfReg}</b>.
                                 s dobou platnosti 1 rok.)
-                                <br /><br />
+                                <br /><br />                         
                                 Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
                                 V případě zájmu o prodloužení platnosti aktuálního programu nebo o přechod na 
                                 jiný program z našeho portfolia nás neváhejte kontaktovat na 
                                 adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
                                 777 861 159 (Po - Pá: 18:00 - 22:00).
                                 <br />
-                                Těšíme se na další společnou spolupráci.
+                                Těšíme se na další spolupráci.
                                 <br /><br />                                
-                                {/if}                                                                                                
+                                {elseif $program=='Premium verze'}                                
+                                rádi bychom Vás informovali o blížícím se vypršení platnosti Vaší stránky <a href={$subdomain} target="_blank">{$subdomain_name}</a>,
+                                ke kterému dojde dne <b>{$validTo}</b>.
+                                <br />
+                                (Vygenerováno na základě Vaší objednávky na vytvoření <b>Základní verze</b> stránky ze dne <b>{$dateOfReg}</b>.
+                                s dobou platnosti 1 rok.)
+                                <br /><br />                             
+                                Děkujeme za Váš zájem o využívání našich služeb a pevně věříme, že jste byli spokojeni. 
+                                V případě zájmu o prodloužení platnosti aktuálního programu nebo o přechod na 
+                                jiný program z našeho portfolia nás neváhejte kontaktovat na 
+                                adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle
+                                777 861 159 (Po - Pá: 18:00 - 22:00).
+                                <br />
+                                Těšíme se na další spolupráci.
+                                <br /><br />                                     
+                                {/if}                                    
                                 S pozdravem
                                 <br /><br />
                                 Váš MUDRweb tým

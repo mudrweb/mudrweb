@@ -48,11 +48,17 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
+                            }  elseif ($user->program == 'premium') {
+                                $this->template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                             $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                             $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
+                            $renewTo = strtotime($user->dateTo);
+                            $renewTo = strtotime("+1 month", $renewTo);
+                            $renewTo = date('d.m.Y', $renewTo);                
+                            $this->template->renewTo = $renewTo;                            
                             $template->token = 'ad' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
@@ -84,12 +90,18 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
+                            }  elseif ($user->program == 'premium') {
+                                $this->template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                             $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                             $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                             $template->validTo = date_format($user->dateTo, 'd.m.Y');
+                            $renewTo = strtotime($user->dateTo);
+                            $renewTo = strtotime("+1 month", $renewTo);
+                            $renewTo = date('d.m.Y', $renewTo);                
+                            $this->template->renewTo = $renewTo;                            
                             $template->token = 'an' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
@@ -121,12 +133,18 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
+                            }  elseif ($user->program == 'premium') {
+                                $this->template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                             $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                             $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                             $template->validTo = date_format($user->dateTo, 'd.m.Y');
+                            $renewTo = strtotime($user->dateTo);
+                            $renewTo = strtotime("+1 month", $renewTo);
+                            $renewTo = date('d.m.Y', $renewTo);                
+                            $this->template->renewTo = $renewTo;                            
                             $template->token = 'an' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
@@ -158,12 +176,18 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
+                            }  elseif ($user->program == 'premium') {
+                                $this->template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                             $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                             $template->subdomain_name = $user->subdomain . '.mudrweb.cz';
                             $template->validTo = date_format($user->dateTo, 'd.m.Y');
+                            $renewTo = strtotime($user->dateTo);
+                            $renewTo = strtotime("+1 month", $renewTo);
+                            $renewTo = date('d.m.Y', $renewTo);                
+                            $this->template->renewTo = $renewTo;                            
                             $template->token = 'an' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
