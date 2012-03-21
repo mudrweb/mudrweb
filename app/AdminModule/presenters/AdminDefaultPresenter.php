@@ -305,7 +305,7 @@ class AdminDefaultPresenter extends AdminPresenter {
 
             //3. users_websiteData
             $layout = $this->db_users->getLayoutById($data->layouts);
-            $dataArray_users_websiteData = array($user->id, $layout->layout, $layout->layout_group,
+            $dataArray_users_websiteData = array($user->id, $layout->layout, 'all',
                 $data->header1, $data->header2, $data->pageTitle, $data->description,
                 $data->keywords);
             $this->db_users->addUserWebsiteData($dataArray_users_websiteData);

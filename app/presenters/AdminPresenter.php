@@ -72,9 +72,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         
         // define basic layout groups
         $this->layout_groups = array(
-            'kardio', 
-            'gyneko', 
-            'opto'
+            'all'
         );
         sort($this->layout_groups);
         
@@ -144,7 +142,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
             // get user specific layout
             $userWebsitedataFromDB = $this->db_users->getUserWebsiteDataById($this->user->getId());
             if ($userWebsitedataFromDB) {
-                $this->template->pathToEditorCSS = $userWebsitedataFromDB->layout . '/' . $userWebsitedataFromDB->layout . '_editor.css';                
+                $this->template->pathToEditorCSS = 'layouts/' . $userWebsitedataFromDB->layout . '_editor.css';                
             } else {
                 $this->template->pathToEditorCSS = 'editor.css';
             }
@@ -313,10 +311,9 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
      */
     public function listLayouts($usersid) {
         if (is_numeric($usersid)) {
-            $user = $this->db_users->getUserById($usersid);
-            $user_data = $this->db_users->getUserWebsiteDataById($usersid);
+            $user = $this->db_users->getUserById($usersid);            
             // get and process layouts
-            $layouts = $this->db_users->getLayouts($user_data->layout_group, $user->subdomain);
+            $layouts = $this->db_users->getLayouts('all', $user->subdomain);
             $layoutsArray = array();
             if ($layouts) {
                 foreach ($layouts as $layout) {

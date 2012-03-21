@@ -1,0 +1,53 @@
+/**
+ * Basic
+ */
+
+* { margin: 0;}
+html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; height: 100%; }
+
+/**
+ * Topspace
+ */
+#topspace { width: 850px; height: 10px; margin-left:auto; margin-right:auto;  padding: 5px 5px 5px 5px;}
+
+/**
+ * Main Box
+ */
+#wrapper {margin-top: 10px; margin-bottom: 10px; width:870px; margin-left:auto; margin-right:auto; padding: 10px 10px 10px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
+
+/**
+ * Header
+ */
+#header { width: 850px; height: 100px; margin-left:auto; margin-right:auto; padding: 5px 5px 5px 5px;background-image: url('../../images/layouts/header.jpg'); background-repeat: no-repeat; }
+#header h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 28px; font-weight: normal; text-align: right; padding: 0px 0px 0px 0px;}
+#header h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; text-align: right; padding: 0px 0px 0px 0px;}
+
+/**
+ * Main
+ */
+#main {overflow:hidden; width: 860px; height: auto; margin-left:auto; margin-right:auto; padding: 0px 0px 0px 0px;}
+
+/**
+ * Menu
+*/ 
+#menu { width: 850px; height: 26px; padding: 5px 10px 0px 10px; margin: 15px 0px 15px 0px;}
+#menu ul {padding: 0px 0px 0px 0px;}
+#menu li { font-family: "Lucida Grande", Arial, sans-serif; display: inline; font-size: 14px; font-weight: normal; padding: 0px 30px 0px 0px}
+#menu a {text-decoration: none}
+#menu .active {text-decoration: underline;}
+
+/**
+ * Content
+*/
+#content { width: 830px; height: auto; padding: 0px 15px 0px 15px;}
+#content h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 20px; font-weight: normal; margin: 0px 0px 0px 0px;}
+#content h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; margin: 0px 0px 0px 0px;}
+#content h3 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 14px; font-weight: normal; margin: 0px 0px 0px 0px;}
+#content ol {padding: 0px 0px 0px 20px;}
+#content ul {padding: 0px 0px 0px 20px;}
+#content li { font-family: "Lucida Grande", Arial, sans-serif; font-size: 12px; font-weight: normal; }
+ 
+ /**
+ * Footer
+ */
+#foot { width: 850px; height: 50px; margin-left:auto; margin-right:auto; padding: 5px 5px 5px 5px;}

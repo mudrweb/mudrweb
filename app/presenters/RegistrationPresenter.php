@@ -364,7 +364,7 @@ class RegistrationPresenter extends BasePresenter {
         //3. users_websiteData        
         // actual user's data
         $user_data = $this->db_users->getUsersDataById(intval($user->id));        
-        $dataArray_users_websiteData = array($user->id, 'layout_kardio1', 'kardio',
+        $dataArray_users_websiteData = array($user->id, 'layout_A1', 'all',
             $user_data->name . ' ' . $user_data->surname, 'Ambulance', $user_data->name . ' ' . $user_data->surname . ' - ' . 'Ambulance',
             '', '');
         $this->db_users->addUserWebsiteData($dataArray_users_websiteData);

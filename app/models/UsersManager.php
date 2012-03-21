@@ -482,7 +482,7 @@ class UsersManager extends Nette\Object {
             $layouts = $this->database->table('layouts')
 //                ->fetchall("SELECT * FROM layouts WHERE layout_group='all'");// AND group = ?', $subdomain);
                     ->where('(layout_group = ?) OR (layout_group = ?)', array($layout_group, $subdomain))
-                    ->order('layout_desc');
+                    ->order('layout_desc');                    
             if ($layouts) {
                 return $layouts;
             } else {                
