@@ -38,6 +38,7 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users` (
   `subdomain` VARCHAR(30) NULL ,
   `dateOfRegistration` DATETIME NULL ,
   `program` VARCHAR(25) NULL ,
+  `advertisement` VARCHAR(25) NULL ,
   `registrationToken` VARCHAR(45) NULL ,
   `dateOfActivation` DATETIME NULL ,
   `dateFrom` DATE NULL ,
@@ -217,15 +218,37 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (1, 'layout_kardio1', 'kardio', 'Kardio vzhled 1 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (2, 'layout_kardio2', 'kardio', 'Kardio vzhled 2 - šedá, modrá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (3, 'layout_kardio1_specific', 'xa', 'Uživatelsky specifický vzhled - menu vlevo');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (4, 'layout_gyneko1', 'gyneko', NULL);
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (5, 'layout_opto1', 'opto', NULL);
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (6, 'layout_kardio3', 'kardio', 'Kardio vzhled 3 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (7, 'layout_kardio4', 'kardio', 'Kardio vzhled 4 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (8, 'layout_kardio5', 'kardio', 'Kardio vzhled 5 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (9, 'layout_kardio6', 'kardio', 'Kardio vzhled 6 - šedá, černá');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (1, 'layout_A1', 'all', 'A - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (2, 'layout_A2', 'all', 'A - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (3, 'layout_A1_specific', 'xa', 'A - Uživatelsky specifický vzhled');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (4, 'layout_A3', 'all', 'A - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (5, 'layout_A4', 'all', 'A - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (6, 'layout_A5', 'all', 'A - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (7, 'layout_A6', 'all', 'A - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (8, 'layout_B1', 'all', 'B - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (9, 'layout_B2', 'all', 'B - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B3', 'all', 'B - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B4', 'all', 'B - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B5', 'all', 'B - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B6', 'all', 'B - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C1', 'all', 'C - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C2', 'all', 'C - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C3', 'all', 'C - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C4', 'all', 'C - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C5', 'all', 'C - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C6', 'all', 'C - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D1', 'all', 'D - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D2', 'all', 'D - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D3', 'all', 'D - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D4', 'all', 'D - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D5', 'all', 'D - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D6', 'all', 'D - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E1', 'all', 'E - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E2', 'all', 'E - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E3', 'all', 'E - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E4', 'all', 'E - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E5', 'all', 'E - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E6', 'all', 'E - modra');
 
 COMMIT;
 
@@ -234,11 +257,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (0, '', 'admin', 'e18290be7eb5f8be11bb4c9ed494f354f3915c4f', '@Xw^~Mr4L60o;E1n', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (1, 'active', 'xa', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1234', 0, 'xa', '2011-12-01 00:00:00', 'demo', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2011-10-01', '2012-09-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (2, 'active', 'mskdfdj', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '5678', 0, 'tutururu', '2011-04-01 00:00:00', 'basic', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-01-17', '2012-10-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (3, 'active', 'tester', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1222', 0, 'tester11', '2011-12-17 00:00:00', 'premium', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-01-27', '2012-11-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (4, 'active', 'ester1', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1344', 0, 'mrkva321', '2011-12-01 00:00:00', 'demo', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-02-04', '2012-12-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (0, '', 'admin', 'e18290be7eb5f8be11bb4c9ed494f354f3915c4f', '@Xw^~Mr4L60o;E1n', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (1, 'active', 'xa', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1234', 0, 'xa', '2011-12-01 00:00:00', 'demo', 'zentiva', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2011-10-01', '2012-09-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (2, 'active', 'mskdfdj', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '5678', 0, 'tutururu', '2011-04-01 00:00:00', 'basic', 'no', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-01-17', '2012-10-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (3, 'active', 'tester', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1222', 0, 'tester11', '2011-12-17 00:00:00', 'premium', 'no', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-01-27', '2012-11-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (4, 'active', 'ester1', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1344', 0, 'mrkva321', '2011-12-01 00:00:00', 'demo', 'wallmark', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-02-04', '2012-12-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
 
 COMMIT;
 
@@ -273,7 +296,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users_websiteData` (`id`, `idusers`, `layout`, `layout_group`, `header1`, `header2`, `title`, `description`, `keywords`, `headerImage`, `colourScheme`, `lastChange`) VALUES (1, 1, 'layout_kardio1', 'kardio', 'MUDr. Richard Pokorný', 'Kardiologická ambulance', 'MUDr. Richard Pokorný - Kardiologická ambulance', 'Ordinace kardiologie - MUDr. Richard Pokorný', 'EKG, kardiologie, interní, interna, MUDr., lékař, ambulance, ordinace', NULL, NULL, NULL);
+INSERT INTO `mudr`.`users_websiteData` (`id`, `idusers`, `layout`, `layout_group`, `header1`, `header2`, `title`, `description`, `keywords`, `headerImage`, `colourScheme`, `lastChange`) VALUES (1, 1, 'layout_A1', 'all', 'MUDr. Richard Pokorný', 'Kardiologická ambulance', 'MUDr. Richard Pokorný - Kardiologická ambulance', 'Ordinace kardiologie - MUDr. Richard Pokorný', 'EKG, kardiologie, interní, interna, MUDr., lékař, ambulance, ordinace', NULL, NULL, NULL);
 
 COMMIT;
 

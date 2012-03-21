@@ -17,6 +17,7 @@
                         <th>Platnost do</th>                        
                         <th>Real Subd.</th>
                         <th>Údržba</th>
+                        <th>Reklama</th>
                     </tr>
                 </thead>
                 <tbody align="center">
@@ -70,7 +71,8 @@
                                 {elseif $user[8] == 'off'}
                                     <td id="mmode{$user[0]}" class="red bold">    
                                 {/if}                                        
-                                    {$user[8]}</td>                                
+                                    {$user[8]}</td> 
+                                <td>{$user[12]}</td>    
                             </tr>
                         {/foreach}  
                     {/if}
@@ -108,7 +110,8 @@
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },                    
                     { "bSortable": false },
-                    { "asSorting": [ "desc", "asc" ] }                                        
+                    { "asSorting": [ "desc", "asc" ] },                                        
+                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' }                                        
                 ]
             }).makeEditable({
                 sUpdateURL: "/admin/admin-users?do=submitChanges",
@@ -148,6 +151,14 @@
                     type: 'select',
                     data: "{'0':'on', '1':'off'}",
                     submit: 'OK&nbsp'                    
+                },
+                {                           
+                    cssclass: 'advert',
+                    maxlength: 25,   
+//                    cssclass  : "required",                                        
+                    indicator : 'Saving ...',     
+                    cancel    : 'Cancel',
+                    submit    : 'OK'                   
                 }
                 ]
         });

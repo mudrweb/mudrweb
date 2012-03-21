@@ -58,7 +58,7 @@ class AdminUsersPresenter extends AdminPresenter {
                        }
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
                             $user->subdomain, $dateOfRegistration, $user->accountStatus, $dateFrom, $dateTo, 
-                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, $dateOfActivation);                
+                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, $dateOfActivation, $user->advertisement);                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminUsers presenter).', 404);                    
                     }
@@ -188,7 +188,7 @@ class AdminUsersPresenter extends AdminPresenter {
         }
 
         // dateFrom
-        if ($columnId == 5) {
+        if ($columnId == 6) {
             $dateFromAdmin = $_REQUEST['value'];                             
             $dateFrom = date_create_from_format('d/m/Y', $dateFromAdmin);
             $dateFrom = $dateFrom->format('Y-m-d');
@@ -197,7 +197,7 @@ class AdminUsersPresenter extends AdminPresenter {
         }        
 
         // dateTo
-        if ($columnId == 6) {
+        if ($columnId == 7) {
             $dateToAdmin = $_REQUEST['value'];                             
             $dateTo = date_create_from_format('d/m/Y', $dateToAdmin);
             $dateTo = $dateTo->format('Y-m-d');
@@ -206,7 +206,7 @@ class AdminUsersPresenter extends AdminPresenter {
         }                
         
         // maintenance mode
-        if ($columnId == 8) {
+        if ($columnId == 9) {
             $mmodeId = $_REQUEST['value'];               
             $mmNewStatus = null;
             switch ($mmodeId) {
@@ -256,6 +256,17 @@ class AdminUsersPresenter extends AdminPresenter {
                         
             $this->db_users->updateMaintenanceModeStatus(intval($id), $mmNewStatus);                    
         }        
+        
+        // advertisement
+        if ($columnId == 10) {
+            $newAdvertisement = $_REQUEST['value'];                             
+            
+            if ($newAdvertisement == '') {
+                $this->db_users->updateAdvertisement(intval($id), 'no');
+            } else {
+                $this->db_users->updateAdvertisement(intval($id), $newAdvertisement);
+            }
+        }         
         
         if (!$this->isAjax()) {
             $this->redirect('this');

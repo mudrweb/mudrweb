@@ -196,6 +196,7 @@ class UsersManager extends Nette\Object {
                'subdomain' => $dataArray[3],
                'dateOfRegistration' => $registrationDateTime,
                'program' => $dataArray[4],
+               'advertisement' => 'no',
                'registrationToken' => $dataArray[5],
                'passwordResent' => '1971-00-00 00:00:00',
                'maintenanceMode' => 'off',
@@ -272,7 +273,22 @@ class UsersManager extends Nette\Object {
             throw new \Nette\Application\ToolException('Unable to update user maintenance mode status.
                     Wrong input. method: updateMaintenanceModeStatus($id, $status)', 500);
         }
-    }    
+    }  
+    
+    /**
+     * Update advertisement.
+     * 
+     * @param int $id
+     * @param string $advert 
+     */    
+    public function updateAdvertisement($id, $advert) {
+        if (is_numeric($id) && is_string($advert)) {            
+            $this->database->exec('UPDATE users SET advertisement=? WHERE id=?', $advert, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update user advertisement.
+                    Wrong input. method: updateAdvertisement($id, $advert)', 500);
+        }
+    }       
     
     /**
      * Update status of subdomain - copied files.
