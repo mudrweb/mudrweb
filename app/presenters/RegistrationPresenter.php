@@ -102,7 +102,7 @@ class RegistrationPresenter extends BasePresenter {
         $form->addRadioList('program', '', array(
                 'demo' => 'DEMOverze - 3 měsíce - ZDARMA',
                 'basic' => 'Základní verze - 1 rok - 990 Kč',
-                'premium' => 'Premium verze - 1 rok - 1100 Kč',
+                'premium' => 'Premium verze - 1 rok - 1190 Kč',
                 ))
                 ->setDefaultValue('demo')
                 ->setAttribute('class', 'programs');

@@ -279,7 +279,9 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .pricelist_h1 {font-family: Arial, sans-serif; color: #000; font-size: 25px; font-weight: bold;}
 .pricelist_h2 {font-family: Arial, sans-serif; color: #0099CC; font-size: 14px; font-weight: bold;}
 .pricelist_h3 {font-family: Arial, sans-serif; color: #003066; font-size: 12px; font-weight: bold;}
-.pricelist_im {margin-left: 10px;}
+.pricelist_im {margin-left: 0px; margin-right: 0px}
+.separator_pricelist { border-bottom: 1px dotted #003066; margin: 5px 0px 5px 0px; }
+.list{color: gray; font-size: 11px; line-height: 16px}
 
 /**
  * SEARCH
@@ -329,3 +331,4 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 #searchedForCaption { font-family: Arial; font-size: 14px; font-weight: bold; word-wrap: break-word; position: absolute; top: 644px; left: auto; padding-left: 57px; }
 #searchedFor { text-align: center; color: #0099CC; font-weight: bold; word-wrap: break-word; position: absolute; width: 130px; top: 665px; padding-left: 44px; }
 .credents { color: #003066; font-weight: bold; }
+
