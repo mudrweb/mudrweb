@@ -1,0 +1,40 @@
+@import url("layout_C.css");
+
+/*Basic*/
+html, body {background-color: transparent; color: #000; background-image: url('../../images/layouts/bck6.png'); background-repeat: repeat;}
+
+/*Topspace*/
+#topspace {background-color: transparent; color: #000;}
+
+/*Main Box*/
+#wrapper {background-color: transparent; color: #000;}
+
+/*Header*/
+#header {background-color: #fff ; color: #000;
+border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
+#header h1 {background-color: transparent; color: #000;}
+#header h2 {background-color: transparent; color: #000;}
+
+/*Main*/
+#main {background-color: transparent; color: #000;}
+
+/*Menu*/ 
+#menu {background-color: #0088BF; color: #fff;
+border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
+#menu ul {background-color: transparent; color: #fff;}
+#menu li {background-color: transparent; color: #fff;}
+#menu a {background-color: transparent; color: #fff;}
+#menu .active {background-color: transparent; color: #fff;}
+
+/*Content*/
+#content {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
+#content h1 {background-color: transparent; color: #000;}
+#content h2 {background-color: transparent; color: #000;}
+#content h3 {background-color: transparent; color: #000;}
+#content ol {background-color: transparent; color: #000;}
+#content ul {background-color: transparent; color: #000;}
+#content li {background-color: transparent; color: #000;}
+ 
+/*Footer*/
+#foot {background-color: transparent; color: #000;}

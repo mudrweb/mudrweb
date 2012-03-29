@@ -390,10 +390,6 @@ a.isNotPublished { background-color: transparent; color: #000; font-weight: bold
 /**
 * username / subdomain availability check
 */
-.object_ok {
-/*    border: 1px solid green; 
-    color: #333333; */
-}
 .object_error { border: 1px solid #fe0000; background-color: #F2D3D3; }
 #usernameAvailableStatus { padding-top: 5px; }
 

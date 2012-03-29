@@ -1,4 +1,4 @@
-@import url("layout_B.css");
+@import url("layout_D.css");
 
 /*Basic*/
 html, body {background-color: transparent; color: #000; background-image: url(''); background-repeat: repeat;}
@@ -7,7 +7,8 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: #fff; color: #000;}
+#wrapper {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #D8D8D8 3px 3px 10px;}
 
 /*Header*/
 #header {background-color: transparent; color: #000;}

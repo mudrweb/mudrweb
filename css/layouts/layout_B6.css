@@ -1,7 +1,7 @@
 @import url("layout_B.css");
 
 /*Basic*/
-html, body {background-color: transparent; color: #000; background-image: url(''); background-repeat: repeat;}
+html, body {background-color: transparent; color: #000; background-image: url('../../images/layouts/bck6.png'); background-repeat: repeat;}
 
 /*Topspace*/
 #topspace {background-color: transparent; color: #000;}
@@ -15,7 +15,7 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #F9F9F9; color: #000;}
+#main {background-color: #0088BF; color: #000;}
 
 /*Menu*/ 
 #menu {background-color: transparent; color: #000;}

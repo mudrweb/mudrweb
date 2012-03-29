@@ -3,7 +3,9 @@
     {snippet form}
     {form questionForm}     
     
-    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        {snippet flashes}
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        {/snippet}                
     
          <table cellspacing="0">                
                 <tr style="height: 15px;"><td></td></tr>
@@ -20,7 +22,8 @@
                 <tr>                       
                     <td class="td_input_submit_guestb_name">{input submit} &nbsp {input reset}</td> 
                 </tr>
-         </table>         
+         </table>     
+         <br />
          <hr>
     {/form questionForm}     
     {/snippet} 
@@ -28,17 +31,18 @@
     {snippet list}	
         {if $data}                              
             
-            {if $countQuestions >= 5}         
+<!--            { if $countQuestions >= 5}         
             <div id="paginate">
-            {control paginator}
+            { control paginator}
             </div>            
             <h2></h2>
-            {else}
+            { else}
             <table cellspacing="0">                
                 <tr style="height: 15px;"><td></td></tr>
             </table>
-            {/if}
+            { /if}-->
          
+            <br /><br />
             {foreach $data as $dat}                                
                 {if $dat[0]}                       
                     <div id="comments">
@@ -68,7 +72,8 @@
                 {/if}                
             {/foreach}
             
-            <h2></h2>            
+            <br />
+            <hr>            
             {if $countQuestions >= 5}
             <div id="paginate_bottom">
             {control paginator}

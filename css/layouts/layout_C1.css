@@ -1,4 +1,4 @@
-@import url("layout_B.css");
+@import url("layout_C.css");
 
 /*Basic*/
 html, body {background-color: transparent; color: #000; background-image: url(''); background-repeat: repeat;}
@@ -7,25 +7,28 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: #fff; color: #000;}
+#wrapper {background-color: transparent; color: #000;}
 
 /*Header*/
-#header {background-color: transparent; color: #000;}
+#header {background-color: #fff ; color: #000;
+border-radius: 10px; box-shadow: #D8D8D8 3px 3px 10px;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #F9F9F9; color: #000;}
+#main {background-color: transparent; color: #000;}
 
 /*Menu*/ 
-#menu {background-color: transparent; color: #000;}
+#menu {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #D8D8D8 3px 3px 10px;}
 #menu ul {background-color: transparent; color: #000;}
 #menu li {background-color: transparent; color: #000;}
 #menu a {background-color: transparent; color: #000;}
 #menu .active {background-color: transparent; color: #000;}
 
 /*Content*/
-#content {background-color: #fff; color: #000;}
+#content {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #D8D8D8 3px 3px 10px;}
 #content h1 {background-color: transparent; color: #000;}
 #content h2 {background-color: transparent; color: #000;}
 #content h3 {background-color: transparent; color: #000;}
