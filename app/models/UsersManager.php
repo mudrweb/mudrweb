@@ -486,6 +486,15 @@ class UsersManager extends Nette\Object {
     }    
     
     /**
+     * Get all layouts from DB.
+     * 
+     * @return users
+     */
+    public function getLayoutsRawData() {
+        return $this->database->table('layouts');
+    }        
+    
+    /**
      * Get list of all layouts for current user (main group (kardio...) || 
      * user specific group defined by subdomain (xa...)).
      * 
@@ -561,6 +570,51 @@ class UsersManager extends Nette\Object {
                     Wrong input. method: getLayoutsBylayoutGroup($group)', 500);
         }         
     }    
+    
+    /**
+     * Update layout name.
+     * 
+     * @param int $id
+     * @param string $name 
+     */    
+    public function updateLayoutName($id, $name) {
+        if (is_numeric($id) && is_string($name)) {            
+            $this->database->exec('UPDATE layouts SET layout=? WHERE id=?', $name, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update layout name.
+                    Wrong input. method: updateLayoutName($id, $name)', 500);
+        }
+    }      
+    
+    /**
+     * Update layout group.
+     * 
+     * @param int $id
+     * @param string $group 
+     */    
+    public function updateLayoutGroup($id, $group) {
+        if (is_numeric($id) && is_string($group)) {            
+            $this->database->exec('UPDATE layouts SET layout_group=? WHERE id=?', $group, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update layout group.
+                    Wrong input. method: updateLayoutGroup($id, $group)', 500);
+        }
+    }         
+
+    /**
+     * Update layout description.
+     * 
+     * @param int $id
+     * @param string $desc
+     */    
+    public function updateLayoutDesc($id, $desc) {
+        if (is_numeric($id) && is_string($desc)) {            
+            $this->database->exec('UPDATE layouts SET layout_desc=? WHERE id=?', $desc, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update layout description.
+                    Wrong input. method: updateLayoutDesc($id, $desc)', 500);
+        }
+    }           
     
     /**
      * Search for data according to user input (conditions included in query string).
