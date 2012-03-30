@@ -572,6 +572,36 @@ class UsersManager extends Nette\Object {
     }    
     
     /**
+     * Add new layout.
+     * 
+     * @param data $dataArray 
+     */
+    public function addLayout($dataArray) {
+        if (isset($dataArray)) {              
+            $this->database->exec('INSERT INTO layouts', array(               
+               'layout' => $dataArray[0],
+               'layout_group' => $dataArray[1],
+               'layout_desc' => $dataArray[2]
+            ));                 
+        } else {            
+            throw new \Nette\Application\ToolException('Unable to add new layout.
+                    Wrong input. method: addLayout($dataArray)', 500);
+        }
+    }         
+    
+    /**
+     * Delete layout.
+     */
+    public function deleteLayout($id) {
+        if (is_numeric($id)) {        
+            $this->database->table('layouts')->find($id)->delete();                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to delete layout.
+                    Wrong input. method: deleteLayout($id)', 500);  
+        }              
+    }        
+    
+    /**
      * Update layout name.
      * 
      * @param int $id

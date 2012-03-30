@@ -299,6 +299,13 @@ a.user_list:hover {text-decoration: underline; color: black;}
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 2px 6px; -webkit-box-shadow: rgba(200,200,200,1) 0 2px 6px; box-shadow: rgba(200,200,200,1) 0 2px 6px;
 }
 .required button:hover { border-color: #FFF #AFAFB4 #AFAFB4 #FFF; color: #333; }
+.input_style_layoutName { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 290px; border: 1px solid #000000;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;    
+}
+.textarea_layout_desc { overflow: auto; font-size: 90%; font-family: arial; padding: 4px; height: 47px; max-height: 47px; width: 478px; border: 1px solid #000000; max-width: 478px;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 10px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 10px; box-shadow: rgba(200,200,200,1) 0 1px 10px;    
+}
+.td_input_addLayout { padding-left: 129px; padding-bottom: 15px; padding-top: 5px; }
 
 /* login, forgotten password */
 .forgotten_password { text-align: center; padding-right: 10px; padding-top: 15px; }
