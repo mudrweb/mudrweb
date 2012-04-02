@@ -1,4 +1,4 @@
-@import url("layout_D.css");
+@import url("layout_E.css");
 
 /*Basic*/
 html, body {background-color: transparent; color: #000; background-image: url('../../images/layouts/bck6.png'); background-repeat: repeat;}
@@ -7,30 +7,25 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: transparent; color: #000; 
-border-radius: 10px; box-shadow: #00709D 4px 4px 8px;}
+#wrapper {background-color: #fff; color: #000;}
 
 /*Header*/
-#header {background-color: #fff ; color: #000;
-border-radius: 0px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;}
+#header {background-color: transparent; color: #000;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #fff; color: #000;}
+#main {background-color: transparent; color: #000;}
 
 /*Menu*/ 
-#menu {background-color: #0088BF; color: #fff;
-border-radius: 7px; box-shadow: #00709D 2px 2px 4px;}
-#menu ul {background-color: transparent; color: #fff;}
-#menu li {background-color: transparent; color: #fff;}
-#menu a {background-color: transparent; color: #B1E6FC;}
-#menu .active {background-color: transparent; color: #fff;}
+#menu {background-color: transparent; color: #000; border-color: #0088BF;}
+#menu ul {background-color: transparent; color: #000;}
+#menu li {background-color: transparent; color: #000;}
+#menu a {background-color: transparent; color: #04A8EB;}
+#menu .active {text-align: left; background-color: transparent; color: #000;}
 
 /*Content*/
-#content {background-color: transparent; color: #000;}
+#content {background-color: #fff; color: #000;}
 #content h1 {background-color: transparent; color: #000;}
 #content h2 {background-color: transparent; color: #000;}
 #content h3 {background-color: transparent; color: #000;}
@@ -39,4 +34,4 @@ border-radius: 7px; box-shadow: #00709D 2px 2px 4px;}
 #content li {background-color: transparent; color: #000;}
  
 /*Footer*/
-#foot {background-color: #fff; color: #000;}
+#foot {background-color: transparent; color: #000;}

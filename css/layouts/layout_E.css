@@ -13,9 +13,8 @@ html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; h
 /**
  * Main Box
  */
-#wrapper {margin-top: 10px; margin-bottom: 10px; width:850px; margin-left:auto; margin-right:auto; padding: 10px 10px 10px 10px;}
-
-
+#wrapper {width:850px; margin-top: 10px; margin-bottom: 10px; margin-left:auto; margin-right:auto; padding: 0px 0px 0px 0px; 
+border-width: 1px; border-color: #000; border-style: solid}
 /**
  * Header
  */
@@ -26,21 +25,21 @@ html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; h
 /**
  * Main
  */
-#main {overflow:hidden; width: 860px; height: auto; margin-left:auto; margin-right:auto; margin-top: 10px; padding: 0px 0px 0px 0px;}
+#main {overflow:hidden; width: 850px; height: auto; margin-left:auto; margin-right:auto; margin-top: 20px; padding: 0px 0px 0px 0px;}
 
 /**
  * Menu
 */ 
-#menu { width: 100px; height: auto; float: left; padding: 10px 0px 0px 20px; margin: 0px 0px 0px 0px;}
-#menu ul {padding: 0px 0px 0px 0px;}
-#menu li { font-family: "Lucida Grande", Arial, sans-serif; font-size: 14px; font-weight: normal; list-style-type: none; padding: 0px 0px 20px 0px;}
+#menu { width: 100px; height: auto; float: left; padding: 10px 0px 0px 0px; margin: 0px 0px 0px 10px; border-width: 0px; border-right:5px; border-style: solid}
+#menu ul {padding: 0px 10px 0px 0px;}
+#menu li {text-align: right; font-family: "Lucida Grande", Arial, sans-serif; font-size: 14px; font-weight: normal; list-style-type: none; padding: 0px 0px 20px 0px;}
 #menu a {text-decoration: none}
 #menu .active {text-decoration: none;}
 
 /**
  * Content
 */
-#content { width: 695px; height: auto; float: right; padding: 10px 20px 10px 20px;}
+#content { width: 700px; height: auto; float: right; padding: 10px 0px 0px 0px; margin: 0px 10px 0px 0px;}
 #content h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 20px; font-weight: normal; margin: 0px 0px 0px 0px;}
 #content h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; margin: 0px 0px 0px 0px;}
 #content h3 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 14px; font-weight: normal; margin: 0px 0px 0px 0px;}

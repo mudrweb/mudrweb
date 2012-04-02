@@ -7,26 +7,30 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: #fff; color: #000;
-border-radius: 10px; box-shadow: #129062 3px 3px 10px;}
+#wrapper {background-color: transparent; color: #000; 
+border-radius: 10px; box-shadow: rgba(200,200,200,1) 4px 4px 8px;}
 
 /*Header*/
-#header {background-color: transparent; color: #000;}
+#header {background-color: #fff ; color: #000;
+border-radius: 0px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #00A368; color: #000;}
+#main {background-color: #fff; color: #000;}
 
-/*Menu*/ 
-#menu {background-color: transparent; color: #fff;}
+/*Menu*/  
+#menu {background-color: #00A368; color: #fff;
+border-radius: 7px; box-shadow: rgba(200,200,200,1) 2px 2px 4px;}
 #menu ul {background-color: transparent; color: #fff;}
 #menu li {background-color: transparent; color: #fff;}
-#menu a {background-color: transparent; color: #fff;}
+#menu a {background-color: transparent; color: #06FFA5;}
 #menu .active {background-color: transparent; color: #fff;}
 
 /*Content*/
-#content {background-color: #fff; color: #000;}
+#content {background-color: transparent; color: #000;}
 #content h1 {background-color: transparent; color: #000;}
 #content h2 {background-color: transparent; color: #000;}
 #content h3 {background-color: transparent; color: #000;}
@@ -35,4 +39,7 @@ border-radius: 10px; box-shadow: #129062 3px 3px 10px;}
 #content li {background-color: transparent; color: #000;}
  
 /*Footer*/
-#foot {background-color: transparent; color: #000;}
+#foot {background-color: #fff; color: #000;}
+
+
+

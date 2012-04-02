@@ -7,28 +7,26 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: transparent; color: #000;}
+#wrapper {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #C3A100 3px 3px 10px;}
 
 /*Header*/
-#header {background-color: #fff ; color: #000;
-border-radius: 10px; box-shadow: #C3A100 0px 5px 10px;}
+#header {background-color: transparent; color: #000;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: transparent; color: #000;}
+#main {background-color: #FFD300; color: #000;}
 
 /*Menu*/ 
-#menu {background-color: #FFD300; color: #000;
-border-radius: 10px; box-shadow: #C3A100 3px 3px 10px;}
-#menu ul {background-color: transparent; color: #000;}
-#menu li {background-color: transparent; color: #000;}
-#menu a {background-color: transparent; color: #000;}
-#menu .active {background-color: transparent; color: #000;}
+#menu {background-color: transparent; color: #fff;}
+#menu ul {background-color: transparent; color: #fff;}
+#menu li {background-color: transparent; color: #fff;}
+#menu a {background-color: transparent; color: #8C7400;}
+#menu .active {background-color: transparent; color: #fff;}
 
 /*Content*/
-#content {background-color: #fff; color: #000;
-border-radius: 10px; box-shadow: #C3A100 3px 3px 10px;}
+#content {background-color: #fff; color: #000;}
 #content h1 {background-color: transparent; color: #000;}
 #content h2 {background-color: transparent; color: #000;}
 #content h3 {background-color: transparent; color: #000;}

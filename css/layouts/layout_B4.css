@@ -7,25 +7,28 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: #fff; color: #000;}
+#wrapper {background-color: transparent; color: #000;}
 
 /*Header*/
-#header {background-color: transparent; color: #000;}
+#header {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #E9254A 3px 3px 10px;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #C40233; color: #000;}
+#main {background-color: #C40233; color: #000;
+border-radius: 10px; box-shadow: #E9254A 3px 3px 10px;}
 
 /*Menu*/ 
 #menu {background-color: transparent; color: #fff;}
 #menu ul {background-color: transparent; color: #fff;}
 #menu li {background-color: transparent; color: #fff;}
-#menu a {background-color: transparent; color: #fff;}
+#menu a {background-color: transparent; color: #FACAD6;}
 #menu .active {background-color: transparent; color: #fff;}
 
 /*Content*/
-#content {background-color: #fff; color: #000;}
+#content {background-color: #fff; color: #000;
+border-radius: 7px;}
 #content h1 {background-color: transparent; color: #000;}
 #content h2 {background-color: transparent; color: #000;}
 #content h3 {background-color: transparent; color: #000;}

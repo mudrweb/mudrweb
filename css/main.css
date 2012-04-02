@@ -108,12 +108,20 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .pagination li.current a:hover { background-position:0 -28px; }   
 
 /* BIG BUTTONS */
-.bigbtn_new {margin: 10px 10px 30px 10px; width: 228px; height: 86px; background: url('../images/main/new_acount.png') 0px 88px; }
-.bigbtn_new:hover {cursor: pointer; background: url('../images/main/new_acount.png') 0px 00px;}
-.bigbtn_search {margin: 10px 20px 30px 10px; width: 228px; height: 86px; background: url('../images/main/search_doctor.png') 0px 88px; }
-.bigbtn_search:hover {cursor: pointer; background: url('../images/main/search_doctor.png') 0px 00px;}
-.bigbtn_faq {margin: 10px 10px 30px 10px; width: 228px; height: 86px; background: url('../images/main/faq.png') 0px 88px; }
-.bigbtn_faq:hover {cursor: pointer; background: url('../images/main/faq.png') 0px 00px;}
+.bigbtn_new a {font-family: Arial, sans-serif; color: #fff; font-size: 11px; text-decoration: none; font-weight: bold;}
+.bigbtn_new a:hover {color: #0099CC;}
+.bigbtn_new {margin: 10px 10px 30px 10px; padding: 65px 0px 0px 10px; width: 218px; height: 21px; background: url('../images/main/new_acount.png') 0px 88px; }
+.bigbtn_new:hover {background: url('../images/main/new_acount.png') 0px 00px; }
+
+.bigbtn_search a {font-family: Arial, sans-serif; color: #fff; font-size: 11px; text-decoration: none; font-weight: bold;}
+.bigbtn_search a:hover {color: #0099CC;}
+.bigbtn_search {margin: 10px 20px 30px 10px; padding: 65px 0px 0px 10px; width: 218px; height: 21px; background: url('../images/main/search_doctor.png') 0px 88px; }
+.bigbtn_search:hover {background: url('../images/main/search_doctor.png') 0px 00px;}
+
+.bigbtn_faq a {font-family: Arial, sans-serif; color: #fff; font-size: 11px; text-decoration: none; font-weight: bold;}
+.bigbtn_faq a:hover {color: #0099CC;}
+.bigbtn_faq {margin: 10px 10px 30px 10px; padding: 65px 0px 0px 10px; width: 218px; height: 21px; background: url('../images/main/faq.png') 0px 88px; }
+.bigbtn_faq:hover {background: url('../images/main/faq.png') 0px 00px;}
 
 
 /**************************************

@@ -18,28 +18,28 @@ div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; paddi
 /**
  * Main Box
  */
-#wrapper {margin-top: 10px; margin-bottom: 10px; width:870px; margin-left:auto; margin-right:auto; padding: 10px 10px 10px 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 4px 18px; -webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px; box-shadow: rgba(200,200,200,1) 0 4px 18px; }
+#wrapper {margin-top: 10px; margin-bottom: 10px; width:850px; margin-left:auto; margin-right:auto; padding: 10px 10px 10px 10px; }
 
 /**
  * Header
  */
-#header { width: 850px; height: 100px; margin-left:auto; margin-right:auto; padding: 5px 5px 5px 5px;background-image: url('../../images/layouts/header.jpg'); background-repeat: no-repeat; }
-#header h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 28px; font-weight: normal; text-align: right; padding: 0px 0px 0px 0px;}
-#header h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; text-align: right; padding: 0px 0px 0px 0px;}
+#header { background-image: url('../../images/layouts/header.jpg'); width: 850px; height: 150px; background-repeat: no-repeat;padding: 0px;  }
+#header h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 28px; font-weight: normal; text-align: right; padding: 10px 20px 0px 10px;}
+#header h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; text-align: right; padding: 0px 20px 0px 10px;}
 
 /**
  * Main
  */
-#main {overflow:hidden; width: 860px; height: auto; margin-left:auto; margin-right:auto; padding: 0px 0px 0px 0px;}
+#main {overflow:hidden; width: 850px; height: auto; margin-left:auto; margin-right:auto; padding: 0px 0px 0px 0px;}
 
 /**
  * Menu
 */ 
-#menu { width: 850px; height: 26px; padding: 5px 10px 0px 10px; margin: 15px 0px 15px 0px;}
+#menu { width: 850px; height: 26px; padding: 5px 10px 0px 10px; margin: 10px 0px 10px 0px;}
 #menu ul {padding: 0px 0px 0px 0px;}
 #menu li { font-family: "Lucida Grande", Arial, sans-serif; display: inline; font-size: 14px; font-weight: normal; padding: 0px 30px 0px 0px}
 #menu a {text-decoration: none}
-#menu .active {text-decoration: underline;}
+#menu .active {text-decoration: none;}
 
 /**
  * Content

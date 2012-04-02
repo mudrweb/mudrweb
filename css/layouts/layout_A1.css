@@ -7,7 +7,8 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: #fff; color: #000;}
+#wrapper {background-color: #fff; color: #000;
+border-radius: 10px; box-shadow: #D8D8D8 3px 3px 10px;}
 
 /*Header*/
 #header {background-color: transparent; color: #000;}
@@ -21,7 +22,7 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #menu {background-color: #F9F9F9; color: #000;}
 #menu ul {background-color: transparent; color: #000;}
 #menu li {background-color: transparent; color: #000;}
-#menu a {background-color: transparent; color: #000;}
+#menu a {background-color: transparent; color: #A39F9F;}
 #menu .active {background-color: transparent; color: #000;}
 
 /*Content*/
