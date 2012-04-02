@@ -238,7 +238,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         } elseif ($url != 'admin') {
             if ($request->parameters['lang'] == 'cs') {
                 $UtoPArray['objednavka'] = 'Registration';
-                $UtoPArray['cennik'] = 'PriceList';
+                $UtoPArray['cenik'] = 'PriceList';
                 $UtoPArray['smluvni-podminky'] = 'Terms';
                 $UtoPArray['o-nas'] = 'AboutUs';
                 $UtoPArray['kontakt'] = 'Contact';
@@ -319,7 +319,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             if (isset($request->parameters['lang'])) {
                 if ($request->parameters['lang'] == 'cs') {                                    
                     $PtoUArray['Registration'] = 'objednavka';      
-                    $PtoUArray['PriceList'] = 'cennik';
+                    $PtoUArray['PriceList'] = 'cenik';
                     $PtoUArray['Terms'] = 'smluvni-podminky';
                     $PtoUArray['AboutUs'] = 'o-nas';
                     $PtoUArray['Contact'] = 'kontakt';                    

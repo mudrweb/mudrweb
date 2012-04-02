@@ -75,7 +75,7 @@ $_CONFIG = array(
 
     'mime_magic' => "",
 
-    'maxImageWidth' => 640,
+    'maxImageWidth' => 850,
     'maxImageHeight' => 480,
 
     'thumbWidth' => 100,
