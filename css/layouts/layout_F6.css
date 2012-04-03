@@ -1,4 +1,5 @@
 @import url("layout_F.css");
+@import url("GuestBook_6_blue.css");
 
 /*Basic*/
 html, body {background-color: transparent; color: #000; background-image: url('../../images/layouts/bck6.png'); background-repeat: repeat;}
@@ -8,7 +9,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 
 /*Main Box*/
 #wrapper {background-color: #fff; color: #000;
-border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
+border-radius: 0px; box-shadow: #00709D 3px 3px 10px;}
 
 /*Header*/
 #header {background-color: transparent; color: #000;}
@@ -16,14 +17,15 @@ border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #0088BF; color: #000;}
+#main {background-color: transparent; color: #000;}
 
 /*Menu*/ 
 #menu {background-color: transparent; color: #000;}
 #menu ul {background-color: transparent; color: #000;}
 #menu li {background-color: transparent; color: #000;}
-#menu a {background-color: transparent; color: #B1E6FC;}
-#menu .active {background-color: transparent; color: #fff;}
+#menu a {background-color: transparent; color: #000; border-color: #0088BF;}
+#menu a:hover {background-color: #0088BF; color: #000; border-color: #0088BF;}
+#menu .active {background-color: #0088BF; color: #fff; border-color: #0088BF;}
 
 /*Content*/
 #content {background-color: #fff; color: #000;}

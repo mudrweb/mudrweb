@@ -1,4 +1,5 @@
 @import url("layout_B.css");
+@import url("GuestBook_4_red.css");
 
 /*Basic*/
 html, body {background-color: transparent; color: #000; background-image: url(''); background-image: url('../../images/layouts/bck4.png'); background-repeat: repeat;}

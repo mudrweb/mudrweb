@@ -1,0 +1,40 @@
+@import url("layout_F.css");
+@import url("GuestBook_4_red.css");
+
+/*Basic*/
+html, body {background-color: transparent; color: #000; background-image: url('../../images/layouts/bck4.png'); background-repeat: repeat;}
+
+/*Topspace*/
+#topspace {background-color: transparent; color: #000;}
+
+/*Main Box*/
+#wrapper {background-color: #fff; color: #000;
+border-radius: 0px; box-shadow: #E9254A 3px 3px 10px;}
+
+/*Header*/
+#header {background-color: transparent; color: #000;}
+#header h1 {background-color: transparent; color: #000;}
+#header h2 {background-color: transparent; color: #000;}
+
+/*Main*/
+#main {background-color: transparent; color: #000;}
+
+/*Menu*/ 
+#menu {background-color: transparent; color: #000;}
+#menu ul {background-color: transparent; color: #000;}
+#menu li {background-color: transparent; color: #000;}
+#menu a {background-color: transparent; color: #000; border-color: #C40233;}
+#menu a:hover {background-color: #C40233; color: #fff; border-color: #C40233;}
+#menu .active {background-color: #C40233; color: #FACAD6; border-color: #C40233;}
+
+/*Content*/
+#content {background-color: #fff; color: #000;}
+#content h1 {background-color: transparent; color: #000;}
+#content h2 {background-color: transparent; color: #000;}
+#content h3 {background-color: transparent; color: #000;}
+#content ol {background-color: transparent; color: #000;}
+#content ul {background-color: transparent; color: #000;}
+#content li {background-color: transparent; color: #000;}
+ 
+/*Footer*/
+#foot {background-color: transparent; color: #000;}

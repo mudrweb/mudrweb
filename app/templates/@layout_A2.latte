@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs" xmlns:og="http://opengraphprotocol.org/schema/">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="cs" />
+
+	<meta name="description" content="{$description}" />
+        <meta name="keywords" content="{$keywords}" />
+	<meta name="robots" content="index,follow" />
+        <meta name="author" content="HTML code: MUDRweb.cz; e-mail: support@mudrweb.cz" />            
+
+	<title>{$title}</title>
+	
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="{$sharedBasePath}/css/layouts/layout_A2.css" type="text/css">
+        {if $pathToHeaderCSS}
+            <link rel="stylesheet" href="{$basePath}/header.css" type="text/css">
+        {/if}
+        {if $pathToColourSchemeCSS}
+            <link rel="stylesheet" href="{$basePath}/colour_scheme.css" type="text/css">
+        {/if}           
+	<script type="text/javascript" src="{$sharedBasePath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="{$sharedBasePath}/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="{$sharedBasePath}/js/jquery.nette.js"></script>
+        <script type="text/javascript" src="{$sharedBasePath}/js/jquery.livequery.js"></script>
+        <script type="text/javascript" src="{$sharedBasePath}/js/jquery.ajaxform.js"></script>        
+<!--	<script type="text/javascript" src="{$sharedBasePath}/js/netteForms.js"></script>-->
+        <script type="text/javascript" src="{$sharedBasePath}/js/live-form-validation.js"></script>
+        <script type="text/javascript" src="{$sharedBasePath}/js/jquery.pstrength.js"></script>        
+	{block head}{/block}
+</head>
+
+
+
+
+<body>     
+ <div id="topspace">
+    </div>   
+     
+<div id="wrapper">
+     
+
+    <div id="header">
+      <h1>{$header}
+      </h1>
+      <h2>{$underHeader}
+      </h2>
+    </div>
+    
+    <div id="main">
+            
+        <div id="menu"> 
+            {widget navigation}
+        </div>
+            
+        <div id="content">
+            {include #content}                
+        </div>      
+          
+    </div>
+    
+    <div id="foot">      
+    </div>
+
+</div>        
+</body>
+</html>

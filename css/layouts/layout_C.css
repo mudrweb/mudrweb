@@ -1,9 +1,14 @@
+@import url("../paginator.css");
+
 /**
  * Basic
  */
 
 * { margin: 0;}
 html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; height: 100%; }
+#ajax-spinner { margin: 15px 0 0 15px; padding: 18px; background: url('../../images/ajax-loader.gif') no-repeat 50% 50%; font-size: 0; z-index: 1000; position: absolute; top: 50%; left: 50%; }
+div.flash, div.info { color: #000; background: #FFF9D7; border: 1px solid #E2C822; padding: 10px 10px 10px 10px; margin-top: 20px; margin-left:auto; margin-right:auto; width: 95%; }
+div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; padding: 10px 10px 10px 10px; margin-top: 20px; margin-left:auto; margin-right:auto; width: 95%px; }
 
 /**
  * Topspace
@@ -52,3 +57,43 @@ html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; h
  * Footer
  */
 #foot { width: 850px; height: 50px; margin-left:auto; margin-right:auto; padding: 5px 5px 5px 5px;}
+
+/**
+* GuestBook
+*/
+.textarea_guestb_name { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 230px; border: 1px solid #000000;}
+.textarea_default_desc { overflow: auto; font-size: 90%; font-family: arial; padding: 4px; height: 97px; width: 568px; border: 1px solid #000000; max-width: 568px;}
+
+.td_input_default { padding-left: 20px; padding-bottom: 15px; width: 20px; }
+.td_input_label_guestb { width: 115px; padding-bottom: 15px; padding-left: 0px; }
+.td_input_submit_guestb_name { padding-left: 135px; padding-bottom: 17px; padding-top: 0px; }
+
+#comments { clear:both; min-height: 100px; }
+#comments .comment { float: left; padding-bottom: 20px; width: 100% }
+#comments .comment .contain { float: left; margin-top: 5px; width: 123px; }
+#comments .comment h4 {float: right; font-size: 14px; margin-bottom: 10px; } 
+#comments .comment h4 span {display: block; padding: 5px; }
+#comments .comment .date {clear: right; display: block; float: right; font-size: 12px; padding: 5px }
+#comments .comment .content_q {float: left; font-size: 12px; min-height: 40px; padding: 20px; width: 450px;
+}
+#comments .answ .content_q {width: 400px; }
+#comments .answ .contain { float: left; margin-top: 5px; width: 200px; }
+
+#paginate_bottom { text-align: center; padding-top: 10px; padding-bottom: 10px; }
+
+/**
+* Buttons                                                                             
+*/
+.button,.button_ok,.button_cancel { font-family: arial; cursor:pointer; display:inline; font-weight: bold; margin:0px; padding:6px 6px;
+   
+}
+.button_ok,.button_cancel { background-position:6px 50%; background-repeat:no-repeat; padding-left:26px; }
+
+
+/**
+* Live validation
+*/
+.icon-ui-red { background-image: url('../images/ui-icons_cd0a0a_256x240.png'); float: none; margin: -3px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: inline-block; overflow: hidden; }
+.icon-ui-red-alert { background-position: 0 -144px; }
+
+.form-error-message { padding-left: 1px; color: red; display: inline; }
