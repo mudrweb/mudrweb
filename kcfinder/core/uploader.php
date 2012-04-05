@@ -537,9 +537,10 @@ class uploader {
         if ($gd->init_error)
             return true;
 
-        $thumb = substr($file, strlen($this->config['uploadDir']));
-        $thumb = $this->config['uploadDir'] . "/" . $this->config['thumbsDir'] . "/" . $thumb;
+        $thumb = substr($file, strlen($this->config['uploadDir']));                
+        $thumb = $this->config['uploadDir'] . "/" . $this->config['thumbsDir'] . "/" . $thumb;                      
         $thumb = path::normalize($thumb);
+                
         $thumbDir = dirname($thumb);
         if (!is_dir($thumbDir) && !@mkdir($thumbDir, $this->config['dirPerms'], true))
             return false;
@@ -563,6 +564,53 @@ class uploader {
         // Save thumbnail
         return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
     }
+    
+    protected function makeThumb_cgallery($file, $overwrite=true, $mode) {
+        $gd = new gd($file);
+
+        // Drop files which are not GD handled images
+        if ($gd->init_error)
+            return true;   
+        
+        $commonGalleryPosition = strpos($file, 'commonGallery');
+        $filename = substr($file, $commonGalleryPosition + strlen('commonGallery') + 1);
+        
+        $thumb = substr($file, strlen('commonGallery'));
+        if ($mode == 1) {
+            $thumb = $this->config['uploadDir'] . "/.thumbs/images/gallery/" . $filename;        
+        } elseif ($mode == 2) {
+            $thumb = $this->config['uploadDir'] . "/.thumbs/images/" . $filename;        
+        }        
+        
+//        $myFile = "testFile.txt";
+//        $fh = fopen($myFile, 'w');
+//        fwrite($fh, $filename); 
+//        fclose($fh);                        
+                
+        $thumb = path::normalize($thumb);
+        $thumbDir = dirname($thumb);
+        if (!is_dir($thumbDir) && !@mkdir($thumbDir, $this->config['dirPerms'], true))
+            return false;
+
+        if (!$overwrite && is_file($thumb))
+            return true;
+
+        // Images with smaller resolutions than thumbnails
+        if (($gd->get_width() <= $this->config['thumbWidth']) &&
+            ($gd->get_height() <= $this->config['thumbHeight'])
+        ) {
+            $browsable = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
+            // Drop only browsable types
+            if (in_array($gd->type, $browsable))
+                return true;
+
+        // Resize image
+        } elseif (!$gd->resize_fit($this->config['thumbWidth'], $this->config['thumbHeight']))
+            return false;
+
+        // Save thumbnail
+        return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
+    }    
 
     protected function localize($langCode) {
         require "lang/{$langCode}.php";

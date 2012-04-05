@@ -53,7 +53,7 @@ browser.initFolders = function() {
     }
 };
 
-browser.setTreeData = function(data, path) {
+browser.setTreeData = function(data, path) {    
     if (!path)
         path = '';
     else if (path.length && (path.substr(path.length - 1, 1) != '/'))
@@ -90,7 +90,7 @@ browser.buildTree = function(root, path) {
         }
         html += '</div>';
     }
-    html += '</div>';
+    html += '</div>';    
     return html;
 };
 
@@ -198,42 +198,47 @@ browser.statusDir = function() {
     size_real = size;
     size = this.humanSize(size);        
 
-    function oc(a)
-    {
-        var o = {};
-        for(var i=0;i<a.length;i++)
+    if (this.dir != 'images/gallery') {        
+        function oc(a)
         {
-            o[a[i]]='';
+            var o = {};
+            for(var i=0;i<a.length;i++)
+            {
+                o[a[i]]='';
+            }
+            return o;
         }
-        return o;
-    }
-    premiumUsers = ['/user_uploads/xa'];
+        premiumUsers = ['/user_uploads/xa'];
 
-    // check if current user is in premuium users pool
-    if (this.uploadURL in oc(premiumUsers) == true) {    
-            size_left_real = 52428800 - size_real;
-            size_left = this.humanSize(size_left_real);
-            document.getElementById("upload_mod").style.display = 'block';
-            $('#fileinfo').html(
-            'Počet souborů: ' +
-            this.files.length + ' ' +         
-            ' (' + size + ') . <span style="color: green;">Kapacita Vaší stránky není omezena.</span>');
-    } else {
-        if (size_real > 52428800) {
-            document.getElementById("upload_mod").style.display = 'none';
-            $('#fileinfo').html(
-            'Počet souborů: ' +
-            this.files.length + ' ' + 
-            ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (50MB)!</span>');
+        // check if current user is in premuium users pool
+        if (this.uploadURL in oc(premiumUsers) == true) {    
+                size_left_real = 52428800 - size_real;
+                size_left = this.humanSize(size_left_real);
+                document.getElementById("upload_mod").style.display = 'block';
+                $('#fileinfo').html(
+                'Počet souborů: ' +
+                this.files.length + ' ' +         
+                ' (' + size + ') . <span style="color: green;">Kapacita Vaší stránky není omezena.</span>');
         } else {
-            size_left_real = 52428800 - size_real;
-            size_left = this.humanSize(size_left_real);
-            document.getElementById("upload_mod").style.display = 'block';
-            $('#fileinfo').html(
-            'Počet souborů: ' +
-            this.files.length + ' ' +         
-            ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
-        }        
+            if (size_real > 52428800) {
+                document.getElementById("upload_mod").style.display = 'none';
+                $('#fileinfo').html(
+                'Počet souborů: ' +
+                this.files.length + ' ' + 
+                ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (50MB)!</span>');
+            } else {
+                size_left_real = 52428800 - size_real;
+                size_left = this.humanSize(size_left_real);
+                document.getElementById("upload_mod").style.display = 'block';
+                $('#fileinfo').html(
+                'Počet souborů: ' +
+                this.files.length + ' ' +         
+                ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
+            }        
+        }
+    } else {
+        document.getElementById("upload_mod").style.display = 'block';
+        $('#fileinfo').html('');        
     }
 };
 

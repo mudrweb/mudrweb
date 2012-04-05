@@ -110,7 +110,7 @@ browser.initToolbar = function() {
     this.initUploadButton();
 };
 
-browser.initUploadButton = function() {        
+browser.initUploadButton = function() {            
     var btn = $('#toolbar a[href="kcact:upload"]');
     if (!this.access.files.upload) {
         btn.css('display', 'none');
@@ -126,7 +126,7 @@ browser.initUploadButton = function() {
 //    }
 //    size_real = size;
 //    alert(size);
-//    size = this.humanSize(size);
+//    size = this.humanSize(size);;
 //    if (size <= '50MB') {            
     $('#toolbar').prepend('<div id="upload" style="top:' + top + 'px;width:' + width + 'px;height:' + height + 'px">' +
         '<form enctype="multipart/form-data" method="post" target="uploadResponse" action="' + browser.baseGetData('upload') + '">' +
@@ -146,39 +146,49 @@ browser.initUploadButton = function() {
 };
 
 browser.uploadFile = function(form) {
-    if (!this.dirWritable) {
+    // gallery addon start    
+    if (this.dir == 'images/gallery') {
         browser.alert(this.label("Cannot write to upload folder."));
         $('#upload').detach();
         browser.initUploadButton();
         return;
-    }
-    form.elements[1].value = browser.dir;
-    $('<iframe id="uploadResponse" name="uploadResponse" src="javascript:;"></iframe>').prependTo(document.body);
-    $('#loading').html(this.label("Uploading file..."));
-    $('#loading').css('display', 'inline');
-    form.submit();
-    $('#uploadResponse').load(function() {
-        var response = $(this).contents().find('body').html();
-        $('#loading').css('display', 'none');
-        response = response.split("\n");
-        var selected = [], errors = [];
-        $.each(response, function(i, row) {
-            if (row.substr(0, 1) == '/')
-                selected[selected.length] = row.substr(1, row.length - 1)
-            else
-                errors[errors.length] = row;
+    }    
+    // gallery addon end
+    else {
+        if (!this.dirWritable) {
+            browser.alert(this.label("Cannot write to upload folder."));
+            $('#upload').detach();
+            browser.initUploadButton();
+            return;
+        }
+        form.elements[1].value = browser.dir;
+        $('<iframe id="uploadResponse" name="uploadResponse" src="javascript:;"></iframe>').prependTo(document.body);
+        $('#loading').html(this.label("Uploading file..."));
+        $('#loading').css('display', 'inline');
+        form.submit();
+        $('#uploadResponse').load(function() {
+            var response = $(this).contents().find('body').html();
+            $('#loading').css('display', 'none');
+            response = response.split("\n");
+            var selected = [], errors = [];
+            $.each(response, function(i, row) {
+                if (row.substr(0, 1) == '/')
+                    selected[selected.length] = row.substr(1, row.length - 1)
+                else
+                    errors[errors.length] = row;
+            });
+            if (errors.length)
+                browser.alert(errors.join("\n"));
+            if (!selected.length)
+                selected = null
+            browser.refresh(selected);
+            $('#upload').detach();
+            setTimeout(function() {
+                $('#uploadResponse').detach();
+            }, 1);
+            browser.initUploadButton();
         });
-        if (errors.length)
-            browser.alert(errors.join("\n"));
-        if (!selected.length)
-            selected = null
-        browser.refresh(selected);
-        $('#upload').detach();
-        setTimeout(function() {
-            $('#uploadResponse').detach();
-        }, 1);
-        browser.initUploadButton();
-    });
+    }
 };
 
 browser.maximize = function(button) {

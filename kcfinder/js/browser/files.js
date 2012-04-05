@@ -158,7 +158,16 @@ browser.returnFile = function(file) {
     var fileURL = file.substr
         ? file : browser.uploadURL + '/' + browser.dir + '/' + file.data('name');
     fileURL = _.escapeDirs(fileURL);
-
+    
+//    alert(asdf);
+    // gallery addon start
+    if (browser.dir == 'images/gallery') {        
+        fileURL = file.substr
+                ? file : 'http://mudrweb.cz/images/commonGallery/' + file.data('name');
+        fileURL = _.escapeDirs(fileURL);                
+    }
+    // gallery addon end
+    
     if (this.opener.CKEditor) {
         this.opener.CKEditor.object.tools.callFunction(this.opener.CKEditor.funcNum, fileURL, '');
         window.close();
@@ -221,7 +230,7 @@ browser.returnFiles = function(files) {
     }
 };
 
-browser.returnThumbnails = function(files) {
+browser.returnThumbnails = function(files) {    
     if (this.opener.callBackMultiple) {
         var rfiles = [];
         var j = 0;
@@ -230,7 +239,8 @@ browser.returnThumbnails = function(files) {
                 rfiles[j] = browser.thumbsURL + '/' + browser.dir + '/' + $(file).data('name');
                 rfiles[j] = _.escapeDirs(rfiles[j++]);
             }
-        });
+        });                
+        
         this.opener.callBackMultiple(rfiles);
         if (window.opener) window.close()
     }
@@ -264,9 +274,11 @@ browser.menuFile = function(file, e) {
                 '<a href="kcact:download">' + this.label("Download") + '</a>';
         }
 
-        if (this.access.files.copy || this.access.files.move)
-            html += (html.length ? '<div class="delimiter"></div>' : '') +
-                '<a href="kcact:clpbrdadd">' + this.label("Add to Clipboard") + '</a>';
+    // gallery addon start   
+//        if (this.access.files.copy || this.access.files.move)
+//            html += (html.length ? '<div class="delimiter"></div>' : '') +
+//                '<a href="kcact:clpbrdadd">' + this.label("Add to Clipboard") + '</a>';
+    // gallery addon end
         if (this.access.files['delete'])
             html += (html.length ? '<div class="delimiter"></div>' : '') +
                 '<a href="kcact:rm"' + ((notWritable == files.length) ? ' class="denied"' : '') +
@@ -292,7 +304,7 @@ browser.menuFile = function(file, e) {
         });
 
         $('.menu a[href="kcact:download"]').click(function() {
-            browser.hideDialog();
+            browser.hideDialog();            
             var pfiles = [];
             $.each(files, function(i, cfile) {
                 pfiles[i] = $(cfile).data('name');
@@ -301,30 +313,30 @@ browser.menuFile = function(file, e) {
             return false;
         });
 
-        $('.menu a[href="kcact:clpbrdadd"]').click(function() {
-            browser.hideDialog();
-            var msg = '';
-            $.each(files, function(i, cfile) {
-                var cdata = $(cfile).data();
-                var failed = false;
-                for (i = 0; i < browser.clipboard.length; i++)
-                    if ((browser.clipboard[i].name == cdata.name) &&
-                        (browser.clipboard[i].dir == browser.dir)
-                    ) {
-                        failed = true
-                        msg += cdata.name + ": " + browser.label("This file is already added to the Clipboard.") + "\n";
-                        break;
-                    }
-
-                if (!failed) {
-                    cdata.dir = browser.dir;
-                    browser.clipboard[browser.clipboard.length] = cdata;
-                }
-            });
-            browser.initClipboard();
-            if (msg.length) browser.alert(msg.substr(0, msg.length - 1));
-            return false;
-        });
+//        $('.menu a[href="kcact:clpbrdadd"]').click(function() {
+//            browser.hideDialog();
+//            var msg = '';
+//            $.each(files, function(i, cfile) {
+//                var cdata = $(cfile).data();
+//                var failed = false;
+//                for (i = 0; i < browser.clipboard.length; i++)
+//                    if ((browser.clipboard[i].name == cdata.name) &&
+//                        (browser.clipboard[i].dir == browser.dir)
+//                    ) {
+//                        failed = true
+//                        msg += cdata.name + ": " + browser.label("This file is already added to the Clipboard.") + "\n";
+//                        break;
+//                    }
+//
+//                if (!failed) {
+//                    cdata.dir = browser.dir;
+//                    browser.clipboard[browser.clipboard.length] = cdata;
+//                }
+//            });
+//            browser.initClipboard();
+//            if (msg.length) browser.alert(msg.substr(0, msg.length - 1));
+//            return false;
+//        });
 
         $('.menu a[href="kcact:rm"]').click(function() {
             if ($(this).hasClass('denied')) return false;
@@ -400,9 +412,9 @@ browser.menuFile = function(file, e) {
         html +=
             '<a href="kcact:download">' + this.label("Download") + '</a>';
 
-        if (this.access.files.copy || this.access.files.move)
-            html += '<div class="delimiter"></div>' +
-                '<a href="kcact:clpbrdadd">' + this.label("Add to Clipboard") + '</a>';
+//        if (this.access.files.copy || this.access.files.move)
+//            html += '<div class="delimiter"></div>' +
+//                '<a href="kcact:clpbrdadd">' + this.label("Add to Clipboard") + '</a>';
         if (this.access.files.rename || this.access.files['delete'])
             html += '<div class="delimiter"></div>';
         if (this.access.files.rename)
@@ -429,7 +441,7 @@ browser.menuFile = function(file, e) {
             return false;
         });
 
-        $('.menu a[href="kcact:download"]').click(function() {
+        $('.menu a[href="kcact:download"]').click(function() {            
             var html = '<form id="downloadForm" method="post" action="' + browser.baseGetData('download') + '">' +
                 '<input type="hidden" name="dir" />' +
                 '<input type="hidden" name="file" />' +
@@ -441,22 +453,22 @@ browser.menuFile = function(file, e) {
             return false;
         });
 
-        $('.menu a[href="kcact:clpbrdadd"]').click(function() {
-            for (i = 0; i < browser.clipboard.length; i++)
-                if ((browser.clipboard[i].name == data.name) &&
-                    (browser.clipboard[i].dir == browser.dir)
-                ) {
-                    browser.hideDialog();
-                    browser.alert(browser.label("This file is already added to the Clipboard."));
-                    return false;
-                }
-            var cdata = data;
-            cdata.dir = browser.dir;
-            browser.clipboard[browser.clipboard.length] = cdata;
-            browser.initClipboard();
-            browser.hideDialog();
-            return false;
-        });
+//        $('.menu a[href="kcact:clpbrdadd"]').click(function() {
+//            for (i = 0; i < browser.clipboard.length; i++)
+//                if ((browser.clipboard[i].name == data.name) &&
+//                    (browser.clipboard[i].dir == browser.dir)
+//                ) {
+//                    browser.hideDialog();
+//                    browser.alert(browser.label("This file is already added to the Clipboard."));
+//                    return false;
+//                }
+//            var cdata = data;
+//            cdata.dir = browser.dir;
+//            browser.clipboard[browser.clipboard.length] = cdata;
+//            browser.initClipboard();
+//            browser.hideDialog();
+//            return false;
+//        });
 
         $('.menu a[href="kcact:mv"]').click(function(e) {
             if (!data.writable) return false;
@@ -507,8 +519,14 @@ browser.menuFile = function(file, e) {
     $('.menu a[href="kcact:view"]').click(function() {
         browser.hideDialog();
         var ts = new Date().getTime();
-        var showImage = function(data) {
-            url = _.escapeDirs(browser.uploadURL + '/' + browser.dir + '/' + data.name) + '?ts=' + ts,
+        var showImage = function(data) {     
+            // gallery addon start          
+            if (this.browser.dir == "images/gallery") {
+                url = _.escapeDirs('/images/commonGallery/' + data.name) + '?ts=' + ts;
+            } else {
+            // gallery addon end
+                url = _.escapeDirs(browser.uploadURL + '/' + browser.dir + '/' + data.name) + '?ts=' + ts;                
+            }
             $('#loading').html(browser.label("Loading image..."));
             $('#loading').css('display', 'inline');
             var img = new Image();
