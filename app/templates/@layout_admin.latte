@@ -109,9 +109,9 @@
             <div id="footer">   
                 <div class="container">
                     <div class="grid_footer_l">
-                        Optimalizováno pro prohlížeče IE9+, Firefox 10+ a Google Chrome 17+<br />
+                        {!$compatibleBrowsers}<br />
                         {if $user->isLoggedIn()}
-                        Aktualizováno dne 30.03.2012; verze alfa1
+                        {!$lastUpdate}
                         {/if}
                     </div>
                     <div class="grid_footer_r">            

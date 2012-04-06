@@ -209,6 +209,7 @@ browser.statusDir = function() {
             return o;
         }
         premiumUsers = ['/user_uploads/xa'];
+//        premiumUsers = [''];
 
         // check if current user is in premuium users pool
         if (this.uploadURL in oc(premiumUsers) == true) {    
@@ -221,6 +222,7 @@ browser.statusDir = function() {
                 ' (' + size + ') . <span style="color: green;">Kapacita Vaší stránky není omezena.</span>');
         } else {
             if (size_real > 52428800) {
+                // hide upload button
                 document.getElementById("upload_mod").style.display = 'none';
                 $('#fileinfo').html(
                 'Počet souborů: ' +
@@ -237,7 +239,7 @@ browser.statusDir = function() {
             }        
         }
     } else {
-        document.getElementById("upload_mod").style.display = 'block';
+        document.getElementById("upload_mod").style.display = 'none';
         $('#fileinfo').html('');        
     }
 };

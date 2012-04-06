@@ -139,39 +139,13 @@
     {/form editForm}     
     {/snippet} 
          
-    <script type="text/javascript">     
-//        $(document).ready(function()
-//        {           
-//           $('#frmeditForm-title').qtip({
-//                content: {
-//                    text: 'V názvu stránky použijte nejdůležitější klíčová slova nebo fráze\n\
-//                    a dodržte délku 10 až 64 znaků včetně mezer. Doporučujeme:\n\
-//                    - Snažte se minimalizovat použití spojky "a"              \n\
-//                    - vyhněte se použití slov, které se na stránce nenacházejí.//',
-//                    width: '200'
-//                },
-//                position: {
-//                    my: 'bottom left',
-//                    at: 'top left'
-//                },
-//                show: {
-//                    event: 'mouseenter',
-//                    ready: false                 
-//                },
-//                hide: {
-//                    event: 'unfocus'
-//                },                
-//                style: {
-//                    classes: 'ui-tooltip-shadow ui-tooltip-jtools'                    
-//                }            
-//           });            
-//        });     
+    <script type="text/javascript">        
     function openKCFinder(div) {
         window.KCFinder = { callBack: function(url) { window.KCFinder = null; div.innerHTML = '<div style="margin:5px">Nahrávání obrázku...</div>'; var img = new Image(); img.src = url; img.onload = function() {
                     div.innerHTML = '<img id="img" src="' + url + '" />'; var img = document.getElementById('img'); var o_w = img.offsetWidth; var o_h = img.offsetHeight;   var f_w = div.offsetWidth; var f_h = div.offsetHeight; if ((o_w > f_w) || (o_h > f_h)) { if ((f_w / f_h) > (o_w / o_h)) f_w = parseInt((o_w * f_h) / o_h); else if ((f_w / f_h) < (o_w / o_h)) f_h = parseInt((o_h * f_w) / o_w); img.style.width = f_w + "px"; img.style.height = f_h + "px"; } else { f_w = o_w; f_h = o_h; }
                     img.style.marginLeft = parseInt((div.offsetWidth - f_w) / 2) + 'px'; img.style.marginTop = parseInt((div.offsetHeight - f_h) / 2) + 'px'; img.style.visibility = "visible"; var headerImageData = document.getElementById('frmeditForm-headerImageData'); headerImageData.value = url; var headerImage = document.getElementById('frmeditForm-headerImage-0');headerImage.checked = ''; headerImage = document.getElementById('frmeditForm-headerImage-1'); headerImage.checked = 'checked'; } }
         };
-        window.open('../kcfinder/browse.php?type=images&dir=user_uploads/{!$subdomain}',
+        window.open('../kcfinder/browse.php?type=images&dir=user_uploads/{!$subdomain}&langCode=cs',
             'kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, ' +
             'directories=0, resizable=1, scrollbars=0, width=800, height=600'
             );

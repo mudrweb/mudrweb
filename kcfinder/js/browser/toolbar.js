@@ -112,6 +112,7 @@ browser.initToolbar = function() {
 
 browser.initUploadButton = function() {            
     var btn = $('#toolbar a[href="kcact:upload"]');
+     
     if (!this.access.files.upload) {
         btn.css('display', 'none');
         return;
@@ -120,21 +121,13 @@ browser.initUploadButton = function() {
     var width = btn.outerWidth();
     var height = btn.outerHeight();
     
-    // compute images folder size <= 50MB 
-//    for (var i = 0, size = 0; i < this.files.length; i) {
-//        size += parseInt(this.files[i].size);
-//    }
-//    size_real = size;
-//    alert(size);
-//    size = this.humanSize(size);;
-//    if (size <= '50MB') {            
+    // compute images folder size <= 50MB           
     $('#toolbar').prepend('<div id="upload" style="top:' + top + 'px;width:' + width + 'px;height:' + height + 'px">' +
         '<form enctype="multipart/form-data" method="post" target="uploadResponse" action="' + browser.baseGetData('upload') + '">' +
             '<input type="file" name="upload[]" onchange="browser.uploadFile(this.form)" style="height:' + height + 'px" multiple="multiple" />' +
             '<input type="hidden" name="dir" value="" />' +
         '</form>' +
     '</div>');
-//    }
     
     $('#upload input').css('margin-left', "-" + ($('#upload input').outerWidth() - width) + 'px');
     $('#upload').mouseover(function() {

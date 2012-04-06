@@ -580,12 +580,7 @@ class uploader {
             $thumb = $this->config['uploadDir'] . "/.thumbs/images/gallery/" . $filename;        
         } elseif ($mode == 2) {
             $thumb = $this->config['uploadDir'] . "/.thumbs/images/" . $filename;        
-        }        
-        
-//        $myFile = "testFile.txt";
-//        $fh = fopen($myFile, 'w');
-//        fwrite($fh, $filename); 
-//        fclose($fh);                        
+        }                               
                 
         $thumb = path::normalize($thumb);
         $thumbDir = dirname($thumb);

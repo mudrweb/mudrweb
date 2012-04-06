@@ -159,7 +159,6 @@ browser.returnFile = function(file) {
         ? file : browser.uploadURL + '/' + browser.dir + '/' + file.data('name');
     fileURL = _.escapeDirs(fileURL);
     
-//    alert(asdf);
     // gallery addon start
     if (browser.dir == 'images/gallery') {        
         fileURL = file.substr

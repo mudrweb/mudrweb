@@ -198,7 +198,7 @@ class DefaultPresenter extends AdminPresenter {
             fclose($indexFile);
 
             // update its content
-            $updatedIndexContent = "#header { background-image: url(\".." . $data->headerImageData . "\"); width: 850px; height: 150px; background-size: auto 150px; background-repeat: no-repeat; padding: 0px; margin: 0 auto }";
+            $updatedIndexContent = "#header { background-image: url(\"$data->headerImageData\"); width: 850px; height: 150px; background-size: auto 150px; background-repeat: no-repeat; padding: 0px; margin: 0 auto }";
 
             $updatedFile = fopen($pathToUserSpecificDir . '/header.css', 'w+');
             fwrite($updatedFile, $updatedIndexContent);

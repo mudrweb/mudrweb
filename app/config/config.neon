@@ -13,6 +13,24 @@ common:
 			user: mudr
 			password: OKStFYCmq
 
+		globalSettings:
+			compatibleBrowsers: 'Optimalizováno pro prohlížeče IE9+, Firefox 11+ a Google Chrome 18+'
+			lastUpdate: 'Aktualizováno dne 06.04.2012; verze alfa2'
+			regionList: { jihocesky : Jihočeský, 
+                                    jihomoravsky : Jihomoravský, 
+                                    karlovarsky : Karlovarský, 
+                                    kralovohradecky : Královéhradecký, 
+                                    liberecky : Liberecký, 
+                                    moravskoslezsky : Moravskoslezský,
+                                    olomoucky : Olomoucký,
+                                    pardubicky : Pardubický,
+                                    plzensky : Plzeňský,
+                                    praha: Hlavní město Praha,
+                                    stredocesky : Středočeský,
+                                    ustecky : Ústecký,
+                                    vysocina : Vysočina,
+                                    zlinsky : Zlínský}
+			layoutGroups: { 'all' }
 
 	php:
 		date.timezone: Europe/Prague

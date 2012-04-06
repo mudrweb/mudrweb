@@ -38,23 +38,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     public function startup() {
         parent::startup();                                    
         
+        // ********************************************************************
+        // Website settings start
+        // ********************************************************************                        
         // list of regions
-        $this->regionsList = array(
-            'jihocesky' => 'Jihočeský',
-            'jihomoravsky' => 'Jihomoravský',
-            'karlovarsky' => 'Karlovarský',
-            'kralovohradecky' => 'Královéhradecký',
-            'liberecky' => 'Liberecký',
-            'moravskoslezsky' => 'Moravskoslezský',
-            'olomoucky' => 'Olomoucký',
-            'pardubicky' => 'Pardubický',
-            'plzensky' => 'Plzeňský',
-            'praha' => 'Hlavní město Praha',
-            'stredocesky' => 'Středočeský',
-            'ustecky' => 'Ústecký',
-            'vysocina' => 'Vysočina',
-            'zlinsky' => 'Zlínský'
-        );        
+        $this->regionsList = $this->context->container->parameters['globalSettings']['regionList'];
+        
+        // ********************************************************************
+        // Website settings end
+        // ********************************************************************        
         
         // logger
         $this->logger = $this->getService('logger');    

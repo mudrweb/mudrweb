@@ -42,7 +42,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
     protected $regionsList;
     
     protected $logger;
-    
+
     /**
      * Startup settings.
      */
@@ -52,28 +52,15 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         // ********************************************************************
         // Website settings start
         // ********************************************************************
+        // compatible browsers notification
+        $this->template->compatibleBrowsers = $this->context->container->parameters['globalSettings']['compatibleBrowsers'];
+        $this->template->lastUpdate = $this->context->container->parameters['globalSettings']['lastUpdate'];
+        
         // list of regions
-        $this->regionsList = array(
-            'jihocesky' => 'Jihočeský',
-            'jihomoravsky' => 'Jihomoravský',
-            'karlovarsky' => 'Karlovarský',
-            'kralovohradecky' => 'Královéhradecký',
-            'liberecky' => 'Liberecký',
-            'moravskoslezsky' => 'Moravskoslezský',
-            'olomoucky' => 'Olomoucký',
-            'pardubicky' => 'Pardubický',
-            'plzensky' => 'Plzeňský',
-            'praha' => 'Praha',
-            'stredocesky' => 'Středočeský',
-            'ustecky' => 'Ústecký',
-            'vysocina' => 'Vysočina',
-            'zlinsky' => 'Zlínský'
-        );
+        $this->regionsList = $this->context->container->parameters['globalSettings']['regionList'];
         
         // define basic layout groups
-        $this->layout_groups = array(
-            'all'
-        );
+        $this->layout_groups = $this->context->container->parameters['globalSettings']['layoutGroups'];
         sort($this->layout_groups);
         
         // ********************************************************************
