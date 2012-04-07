@@ -93,7 +93,7 @@ class SearchPresenter extends BasePresenter
 
             $conditions = $conditions . ") AND (";
             $conditions = $conditions . "name LIKE '%" . $stringToSearchFor . "%' OR surname LIKE '%" . $stringToSearchFor . "%' OR titleBefore LIKE '%" . $stringToSearchFor . "%'
-                OR titleAfter LIKE '%" . $stringToSearchFor . "%' OR email LIKE '%" . $stringToSearchFor . "%' OR street LIKE '%" . $stringToSearchFor . "%'
+                OR titleAfter LIKE '%" . $stringToSearchFor . "%' OR doctorGroup LIKE '%" . $stringToSearchFor . "%' OR email LIKE '%" . $stringToSearchFor . "%' OR street LIKE '%" . $stringToSearchFor . "%'
                 OR city LIKE '%" . $stringToSearchFor . "%' OR zip LIKE '%" . $stringToSearchFor . "%' OR region LIKE '%" . $stringToSearchFor . "%' 
                 OR phone LIKE '%" . $stringToSearchFor . "%'))";
 
@@ -141,9 +141,9 @@ class SearchPresenter extends BasePresenter
                     $users_data = $this->db_users->getUsersDataById(intval($serachResult));
                     if ($user && $users_data) {                    
                         $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
-                                $users_data->surname, $users_data->titleAfter, $users_data->email, 
-                                $users_data->street, $users_data->city, $this->regionsList[$users_data->region],
-                                $users_data->phone, $user->subdomain);
+                                $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup, 
+                                $users_data->email, $users_data->street, $users_data->city, 
+                                $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);
                     }
                 }            
 
@@ -157,7 +157,7 @@ class SearchPresenter extends BasePresenter
             $index = 1;
             $conditions = "(";            
             $conditions = $conditions . "name LIKE '%" . $stringToSearchFor . "%' OR surname LIKE '%" . $stringToSearchFor . "%' OR titleBefore LIKE '%" . $stringToSearchFor . "%'
-                OR titleAfter LIKE '%" . $stringToSearchFor . "%' OR email LIKE '%" . $stringToSearchFor . "%' OR street LIKE '%" . $stringToSearchFor . "%'
+                OR titleAfter LIKE '%" . $stringToSearchFor . "%' OR doctorGroup LIKE '%" . $stringToSearchFor . "%' OR email LIKE '%" . $stringToSearchFor . "%' OR street LIKE '%" . $stringToSearchFor . "%'
                 OR city LIKE '%" . $stringToSearchFor . "%' OR zip LIKE '%" . $stringToSearchFor . "%' OR region LIKE '%" . $stringToSearchFor . "%' 
                 OR phone LIKE '%" . $stringToSearchFor . "%')";
 
@@ -203,9 +203,9 @@ class SearchPresenter extends BasePresenter
                 $users_data = $this->db_users->getUsersDataById(intval($serachResult));
                 if ($user && $users_data) {
                     $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
-                            $users_data->surname, $users_data->titleAfter, $users_data->email, 
-                            $users_data->street, $users_data->city, $this->regionsList[$users_data->region],
-                            $users_data->phone, $user->subdomain);
+                            $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup,
+                            $users_data->email, $users_data->street, $users_data->city, 
+                            $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);
                 }
             }            
             

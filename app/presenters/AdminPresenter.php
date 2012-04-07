@@ -129,7 +129,8 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
             // get user specific layout
             $userWebsitedataFromDB = $this->db_users->getUserWebsiteDataById($this->user->getId());
             if ($userWebsitedataFromDB) {
-                $this->template->pathToEditorCSS = 'layouts/' . $userWebsitedataFromDB->layout . '_editor.css';                
+                $editorCSS = substr($userWebsitedataFromDB->layout, 0, 8);
+                $this->template->pathToEditorCSS = 'layouts/' . $editorCSS . '_editor';                
             } else {
                 $this->template->pathToEditorCSS = 'editor.css';
             }

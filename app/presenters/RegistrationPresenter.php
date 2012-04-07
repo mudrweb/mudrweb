@@ -18,7 +18,7 @@ class RegistrationPresenter extends BasePresenter {
      */
     public function startup()
     {
-        parent::startup();             
+        parent::startup();        
     }
     
     /**
@@ -207,6 +207,16 @@ class RegistrationPresenter extends BasePresenter {
                 ->addRule(Form::MAX_LENGTH, 'Titul za: Maximální povolená délka titulu za jménem je 12 znaků.', 12)                
                 ->setAttribute('class', 'input_style_pinfo');                                    
         
+        $form->addSelect('doctorGroup', 'Odbornost:', $this->doctorGroupsList)                    
+                ->setDefaultValue('1')
+                ->setAttribute('class', 'input_style_select');         
+
+        $form->addText('extraDoctorGroup', 'Odbornost+:', 40, 40)                
+                ->addRule(Form::FILLED, 'Musíte zadat odbornost nebo vybrat ze seznamu.')
+                ->addRule(Form::MAX_LENGTH, 'Odbornost: Maximální povolená délka odbornosti je 40 znaků.', 40)   
+                ->setDefaultValue('Vaše odbornost')
+                ->setAttribute('class', 'input_style_pinfo');          
+        
         $form->addText('street', 'Ulice a číslo:', 50, 50)                
                 ->addRule(Form::FILLED, 'Musíte zadat ulici.')                
                 ->addRule(Form::FILLED, 'Musíte zadat ulici a číslo.')                
@@ -286,21 +296,34 @@ class RegistrationPresenter extends BasePresenter {
                 $section->hashedPassword = $hashedPassword;
                 $section->salt = $salt;
                 $section->subdomain = $data->subdomain;
-                $section->usersSponsor = $usersSponsor;
-
+                $section->usersSponsor = $usersSponsor;                                             
+                                
+                $doctorGroupFoundById = null;
+                // doctor group chosen from list or set manually?
+                if ($data->doctorGroup != 'xxx') {               
+                    // found group by id in 2D array
+                    foreach ($this->doctorGroupsList as $doctorGroup=>$value) {
+                        if (array_key_exists($data->doctorGroup, $this->doctorGroupsList[$doctorGroup])) {                        
+                            $doctorGroupFoundById = $this->doctorGroupsList[$doctorGroup][$data->doctorGroup];
+                        }                   
+                    }                                        
+                } else {
+                    $doctorGroupFoundById = $data->extraDoctorGroup;
+                }                            
+                
                 $dataArray_users_data = array('', $data->name, $data->surname,
                     $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                    $data->region, $data->phone);
+                    $data->region, $data->phone, $doctorGroupFoundById);
 
                 $section->dataArray_users_data = $dataArray_users_data;                                                        
-
+                
     //            if (!$this->isAjax()) {
     //                $this->redirect('this');
     //            } else {
-                    $this->invalidateControl('formRegUser');
-                    $this->invalidateControl('dispPass');
-                    $button->getForm()->setValues(array(), TRUE);
-                    $this->redirect('Registration:final');
+                $this->invalidateControl('formRegUser');
+                $this->invalidateControl('dispPass');
+                $button->getForm()->setValues(array(), TRUE);
+                $this->redirect('Registration:final');
     //            }        
             } else {
                 $this->flashMessage('Zadané referenční číslo je neplatné!', 'warning');

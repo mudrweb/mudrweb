@@ -158,6 +158,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .input_style_select { font-size: 95%; font-family: arial; padding: 1px; padding-top: 2px; height: 24px; border: 1px solid #000000;
     -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 10px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 10px; box-shadow: rgba(200,200,200,1) 0 1px 10px;
 }
+#extraDoctorGroup { display: none; }
 
 /** program */
 .td_reg_programs { background-color: #ffffff; padding-left: 20px; width: 685px; }
@@ -199,7 +200,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .generatedPass { display:inline; float:right; padding-right: 80px; font-size: 130%; color: red; }
 .td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; }
 .td_input_changePass { padding-left: 150px; padding-bottom: 15px; padding-top: 5px; }
-.td_right_img {  padding-left: 70px; }
+.td_right_img {  padding-left: 40px; }
 .td_input_referral_regUserPanel { padding-left: 30px; padding-bottom: 15px; width: 20px; }
 .qtip_content { font-size: 105%; font-weight: bold; }
 

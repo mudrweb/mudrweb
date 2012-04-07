@@ -30,6 +30,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     // list of regions
     protected $regionsList;    
     
+    // list of doctor groups
+    protected $doctorGroupsList;
+
     protected $logger;    
     
     /**
@@ -43,6 +46,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         // ********************************************************************                        
         // list of regions
         $this->regionsList = $this->context->container->parameters['globalSettings']['regionList'];
+        
+        // list of doctor groups
+        $this->doctorGroupsList = $this->context->container->parameters['globalSettings']['doctorGroups'];
         
         // ********************************************************************
         // Website settings end

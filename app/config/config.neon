@@ -29,8 +29,117 @@ common:
                                     stredocesky : Středočeský,
                                     ustecky : Ústecký,
                                     vysocina : Vysočina,
-                                    zlinsky : Zlínský}
+                                    zlinsky : Zlínský }
 			layoutGroups: { 'all' }
+			doctorGroups: { 
+                                    skupina 0 : { 
+                                        001 : 001 praktické lékařství pro dospělé,
+                                        002 : 002 praktické lékařství pro děti a dorost,
+                                        003 : 003 lékařská služba první pomoci,
+                                        013 : 013 stomatologická chirurgie,
+                                        014 : 014 praktické zubní lékařství,
+                                        015 : 015 čelistní ortopedie,
+                                        016 : 016 dětská stomatologie,
+                                        017 : 017 parodontologie,
+                                        019 : 019 stomatologická LSPP
+                                    }, skupina 1 : {
+                                        101 : 101 interní lékařství,
+                                        102 : 102 angiologie,
+                                        103 : 103 diabetologie,
+                                        104 : 104 endokrinologie,
+                                        105 : 105 gastroenterologie a hepatologie,
+                                        106 : 106 geriatrie,
+                                        107 : 107 kardiologie,
+                                        108 : 108 nefrologie,
+                                        109 : 109 revmatologie,
+                                        128 : 128 hemodialýza
+                                    }, skupina 2 : {
+                                        201 : 201 fyziatrie a rehabilitační lékařství,
+                                        202 : 202 klinická hematologie,
+                                        203 : 203 přenosné nemoce,
+                                        204 : 204 tělovýchovné lékařství,
+                                        205 : 205 tuberkulóza a respirační nemoce,
+                                        206 : 206 klinická farmakologie,
+                                        207 : 207 alergologie a klinická imunologie,
+                                        208 : 208 lékařská genetika,
+                                        209 : 209 neurologie,
+                                        222 : 222 transfúzní služba
+                                    }, skupina 3 : {
+                                        301 : 301 pediatrie,
+                                        302 : 302 dětská kardiologie,
+                                        303 : 303 dorostové lékařství,
+                                        304 : 304 neonatologie,
+                                        305 : 305 psychiatrie,
+                                        306 : 306 dětská psychiatrie,
+                                        307 : 307 gerontopsychiatrie,
+                                        308 : 308 léčba alkoholismu a toxikomanií,
+                                        309 : 309 sexuologie
+                                    }, skupina 4 : {
+                                        401 : 401 pracovní lékařství,
+                                        402 : 402 klinická onkologie
+                                        403 : 403 radioterapie a radiační onkologie,
+                                        404 : 404 dermatovenerologie,
+                                        405 : 405 dětská dermatologie,
+                                        406 : 406 korektivní dermatologie,
+                                        407 : 407 nukleární medicína,
+                                        409 : 409 dětská neurologie
+                                    }, skupina 5 : {
+                                        501 : 501 chirurgie,
+                                        502 : 502 dětská chirurgie,
+                                        503 : 503 úrazová chirurgie,
+                                        504 : 504 cévní chirurgie,
+                                        505 : 505 kardiochirurgie,
+                                        506 : 506 neurochirurgie,
+                                        507 : 507 hrudní chirurgie
+                                    }, skupina 6 : {
+                                        601 : 601 plastická chirurgie,
+                                        602 : 602 popáleninová medicína,
+                                        603 : 603 gynekologie a porodnictví,
+                                        604 : 604 dětská gynekologie,
+                                        605 : 605 čelistní a obličejová chirurgie,
+                                        606 : 606 ortopedie,
+                                        607 : 607 5ortopedická protetika,
+                                        613 : 613 asistovaná reprodukce
+                                    }, skupina 7 : {
+                                        701 : 701 otorinolaryngologie,
+                                        702 : 702 foniatrie,
+                                        703 : 703 audiologie,
+                                        704 : 704 dětská otorinolaryngologie,
+                                        705 : 705 oftalmologie,
+                                        706 : 706 urologie,
+                                        707 : 707 dětská urologie,
+                                        708 : 708 ARO a intenzivní péče,
+                                        709 : 709 zdravotnická záchranná služba,
+                                        710 : 710 léčba bolesti
+                                    }, skupina 8 : {
+                                        801 : 801 klinická biochemie,
+                                        802 : 802 lékařská mikrobiologie,
+                                        803 : 803 lékařská bakteriologie,
+                                        804 : 804 lékařská parazitologie,
+                                        805 : 805 lékařská virologie,
+                                        806 : 806 screening nádorů prsu,
+                                        807 : 807 patologická anatomie,
+                                        808 : 808 soudní lékařství,
+                                        809 : 809 radiodiagnostika,
+                                        810 : 810 magnetická rezonance,                                        
+                                        814 : 814 laboratoř toxikologická,
+                                        815 : 815 laboratoř nukleární medicíny,
+                                        816 : 816 laboratoř lékařské genetiky,
+                                        817 : 817 laboratoř klinické cytologie,
+                                        818 : 818 laboratoř hematologická,
+                                        822 : 822 laboratoř mykologická
+                                    }, skupina 9 : {
+                                        901 : 901 klinická psychologie,
+                                        902 : 902 rehabilitace - vysokoškolák,
+                                        903 : 903 klinická logopedie,
+                                        914 : 914 psychiatrická sestra,
+                                        917 : 917 ergoterapie,
+                                        921 : 921 porodní asistentka,
+                                        927 : 927 ortoptická sestra,
+                                    }, skupina ? : {
+                                        xxx : xxx jiná odbornost
+                                    }
+                                      }
 
 	php:
 		date.timezone: Europe/Prague

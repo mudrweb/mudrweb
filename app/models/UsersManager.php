@@ -401,6 +401,7 @@ class UsersManager extends Nette\Object {
                'surname' => $dataArray[2],
                'titleBefore' => $dataArray[3],
                'titleAfter' => $dataArray[4],
+               'doctorGroup' => $dataArray[11],
                'email' => $dataArray[5],                
                'street' => $dataArray[6],                
                'city' => $dataArray[7],                
