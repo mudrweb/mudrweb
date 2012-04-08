@@ -380,8 +380,8 @@ class UsersManager extends Nette\Object {
             $changeDateTime = date("Y-m-d H:i:s");
             $this->database->exec('
                 UPDATE users_data SET 
-                name=?, surname=?, titleBefore=?, titleAfter=?, street=?, city=?, zip=?, region=?, phone=?, email=?, lastChange=? WHERE idusers=?', 
-                $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5], $dataArray[6], $dataArray[7], $dataArray[8], $dataArray[9], $dataArray[10], $changeDateTime, $dataArray[0]);            
+                name=?, surname=?, titleBefore=?, titleAfter=?, doctorGroup=?, street=?, city=?, zip=?, region=?, phone=?, email=?, lastChange=? WHERE idusers=?', 
+                $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5], $dataArray[6], $dataArray[7], $dataArray[8], $dataArray[9], $dataArray[10], $dataArray[11], $changeDateTime, $dataArray[0]);            
         } else {            
             throw new \Nette\Application\ToolException('Unable to update user profile info.
                     Wrong input. method: changeUserProfileInfo($dataArray)', 500);

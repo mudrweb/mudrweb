@@ -92,6 +92,7 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users_data` (
   `surname` VARCHAR(45) NULL ,
   `titleBefore` VARCHAR(12) NULL ,
   `titleAfter` VARCHAR(12) NULL ,
+  `doctorGroup` VARCHAR(40) NULL ,
   `gender` ENUM('muž','žena') NULL ,
   `email` VARCHAR(50) NULL ,
   `street` VARCHAR(50) NULL ,
@@ -249,6 +250,12 @@ INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VAL
 INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E4', 'all', 'E - cervena');
 INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E5', 'all', 'E - zluta');
 INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E6', 'all', 'E - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F1', 'all', 'F - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F2', 'all', 'F - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F3', 'all', 'F - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F4', 'all', 'F - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F5', 'all', 'F - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F6', 'all', 'F - modra');
 
 COMMIT;
 
@@ -284,10 +291,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (1, 1, 'Martin', 'Test', 'Ing.', 'Phd.', 'muž', 'zvak.martin@gmail.com', 'Vachova 36/1', 'Brno', '60200', 'jihomoravsky', 737104133, NULL);
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (2, 2, 'Frantisek', 'Buksantl', 'MUDR.', 'Phd.', NULL, 'zvak.martin@gmail.com', 'Siroka', 'Praha', '66789', 'praha', 998000222, NULL);
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (3, 3, 'Jozef', 'Kukuricudus', 'Mgr.', 'Phd.', NULL, 'zvak.martin@gmail.com', 'Dlha', 'Ostrava', '44556', 'moravskoslezsky', 222333444, NULL);
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (5, 4, 'Peter', 'Nagy', 'Bc.', 'Phd.', NULL, 'zvak.martin@gmail.com', 'Uzka', 'Plzen', '12345', 'plzensky', 666555777, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (1, 1, 'Martin', 'Test', 'Ing.', 'Phd.', '302 dětská kardiologie', 'muž', 'zvak.martin@gmail.com', 'Vachova 36/1', 'Brno', '60200', 'jihomoravsky', 737104133, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (2, 2, 'Frantisek', 'Buksantl', 'MUDR.', 'Phd.', '302 dětská kardiologie', NULL, 'zvak.martin@gmail.com', 'Siroka', 'Praha', '66789', 'praha', 998000222, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (3, 3, 'Jozef', 'Kukuricudus', 'Mgr.', 'Phd.', '309 sexuologie', NULL, 'zvak.martin@gmail.com', 'Dlha', 'Ostrava', '44556', 'moravskoslezsky', 222333444, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (5, 4, 'Peter', 'Nagy', 'Bc.', 'Phd.', '208 lékařská genetika', NULL, 'zvak.martin@gmail.com', 'Uzka', 'Plzen', '12345', 'plzensky', 666555777, NULL);
 
 COMMIT;
 

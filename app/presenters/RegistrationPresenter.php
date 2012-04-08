@@ -213,7 +213,7 @@ class RegistrationPresenter extends BasePresenter {
 
         $form->addText('extraDoctorGroup', 'Odbornost+:', 40, 40)                
                 ->addRule(Form::FILLED, 'Musíte zadat odbornost nebo vybrat ze seznamu.')
-                ->addRule(Form::MAX_LENGTH, 'Odbornost: Maximální povolená délka odbornosti je 40 znaků.', 40)   
+                ->addRule(Form::MAX_LENGTH, 'Odbornost+: Maximální povolená délka odbornosti je 40 znaků.', 40)   
                 ->setDefaultValue('Vaše odbornost')
                 ->setAttribute('class', 'input_style_pinfo');          
         

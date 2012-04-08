@@ -40,7 +40,7 @@
 	 <table cellspacing="0">          
                 <tr style="height: 5px;"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" rowspan="10">Změna osobních údajů</td>
+                    <td class="td_verticalSeparator" id="regArea" rowspan="11">Změna osobních údajů</td>
                     
                     <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input name}</td>                    
@@ -57,6 +57,14 @@
                     <td class="td_input_label_pinfo">{label titleAfter /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input titleAfter}</td>                                                      
                 </tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label doctorGroup /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input doctorGroup}</td>                                                      
+                </tr>                
+                <tr id="extraDoctorGroup">                
+                    <td class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input extraDoctorGroup}</td>                                                                      
+                </tr>                 
                 <tr>
                     <td class="td_input_label_pinfo">{label street /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input street}</td>                                                      
@@ -90,7 +98,13 @@
                 </tr>
          </table>
          <h2></h2>          
-    {/form editPInfoForm}     
+    {/form editPInfoForm}
+    <script type="text/javascript">     
+        if ($('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#extraDoctorGroup').show(1000); $('#regArea').attr('rowspan',12); } else { $('#extraDoctorGroup').hide(); $('#regArea').attr('rowspan',11); }
+        $('#frmeditPInfoForm-doctorGroup').live("change", function () {
+            if ($(this).attr('value') == 'xxx') { $('#extraDoctorGroup').show(1000); $('#regArea').attr('rowspan',12); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val(''); } } else { $('#regArea').attr('rowspan',11); $('#extraDoctorGroup').hide(); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val('Vaše odbornost'); } }
+        })
+    </script> 
     {/snippet}          
          
 {/block}

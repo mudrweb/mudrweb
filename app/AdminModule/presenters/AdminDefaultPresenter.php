@@ -153,6 +153,16 @@ class AdminDefaultPresenter extends AdminPresenter {
         $form->addText('titleAfter', 'Titul za:', 12, 12)                
                 ->addRule(Form::MAX_LENGTH, 'Titul za: Maximální povolená délka titulu za jménem je 12 znaků.', 12)                
                 ->setAttribute('class', 'input_style_pinfo');                                    
+
+        $form->addSelect('doctorGroup', 'Odbornost:', $this->doctorGroupsList)                    
+                ->setDefaultValue('1')
+                ->setAttribute('class', 'input_style_select');         
+
+        $form->addText('extraDoctorGroup', 'Odbornost+:', 40, 40)                
+                ->addRule(Form::FILLED, 'Musíte zadat odbornost nebo vybrat ze seznamu.')
+                ->addRule(Form::MAX_LENGTH, 'Odbornost+: Maximální povolená délka odbornosti je 40 znaků.', 40)   
+                ->setDefaultValue('Vaše odbornost')
+                ->setAttribute('class', 'input_style_pinfo');           
         
         $form->addText('street', 'Ulice a číslo:', 50, 50)                
                 ->addRule(Form::FILLED, 'Musíte zadat ulici.')                
@@ -298,9 +308,21 @@ class AdminDefaultPresenter extends AdminPresenter {
 
             //2. users_data
             $user = $this->db_users->getUserBySubdomain($data->subdomain);
+            $doctorGroupFoundById = null;
+            // doctor group chosen from list or set manually?
+            if ($data->doctorGroup != 'xxx') {
+                // found group by id in 2D array
+                foreach ($this->doctorGroupsList as $doctorGroup => $value) {
+                    if (array_key_exists($data->doctorGroup, $this->doctorGroupsList[$doctorGroup])) {
+                        $doctorGroupFoundById = $this->doctorGroupsList[$doctorGroup][$data->doctorGroup];
+                    }
+                }
+            } else {
+                $doctorGroupFoundById = $data->extraDoctorGroup;
+            }
             $dataArray_users_data = array($user->id, $data->name, $data->surname,
                 $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                $data->region, $data->phone);
+                $data->region, $data->phone, $doctorGroupFoundById);
             $this->db_users->addUserData($dataArray_users_data);
 
             //3. users_websiteData
