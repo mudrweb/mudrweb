@@ -565,19 +565,103 @@ class uploader {
         return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
     }
     
-    protected function makeThumb_cgallery($file, $overwrite=true, $mode) {
+//    protected function makeThumb_cgallery($file, $overwrite=true, $mode) {
+//        $gd = new gd($file);
+//
+//        // Drop files which are not GD handled images
+//        if ($gd->init_error)
+//            return true;   
+//        
+//        $commonGalleryPosition = strpos($file, 'commonGallery');
+//        $filename = substr($file, $commonGalleryPosition + strlen('commonGallery') + 1);
+//        
+//        $thumb = substr($file, strlen('commonGallery'));
+//        if ($mode == 1) {
+//            $thumb = $this->config['uploadDir'] . "/.thumbs/images/gallery/" . $filename;        
+//        } elseif ($mode == 2) {
+//            $thumb = $this->config['uploadDir'] . "/.thumbs/images/" . $filename;        
+//        }                               
+//                
+//        $thumb = path::normalize($thumb);
+//        $thumbDir = dirname($thumb);
+//        if (!is_dir($thumbDir) && !@mkdir($thumbDir, $this->config['dirPerms'], true))
+//            return false;
+//
+//        if (!$overwrite && is_file($thumb))
+//            return true;
+//
+//        // Images with smaller resolutions than thumbnails
+//        if (($gd->get_width() <= $this->config['thumbWidth']) &&
+//            ($gd->get_height() <= $this->config['thumbHeight'])
+//        ) {
+//            $browsable = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
+//            // Drop only browsable types
+//            if (in_array($gd->type, $browsable))
+//                return true;
+//
+//        // Resize image
+//        } elseif (!$gd->resize_fit($this->config['thumbWidth'], $this->config['thumbHeight']))
+//            return false;
+//
+//        // Save thumbnail
+//        return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
+//    }    
+//
+//    protected function makeThumb_cgallery_cardiology($file, $overwrite=true, $mode) {
+//        $gd = new gd($file);
+//
+//        // Drop files which are not GD handled images
+//        if ($gd->init_error)
+//            return true;   
+//        
+//        $commonGalleryPosition = strpos($file, 'commonGallery/cardiology');
+//        $filename = substr($file, $commonGalleryPosition + strlen('commonGallery/cardiology') + 1);
+//        
+//        $thumb = substr($file, strlen('commonGallery/cardiology'));
+//        if ($mode == 1) {
+//            $thumb = $this->config['uploadDir'] . "/.thumbs/images/gallery/cardiology/" . $filename;        
+//        } elseif ($mode == 2) {
+//            $thumb = $this->config['uploadDir'] . "/.thumbs/images/" . $filename;        
+//        }                               
+//                
+//        $thumb = path::normalize($thumb);
+//        $thumbDir = dirname($thumb);
+//        if (!is_dir($thumbDir) && !@mkdir($thumbDir, $this->config['dirPerms'], true))
+//            return false;
+//
+//        if (!$overwrite && is_file($thumb))
+//            return true;
+//
+//        // Images with smaller resolutions than thumbnails
+//        if (($gd->get_width() <= $this->config['thumbWidth']) &&
+//            ($gd->get_height() <= $this->config['thumbHeight'])
+//        ) {
+//            $browsable = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
+//            // Drop only browsable types
+//            if (in_array($gd->type, $browsable))
+//                return true;
+//
+//        // Resize image
+//        } elseif (!$gd->resize_fit($this->config['thumbWidth'], $this->config['thumbHeight']))
+//            return false;
+//
+//        // Save thumbnail
+//        return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
+//    }        
+
+    protected function makeThumb_universal($file, $overwrite=true, $mode, $commonGalleryPath, $tumbsPath) {
         $gd = new gd($file);
 
         // Drop files which are not GD handled images
         if ($gd->init_error)
             return true;   
         
-        $commonGalleryPosition = strpos($file, 'commonGallery');
-        $filename = substr($file, $commonGalleryPosition + strlen('commonGallery') + 1);
+        $commonGalleryPosition = strpos($file, $commonGalleryPath);
+        $filename = substr($file, $commonGalleryPosition + strlen($commonGalleryPath) + 1);
         
-        $thumb = substr($file, strlen('commonGallery'));
+        $thumb = substr($file, strlen($commonGalleryPath));
         if ($mode == 1) {
-            $thumb = $this->config['uploadDir'] . "/.thumbs/images/gallery/" . $filename;        
+            $thumb = $this->config['uploadDir'] . $tumbsPath . $filename;        
         } elseif ($mode == 2) {
             $thumb = $this->config['uploadDir'] . "/.thumbs/images/" . $filename;        
         }                               
@@ -606,7 +690,7 @@ class uploader {
         // Save thumbnail
         return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
     }    
-
+    
     protected function localize($langCode) {
         require "lang/{$langCode}.php";
         setlocale(LC_ALL, $lang['_locale']);

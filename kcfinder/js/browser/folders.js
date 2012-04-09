@@ -198,7 +198,8 @@ browser.statusDir = function() {
     size_real = size;
     size = this.humanSize(size);        
 
-    if (this.dir != 'images/gallery') {        
+    // gallery addon start
+    if (this.dir != 'images/gallery' && this.dir != 'images/gallery/cardiology') {        
         function oc(a)
         {
             var o = {};
@@ -208,14 +209,15 @@ browser.statusDir = function() {
             }
             return o;
         }
-        premiumUsers = ['/user_uploads/xa'];
-//        premiumUsers = [''];
+//        premiumUsers = ['/user_uploads/xa'];
+        premiumUsers = [''];
 
         // check if current user is in premuium users pool
         if (this.uploadURL in oc(premiumUsers) == true) {    
                 size_left_real = 52428800 - size_real;
                 size_left = this.humanSize(size_left_real);
                 document.getElementById("upload_mod").style.display = 'block';
+                document.getElementById("upload").style.display = 'block';                
                 $('#fileinfo').html(
                 'Počet souborů: ' +
                 this.files.length + ' ' +         
@@ -224,6 +226,7 @@ browser.statusDir = function() {
             if (size_real > 52428800) {
                 // hide upload button
                 document.getElementById("upload_mod").style.display = 'none';
+                document.getElementById("upload").style.display = 'none';                
                 $('#fileinfo').html(
                 'Počet souborů: ' +
                 this.files.length + ' ' + 
@@ -232,6 +235,7 @@ browser.statusDir = function() {
                 size_left_real = 52428800 - size_real;
                 size_left = this.humanSize(size_left_real);
                 document.getElementById("upload_mod").style.display = 'block';
+                document.getElementById("upload").style.display = 'block';                                
                 $('#fileinfo').html(
                 'Počet souborů: ' +
                 this.files.length + ' ' +         
@@ -240,6 +244,7 @@ browser.statusDir = function() {
         }
     } else {
         document.getElementById("upload_mod").style.display = 'none';
+        document.getElementById("upload").style.display = 'none';
         $('#fileinfo').html('');        
     }
 };

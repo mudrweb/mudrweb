@@ -48,24 +48,18 @@ class browser extends uploader {
             $this->errorMsg("Cannot access or create thumbnails folder.");
 
         // gallery addon start    
-//        $galleryDir = $this->config['uploadDir'] . "/images/gallery";
-//        if ((
-//                !is_dir($galleryDir) &&
-//                !@mkdir($galleryDir, $this->config['dirPerms'])
-//            ) ||
-//
-//            !is_readable($galleryDir) ||
-//            !dir::isWritable($galleryDir) ||
-//            (
-//                !is_dir("$galleryDir") &&
-//                !@mkdir("$galleryDir}", $this->config['dirPerms'])
-//            )
-//        )                      
+        // gallery main
         $galleryDir = $this->config['uploadDir'] . "/images/gallery";
         if (is_dir($galleryDir)) {            
         } else {
             @mkdir($galleryDir, $this->config['dirPerms']);
         }
+        // cardiology
+        $galleryDir = $this->config['uploadDir'] . "/images/gallery/cardiology";
+        if (is_dir($galleryDir)) {            
+        } else {
+            @mkdir($galleryDir, $this->config['dirPerms']);
+        }        
         // gallery addon end                
                 
         $this->thumbsDir = $thumbsDir;
@@ -297,8 +291,11 @@ class browser extends uploader {
 
     protected function act_download() {
         $dir = $this->postDir();
-        // gallery addon start         
-        if (strpos($dir, "images/gallery")) {
+        // gallery addon start        
+        if (strpos($dir, "images/gallery/cardiology")) {
+            $dir = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology";
+        }
+        else if (strpos($dir, "images/gallery")) {
             $dir = "/CORE/mudrweb.cz/www/images/commonGallery";
         }
         // gallery addon end
@@ -768,57 +765,69 @@ class browser extends uploader {
             );                      
         }
              
-        // gallery addon start         
-        $return_cgallery = array();        
-        if (strpos($dir, '/images/gallery')) {            
+        // gallery addon start        
+        $thumbDir_cgallery = array();
+        $dir_cgallery = array();
+        $files_cgallery = array();
+        $commonGalleryPath = array();
+        $tumbsPath = array();
+        $return_cgallery = array();            
+        if (strpos($dir, '/images/gallery/cardiology')) {                    
+            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/images";
+            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology";        
+            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
+            $commonGalleryPath = 'commonGallery/cardiology';
+            $tumbsPath = '/.thumbs/images/gallery/cardiology/';
+        } else if (strpos($dir, '/images/gallery')) {            
             $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/images";
             $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery";        
             $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-
+            $commonGalleryPath = 'commonGallery';
+            $tumbsPath = '/.thumbs/images/gallery/';            
+        }
 //        $myFile = "testFile.txt";
 //        $fh = fopen($myFile, 'w');
 //        fwrite($fh, count($files_cgallery)); 
-//        fclose($fh);              
-            
-            if ($files_cgallery !== false) {                   
-                foreach ($files_cgallery as $file_cgallery) {
-                    $size = @getimagesize($file_cgallery);                
-                    if (is_array($size) && count($size)) {                    
-                        $thumb_file = "$thumbDir_cgallery/" . basename($file_cgallery);                    
-                        if (!is_file($thumb_file))
-                            $this->makeThumb_cgallery($file_cgallery, false, 1);
-                            $this->makeThumb_cgallery($file_cgallery, false, 2);
-                        $smallThumb =
+//        fclose($fh);                          
+        if ($files_cgallery !== false) {
+            foreach ($files_cgallery as $file_cgallery) {
+                $size = @getimagesize($file_cgallery);
+                if (is_array($size) && count($size)) {
+                    $thumb_file = "$thumbDir_cgallery/" . basename($file_cgallery);
+                    if (!is_file($thumb_file))
+                    $this->makeThumb_universal($file_cgallery, false, 1, $commonGalleryPath, $tumbsPath);
+                    $this->makeThumb_universal($file_cgallery, false, 2, $commonGalleryPath, $tumbsPath);
+                    $smallThumb =
                             ($size[0] <= $this->config['thumbWidth']) &&
                             ($size[1] <= $this->config['thumbHeight']) &&
                             in_array($size[2], array(IMAGETYPE_GIF, IMAGETYPE_PNG, IMAGETYPE_JPEG));
-                    } else
-                        $smallThumb = false;
+                } else
+                    $smallThumb = false;
 
-                    $stat = stat($file_cgallery);
-                    if ($stat === false) continue;
-                    $name = basename($file_cgallery);
-                    $ext = file::getExtension($file_cgallery);
-                    $bigIcon = file_exists("themes/{$this->config['theme']}/img/files/big/$ext.png");
-                    $smallIcon = file_exists("themes/{$this->config['theme']}/img/files/small/$ext.png");
-                    $thumb = file_exists("$thumbDir_cgallery/$name");
-                    $return_cgallery[] = array(
-                        'name' => stripcslashes($name),
-                        'size' => $stat['size'],
-                        'mtime' => $stat['mtime'],
-                        'date' => @strftime($this->dateTimeSmall, $stat['mtime']),
-                        'readable' => is_readable($file_cgallery),
-                        'writable' => false,
-                        'bigIcon' => $bigIcon,
-                        'smallIcon' => $smallIcon,
-                        'thumb' => $thumb,
-                        'smallThumb' => $smallThumb
-                    );       
-                }            
-            } else {
-                return $return;
-            }                   
-        }               
+                $stat = stat($file_cgallery);
+                if ($stat === false)
+                    continue;
+                $name = basename($file_cgallery);
+                $ext = file::getExtension($file_cgallery);
+                $bigIcon = file_exists("themes/{$this->config['theme']}/img/files/big/$ext.png");
+                $smallIcon = file_exists("themes/{$this->config['theme']}/img/files/small/$ext.png");
+                $thumb = file_exists("$thumbDir_cgallery/$name");
+                $return_cgallery[] = array(
+                    'name' => stripcslashes($name),
+                    'size' => $stat['size'],
+                    'mtime' => $stat['mtime'],
+                    'date' => @strftime($this->dateTimeSmall, $stat['mtime']),
+                    'readable' => is_readable($file_cgallery),
+                    'writable' => false,
+                    'bigIcon' => $bigIcon,
+                    'smallIcon' => $smallIcon,
+                    'thumb' => $thumb,
+                    'smallThumb' => $smallThumb
+                );
+            }
+        } else {
+            return $return;
+        }
         // gallery addon end
         
         return array_merge($return, $return_cgallery);
@@ -906,7 +915,7 @@ class browser extends uploader {
             $hasDirs = false;              
         
         // gallery addon start                
-        if (strpos($dir, 'images/gallery')) {              
+        if (strpos($dir, 'images/gallery/cardiology')) {              
             $writable = dir::isWritable($dir);
             $info = array(
                 'name' => stripslashes(basename($dir)),
@@ -914,6 +923,16 @@ class browser extends uploader {
                 'writable' => false,
                 'removable' => false,
                 'hasDirs' => false
+            );
+        }
+        else if (strpos($dir, 'images/gallery')) {              
+            $writable = dir::isWritable($dir);
+            $info = array(
+                'name' => stripslashes(basename($dir)),
+                'readable' => true,
+                'writable' => false,
+                'removable' => false,
+                'hasDirs' => true
             );
         } else {   
         // gallery addon end            

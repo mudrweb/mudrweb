@@ -160,7 +160,12 @@ browser.returnFile = function(file) {
     fileURL = _.escapeDirs(fileURL);
     
     // gallery addon start
-    if (browser.dir == 'images/gallery') {        
+    if (browser.dir == 'images/gallery/cardiology') {        
+        fileURL = file.substr
+                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/' + file.data('name');
+        fileURL = _.escapeDirs(fileURL);                
+    }    
+    else if (browser.dir == 'images/gallery') {        
         fileURL = file.substr
                 ? file : 'http://mudrweb.cz/images/commonGallery/' + file.data('name');
         fileURL = _.escapeDirs(fileURL);                
@@ -520,7 +525,10 @@ browser.menuFile = function(file, e) {
         var ts = new Date().getTime();
         var showImage = function(data) {     
             // gallery addon start          
-            if (this.browser.dir == "images/gallery") {
+            if (this.browser.dir == "images/gallery/cardiology") {
+                url = _.escapeDirs('/images/commonGallery/cardiology/' + data.name) + '?ts=' + ts;
+            }
+            else if (this.browser.dir == "images/gallery") {
                 url = _.escapeDirs('/images/commonGallery/' + data.name) + '?ts=' + ts;
             } else {
             // gallery addon end
