@@ -122,7 +122,7 @@ class DefaultPresenter extends AdminPresenter {
         } else {
             $colourScheme = 'default';
         }          
-        $form->addRadioList('colourScheme', 'Výběr barev:', array(
+        $form->addRadioList('colourScheme', 'Barva textu (hlavní nadpis, podnadpis):', array(
                 'default' => 'výchozí',
                 'userSpecific' => 'vlastní',
                 ))
@@ -132,6 +132,7 @@ class DefaultPresenter extends AdminPresenter {
         // preprocess colours from DB format #colour1;#colour2;...
         $colours = $this->colourSchemeData;
         $colours = explode(";", $colours);
+        
         foreach($colours as $key => $value) { 
             if($value == "") { 
                 unset($colours[$key]); 
@@ -139,8 +140,14 @@ class DefaultPresenter extends AdminPresenter {
         }           
         if (isset($colours) && sizeof($colours) == 1) {
             $colour1 = $colours[0];
-        } else {
-            $colour1 = '#FFFFFF';
+            $colour2 = '';
+        } elseif (isset($colours) && sizeof($colours) == 2) {
+            $colour1 = $colours[0];
+            $colour2 = $colours[1];
+        }
+        else {
+            $colour1 = '#000000';
+            $colour2 = '#000000';
         }
         // set colour1
         $form->addHidden('colourSchemeData', $this->colourSchemeData);
@@ -148,6 +155,11 @@ class DefaultPresenter extends AdminPresenter {
                 ->addRule(Form::FILLED, 'Musíte vybrat barvu hlavního nadpisu.')                                                
                 ->setDefaultValue($colour1)
                 ->setAttribute('class', 'color-picker');                   
+
+        $form->addText('colour2', 'Barva podnadpisu:')                
+                ->addRule(Form::FILLED, 'Musíte vybrat barvu podnadpisu.')                                                
+                ->setDefaultValue($colour2)
+                ->setAttribute('class', 'color-picker');                           
         
         $form->addTextArea('title', 'Název stránky (title):', 52, 64)                
 //                ->addRule(Form::FILLED, 'Musíte zadat název stránky.')                
@@ -208,7 +220,7 @@ class DefaultPresenter extends AdminPresenter {
         if ($data->colourScheme == 'default') {
             $colourScheme = null;
         } else {
-            $colourScheme = $data->colour1 . ';';
+            $colourScheme = $data->colour1 . ';' . $data->colour2 . ';';
             
             // update colour_scheme.css
             $wwwDir = WWW_DIR;
@@ -219,7 +231,7 @@ class DefaultPresenter extends AdminPresenter {
             fclose($indexFile);
 
             // update its content            
-            $updatedIndexContent = "#header h1 { color: ". $data->colour1 . "; }";
+            $updatedIndexContent = "#header h1 { color: ". $data->colour1 . "; } #header h2 { color: ". $data->colour2 . "; }";
                 
             $updatedFile = fopen($pathToUserSpecificDir . '/colour_scheme.css', 'w+');
             fwrite($updatedFile, $updatedIndexContent);

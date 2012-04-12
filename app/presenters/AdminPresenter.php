@@ -80,7 +80,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         // extra methods holder
         $this->extraMethods = new ExtraMethods;
         
-        // create DB driver to access db manager methods
+        // create DB driver to access db manager methods        
         $this->db_users = $this->getService('usersmanager');
         $this->db_menuItems = $this->getService('menuitemsmanager');
         $this->db_stats = $this->getService('statsmanager');
