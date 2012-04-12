@@ -11,7 +11,7 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 #wrapper {background-color: #fff; color: #000;}
 
 /*Header*/
-#header {background-color: #fff; color: #000;
+#header {background-image: url('../../images/layouts/header_default_white.jpg'); background-color: #fff; color: #000;
 border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}

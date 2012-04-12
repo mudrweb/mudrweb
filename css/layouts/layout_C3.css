@@ -12,7 +12,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 border-radius: 10px; box-shadow: #129062 3px 3px 10px;}
 
 /*Header*/
-#header {background-color: transparent; color: #000;}
+#header {background-image: url('../../images/layouts/header_default_green.jpg'); background-color: transparent; color: #000;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 

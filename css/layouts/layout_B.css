@@ -23,7 +23,7 @@ div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; paddi
 /**
  * Header
  */
-#header { background-image: url('../../images/layouts/header.jpg'); width: 850px; height: 150px; background-repeat: no-repeat;padding: 0px;  }
+#header { width: 850px; height: 150px; background-repeat: no-repeat;padding: 0px;  }
 #header h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 28px; font-weight: normal; text-align: right; padding: 10px 20px 0px 10px;}
 #header h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; text-align: right; padding: 0px 20px 0px 10px;}
 

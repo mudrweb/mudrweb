@@ -8,7 +8,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 #topspace {background-color: transparent; color: #000;}
 
 /*Main Box*/
-#wrapper {background-color: #fff; color: #000;
+#wrapper {background-image: url('../../images/layouts/header_default_black.jpg'); background-color: #fff; color: #000;
 border-radius: 10px; box-shadow: #858383 3px 3px 10px}
 
 /*Header*/

@@ -69,7 +69,7 @@
          <table cellspacing="0">          
                 <tr class="tr_reg_height5"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" id="regArea" rowspan="10">Osobní údaje</td>
+                    <td class="td_verticalSeparator" id="regArea" rowspan="11">Osobní údaje</td>
                     
                     <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
                     <td class="td_input_regUserPanel_1">{input name}</td>         
@@ -92,9 +92,9 @@
                     <td class="td_input_label_pinfo">{label doctorGroup /} &nbsp</td>                    
                     <td class="td_input_regUserPanel_1">{input doctorGroup}</td>                                                      
                 </tr>                
-                <tr id="extraDoctorGroup">                
-                    <td class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1">{input extraDoctorGroup}</td>                                                                      
+                <tr>                
+                    <td id="extraDoctorGroup" class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
+                    <td id="extraDoctorGroup1" class="td_input_regUserPanel_1">{input extraDoctorGroup}</td>                                                                      
                 </tr>                  
                 <tr>
                     <td class="td_input_label_pinfo">{label street /} &nbsp</td>                    
@@ -169,7 +169,7 @@
     } else { $("#frmregUserForm2-subdomain").removeClass('form-control-error'); $("#frmregUserForm2-subdomain").removeClass('object_error'); $("#frmregUserForm2-subdomain").addClass("object_ok"); $("#subdomainAvailableStatus").html('&nbsp;<span class="icon-ui-green icon-ui-green-tick"></span><span>Název stránky je k dispozici</span>'); } }); } });         
 
     $('#frmregUserForm2-doctorGroup').live("change", function () {
-        if ($(this).attr('value') == 'xxx') { $('#extraDoctorGroup').show(1000); $('#regArea').attr('rowspan',11); $('#frmregUserForm2-extraDoctorGroup').val(''); } else { $('#regArea').attr('rowspan',10); $('#extraDoctorGroup').hide(); $('#frmregUserForm2-extraDoctorGroup').val('Vaše odbornost'); }
+        if ($(this).attr('value') == 'xxx') { $("#extraDoctorGroup").animate({ opacity: "show"}, 800); $("#extraDoctorGroup1").animate({ opacity: "show"}, 800); $('#frmregUserForm2-extraDoctorGroup').val(''); } else { $('#extraDoctorGroup').hide(); $('#extraDoctorGroup1').hide(); $('#frmregUserForm2-extraDoctorGroup').val('Vaše odbornost'); }
     })
 </script>                         
          

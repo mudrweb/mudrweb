@@ -7,7 +7,7 @@
 * { margin: 0;}
 html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; height: 100%; }
 #ajax-spinner { margin: 15px 0 0 15px; padding: 18px; background: url('../../images/ajax-loader.gif') no-repeat 50% 50%; font-size: 0; z-index: 1000; position: absolute; top: 50%; left: 50%; }
-div.flash, div.info { color: #000; background: #FFF9D7; border: 1px solid #E2C822; padding: 10px 10px 10px 10px; margin-top: 20px; margin-left:auto; margin-right:auto; width: 95%; }
+div.flash, div.info { color: #000; background: #FFF9D7; border: 1px solid #E2C822; padding: 10px 10px 10px 10px; margin-top: 0px; margin-left:0px; margin-right: 0px; width: 670px; }
 div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; padding: 10px 10px 10px 10px; margin-top: 20px; margin-left:auto; margin-right:auto; width: 95%px; }
 * :focus { outline: 0; }
 
@@ -24,7 +24,7 @@ border-width: 1px; border-color: #000; border-style: solid}
 /**
  * Header
  */
-#header { background-image: url('../../images/layouts/header.jpg'); width: 850px; height: 150px; background-repeat: no-repeat;padding: 0px;  }
+#header {width: 850px; height: 150px; background-repeat: no-repeat;padding: 0px;  }
 #header h1 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 28px; font-weight: normal; text-align: right; padding: 10px 20px 0px 10px;}
 #header h2 { font-family: "Lucida Grande", Arial, sans-serif; font-size: 16px; font-weight: normal; text-align: right; padding: 0px 20px 0px 10px;}
 

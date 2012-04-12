@@ -12,7 +12,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 border-radius: 10px; box-shadow: rgba(200,200,200,1) 4px 4px 8px;}
 
 /*Header*/
-#header {background-color: #fff ; color: #000;
+#header {background-image: url('../../images/layouts/header_default_green.jpg'); background-color: #fff ; color: #000;
 border-radius: 0px;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;}

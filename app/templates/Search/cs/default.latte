@@ -110,11 +110,11 @@
                             <span class="credents">{$dat[0]} {$dat[1]} {$dat[2]}, {$dat[3]}</span> - <a href='http://{$dat[9]}.mudrweb.cz' target="_blank">{$dat[9]}.mudrweb.cz</a>
                             <br />
                             {if $dat[7] == 'Hlavní město Praha'}
-                                {$dat[5]}, {$dat[6]}, Hlavní město Praha
+                                {$dat[5]}, {$dat[6]}, {$dat[7]}, Hlavní město Praha
                             {elseif $dat[7] == 'Vysočina'}
-                                {$dat[5]}, {$dat[6]}, Kraj {$dat[7]}
+                                {$dat[5]}, {$dat[6]}, {$dat[7]}, Kraj {$dat[7]}
                             {else}
-                                {$dat[5]}, {$dat[6]}, {$dat[7]} kraj
+                                {$dat[5]}, {$dat[6]}, {$dat[7]}, {$dat[8]} kraj
                             {/if}
                             <br />
                         </div>

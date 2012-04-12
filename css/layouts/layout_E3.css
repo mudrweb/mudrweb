@@ -11,7 +11,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 #wrapper {background-color: #fff; color: #000;}
 
 /*Header*/
-#header {background-color: transparent; color: #000;}
+#header {background-image: url('../../images/layouts/header_default_green.jpg');background-color: transparent; color: #000;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
@@ -19,7 +19,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 #main {background-color: transparent; color: #000;}
 
 /*Menu*/ 
-#menu {background-color: transparent; color: #000; border-color: #00A368;}
+#menu { background-color: transparent; color: #000; border-color: #00A368;}
 #menu ul {background-color: transparent; color: #000;}
 #menu li {background-color: transparent; color: #000;}
 #menu a {background-color: transparent; color: #05C37E;}

@@ -40,7 +40,7 @@
 	 <table cellspacing="0">          
                 <tr style="height: 5px;"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" id="regArea" rowspan="11">Změna osobních údajů</td>
+                    <td class="td_verticalSeparator" id="regArea" rowspan="12">Změna osobních údajů</td>
                     
                     <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input name}</td>                    
@@ -61,9 +61,9 @@
                     <td class="td_input_label_pinfo">{label doctorGroup /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input doctorGroup}</td>                                                      
                 </tr>                
-                <tr id="extraDoctorGroup">                
-                    <td class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
-                    <td class="td_input_pinfo">{input extraDoctorGroup}</td>                                                                      
+                <tr>                
+                    <td id="extraDoctorGroup" class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
+                    <td id="extraDoctorGroup1" class="td_input_pinfo">{input extraDoctorGroup}</td>                                                                      
                 </tr>                 
                 <tr>
                     <td class="td_input_label_pinfo">{label street /} &nbsp</td>                    
@@ -100,9 +100,9 @@
          <h2></h2>          
     {/form editPInfoForm}
     <script type="text/javascript">     
-        if ($('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#extraDoctorGroup').show(1000); $('#regArea').attr('rowspan',12); } else { $('#extraDoctorGroup').hide(); $('#regArea').attr('rowspan',11); }
+        if ($('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $("#extraDoctorGroup").animate({ opacity: "show"}, 800); $("#extraDoctorGroup1").animate({ opacity: "show"}, 800); } else { $('#extraDoctorGroup').hide(); $('#extraDoctorGroup1').hide(); }
         $('#frmeditPInfoForm-doctorGroup').live("change", function () {
-            if ($(this).attr('value') == 'xxx') { $('#extraDoctorGroup').show(1000); $('#regArea').attr('rowspan',12); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val(''); } } else { $('#regArea').attr('rowspan',11); $('#extraDoctorGroup').hide(); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val('Vaše odbornost'); } }
+            if ($(this).attr('value') == 'xxx') { $("#extraDoctorGroup").animate({ opacity: "show"}, 800); $("#extraDoctorGroup1").animate({ opacity: "show"}, 800); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val(''); } } else { $('#extraDoctorGroup').hide(); $('#extraDoctorGroup1').hide(); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val('Vaše odbornost'); } }
         })
     </script> 
     {/snippet}          

@@ -73,10 +73,8 @@ class SearchPresenter extends BasePresenter
         $this->template->stringToSearchFor = $stringToSearchFor;
         $inputItems = $data->searchItems;        
         $dbInputs = explode(',', $inputItems);        
-        unset($dbInputs[0]);               
-        
-        \Nette\Diagnostics\Debugger::firelog($dbInputs);
-        
+        unset($dbInputs[0]);                               
+                
         // user selected some region/s
         if (count($dbInputs) > 0) {
             //---------------------- prepare query to search in users_data table
@@ -106,11 +104,20 @@ class SearchPresenter extends BasePresenter
             }            
             
             //--------------------------- prepare query to search in users table
+//            SELECT users.id FROM users JOIN users_data ON users.id = users_data.idusers WHERE (subdomain LIKE '%tes%' AND region ='moravskoslezsky')
             $index = 1;
             $conditions = "(";
-            $conditions = $conditions . "subdomain LIKE '%" . $stringToSearchFor . "%')";
-
-            $dbQuery = "SELECT id FROM users WHERE " . $conditions;
+            foreach ($dbInputs as $dbInput) {
+                // skip first empty             
+                $conditions = $conditions . "region = '" . $dbInput . "'";
+                if ($index != count($dbInputs)) {
+                    $conditions = $conditions . " OR ";
+                }
+                $index++;
+            }                        
+            $conditions = $conditions . ")";            
+           
+            $dbQuery = "SELECT users.id FROM users JOIN users_data ON users.id = users_data.idusers WHERE (subdomain LIKE '%" . $stringToSearchFor . "%' AND " . $conditions . ")";
             $results1 = $this->db_users->searchForSomething($dbQuery);              
                        
             $resultsFromUsersTable = array();
@@ -143,7 +150,7 @@ class SearchPresenter extends BasePresenter
                         $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
                                 $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup, 
                                 $users_data->email, $users_data->street, $users_data->city, 
-                                $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);
+                                $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);                            
                     }
                 }            
 

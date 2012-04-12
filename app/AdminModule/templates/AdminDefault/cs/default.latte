@@ -44,7 +44,7 @@
          <table cellspacing="0">          
                 <tr style="height: 5px;"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" id="regArea" rowspan="12">Osobní údaje</td>
+                    <td class="td_verticalSeparator" id="regArea" rowspan="13">Osobní údaje</td>
                     
                     <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
                     <td class="td_input_regUserPanel_1">{input name}</td>                                      
@@ -65,9 +65,9 @@
                     <td class="td_input_label_pinfo">{label doctorGroup /} &nbsp</td>                    
                     <td class="td_input_regUserPanel_1">{input doctorGroup}</td>                                                      
                 </tr>                
-                <tr id="extraDoctorGroup">                
-                    <td class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
-                    <td class="td_input_regUserPanel_1">{input extraDoctorGroup}</td>                                                                      
+                <tr>                
+                    <td id="extraDoctorGroup" class="td_input_label_pinfo">{label extraDoctorGroup /} &nbsp</td>                    
+                    <td id="extraDoctorGroup1" class="td_input_regUserPanel_1">{input extraDoctorGroup}</td>                                                                      
                 </tr>                 
                 <tr>
                     <td class="td_input_label_pinfo">{label street /} &nbsp</td>                    
@@ -178,12 +178,12 @@
 
     $('#frmregUserForm-doctorGroup').live("change", function () {
         if ($(this).attr('value') == 'xxx') { 
-            $('#extraDoctorGroup').show(1000); 
-            $('#regArea').attr('rowspan',13);
+            $("#extraDoctorGroup").animate({ opacity: "show"}, 800);
+            $("#extraDoctorGroup1").animate({ opacity: "show"}, 800);
             $('#frmregUserForm-extraDoctorGroup').val(''); 
         } else { 
-            $('#regArea').attr('rowspan',12);
             $('#extraDoctorGroup').hide(); 
+            $('#extraDoctorGroup1').hide(); 
             $('#frmregUserForm-extraDoctorGroup').val('Vaše odbornost'); 
         }
     })
