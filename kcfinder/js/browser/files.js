@@ -12,6 +12,183 @@
   *      @link http://kcfinder.sunhater.com
   */?>
 
+    galleryPathsComplete = [
+    'galerie/zahlavi/praktik/bila',
+    'galerie/zahlavi/pediatr/bila',
+    'galerie/zahlavi/stomatolog/bila',
+    'galerie/zahlavi/internista/bila',
+    'galerie/zahlavi/angiolog/bila',
+    'galerie/zahlavi/diabetolog/bila',
+    'galerie/zahlavi/endokrinolog/bila',
+    'galerie/zahlavi/gastroenterolog/bila',
+    'galerie/zahlavi/geriatr/bila',
+    'galerie/zahlavi/kardiolog/bila',
+    'galerie/zahlavi/nefrolog/bila',
+    'galerie/zahlavi/revmatolog/bila',
+    'galerie/zahlavi/rehabilitace/bila',
+    'galerie/zahlavi/hematolog/bila',
+    'galerie/zahlavi/alergolog/bila',
+    'galerie/zahlavi/neurolog/bila',
+    'galerie/zahlavi/neonatolog/bila',
+    'galerie/zahlavi/psychiatr/bila',
+    'galerie/zahlavi/sexuolog/bila',
+    'galerie/zahlavi/onkolog/bila',
+    'galerie/zahlavi/radiolog/bila',
+    'galerie/zahlavi/dermatolog/bila',
+    'galerie/zahlavi/chirurg/bila',
+    'galerie/zahlavi/gynekolog/bila',
+    'galerie/zahlavi/ortoped/bila',
+    'galerie/zahlavi/ORL/bila',
+    'galerie/zahlavi/laborator/bila',
+    'galerie/zahlavi/mamo/bila',
+    'galerie/zahlavi/logoped/bila',
+    'galerie/zahlavi/praktik/cerna',
+    'galerie/zahlavi/pediatr/cerna',
+    'galerie/zahlavi/stomatolog/cerna',
+    'galerie/zahlavi/internista/cerna',
+    'galerie/zahlavi/angiolog/cerna',
+    'galerie/zahlavi/diabetolog/cerna',
+    'galerie/zahlavi/endokrinolog/cerna',
+    'galerie/zahlavi/gastroenterolog/cerna',
+    'galerie/zahlavi/geriatr/cerna',
+    'galerie/zahlavi/kardiolog/cerna',
+    'galerie/zahlavi/nefrolog/cerna',
+    'galerie/zahlavi/revmatolog/cerna',
+    'galerie/zahlavi/rehabilitace/cerna',
+    'galerie/zahlavi/hematolog/cerna',
+    'galerie/zahlavi/alergolog/cerna',
+    'galerie/zahlavi/neurolog/cerna',
+    'galerie/zahlavi/neonatolog/cerna',
+    'galerie/zahlavi/psychiatr/cerna',
+    'galerie/zahlavi/sexuolog/cerna',
+    'galerie/zahlavi/onkolog/cerna',
+    'galerie/zahlavi/radiolog/cerna',
+    'galerie/zahlavi/dermatolog/cerna',
+    'galerie/zahlavi/chirurg/cerna',
+    'galerie/zahlavi/gynekolog/cerna',
+    'galerie/zahlavi/ortoped/cerna',
+    'galerie/zahlavi/ORL/cerna',
+    'galerie/zahlavi/laborator/cerna',
+    'galerie/zahlavi/mamo/cerna',
+    'galerie/zahlavi/logoped/cerna',
+    'galerie/zahlavi/praktik/cervena',
+    'galerie/zahlavi/pediatr/cervena',
+    'galerie/zahlavi/stomatolog/cervena',
+    'galerie/zahlavi/internista/cervena',
+    'galerie/zahlavi/angiolog/cervena',
+    'galerie/zahlavi/diabetolog/cervena',
+    'galerie/zahlavi/endokrinolog/cervena',
+    'galerie/zahlavi/gastroenterolog/cervena',
+    'galerie/zahlavi/geriatr/cervena',
+    'galerie/zahlavi/kardiolog/cervena',
+    'galerie/zahlavi/nefrolog/cervena',
+    'galerie/zahlavi/revmatolog/cervena',
+    'galerie/zahlavi/rehabilitace/cervena',
+    'galerie/zahlavi/hematolog/cervena',
+    'galerie/zahlavi/alergolog/cervena',
+    'galerie/zahlavi/neurolog/cervena',
+    'galerie/zahlavi/neonatolog/cervena',
+    'galerie/zahlavi/psychiatr/cervena',
+    'galerie/zahlavi/sexuolog/cervena',
+    'galerie/zahlavi/onkolog/cervena',
+    'galerie/zahlavi/radiolog/cervena',
+    'galerie/zahlavi/dermatolog/cervena',
+    'galerie/zahlavi/chirurg/cervena',
+    'galerie/zahlavi/gynekolog/cervena',
+    'galerie/zahlavi/ortoped/cervena',
+    'galerie/zahlavi/ORL/cervena',
+    'galerie/zahlavi/laborator/cervena',
+    'galerie/zahlavi/mamo/cervena',
+    'galerie/zahlavi/logoped/cervena',
+    'galerie/zahlavi/praktik/zelena',
+    'galerie/zahlavi/pediatr/zelena',
+    'galerie/zahlavi/stomatolog/zelena',
+    'galerie/zahlavi/internista/zelena',
+    'galerie/zahlavi/angiolog/zelena',
+    'galerie/zahlavi/diabetolog/zelena',
+    'galerie/zahlavi/endokrinolog/zelena',
+    'galerie/zahlavi/gastroenterolog/zelena',
+    'galerie/zahlavi/geriatr/zelena',
+    'galerie/zahlavi/kardiolog/zelena',
+    'galerie/zahlavi/nefrolog/zelena',
+    'galerie/zahlavi/revmatolog/zelena',
+    'galerie/zahlavi/rehabilitace/zelena',
+    'galerie/zahlavi/hematolog/zelena',
+    'galerie/zahlavi/alergolog/zelena',
+    'galerie/zahlavi/neurolog/zelena',
+    'galerie/zahlavi/neonatolog/zelena',
+    'galerie/zahlavi/psychiatr/zelena',
+    'galerie/zahlavi/sexuolog/zelena',
+    'galerie/zahlavi/onkolog/zelena',
+    'galerie/zahlavi/radiolog/zelena',
+    'galerie/zahlavi/dermatolog/zelena',
+    'galerie/zahlavi/chirurg/zelena',
+    'galerie/zahlavi/gynekolog/zelena',
+    'galerie/zahlavi/ortoped/zelena',
+    'galerie/zahlavi/ORL/zelena',
+    'galerie/zahlavi/laborator/zelena',
+    'galerie/zahlavi/mamo/zelena',
+    'galerie/zahlavi/logoped/zelena',
+    'galerie/zahlavi/praktik/zluta',
+    'galerie/zahlavi/pediatr/zluta',
+    'galerie/zahlavi/stomatolog/zluta',
+    'galerie/zahlavi/internista/zluta',
+    'galerie/zahlavi/angiolog/zluta',
+    'galerie/zahlavi/diabetolog/zluta',
+    'galerie/zahlavi/endokrinolog/zluta',
+    'galerie/zahlavi/gastroenterolog/zluta',
+    'galerie/zahlavi/geriatr/zluta',
+    'galerie/zahlavi/kardiolog/zluta',
+    'galerie/zahlavi/nefrolog/zluta',
+    'galerie/zahlavi/revmatolog/zluta',
+    'galerie/zahlavi/rehabilitace/zluta',
+    'galerie/zahlavi/hematolog/zluta',
+    'galerie/zahlavi/alergolog/zluta',
+    'galerie/zahlavi/neurolog/zluta',
+    'galerie/zahlavi/neonatolog/zluta',
+    'galerie/zahlavi/psychiatr/zluta',
+    'galerie/zahlavi/sexuolog/zluta',
+    'galerie/zahlavi/onkolog/zluta',
+    'galerie/zahlavi/radiolog/zluta',
+    'galerie/zahlavi/dermatolog/zluta',
+    'galerie/zahlavi/chirurg/zluta',
+    'galerie/zahlavi/gynekolog/zluta',
+    'galerie/zahlavi/ortoped/zluta',
+    'galerie/zahlavi/ORL/zluta',
+    'galerie/zahlavi/laborator/zluta',
+    'galerie/zahlavi/mamo/zluta',
+    'galerie/zahlavi/logoped/zluta',
+    'galerie/zahlavi/praktik/modra',
+    'galerie/zahlavi/pediatr/modra',
+    'galerie/zahlavi/stomatolog/modra',
+    'galerie/zahlavi/internista/modra',
+    'galerie/zahlavi/angiolog/modra',
+    'galerie/zahlavi/diabetolog/modra',
+    'galerie/zahlavi/endokrinolog/modra',
+    'galerie/zahlavi/gastroenterolog/modra',
+    'galerie/zahlavi/geriatr/modra',
+    'galerie/zahlavi/kardiolog/modra',
+    'galerie/zahlavi/nefrolog/modra',
+    'galerie/zahlavi/revmatolog/modra',
+    'galerie/zahlavi/rehabilitace/modra',
+    'galerie/zahlavi/hematolog/modra',
+    'galerie/zahlavi/alergolog/modra',
+    'galerie/zahlavi/neurolog/modra',
+    'galerie/zahlavi/neonatolog/modra',
+    'galerie/zahlavi/psychiatr/modra',
+    'galerie/zahlavi/sexuolog/modra',
+    'galerie/zahlavi/onkolog/modra',
+    'galerie/zahlavi/radiolog/modra',
+    'galerie/zahlavi/dermatolog/modra',
+    'galerie/zahlavi/chirurg/modra',
+    'galerie/zahlavi/gynekolog/modra',
+    'galerie/zahlavi/ortoped/modra',
+    'galerie/zahlavi/ORL/modra',
+    'galerie/zahlavi/laborator/modra',
+    'galerie/zahlavi/mamo/modra',
+    'galerie/zahlavi/logoped/modra'        
+    ];    
+
 browser.initFiles = function() {
     $(document).unbind('keydown');
     $(document).keydown(function(e) {
@@ -157,15 +334,60 @@ browser.returnFile = function(file) {
 
     var fileURL = file.substr
         ? file : browser.uploadURL + '/' + browser.dir + '/' + file.data('name');
-    fileURL = _.escapeDirs(fileURL);
-    
+    fileURL = _.escapeDirs(fileURL);   
+
+    function oc(a)
+    {
+        var o = {};
+        for(var i=0;i<a.length;i++)
+        {
+            o[a[i]]='';
+        }
+        return o;
+    } 
+
     // gallery addon start
-    if (browser.dir == 'images/gallery/cardiology') {        
+    if (browser.dir in oc(galleryPathsComplete) == true) {     
         fileURL = file.substr
-                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/' + file.data('name');
+                ? file : 'http://mudrweb.cz/images/commonGallery/' + browser.dir + '/' + file.data('name');
         fileURL = _.escapeDirs(fileURL);                
-    }    
-    else if (browser.dir == 'images/gallery') {        
+    }         
+//    if (browser.dir == 'galerie/zahlavi kardiologie') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }    
+//    else if (browser.dir == 'galerie/zahlavi kardiologie/bila') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/white/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }    
+//    else if (browser.dir == 'galerie/zahlavi kardiologie/cerna') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/black/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }   
+//    else if (browser.dir == 'galerie/zahlavi kardiologie/zelena') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/green/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }   
+//    else if (browser.dir == 'galerie/zahlavi kardiologie/cervena') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/red/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }       
+//    else if (browser.dir == 'galerie/zahlavi kardiologie/zluta') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/yellow/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }       
+//    else if (browser.dir == 'galerie/zahlavi kardiologie/modra') {        
+//        fileURL = file.substr
+//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/blue/' + file.data('name');
+//        fileURL = _.escapeDirs(fileURL);                
+//    }           
+    else if (browser.dir == 'galerie/sdilene obrazky') {        
         fileURL = file.substr
                 ? file : 'http://mudrweb.cz/images/commonGallery/' + file.data('name');
         fileURL = _.escapeDirs(fileURL);                
@@ -523,12 +745,44 @@ browser.menuFile = function(file, e) {
     $('.menu a[href="kcact:view"]').click(function() {
         browser.hideDialog();
         var ts = new Date().getTime();
-        var showImage = function(data) {     
-            // gallery addon start          
-            if (this.browser.dir == "images/gallery/cardiology") {
-                url = _.escapeDirs('/images/commonGallery/cardiology/' + data.name) + '?ts=' + ts;
+        
+        function oc(a)
+        {
+            var o = {};
+            for(var i=0;i<a.length;i++)
+            {
+                o[a[i]]='';
             }
-            else if (this.browser.dir == "images/gallery") {
+            return o;
+        }            
+        
+        var showImage = function(data) {     
+            // gallery addon start    
+            if (this.browser.dir in oc(galleryPathsComplete) == true) {     
+                url = _.escapeDirs('/images/commonGallery/' + this.browser.dir + '/' + data.name) + '?ts=' + ts;
+            }
+//            if (this.browser.dir == "galerie/zahlavi kardiologie") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/' + data.name) + '?ts=' + ts;
+//            }
+//            else if (this.browser.dir == "galerie/zahlavi kardiologie/bila") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/white/' + data.name) + '?ts=' + ts;
+//            }
+//            else if (this.browser.dir == "galerie/zahlavi kardiologie/cerna") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/black/' + data.name) + '?ts=' + ts;
+//            }
+//            else if (this.browser.dir == "galerie/zahlavi kardiologie/zelena") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/green/' + data.name) + '?ts=' + ts;
+//            }            
+//            else if (this.browser.dir == "galerie/zahlavi kardiologie/cervena") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/red/' + data.name) + '?ts=' + ts;
+//            }
+//            else if (this.browser.dir == "galerie/zahlavi kardiologie/zluta") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/yellow/' + data.name) + '?ts=' + ts;
+//            }
+//            else if (this.browser.dir == "galerie/zahlavi kardiologie/modra") {
+//                url = _.escapeDirs('/images/commonGallery/cardiology/blue/' + data.name) + '?ts=' + ts;
+//            }            
+            else if (this.browser.dir == "galerie/sdilene obrazky") {
                 url = _.escapeDirs('/images/commonGallery/' + data.name) + '?ts=' + ts;
             } else {
             // gallery addon end

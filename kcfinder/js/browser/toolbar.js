@@ -140,20 +140,14 @@ browser.initUploadButton = function() {
 
 browser.uploadFile = function(form) {
     // gallery addon start    
-    if (this.dir == 'images/gallery/cardiology') {
+    if (this.dir != 'vlastni obrazky') {
         browser.alert(this.label("Cannot write to upload folder."));
         $('#upload').detach();
         browser.initUploadButton();
         return;
-    }  
-    else if (this.dir == 'images/gallery') {
-        browser.alert(this.label("Cannot write to upload folder."));
-        $('#upload').detach();
-        browser.initUploadButton();
-        return;
-    }    
+    }     
     // gallery addon end
-    else {
+    
         if (!this.dirWritable) {
             browser.alert(this.label("Cannot write to upload folder."));
             $('#upload').detach();
@@ -187,7 +181,7 @@ browser.uploadFile = function(form) {
             }, 1);
             browser.initUploadButton();
         });
-    }
+//    }
 };
 
 browser.maximize = function(button) {

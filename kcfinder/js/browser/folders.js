@@ -199,7 +199,7 @@ browser.statusDir = function() {
     size = this.humanSize(size);        
 
     // gallery addon start
-    if (this.dir != 'images/gallery' && this.dir != 'images/gallery/cardiology') {        
+    if (this.dir == 'galerie/vlastni obrazky') {        
         function oc(a)
         {
             var o = {};

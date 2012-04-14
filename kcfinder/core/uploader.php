@@ -663,7 +663,7 @@ class uploader {
         if ($mode == 1) {
             $thumb = $this->config['uploadDir'] . $tumbsPath . $filename;        
         } elseif ($mode == 2) {
-            $thumb = $this->config['uploadDir'] . "/.thumbs/images/" . $filename;        
+            $thumb = $this->config['uploadDir'] . "/.thumbs/galerie/" . $filename;        
         }                               
                 
         $thumb = path::normalize($thumb);

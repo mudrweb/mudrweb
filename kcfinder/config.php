@@ -55,7 +55,7 @@ $_CONFIG = array(
         // CKEditor & FCKEditor types
 //        'files'   =>  "",
 //        'flash'   =>  "swf",
-        'images'  =>  "*img",
+        'galerie'  =>  "*img",
 
         // TinyMCE types
 //        'file'    =>  "",
