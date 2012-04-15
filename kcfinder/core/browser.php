@@ -190,7 +190,10 @@ class browser extends uploader {
     'galerie/zahlavi/ORL',
     'galerie/zahlavi/laborator',
     'galerie/zahlavi/mamo',
-    'galerie/zahlavi/logoped'        
+    'galerie/zahlavi/logoped',        
+    'galerie/zahlavi/ikony',        
+    'galerie/zahlavi/leky',
+    'galerie/zahlavi/oftalmolog'
     );    
     
     protected $colours = array(
@@ -376,7 +379,25 @@ class browser extends uploader {
     '/galerie/zahlavi/ORL/modra',
     '/galerie/zahlavi/laborator/modra',
     '/galerie/zahlavi/mamo/modra',
-    '/galerie/zahlavi/logoped/modra'        
+    '/galerie/zahlavi/logoped/modra',       
+    '/galerie/zahlavi/ikony/bila',        
+    '/galerie/zahlavi/ikony/cerna',
+    '/galerie/zahlavi/ikony/cervena',
+    '/galerie/zahlavi/ikony/zelena',        
+    '/galerie/zahlavi/ikony/zluta',
+    '/galerie/zahlavi/ikony/modra',        
+    '/galerie/zahlavi/leky/bila',        
+    '/galerie/zahlavi/leky/cerna',
+    '/galerie/zahlavi/leky/cervena',
+    '/galerie/zahlavi/leky/zelena',        
+    '/galerie/zahlavi/leky/zluta',
+    '/galerie/zahlavi/leky/modra',        
+    '/galerie/zahlavi/oftalmolog/bila',        
+    '/galerie/zahlavi/oftalmolog/cerna',
+    '/galerie/zahlavi/oftalmolog/cervena',
+    '/galerie/zahlavi/oftalmolog/zelena',        
+    '/galerie/zahlavi/oftalmolog/zluta',
+    '/galerie/zahlavi/oftalmolog/modra'             
     );    
     
     public function __construct() {
@@ -417,7 +438,7 @@ class browser extends uploader {
             @mkdir($galleryDir, $this->config['dirPerms']);
         }
         // shared
-        $galleryDir = $this->config['uploadDir'] . "/galerie/sdilene obrazky";
+        $galleryDir = $this->config['uploadDir'] . "/galerie/ilustracni obrazky";
         if (is_dir($galleryDir)) {            
         } else {
             @mkdir($galleryDir, $this->config['dirPerms']);

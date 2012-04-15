@@ -9,7 +9,7 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 
 /*Main Box*/
 #wrapper {background-color: #fff; color: #000;
-border-radius: 0px; box-shadow: #D8D8D8 3px 3px 10px;}
+border-radius: 0px; box-shadow: #858383 3px 3px 10px;}
 
 /*Header*/
 #header {background-image: url('../../images/layouts/header_default_white.jpg'); background-color: transparent; color: #000;}

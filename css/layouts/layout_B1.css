@@ -12,13 +12,13 @@ html, body {background-color: transparent; color: #000; background-image: url(''
 
 /*Header*/
 #header {background-image: url('../../images/layouts/header_default_white.jpg'); background-color: #fff; color: #000;
-border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
+border-radius: 10px; box-shadow: #858383 3px 3px 10px;}
 #header h1 {background-color: transparent; color: #000;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
 #main {background-color: #F9F9F9; color: #000;
-border-radius: 10px; box-shadow: #00709D 3px 3px 10px;}
+border-radius: 10px; box-shadow: #858383 3px 3px 10px;}
 
 /*Menu*/ 
 #menu {background-color: transparent; color: #000;}

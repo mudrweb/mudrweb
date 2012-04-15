@@ -186,7 +186,25 @@
     'galerie/zahlavi/ORL/modra',
     'galerie/zahlavi/laborator/modra',
     'galerie/zahlavi/mamo/modra',
-    'galerie/zahlavi/logoped/modra'        
+    'galerie/zahlavi/logoped/modra',
+    'galerie/zahlavi/ikony/bila',        
+    'galerie/zahlavi/ikony/cerna',
+    'galerie/zahlavi/ikony/cervena',
+    'galerie/zahlavi/ikony/zelena',        
+    'galerie/zahlavi/ikony/zluta',
+    'galerie/zahlavi/ikony/modra',        
+    'galerie/zahlavi/leky/bila',        
+    'galerie/zahlavi/leky/cerna',
+    'galerie/zahlavi/leky/cervena',
+    'galerie/zahlavi/leky/zelena',        
+    'galerie/zahlavi/leky/zluta',
+    'galerie/zahlavi/leky/modra',        
+    'galerie/zahlavi/oftalmolog/bila',        
+    'galerie/zahlavi/oftalmolog/cerna',
+    'galerie/zahlavi/oftalmolog/cervena',
+    'galerie/zahlavi/oftalmolog/zelena',        
+    'galerie/zahlavi/oftalmolog/zluta',
+    'galerie/zahlavi/oftalmolog/modra'      
     ];    
 
 browser.initFiles = function() {
