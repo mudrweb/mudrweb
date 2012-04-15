@@ -14,8 +14,8 @@ use \AdminPresenter as AdminPresenter;
 class AdminDefaultPresenter extends AdminPresenter {            
     
     private $password;    
-    private $layout = 'layout_A3.jpg';
-    private $layoutDesc = 'A - zelena';
+    private $layout = 'layout_A1.jpg';
+    private $layoutDesc = 'A - bila';
     
     /**
      * Check access and rights here only

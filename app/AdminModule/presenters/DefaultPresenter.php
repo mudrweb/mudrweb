@@ -24,8 +24,8 @@ class DefaultPresenter extends AdminPresenter {
     private $keywords;
     private $headerImageData;
     private $colourSchemeData;
-    private $layout = 'layout_A3.jpg';
-    private $layoutDesc = 'A - zelena';    
+    private $layout = 'layout_A1.jpg';
+    private $layoutDesc = 'A - bila';    
     
     /**
      * Check access and rights here only
@@ -34,6 +34,19 @@ class DefaultPresenter extends AdminPresenter {
     {
         parent::startup();
         $this->checkAccess(array('uživatel')); 
+
+        $user = $this->db_users->getUserById($this->user->getId());
+        $user_websiteData = $this->db_users->getUserWebsiteDataById($this->user->getId());                                       
+        if ($user && $user_websiteData) {                 
+            $this->layout = $user_websiteData->layout . '.jpg';              
+            $layoutsData = $this->db_users->getLayoutsRawData();
+            foreach($layoutsData as $layoutData) {
+                if ($layoutData->layout == $user_websiteData->layout) {
+                    $this->layoutDesc = $layoutData->layout_desc;
+                }
+            }                        
+            $this->layout = $user_websiteData->layout . '.jpg';
+        }        
     }
     
     /**
@@ -66,9 +79,8 @@ class DefaultPresenter extends AdminPresenter {
             
             // prepare data for presenter
             $this->template->layout_desc = $this->layout_desc; 
-            $this->template->subdomain = $user->subdomain;
-            
-            $this->template->layoutToDisplay = $this->layout;   
+            $this->template->subdomain = $user->subdomain;           
+            $this->template->layoutToDisplay = $this->layout;
             $this->template->layoutDesc = $this->layoutDesc;               
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load user profile or user websiteData (AdminModule - default presenter).', 404);
