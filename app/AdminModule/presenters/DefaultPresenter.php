@@ -24,6 +24,8 @@ class DefaultPresenter extends AdminPresenter {
     private $keywords;
     private $headerImageData;
     private $colourSchemeData;
+    private $layout = 'layout_A3.jpg';
+    private $layoutDesc = 'A - zelena';    
     
     /**
      * Check access and rights here only
@@ -65,6 +67,9 @@ class DefaultPresenter extends AdminPresenter {
             // prepare data for presenter
             $this->template->layout_desc = $this->layout_desc; 
             $this->template->subdomain = $user->subdomain;
+            
+            $this->template->layoutToDisplay = $this->layout;   
+            $this->template->layoutDesc = $this->layoutDesc;               
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load user profile or user websiteData (AdminModule - default presenter).', 404);
         }
@@ -248,4 +253,28 @@ class DefaultPresenter extends AdminPresenter {
         $this->flashMessage('Změny byly úspěšně uloženy.', 'info');
         $this->redirect('this');
     }   
+    
+    /**
+     * Layout preview handler.
+     * 
+     * @param int $id 
+     */    
+    public function handleLayoutPreview($layoutFromSelect) {        
+        $layoutsData = $this->db_users->getLayoutsRawData();
+        foreach($layoutsData as $layoutData) {
+            if ($layoutData->layout == $layoutFromSelect) {
+                $this->layoutDesc = $layoutData->layout_desc;
+            }
+        }
+        $layout = $layoutFromSelect . '.jpg';        
+        $this->layout = $layout;
+//        $this->layoutDesc = $layoutData->layout_desc;
+        \Nette\Diagnostics\Debugger::firelog($this->layout);
+        if (!$this->isAjax()) {                        
+            $this->redirect('this');
+        } else {            
+            $this->invalidateControl('layoutPreview');
+//            $this->invalidateControl('form');            
+        }                
+    }      
 }

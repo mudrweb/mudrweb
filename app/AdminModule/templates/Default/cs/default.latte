@@ -1,5 +1,8 @@
 {block head}
     <script type="text/javascript" src="../../js/jquery.admin.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.fancybox-1.3.4.css" type="text/css">                
+    <script type="text/javascript" src="../../js/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="../../js/jquery.mousewheel-3.0.4.pack.js"></script>       
 {/block}
 {block content}   
 
@@ -9,15 +12,28 @@
     {form editForm}
 	 <table cellspacing="0">            
                 <tr style="height: 10px;"><td></td></tr>
-                <tr>
+                <tr height="100">
                     <td class="td_verticalSeparator" rowspan="2">Nastavení vzhledu</td>
                     
-                    <td class="td_input_label_default">Aktivní vzhled:</td>                    
-                    <td class="td_status">{$layout_desc}</td>                    
+                    <td class="td_input_label_default_bottom">Aktivní vzhled:</td>                    
+                    <td class="td_status_bottom">{$layout_desc}</td>    
+                    <td class="layoutPreviewRight" rowspan="2">
+                        {snippet layoutPreview}                            
+                            <div id="layoutPreview">
+                            <a id="single_i" href="../../images/layouts_preview/{$layoutToDisplay}" title="{$layoutDesc}"><img src="../../images/layouts_preview/{$layoutToDisplay}" width=130px alt="" class="noborder"/></a>                            
+                            <script type="text/javascript">      
+                                $(document).ready(function() { $("#single_i").fancybox({
+                                        titlePosition : 'over'
+                                    }); 
+                                }); 
+                            </script>
+                            </div>
+                        {/snippet}                    
+                    </td>                      
                 </tr>
                 <tr>
                     <td class="td_input_label_default">{label layouts /}</td>                    
-                    <td class="td_input_default_select">{input layouts}</td>                    
+                    <td class="td_input_default_select">{input layouts}</td>                       
                 </tr>    
                 <tr style="height: 15px;"><td></td></tr>
          </table>         
@@ -90,9 +106,9 @@
                     <td class="td_input_default">{input title}</td>        
                     <td id="title_help_click" class="icon icon-help"></td>
                 </tr>
-                <tr id="title_help" class="title_help" colspan="2">                    
-                    <td class="td_input_label_default"></td>
-                    <td class="td_input_default">
+                <tr class="title_help" colspan="2">                    
+                    <td id="title_help" class="td_input_label_default"></td>
+                    <td id="title_help1" class="td_input_default">
                         <div class="title_help_content">
                             V názvu stránky použijte nejdůležitější klíčová slova nebo fráze
                             a dodržte délku 10 až 64 znaků včetně mezer. Doporučujeme:<br />
@@ -107,9 +123,9 @@
                     <td class="td_input_default">{input description}</td>                
                     <td id="desc_help_click" class="icon icon-help"></td>
                 </tr>
-                <tr id="desc_help" class="desc_help" colspan="2">                    
-                    <td class="td_input_label_default"></td>
-                    <td class="td_input_default">
+                <tr class="desc_help" colspan="2">                    
+                    <td id="desc_help" class="td_input_label_default"></td>
+                    <td id="desc_help1" class="td_input_default">
                         <div class="desc_help_content">
                             Popis stránky představuje stručný opis, který by měl nejenom 
                             pro účely vyhledávačů, ale především lidských návštevníků jednoznačně
@@ -128,9 +144,9 @@
                     <td class="td_input_default">{input keywords}</td>                
                     <td id="keywords_help_click" class="icon icon-help"></td>
                 </tr>                
-                <tr id="keywords_help" class="keywords_help" colspan="2">                    
-                    <td class="td_input_label_default"></td>
-                    <td class="td_input_default">
+                <tr class="keywords_help" colspan="2">                    
+                    <td id="keywords_help" class="td_input_label_default"></td>
+                    <td id="keywords_help1" class="td_input_default">
                         <div class="keywords_help_content">
                             Klíčová slova představují seznam slov a fráz týkajících se
                             obsahu Vaší stránky, sloužící jako další zdroj textu pro vyhledávače.
@@ -171,7 +187,12 @@
        img.style.marginLeft = parseInt((image.offsetWidth - f_w) / 2) + 'px'; img.style.marginTop = parseInt((image.offsetHeight - f_h) / 2) + 'px'; img.style.visibility = "visible"; }
        $("#headerImageId").show(1000);          
     }
-    var colourScheme = $("#frmeditForm-colourSchemeData").val(); if (colourScheme != "") { $("#colourSchemeId").show(1000); $("#colourSchemeId1").show(1000); }              
+    var colourScheme = $("#frmeditForm-colourSchemeData").val(); if (colourScheme != "") { /*$("#colourSchemeId").show(1000); $("#colourSchemeId1").show(1000);*/ }              
+    $("form").delegate('#frmeditForm-layouts', 'change', function() { 
+        $.get("?do=layoutPreview", {"layoutFromSelect": $(this).val()}); 
+//        $("#layoutPreview").animate({ opacity: "hide"}, 2); 
+//        $("#layoutPreview").animate({ opacity: "show"}, 350); 
+        });      
     </script>
          
 {/block}

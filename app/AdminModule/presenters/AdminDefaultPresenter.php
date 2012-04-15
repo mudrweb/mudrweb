@@ -14,6 +14,8 @@ use \AdminPresenter as AdminPresenter;
 class AdminDefaultPresenter extends AdminPresenter {            
     
     private $password;    
+    private $layout = 'layout_A3.jpg';
+    private $layoutDesc = 'A - zelena';
     
     /**
      * Check access and rights here only
@@ -29,6 +31,8 @@ class AdminDefaultPresenter extends AdminPresenter {
      */
     public function renderDefault() {            
         $this->template->passwordToDisplay = $this->password;     
+        $this->template->layoutToDisplay = $this->layout;   
+        $this->template->layoutDesc = $this->layoutDesc;   
     }                
     
     /**
@@ -216,7 +220,7 @@ class AdminDefaultPresenter extends AdminPresenter {
             }           
         }        
         
-        $form->addSelect('layouts', 'Vzhled', $listOfLayoutsArray)
+        $form->addSelect('layouts', 'Vzhled:', $listOfLayoutsArray)
                 ->setAttribute('class', 'input_style_select');                
         $form->addText('header1', 'Hlavní nadpis:', 50, 40)                
 //                ->addRule(Form::FILLED, 'Musíte zadat hlavní nadpis.')                
@@ -488,5 +492,23 @@ class AdminDefaultPresenter extends AdminPresenter {
 //            else unlink("$dir/$file");
 //        }
 //        rmdir($dir);
-//    }        
+//    }    
+    
+    /**
+     * Layout preview handler.
+     * 
+     * @param int $id 
+     */
+    public function handleLayoutPreview($id) {        
+        $layoutData = $this->db_users->getLayoutById(intval($id));
+        $layout = $layoutData->layout . '.jpg';        
+        $this->layout = $layout;
+        $this->layoutDesc = $layoutData->layout_desc;
+        
+        if (!$this->isAjax()) {                        
+            $this->redirect('this');
+        } else {
+            $this->invalidateControl('layoutPreview');
+        }                
+    }                
 }
