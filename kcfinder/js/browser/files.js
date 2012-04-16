@@ -301,7 +301,8 @@ browser.showFiles = function(callBack, selected) {
                 if (!i) html += '<table summary="list">';
                 var icon = _.getFileExtension(file.name);
                 if (file.thumb)
-                    icon = '.image';
+//                    icon = '.image';
+                    icon = 'png';
                 else if (!icon.length || !file.smallIcon)
                     icon = '.';
                 icon = 'themes/' + browser.theme + '/img/files/small/' + icon + '.png';
