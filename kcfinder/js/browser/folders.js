@@ -199,7 +199,7 @@ browser.statusDir = function() {
     size = this.humanSize(size);        
 
     // gallery addon start
-    if (this.dir == 'galerie/vlastni obrazky') {        
+    if (this.dir == 'galerie/vlastni_obrazky') {        
         function oc(a)
         {
             var o = {};

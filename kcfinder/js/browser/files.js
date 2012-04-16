@@ -207,6 +207,50 @@
     'galerie/zahlavi/oftalmolog/modra'      
     ];    
 
+    galleryPathsIllustrativeImagesComplete = [    
+    'galerie/ilustracni_obrazky/3Dman',
+    'galerie/ilustracni_obrazky/bunky',
+    'galerie/ilustracni_obrazky/cviceni',
+    'galerie/ilustracni_obrazky/deti',
+    'galerie/ilustracni_obrazky/chirurgie',
+    'galerie/ilustracni_obrazky/laborator',
+    'galerie/ilustracni_obrazky/lekari',
+    'galerie/ilustracni_obrazky/leky',
+    'galerie/ilustracni_obrazky/ocni',
+    'galerie/ilustracni_obrazky/pacienti',
+    'galerie/ilustracni_obrazky/priroda',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/RTG',
+    'galerie/ilustracni_obrazky/veterina',
+    'galerie/ilustracni_obrazky/vyziva_jidlo',
+    'galerie/ilustracni_obrazky/zubni',
+    'galerie/ilustracni_obrazky/pristroje/_DOZY',
+    'galerie/ilustracni_obrazky/pristroje/_HMOZDIR',
+    'galerie/ilustracni_obrazky/pristroje/_JINE',
+    'galerie/ilustracni_obrazky/pristroje/_MIKRO',
+    'galerie/ilustracni_obrazky/pristroje/_STETO',
+    'galerie/ilustracni_obrazky/pristroje/_TLAK',
+    'galerie/ilustracni_obrazky/pristroje/_VAHY'
+    ];    
+    
+    galleryPathsIconsComplete = [
+    'galerie/ikony/KAT01',
+    'galerie/ikony/KAT02',
+    'galerie/ikony/KAT03',
+    'galerie/ikony/KAT04',
+    'galerie/ikony/KAT05',
+    'galerie/ikony/KAT06',
+    'galerie/ikony/KAT07',
+    'galerie/ikony/KAT08',
+    'galerie/ikony/KAT09',
+    'galerie/ikony/KAT10',
+    'galerie/ikony/KAT11',
+    'galerie/ikony/KAT12',
+    'galerie/ikony/KAT13',
+    'galerie/ikony/KAT14',
+    'galerie/ikony/KAT15'            
+    ];        
+
 browser.initFiles = function() {
     $(document).unbind('keydown');
     $(document).keydown(function(e) {
@@ -369,45 +413,15 @@ browser.returnFile = function(file) {
         fileURL = file.substr
                 ? file : 'http://mudrweb.cz/images/commonGallery/' + browser.dir + '/' + file.data('name');
         fileURL = _.escapeDirs(fileURL);                
-    }         
-//    if (browser.dir == 'galerie/zahlavi kardiologie') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }    
-//    else if (browser.dir == 'galerie/zahlavi kardiologie/bila') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/white/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }    
-//    else if (browser.dir == 'galerie/zahlavi kardiologie/cerna') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/black/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }   
-//    else if (browser.dir == 'galerie/zahlavi kardiologie/zelena') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/green/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }   
-//    else if (browser.dir == 'galerie/zahlavi kardiologie/cervena') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/red/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }       
-//    else if (browser.dir == 'galerie/zahlavi kardiologie/zluta') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/yellow/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }       
-//    else if (browser.dir == 'galerie/zahlavi kardiologie/modra') {        
-//        fileURL = file.substr
-//                ? file : 'http://mudrweb.cz/images/commonGallery/cardiology/blue/' + file.data('name');
-//        fileURL = _.escapeDirs(fileURL);                
-//    }           
-    else if (browser.dir == 'galerie/sdilene obrazky') {        
+    }             
+    else if (browser.dir in oc(galleryPathsIllustrativeImagesComplete) == true) {        
         fileURL = file.substr
-                ? file : 'http://mudrweb.cz/images/commonGallery/' + file.data('name');
+                ? file : 'http://mudrweb.cz/images/commonGallery/' + browser.dir + '/' + file.data('name');
+        fileURL = _.escapeDirs(fileURL);                
+    }
+    else if (browser.dir in oc(galleryPathsIconsComplete) == true) {        
+        fileURL = file.substr
+                ? file : 'http://mudrweb.cz/images/commonGallery/' + browser.dir + '/' + file.data('name');
         fileURL = _.escapeDirs(fileURL);                
     }
     // gallery addon end
@@ -778,31 +792,14 @@ browser.menuFile = function(file, e) {
             // gallery addon start    
             if (this.browser.dir in oc(galleryPathsComplete) == true) {     
                 url = _.escapeDirs('/images/commonGallery/' + this.browser.dir + '/' + data.name) + '?ts=' + ts;
-            }
-//            if (this.browser.dir == "galerie/zahlavi kardiologie") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/' + data.name) + '?ts=' + ts;
-//            }
-//            else if (this.browser.dir == "galerie/zahlavi kardiologie/bila") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/white/' + data.name) + '?ts=' + ts;
-//            }
-//            else if (this.browser.dir == "galerie/zahlavi kardiologie/cerna") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/black/' + data.name) + '?ts=' + ts;
-//            }
-//            else if (this.browser.dir == "galerie/zahlavi kardiologie/zelena") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/green/' + data.name) + '?ts=' + ts;
-//            }            
-//            else if (this.browser.dir == "galerie/zahlavi kardiologie/cervena") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/red/' + data.name) + '?ts=' + ts;
-//            }
-//            else if (this.browser.dir == "galerie/zahlavi kardiologie/zluta") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/yellow/' + data.name) + '?ts=' + ts;
-//            }
-//            else if (this.browser.dir == "galerie/zahlavi kardiologie/modra") {
-//                url = _.escapeDirs('/images/commonGallery/cardiology/blue/' + data.name) + '?ts=' + ts;
-//            }            
-            else if (this.browser.dir == "galerie/sdilene obrazky") {
-                url = _.escapeDirs('/images/commonGallery/' + data.name) + '?ts=' + ts;
-            } else {
+            }        
+            else if (this.browser.dir in oc(galleryPathsIllustrativeImagesComplete) == true) {
+                url = _.escapeDirs('/images/commonGallery/' + this.browser.dir + '/' + data.name) + '?ts=' + ts;
+            } 
+            else if (this.browser.dir in oc(galleryPathsIconsComplete) == true) {
+                url = _.escapeDirs('/images/commonGallery/' + this.browser.dir + '/' + data.name) + '?ts=' + ts;
+            }             
+            else {
             // gallery addon end
                 url = _.escapeDirs(browser.uploadURL + '/' + browser.dir + '/' + data.name) + '?ts=' + ts;                
             }

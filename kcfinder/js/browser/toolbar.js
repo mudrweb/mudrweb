@@ -140,7 +140,7 @@ browser.initUploadButton = function() {
 
 browser.uploadFile = function(form) {
     // gallery addon start    
-    if (this.dir != 'vlastni obrazky') {
+    if (this.dir != 'galerie/vlastni_obrazky') {
         browser.alert(this.label("Cannot write to upload folder."));
         $('#upload').detach();
         browser.initUploadButton();

@@ -383,7 +383,7 @@ class browser extends uploader {
     '/galerie/zahlavi/ikony/bila',        
     '/galerie/zahlavi/ikony/cerna',
     '/galerie/zahlavi/ikony/cervena',
-    '/galerie/zahlavi/ikony/zelena',        
+    '/galerie/zahlavi/ikony/zelena',           
     '/galerie/zahlavi/ikony/zluta',
     '/galerie/zahlavi/ikony/modra',        
     '/galerie/zahlavi/leky/bila',        
@@ -398,6 +398,147 @@ class browser extends uploader {
     '/galerie/zahlavi/oftalmolog/zelena',        
     '/galerie/zahlavi/oftalmolog/zluta',
     '/galerie/zahlavi/oftalmolog/modra'             
+    );    
+
+    protected $galleryPathsIllustrativeImages = array(    
+    'galerie/ilustracni_obrazky/3Dman',
+    'galerie/ilustracni_obrazky/bunky',
+    'galerie/ilustracni_obrazky/cviceni',
+    'galerie/ilustracni_obrazky/deti',
+    'galerie/ilustracni_obrazky/chirurgie',
+    'galerie/ilustracni_obrazky/laborator',
+    'galerie/ilustracni_obrazky/lekari',
+    'galerie/ilustracni_obrazky/leky',
+    'galerie/ilustracni_obrazky/ocni',
+    'galerie/ilustracni_obrazky/pacienti',
+    'galerie/ilustracni_obrazky/priroda',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/RTG',
+    'galerie/ilustracni_obrazky/veterina',
+    'galerie/ilustracni_obrazky/vyziva_jidlo',
+    'galerie/ilustracni_obrazky/zubni',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/pristroje',
+    'galerie/ilustracni_obrazky/pristroje'
+    );
+    
+    protected $galleryPathsIllustrativeImagesPristroje = array (
+    'galerie/ilustracni_obrazky/pristroje/_DOZY',
+    'galerie/ilustracni_obrazky/pristroje/_HMOZDIR',
+    'galerie/ilustracni_obrazky/pristroje/_JINE',
+    'galerie/ilustracni_obrazky/pristroje/_MIKRO',
+    'galerie/ilustracni_obrazky/pristroje/_STETO',
+    'galerie/ilustracni_obrazky/pristroje/_TLAK',
+    'galerie/ilustracni_obrazky/pristroje/_VAHY'  
+    );
+    
+    protected $illustrativeImagesEndFolders = array(
+    '3Dman',
+    'bunky',
+    'cviceni',
+    'deti',
+    'chirurgie',
+    'laborator',
+    'lekari',
+    'leky',
+    'ocni',
+    'pacienti',
+    'priroda',    
+    'RTG',
+    'veterina',
+    'vyziva_jidlo',
+    'zubni',
+    '_DOZY',
+    '_HMOZDIR',
+    '_JINE',
+    '_MIKRO',
+    '_STETO',
+    '_TLAK',
+    '_VAHY'        
+    );
+    
+    protected $galleryPathsIllustrativeImagesComplete = array(    
+    '/galerie/ilustracni_obrazky/3Dman',
+    '/galerie/ilustracni_obrazky/bunky',
+    '/galerie/ilustracni_obrazky/cviceni',
+    '/galerie/ilustracni_obrazky/deti',
+    '/galerie/ilustracni_obrazky/chirurgie',
+    '/galerie/ilustracni_obrazky/laborator',
+    '/galerie/ilustracni_obrazky/lekari',
+    '/galerie/ilustracni_obrazky/leky',
+    '/galerie/ilustracni_obrazky/ocni',
+    '/galerie/ilustracni_obrazky/pacienti',
+    '/galerie/ilustracni_obrazky/priroda',
+    '/galerie/ilustracni_obrazky/pristroje',
+    '/galerie/ilustracni_obrazky/RTG',
+    '/galerie/ilustracni_obrazky/veterina',
+    '/galerie/ilustracni_obrazky/vyziva_jidlo',
+    '/galerie/ilustracni_obrazky/zubni',
+    '/galerie/ilustracni_obrazky/pristroje/_DOZY',
+    '/galerie/ilustracni_obrazky/pristroje/_HMOZDIR',
+    '/galerie/ilustracni_obrazky/pristroje/_JINE',
+    '/galerie/ilustracni_obrazky/pristroje/_MIKRO',
+    '/galerie/ilustracni_obrazky/pristroje/_STETO',
+    '/galerie/ilustracni_obrazky/pristroje/_TLAK',
+    '/galerie/ilustracni_obrazky/pristroje/_VAHY'
+    );    
+
+    protected $galleryPathsIcons = array(
+    'galerie/ikony/KAT01',
+    'galerie/ikony/KAT02',
+    'galerie/ikony/KAT03',
+    'galerie/ikony/KAT04',
+    'galerie/ikony/KAT05',
+    'galerie/ikony/KAT06',
+    'galerie/ikony/KAT07',
+    'galerie/ikony/KAT08',
+    'galerie/ikony/KAT09',
+    'galerie/ikony/KAT10',
+    'galerie/ikony/KAT11',
+    'galerie/ikony/KAT12',
+    'galerie/ikony/KAT13',
+    'galerie/ikony/KAT14',
+    'galerie/ikony/KAT15'            
+    );
+
+    protected $iconsEndFolders = array (
+    'KAT01',
+    'KAT02',
+    'KAT03',
+    'KAT04',
+    'KAT05',
+    'KAT06',
+    'KAT07',
+    'KAT08',
+    'KAT09',
+    'KAT10',
+    'KAT11',
+    'KAT12',
+    'KAT13',
+    'KAT14',
+    'KAT15'           
+    );
+    
+    protected $galleryPathsIconsComplete = array(
+    '/galerie/ikony/KAT01',
+    '/galerie/ikony/KAT02',
+    '/galerie/ikony/KAT03',
+    '/galerie/ikony/KAT04',
+    '/galerie/ikony/KAT05',
+    '/galerie/ikony/KAT06',
+    '/galerie/ikony/KAT07',
+    '/galerie/ikony/KAT08',
+    '/galerie/ikony/KAT09',
+    '/galerie/ikony/KAT10',
+    '/galerie/ikony/KAT11',
+    '/galerie/ikony/KAT12',
+    '/galerie/ikony/KAT13',
+    '/galerie/ikony/KAT14',
+    '/galerie/ikony/KAT15'            
     );    
     
     public function __construct() {
@@ -431,43 +572,72 @@ class browser extends uploader {
             $this->errorMsg("Cannot access or create thumbnails folder.");
 
         // gallery addon start    
-        // user specific
-        $galleryDir = $this->config['uploadDir'] . "/galerie/vlastni obrazky";
+        // vlastni_obrazky
+        $galleryDir = $this->config['uploadDir'] . "/galerie/vlastni_obrazky";
         if (is_dir($galleryDir)) {            
         } else {
             @mkdir($galleryDir, $this->config['dirPerms']);
         }
-        // shared
-        $galleryDir = $this->config['uploadDir'] . "/galerie/ilustracni obrazky";
+        // ikony
+        $galleryDir = $this->config['uploadDir'] . "/galerie/ikony";
         if (is_dir($galleryDir)) {            
         } else {
             @mkdir($galleryDir, $this->config['dirPerms']);
-        }            
-        // headers
+        }
+            // ikony/categories
+            foreach($this->galleryPathsIcons as $galleryPathsIcon) {
+                $galleryDir = $this->config['uploadDir'] . '/' .$galleryPathsIcon;
+                if (is_dir($galleryDir)) {            
+                } else {
+                    @mkdir($galleryDir, $this->config['dirPerms']);
+                }            
+            }        
+        // ilustracni_obrazky
+        $galleryDir = $this->config['uploadDir'] . "/galerie/ilustracni_obrazky";
+        if (is_dir($galleryDir)) {            
+        } else {
+            @mkdir($galleryDir, $this->config['dirPerms']);
+        }    
+            // ilustracni_obrazky/categories
+            foreach($this->galleryPathsIllustrativeImages as $galleryPathsIllustrativeImage) {
+                $galleryDir = $this->config['uploadDir'] . '/' .$galleryPathsIllustrativeImage;
+                if (is_dir($galleryDir)) {            
+                } else {
+                    @mkdir($galleryDir, $this->config['dirPerms']);
+                }            
+            }
+                // ilustracni_obrazky/pristroje/
+                foreach($this->galleryPathsIllustrativeImagesPristroje as $galleryPathsIllustrativeImagesPristroj) {
+                    $galleryDir = $this->config['uploadDir'] . '/' .$galleryPathsIllustrativeImagesPristroj;
+                    if (is_dir($galleryDir)) {            
+                    } else {
+                        @mkdir($galleryDir, $this->config['dirPerms']);
+                    }            
+                }            
+        // zahlavi
         $galleryDir = $this->config['uploadDir'] . "/galerie/zahlavi";
         if (is_dir($galleryDir)) {            
         } else {
             @mkdir($galleryDir, $this->config['dirPerms']);
-        }        
-        
-        // headers/doctors
-        foreach($this->galleryPaths as $galleryPath) {            
-            $galleryDir = $this->config['uploadDir'] . '/' .$galleryPath;
-            if (is_dir($galleryDir)) {            
-            } else {
-                @mkdir($galleryDir, $this->config['dirPerms']);
-            }
-        }        
-        // headers/doctors/colours
-        foreach($this->galleryPaths as $galleryPath) {            
-            foreach($this->colours as $colour) {            
-                $galleryDir = $this->config['uploadDir'] . '/' .$galleryPath . '/' . $colour;
+        }                
+            // zahlavi/doctors
+            foreach($this->galleryPaths as $galleryPath) {            
+                $galleryDir = $this->config['uploadDir'] . '/' .$galleryPath;
                 if (is_dir($galleryDir)) {            
                 } else {
                     @mkdir($galleryDir, $this->config['dirPerms']);
                 }
-            }
-        }                       
+            }        
+            // zahlavi/doctors/colours
+            foreach($this->galleryPaths as $galleryPath) {            
+                foreach($this->colours as $colour) {            
+                    $galleryDir = $this->config['uploadDir'] . '/' .$galleryPath . '/' . $colour;
+                    if (is_dir($galleryDir)) {            
+                    } else {
+                        @mkdir($galleryDir, $this->config['dirPerms']);
+                    }
+                }
+            }                       
         // gallery addon end                
                 
         $this->thumbsDir = $thumbsDir;
@@ -700,13 +870,16 @@ class browser extends uploader {
     protected function act_download() {
         $dir = $this->postDir();
         // gallery addon start              
-        $dir_tmp = substr($dir, strlen('/CORE/mudrweb.cz/www/user_uploads/xa'));                             
+        $dir_tmp = substr($dir, strlen($this->config['uploadDir']));                             
         if (in_array($dir_tmp, $this->galleryPathsComplete)) {
-            $dir = "/CORE/mudrweb.cz/www/images/commonGallery" . $dir_tmp;
+            $dir = "/CORE/mudrweb.cz/www/images/commonGallery/" . $dir_tmp;
         }                   
-        else if (strpos($dir, "galerie/sdilene obrazky")) {
-            $dir = "/CORE/mudrweb.cz/www/images/commonGallery";
-        }
+        else if (in_array($dir_tmp, $this->galleryPathsIllustrativeImagesComplete)) {
+            $dir = "/CORE/mudrweb.cz/www/images/commonGallery/" . $dir_tmp;
+        }     
+        else if (in_array($dir_tmp, $this->galleryPathsIconsComplete)) {
+            $dir = "/CORE/mudrweb.cz/www/images/commonGallery/" . $dir_tmp;
+        }             
         // gallery addon end
         
         if (!isset($this->post['dir']) ||
@@ -1182,62 +1355,28 @@ class browser extends uploader {
         $tumbsPath = array();
         $return_cgallery = array();               
         // get dir starting from /galerie/...
-        $tmp_dir = substr($dir, strlen('/CORE/mudrweb.cz/www/user_uploads/xa'));        
+        $tmp_dir = substr($dir, strlen($this->config['uploadDir']));            
         if (in_array($tmp_dir, $this->galleryPathsComplete)) {      
             $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
             $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery" . $tmp_dir;        
             $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
             $commonGalleryPath = 'commonGallery' . $tmp_dir;
-            $tumbsPath = '/.thumbs' . $tmp_dir . '/';                                       
-//        if (strpos($dir, '/galerie/zahlavi kardiologie')) {            
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology/white";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology/white';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';                               
-//        } else if (strpos($dir, '/galerie/zahlavi kardiologie')) {            
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology/black";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology/black';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';            
-//        } else if (strpos($dir, '/galerie/zahlavi kardiologie')) {            
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology/green";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology/green';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';            
-//        } else if (strpos($dir, '/galerie/zahlavi kardiologie')) {            
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology/red";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology/red';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';            
-//        } else if (strpos($dir, '/galerie/zahlavi kardiologie')) {            
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology/yellow";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology/yellow';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';                        
-//        } else if (strpos($dir, '/galerie/zahlavi kardiologie')) {            
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology/blue";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology/blue';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';     
-//        } else if (strpos($dir, '/galerie/zahlavi kardiologie')) {                    
-//            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-//            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery/cardiology";        
-//            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-//            $commonGalleryPath = 'commonGallery/cardiology';
-//            $tumbsPath = '/.thumbs/galerie/zahlavi kardiologie/';            
-        } else if (strpos($dir, '/galerie/sdilene obrazky')) {            
+            $tumbsPath = '/.thumbs' . $tmp_dir . '/';        
+        } 
+        else if (in_array($tmp_dir, $this->galleryPathsIllustrativeImagesComplete)) {                 
             $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
-            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery";        
+            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery" . $tmp_dir;        
             $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
-            $commonGalleryPath = 'commonGallery';
-            $tumbsPath = '/.thumbs/galerie/sdilene obrazky/';            
-        }
+            $commonGalleryPath = 'commonGallery' . $tmp_dir;
+            $tumbsPath = '/.thumbs' . $tmp_dir . '/';        
+        }     
+        else if (in_array($tmp_dir, $this->galleryPathsIconsComplete)) {                 
+            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
+            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery" . $tmp_dir;        
+            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
+            $commonGalleryPath = 'commonGallery' . $tmp_dir;
+            $tumbsPath = '/.thumbs' . $tmp_dir . '/';        
+        }             
 //        $myFile = "testFile.txt";
 //        $fh = fopen($myFile, 'w');
 //        fwrite($fh, count($files_cgallery)); 
@@ -1368,9 +1507,30 @@ class browser extends uploader {
             $hasDirs = false;              
         
         // gallery addon start        
-        if (strpos($dir, '/bila') || strpos($dir, '/cerna') || strpos($dir, '/cervena')
-                || strpos($dir, '/zelena') || strpos($dir, '/zluta') || strpos($dir, '/modra')
-                ) {              
+        $stringAfterLastSlash = strrchr($dir, '/');
+        $matchCounterColours = 0;       
+        // colours as end folders
+        if (strpos($dir, 'zahlavi')) {
+            if (in_array(substr($stringAfterLastSlash, 1), $this->colours)) {
+                $matchCounterColours++;
+            }
+        }
+        // end folder from ilustracni_obrazky
+        $matchCounterIllustrativeImagesEndFolders = 0;        
+        if (strpos($dir, 'ilustracni_obrazky')) {        
+            if (in_array(substr($stringAfterLastSlash, 1), $this->illustrativeImagesEndFolders)) {
+                $matchCounterIllustrativeImagesEndFolders++;
+            }        
+        }
+        // end fodlers from ikony
+        $matchCounterIconsEndFolders = 0;        
+        if (strpos($dir, 'ikony')) {        
+            if (in_array(substr($stringAfterLastSlash, 1), $this->iconsEndFolders)) {
+                $matchCounterIconsEndFolders++;
+            }        
+        }        
+                
+        if ($matchCounterColours > 0 || $matchCounterIllustrativeImagesEndFolders > 0 || $matchCounterIconsEndFolders > 0) {
             $writable = dir::isWritable($dir);
             $info = array(
                 'name' => stripslashes(basename($dir)),
@@ -1380,16 +1540,7 @@ class browser extends uploader {
                 'hasDirs' => false
             );
         }        
-        else if (strpos($dir, 'galerie/sdilene obrazky')) {              
-            $writable = dir::isWritable($dir);
-            $info = array(
-                'name' => stripslashes(basename($dir)),
-                'readable' => true,
-                'writable' => false,
-                'removable' => false,
-                'hasDirs' => false
-            );
-        } else {   
+        else {   
         // gallery addon end            
             $writable = dir::isWritable($dir);
             $info = array(
