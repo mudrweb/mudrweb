@@ -71,8 +71,8 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         
         // ********************************************************************
         // Website settings end
-        // ********************************************************************
-        
+        // ********************************************************************       
+                        
         // logger
         $this->logger = $this->getService('logger');    
         $this->logger->logDir = WWW_DIR . '/log_cron';   
@@ -115,8 +115,8 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
             $_SESSION['KCFINDER'] = array();
             $_SESSION['KCFINDER']['disabled'] = false;
             $_SESSION['KCFINDER']['uploadURL'] = "/user_uploads/" . $userFromDB->subdomain;            
-            $_SESSION['KCFINDER']['uploadDir'] = "";
-                                    
+            $_SESSION['KCFINDER']['uploadDir'] = "";                    
+            
             // set username
             if ($userFromDB) {                
                 $this->template->userName = $userFromDB->username;

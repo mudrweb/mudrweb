@@ -202,7 +202,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 		if ( !dialog.getContentElement( this[ 'for' ][ 0 ], this[ 'for' ][ 1 ] ).getAction() )
 			return false;
 
-		return true;
+		return false;
 	}
 
 	/*
@@ -411,8 +411,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 				}
 			}
 		}
-	} );
-
+	} );        
 } )();
 
 /**

@@ -660,7 +660,7 @@ class browser extends uploader {
             ($this->get['theme'] == basename($this->get['theme'])) &&
             is_dir("themes/{$this->get['theme']}")
         )
-            $this->config['theme'] = $this->get['theme'];
+            $this->config['theme'] = $this->get['theme'];           
     }
 
     public function action() {
@@ -1529,7 +1529,7 @@ class browser extends uploader {
                 $matchCounterIconsEndFolders++;
             }        
         }        
-                
+                     
         if ($matchCounterColours > 0 || $matchCounterIllustrativeImagesEndFolders > 0 || $matchCounterIconsEndFolders > 0) {
             $writable = dir::isWritable($dir);
             $info = array(
@@ -1539,7 +1539,7 @@ class browser extends uploader {
                 'removable' => false,
                 'hasDirs' => false
             );
-        }        
+        }            
         else {   
         // gallery addon end            
             $writable = dir::isWritable($dir);
