@@ -1,8 +1,10 @@
 @import url("../paginator.css");
-
+@import url("layout_A_editor.css");
 /**
  * Basic
  */
+ 
+ 
 
 * { margin: 0;}
 html, body { font-size: 12px; font-family: Arial, sans-serif; line-height:1.5; height: 100%; }
@@ -39,7 +41,8 @@ div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; paddi
 #menu { width: 850px; height: 26px; padding: 5px 10px 0px 10px; margin: 10px 0px 10px 0px;}
 #menu ul {padding: 0px 0px 0px 0px;}
 #menu li { font-family: "Lucida Grande", Arial, sans-serif; display: inline; font-size: 14px; font-weight: normal; padding: 0px 30px 0px 0px}
-#menu a {text-decoration: none}
+#menu a {text-decoration: none; font-family: "Lucida Grande", Arial, sans-serif; display: inline; font-size: 14px; font-weight: normal; padding: 0px 0px 0px 0px}
+
 #menu .active {text-decoration: none;}
 
 /**

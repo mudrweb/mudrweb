@@ -1,5 +1,5 @@
 @import url("../paginator.css");
-
+@import url("layout_C_editor.css");
 /**
  * Basic
  */
@@ -40,7 +40,8 @@ div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; paddi
 #menu { width: 100px; height: auto; float: left; padding: 10px 0px 0px 20px; margin: 0px 0px 0px 0px;}
 #menu ul {padding: 0px 0px 0px 0px;}
 #menu li { font-family: "Lucida Grande", Arial, sans-serif; font-size: 14px; font-weight: normal; list-style-type: none; padding: 0px 0px 20px 0px;}
-#menu a {text-decoration: none}
+#menu a {text-decoration: none; font-family: "Lucida Grande", Arial, sans-serif; display: inline; font-size: 14px; font-weight: normal; padding: 0px 0px 0px 0px}
+#menu a:hover {font-weight: bold;}
 #menu .active {text-decoration: none;}
 
 /**
