@@ -53,6 +53,8 @@ class EmailsPresenter extends BasePresenter
                 $this->template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
                 $this->template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
                 $this->template->subdomain_name = $user->subdomain . '.mudrweb.cz';
+                $this->template->username = $user->username;
+                $this->template->usersSponsoringNumber = $user->usersSponsoringNumber;
                 $this->setView('acc_active');
             } else {
                 $this->redirect('Default:default');
@@ -106,6 +108,9 @@ class EmailsPresenter extends BasePresenter
             } else {
                 $this->redirect('Default:default');
             }                  
-        }        
+        } else {
+            $this->redirect('Default:default');
+        }
+            
     }        
 }

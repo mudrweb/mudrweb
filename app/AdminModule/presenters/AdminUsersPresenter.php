@@ -119,7 +119,9 @@ class AdminUsersPresenter extends AdminPresenter {
                         $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                
                         $template->subdomain_name = $user->subdomain . '.mudrweb.cz';        
                         $template->token = 'aa' . $user->registrationToken;
-
+                        $template->username = $user->username;
+                        $template->usersSponsoringNumber = $user->usersSponsoringNumber;
+                        
                         $mail = new \Nette\Mail\Message;
                         $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
                                 ->addTo($user_data->email)                

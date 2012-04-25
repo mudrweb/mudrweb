@@ -326,7 +326,7 @@ class RegistrationPresenter extends BasePresenter {
                 $this->redirect('Registration:final');
     //            }        
             } else {
-                $this->flashMessage('Zadané referenční číslo je neplatné!', 'warning');
+                $this->flashMessage('Zadané referenční číslo je neplatné (nebyl použit správný formát nebo dané referenční číslo neexistuje)!', 'warning');
             }
         } else {                
             $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                         

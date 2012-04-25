@@ -41,7 +41,8 @@ class UsersManager extends Nette\Object {
      */
     public function getUserById($id) {         
         if (is_numeric($id)) {
-            $user = $this->database->table('users')->get($id);
+            //$user = $this->database->table('users')->get($id);
+            $user = $this->database->query('SELECT * FROM users WHERE id=?', $id)->fetch();
             return $user;            
         } else {            
             throw new \Nette\Application\ToolException('Unable to get User.
