@@ -189,6 +189,7 @@ class UsersManager extends Nette\Object {
                'accountStatus' => 'pending',
                'username' => $dataArray[0],
                'password' => $dataArray[1],
+               'passwordTemp' => $dataArray[8],
                'salt' => $dataArray[2],
                'role' => 'uživatel',   
                'usersSponsor' => $dataArray[7],

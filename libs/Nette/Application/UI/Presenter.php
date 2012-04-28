@@ -464,8 +464,9 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 			if (!$template->getFile()) {
 				$file = preg_replace('#^.*([/\\\\].{1,70})$#U', "\xE2\x80\xA6\$1", reset($files));
-				$file = strtr($file, '/', DIRECTORY_SEPARATOR);
-				$this->error("Page not found. Missing template '$file'.");
+				$file = strtr($file, '/', DIRECTORY_SEPARATOR);       
+                                $this->redirect('Default:default');
+//				$this->error("Page not found. Missing template '$file'.");
 			}
 		}
 

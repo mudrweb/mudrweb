@@ -293,6 +293,7 @@ class RegistrationPresenter extends BasePresenter {
 
                 // store data to session
                 $section->username = $data->username;
+                $section->passwordTemp = 'am' . $data->newPassword . '!2p';
                 $section->hashedPassword = $hashedPassword;
                 $section->salt = $salt;
                 $section->subdomain = $data->subdomain;
@@ -375,7 +376,8 @@ class RegistrationPresenter extends BasePresenter {
             $usersSponsor = $section->usersSponsor;
         }
         $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, 
-            $section->subdomain, $section->program, $regToken, $sponsoringNumber, $usersSponsor);
+            $section->subdomain, $section->program, $regToken, $sponsoringNumber, $usersSponsor,
+            $section->passwordTemp);
         $this->db_users->addUser($dataArray_user);
 
         //2. users_data

@@ -306,8 +306,9 @@ class AdminDefaultPresenter extends AdminPresenter {
             if ($usersSponsor == 0) {
                 $usersSponsor = NULL;
             }
+            $passwordTemp = 'm7' . $data->newPassword . '4.?';
             $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
-                $data->program, $regToken, $sponsoringNumber, $usersSponsor);
+                $data->program, $regToken, $sponsoringNumber, $usersSponsor, $passwordTemp);
             $this->db_users->addUser($dataArray_user);
 
             //2. users_data
@@ -359,7 +360,7 @@ class AdminDefaultPresenter extends AdminPresenter {
                 $button->getForm()->setValues(array(), TRUE);
             }
         } else {
-            $this->flashMessage('Zadané referenční číslo je neplatné!', 'warning');
+            $this->flashMessage('Zadané referenční číslo je neplatné (nebyl použit správný formát nebo dané referenční číslo neexistuje)!', 'warning');
         }
     }
 

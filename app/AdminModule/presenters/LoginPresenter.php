@@ -121,11 +121,15 @@ class LoginPresenter extends AdminPresenter
     public function actionLogout() {
         $this->getUser()->logout();        
         // update logout date and time (not for superUser login to user account)
-        $user = $this->db_users->getUserById($this->getUser()->getId());        
-        if ($user->superUserActive != 1) {        
-            $this->db_users->saveLastUserLogout($this->user->getId());
+        if ($this->getUser()->getId()) {
+            $user = $this->db_users->getUserById(intval($this->getUser()->getId()));        
+            if ($user) {
+                if ($user->superUserActive != 1) {        
+                    $this->db_users->saveLastUserLogout($this->user->getId());
+                }
+                $this->db_users->updateSuperUserActivityStatus($this->user->getId(), 0);
+            }
         }
-        $this->db_users->updateSuperUserActivityStatus($this->user->getId(), 0);
         $this->flashMessage('Odhlášení proběhlo úspěšně.', 'info_log');
         $this->redirect(':Admin:Default:');
     }

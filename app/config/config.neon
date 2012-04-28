@@ -154,7 +154,7 @@ common:
 
 		application:
 			debugger: true
-			catchExceptions: false
+			catchExceptions: true
 			errorPresenter: Error
 
 		container:

@@ -187,7 +187,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @param Nette\Application\Request $request
      * @return string presenter
      */
-    public static function urlToPresenter($url, Nette\Application\Request $request) {
+    public static function urlToPresenter($url, Nette\Application\Request $request) {        
         // get subdomain
         $scriptPath = \Nette\Environment::getHttpContext()->request->url->scriptPath;
         // remove "/"
@@ -251,7 +251,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         if (array_key_exists($url, $UtoPArray)) {
             $url = $UtoPArray[$url];
         } else {
-            $url = null;
+//            $url = null;
         }
 
         $s = strtolower($url);
@@ -334,7 +334,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         if (array_key_exists($presenter, $PtoUArray)) {
             $presenter = $PtoUArray[$presenter];
         } else {
-            $presenter = null;
+//            $presenter = null;
         }
 
         $s = strtr($presenter, ':', '.');

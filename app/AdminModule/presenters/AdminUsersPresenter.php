@@ -120,6 +120,7 @@ class AdminUsersPresenter extends AdminPresenter {
                         $template->subdomain_name = $user->subdomain . '.mudrweb.cz';        
                         $template->token = 'aa' . $user->registrationToken;
                         $template->username = $user->username;
+                        $template->password = substr($user->passwordTemp, 2, - 3);                        
                         $template->usersSponsoringNumber = $user->usersSponsoringNumber;
                         
                         $mail = new \Nette\Mail\Message;
