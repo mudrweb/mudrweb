@@ -352,7 +352,21 @@ class UsersManager extends Nette\Object {
             throw new \Nette\Application\ToolException('Unable to update notification counter.
                     Wrong input. method: updateAccDeactNotificationCounter($id, $notifyNumber)', 500);
         }
-    }      
+    }     
+    
+    /**
+     * Reset temporary password -> set it to null.
+     * 
+     * @param int $id     
+     */    
+    public function resetTemporaryPassword($id) {
+        if (is_numeric($id)) {            
+            $this->database->exec('UPDATE users SET passwordTemp=null WHERE id=?', $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to reset temporary password.
+                    Wrong input. method: resetTemporaryPassword($id)', 500);
+        }
+    }       
     
     /**************************** UsersData ***********************************/           
     

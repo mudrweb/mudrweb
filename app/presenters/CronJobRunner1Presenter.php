@@ -23,11 +23,48 @@ class CronJobRunner1Presenter extends BasePresenter
                     // check dateFrom - set user's account status from pending->active
                     $todaysDate = date('Y-m-d');
                     $dateFrom = date_format($user->dateFrom, 'Y-m-d');
+                    
+                    // account activation START ////////////////////////////////
                     if (($user->accountStatus == 'pending') && ($todaysDate >= $dateFrom)) {
                         $this->db_users->updateRegistrationProcessStatus(intval($user->id), 'active');
-                        $this->logger->logMessage(ILogger::INFO, '>>> Subodmain ' . $user->subdomain . ' successfuly activated. [cron]');
-                    }
+                        
+                        if ($user) {
+                            $user_data = $this->db_users->getUsersDataById(intval($user->id));
 
+                            // send email
+                            $template = parent::createTemplate();
+                            $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_active.latte');
+                            $template->registerFilter(new Nette\Latte\Engine());
+
+                            if ($user->program == 'demo') {
+                                $template->program = 'DEMOverze';
+                            } elseif ($user->program == 'basic') {
+                                $template->program = 'Základní verze';
+                            } elseif ($user->program == 'premium') {
+                                $template->program = 'Premium verze';
+                            }
+
+                            $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
+                            $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';
+                            $template->subdomain_name = $user->subdomain . '.mudrweb.cz';                           
+                            $template->token = 'aa' . $user->registrationToken;
+                            $template->username = $user->username;
+                            $template->password = substr($user->passwordTemp, 2, - 3);                        
+                            $template->usersSponsoringNumber = $user->usersSponsoringNumber;
+                            
+                            $mail = new \Nette\Mail\Message;
+                            $mail->setFrom('MUDRweb.cz - účet <support@mudrweb.cz>')
+                                    ->addTo($user_data->email)
+                                    ->setHtmlBody($template)
+                                    ->send();
+                            
+                            $this->db_users->resetTemporaryPassword(intval($user->id));     
+                            
+                            $this->logger->logMessage(ILogger::INFO, '>>> Subodmain ' . $user->subdomain . ' successfuly activated. [cron]');
+                        }
+                    }
+                    // account activation END ////////////////////////////////
+                    
                     // check dateTo - set user's account status from active->inactive
                     $dateToStopIt = date('Y-m-d', strtotime('-1 day'));
                     $dateTo = date_format($user->dateTo, 'Y-m-d');
@@ -48,8 +85,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
-                            }  elseif ($user->program == 'premium') {
-                                $this->template->program = 'Premium verze';
+                            } elseif ($user->program == 'premium') {
+                                $template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
@@ -90,8 +127,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
-                            }  elseif ($user->program == 'premium') {
-                                $this->template->program = 'Premium verze';
+                            } elseif ($user->program == 'premium') {
+                                $template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
@@ -133,8 +170,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
-                            }  elseif ($user->program == 'premium') {
-                                $this->template->program = 'Premium verze';
+                            } elseif ($user->program == 'premium') {
+                                $template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');
@@ -176,8 +213,8 @@ class CronJobRunner1Presenter extends BasePresenter
                                 $template->program = 'DEMOverze';
                             } elseif ($user->program == 'basic') {
                                 $template->program = 'Základní verze';
-                            }  elseif ($user->program == 'premium') {
-                                $this->template->program = 'Premium verze';
+                            } elseif ($user->program == 'premium') {
+                                $template->program = 'Premium verze';
                             }
 
                             $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');

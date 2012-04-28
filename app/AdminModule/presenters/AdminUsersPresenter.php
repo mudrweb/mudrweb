@@ -114,6 +114,8 @@ class AdminUsersPresenter extends AdminPresenter {
                             $template->program = 'DEMOverze';
                         } elseif ($user->program == 'basic') {
                             $template->program = 'Základní verze';
+                        } elseif ($user->program == 'premium') {
+                            $template->program = 'Premium verze';
                         }
                         $template->dateOfReg = date_format($user->dateOfRegistration, 'd.m.Y');                                        
                         $template->subdomain = 'http://' . $user->subdomain . '.mudrweb.cz';                
@@ -129,7 +131,8 @@ class AdminUsersPresenter extends AdminPresenter {
                                 ->setHtmlBody($template)
                                 ->send();   
 
-                        $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);                       
+                        $this->db_users->updateRegistrationProcessStatus(intval($id), $newStatus);     
+                        $this->db_users->resetTemporaryPassword(intval($id));     
                         
                         $this->logger->logMessage(\ILogger::INFO, '>>> Subodmain ' . $user->subdomain . ' successfuly activated. [manual]');
                     }
