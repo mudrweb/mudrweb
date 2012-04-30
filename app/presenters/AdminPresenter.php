@@ -265,6 +265,11 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
             if ($this->name === 'Admin:AdminLayouts') {
                 $nav->setCurrent($sec);
             }                
+
+            $sec = $nav->add("Údržba", $this->link(":Admin:AdminMaintenance:"), 'no');
+            if ($this->name === 'Admin:AdminMaintenance') {
+                $nav->setCurrent($sec);
+            }                
         }
     }
     

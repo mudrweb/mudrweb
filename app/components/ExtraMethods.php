@@ -110,7 +110,7 @@ class ExtraMethods extends Nette\Object {
         // check connection and login result
         if ((!$conn_id) || (!$login_result)) {
              \Nette\Diagnostics\Debugger::log('FTP connection has encountered an error!'); 
-             ftp_quit($Connect);
+             ftp_quit($conn_id);
              exit;
          } else {
              \Nette\Diagnostics\Debugger::log('FTP connection was successful - copy file!');                           
@@ -145,7 +145,7 @@ class ExtraMethods extends Nette\Object {
       // check connection and login result
       if ((!$conn_id) || (!$login_result)) {
              \Nette\Diagnostics\Debugger::log('FTP connection has encountered an error!'); 
-             ftp_quit($Connect);
+             ftp_quit($conn_id);
              exit;
          } else {
              \Nette\Diagnostics\Debugger::log('FTP connection was successful - real subdomain existence check!');                           
@@ -189,7 +189,7 @@ class ExtraMethods extends Nette\Object {
       // check connection and login result
       if ((!$conn_id) || (!$login_result)) {
              \Nette\Diagnostics\Debugger::log('FTP connection has encountered an error!'); 
-             ftp_quit($Connect);
+             ftp_quit($conn_id);
              exit;
          } else {
              \Nette\Diagnostics\Debugger::log('FTP connection was successful - delete subdomain!');                           
@@ -232,7 +232,7 @@ class ExtraMethods extends Nette\Object {
       // check connection and login result
       if ((!$conn_id) || (!$login_result)) {
              \Nette\Diagnostics\Debugger::log('FTP connection has encountered an error!'); 
-             ftp_quit($Connect);
+             ftp_quit($conn_id);
              exit;
          } else {
              \Nette\Diagnostics\Debugger::log('FTP connection was successful - create subdomain!');                           
@@ -322,7 +322,7 @@ class ExtraMethods extends Nette\Object {
       // check connection and login result
       if ((!$conn_id) || (!$login_result)) {
              \Nette\Diagnostics\Debugger::log('FTP connection has encountered an error!'); 
-             ftp_quit($Connect);
+             ftp_quit($conn_id);
              exit;
          } else {
              \Nette\Diagnostics\Debugger::log('FTP connection was successful - archive subdomain!');                           
@@ -342,5 +342,57 @@ class ExtraMethods extends Nette\Object {
       }
          
       ftp_close($conn_id);        
-    }    
+    }
+    
+    /**
+     * Delete .thumbs dir for all users.
+     * 
+     * @param string $subdomain
+     * @return bool status
+     */
+    public function deleteThumbs($subdomain) {
+        $wwwDir = WWW_DIR;        
+
+        try {
+            if (is_dir($wwwDir . '/user_uploads/' . $subdomain . '/.thumbs')) {
+                $this->rrmdir($wwwDir . '/user_uploads/' . $subdomain . '/.thumbs');
+                \Nette\Diagnostics\Debugger::log('Thumbs dir for subdomain: ' . $subdomain . ' was successfuly deleted.');
+                // ok
+                return 1;            
+            } else {
+                \Nette\Diagnostics\Debugger::log('Thumbs dir for subdomain: ' . $subdomain . ' was not found.');
+                // warning - thumbs dir not found (already deleted or missing)
+                return -1;
+            }                       
+        } catch(Exception $e) {
+            \Nette\Diagnostics\Debugger::log('Unable to delete thumbs dir for subdomain: ' . $subdomain);                                               
+            // error
+            return 0;                            
+        }
+    }
+    
+    /**
+     * Remove dir and its content - recursion.
+     * 
+     * @param string $dir 
+     */
+    function rrmdir($dir) {
+        $fp = opendir($dir);
+        if ($fp) {
+            while ($f = readdir($fp)) {
+                $file = $dir . "/" . $f;
+                if ($f == "." || $f == "..") {
+                    continue;
+                }
+                else if (is_dir($file)) {
+                    $this->rrmdir($file);
+                }
+                else {
+                    unlink($file);
+                }
+            }
+            closedir($fp);
+            rmdir($dir);
+        }
+    }
 }    

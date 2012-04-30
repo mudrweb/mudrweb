@@ -311,6 +311,11 @@ a.user_list:hover {text-decoration: underline; color: black;}
 }
 .td_input_addLayout { padding-left: 129px; padding-bottom: 15px; padding-top: 5px; }
 
+/* maintenance - admin panel */
+.td_input_label_maint { padding-bottom: 0px; padding-left: 20px; }
+.progressBar_maint { width: 150px; height: 30px; margin-top: 2px; }
+#progressBarNumStatResult { display: inline; }
+
 /* login, forgotten password */
 .forgotten_password { text-align: center; padding-right: 10px; padding-top: 15px; }
 a.f_password:link {text-decoration: underline; color: red;}
@@ -399,6 +404,8 @@ a.isNotPublished { background-color: transparent; color: #000; font-weight: bold
 .icon-ui-red-close { background-position: -80px -128px; }
 .icon-ui-green { background-image: url('images/ui-icons_8dc262_256x240.png'); float: none; margin: -3px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: inline-block; overflow: hidden; }
 .icon-ui-green-tick { background-position: -64px -144px; }
+.icon-ui-blue { background-image: url('images/ui-icons_2e83ff_256x240.png'); float: none; margin: -3px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: inline-block; overflow: hidden; }
+.icon-ui-blue-alert { background-position: 0 -144px; }
 
 /**
 * Live validation

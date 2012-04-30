@@ -34,7 +34,7 @@ common:
 			doctorGroups: { 
                                     skupina 0 : { 
                                         001 : 001 praktické lékařství pro dospělé,
-                                        002 : 002 praktické lékařství pro děti a dorost,
+                                        002 : 002 praktické lékařství děti/dorost,
                                         003 : 003 lékařská služba první pomoci,
                                         013 : 013 stomatologická chirurgie,
                                         014 : 014 praktické zubní lékařství,
@@ -54,7 +54,7 @@ common:
                                         109 : 109 revmatologie,
                                         128 : 128 hemodialýza
                                     }, skupina 2 : {
-                                        201 : 201 fyziatrie a rehabilitační lékařství,
+                                        201 : 201 fyziatrie a rehab. lékařství,
                                         202 : 202 klinická hematologie,
                                         203 : 203 přenosné nemoce,
                                         204 : 204 tělovýchovné lékařství,

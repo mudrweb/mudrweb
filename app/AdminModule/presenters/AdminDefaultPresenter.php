@@ -303,6 +303,18 @@ class AdminDefaultPresenter extends AdminPresenter {
             $salt = $this->extraMethods->generateSalt();
             $regToken = $this->extraMethods->calculateHash($token, $salt);
             $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
+            // check if generated sponsoring number does not already exist (3 check)
+            // 14,776,336 unique combinations -> long way to catch them all
+            $users = $this->db_users->getUsers();
+            $sponsoringNumbersList = array();
+            foreach ($users as $user) {
+                $sponsoringNumbersList[] = $user->usersSponsoringNumber;
+            }
+            // check until generated one is unique
+            while (in_array($sponsoringNumber, $sponsoringNumbersList)) {
+                $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
+            }
+            
             if ($usersSponsor == 0) {
                 $usersSponsor = NULL;
             }

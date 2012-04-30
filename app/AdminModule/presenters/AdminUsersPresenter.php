@@ -19,7 +19,10 @@ class AdminUsersPresenter extends AdminPresenter {
     public function startup()
     {
         parent::startup();
-        $this->checkAccess(array('admin'));                
+        $this->checkAccess(array('admin'));            
+        
+//        $listOfSubdomains = array('xa', 'xb', 'fd');
+//        $this->extraMethods->deleteThumbs($listOfSubdomains);
     }      
  
     public function renderDefault() {      
