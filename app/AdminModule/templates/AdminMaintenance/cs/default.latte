@@ -1,0 +1,84 @@
+{block content}
+              
+    <h2>Údržba</h2>  
+    
+{snippet formDeleteThumbs}      
+{form deleteThumbsForm} 
+{/form deleteThumbsForm}     
+        <table cellspacing="0">          
+                <tr style="height: 5px;"><td></td></tr>
+                <tr>
+                    <td class="td_verticalSeparator" rowspan="2">Galerie</td>                    
+                </tr>  
+                <tr>
+                    <td class="td_input_label_maint" id="deleteThumbs_submit">
+                        <a href="" class="ajax">                                                
+                            <input id="deleteThumbs-submit" class="button" type="submit" value="Smazat náhledy" name="submit_">                    
+                        </a>
+                    </td>
+                    <td class="td_input_label_maint">
+                        <div class="progressBar_maint">                            
+                        </div>
+                    </td>
+                    <td class="td_input_label_maint">
+                        <div id="progressBarNumStat"></div>
+                    </td>
+                </tr>                
+                <tr style="height: 15px;"><td></td></tr>
+         </table>             
+         <h2></h2>         
+         <table cellspacing="0">                
+
+         </table>                     
+         
+<script type="text/javascript">         
+    $('.progressBar_maint').progressbar({ value: 0 });
+    var numberOfSubdomains = $('#frmdeleteThumbsForm-numberOfSubdomains').val();
+    $('#deleteThumbs_submit').click(function(event) {
+        var numberOfSuccessfulPayloads = 0;
+        var i = 0;
+        var counter = 0;
+        var errorStatus = 0;
+        var warningStatus = 0;
+        $('#progressBarNumStatValidity').remove();
+        while (i < numberOfSubdomains)        
+        {
+            $.getJSON({link deleteThumbs!},{'index':i},function(payload) {                  
+                    // error occurred in deletion process
+                    if (payload.availCheck[0] == 999888999) { 
+                        errorStatus++;
+                    }
+                    // warning - thumbs dir not found (already deleted or missing)
+                    if (payload.availCheck[0] == 999999999) { 
+                        warningStatus++;
+                    }     
+                    // ok
+                    if (payload.availCheck[0] != null) {
+                        counter++;
+                    }
+                    var progress = (counter / numberOfSubdomains) * 100;
+                    $('.progressBar_maint').progressbar( "option", "value", progress );
+                    $('#progressBarNumStatResult').remove();                
+                    $('#progressBarNumStat').append('<p id="progressBarNumStatResult">' + counter + ' / ' + numberOfSubdomains + '</p>');
+
+                    // ok
+                    if (counter == numberOfSubdomains && errorStatus == 0 && warningStatus == 0) {
+                        $('#progressBarNumStatResult').append('<p id="progressBarNumStatValidity" class="icon-ui-green icon-ui-green-tick"></p>');
+                    } 
+                    // warning
+                    else if (counter == numberOfSubdomains && errorStatus == 0 && warningStatus != 0) {
+                        $('#progressBarNumStatResult').append('<p id="progressBarNumStatValidity" class="icon-ui-blue icon-ui-blue-alert"></p>>>>>>> ' + warningStatus + ' warnings (see log)');
+                    } 
+                    // error
+                    else if (counter == numberOfSubdomains && errorStatus != 0 && warningStatus == 0) {
+                        $('#progressBarNumStatResult').append('<p id="progressBarNumStatValidity" class="icon-ui-red icon-ui-red-close"></p>>>>>>>> ' + errorStatus + ' errors (see log)');
+                    }
+            });  
+            i++;
+        }        
+    });     
+</script>         
+         
+{/snippet}                        
+         
+{/block}
