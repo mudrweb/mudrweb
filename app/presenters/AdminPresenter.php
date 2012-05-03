@@ -109,7 +109,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
             }
             
             // get user data from DB
-            $userFromDB = $this->db_users->getUserById(1);                          
+            $userFromDB = $this->db_users->getUserById($this->user->getId());                          
                         
             // set rights and user specific folder for uploads (kcfinder )
             $_SESSION['KCFINDER'] = array();

@@ -65,8 +65,8 @@ class ExtraMethods extends Nette\Object {
     public function generateSponsoringNumber() {
         $args = array(
         'length'                =>   4,
-        'alpha_upper_include'   =>   TRUE,
-        'alpha_lower_include'   =>   TRUE,
+        'alpha_upper_include'   =>   FALSE,
+        'alpha_lower_include'   =>   FALSE,
         'number_include'        =>   TRUE,
         'symbol_include'        =>   FALSE,
         );
@@ -85,8 +85,8 @@ class ExtraMethods extends Nette\Object {
      * @param string $filename 
      */
     public function copyFileToRealSubdomain($subdomain, $filename) {
-        $wwwDir = $this->getContext()->params['wwwDir'];
-
+        $wwwDir = Nette\Environment::getContext()->params['wwwDir'];      
+        
         //data
         $paths = "";
         $ftp_server = "eam.hukot.cz";

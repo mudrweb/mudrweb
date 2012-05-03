@@ -133,9 +133,11 @@ jQuery.validator.addMethod(
 	"dateITA",
 	function(value, element) {
 		var check = false;
-		var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+//		var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+                var re = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
 		if( re.test(value)){
-			var adata = value.split('/');
+//			var adata = value.split('/');
+                        var adata = value.split('.');
 			var gg = parseInt(adata[0],10);
 			var mm = parseInt(adata[1],10);
 			var aaaa = parseInt(adata[2],10);

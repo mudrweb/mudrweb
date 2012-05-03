@@ -10,6 +10,7 @@
                         <th>ID</th>
                         <th>Jméno</th>
                         <th>Subd.</th>
+                        <th>Program</th>
                         <th>Registrace</th>
                         <th>Status</th>                        
                         <th>Aktivace</th>
@@ -38,6 +39,7 @@
                                         <span class="red">{$user[9]}</span>                                        
                                     {/if}
                                 </td>
+                                <td>{$user[13]}</td>                                
                                 <td>{$user[4]}</td>                                
                                 {if $user[5] == 'active'}
                                     <td id="status{$user[0]}" class="green bold">
@@ -108,6 +110,7 @@
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },                    
                     { "bSortable": false },
                     { "asSorting": [ "desc", "asc" ] },                                        
@@ -116,6 +119,7 @@
             }).makeEditable({
                 sUpdateURL: "/admin/admin-users?do=submitChanges",
                 "aoColumns": [ 
+                    null,
                     null,
                     null,
                     null,

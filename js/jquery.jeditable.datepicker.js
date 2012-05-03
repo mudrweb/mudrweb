@@ -64,7 +64,7 @@ $.editable.addInputType( 'datepicker', {
           }, 150 );
         },
         
-        dateFormat: 'dd/mm/yy'
+        dateFormat: 'dd.mm.yy'
       };
     
       if (settings.datepicker) {

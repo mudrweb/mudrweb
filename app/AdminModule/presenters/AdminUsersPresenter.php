@@ -19,10 +19,7 @@ class AdminUsersPresenter extends AdminPresenter {
     public function startup()
     {
         parent::startup();
-        $this->checkAccess(array('admin'));            
-        
-//        $listOfSubdomains = array('xa', 'xb', 'fd');
-//        $this->extraMethods->deleteThumbs($listOfSubdomains);
+        $this->checkAccess(array('admin'));                            
     }      
  
     public function renderDefault() {      
@@ -38,30 +35,31 @@ class AdminUsersPresenter extends AdminPresenter {
                        // change date format 
                        if ($user->dateFrom != null) {
                             $dateFrom = $user->dateFrom;
-                            $dateFrom = $dateFrom->format('d/m/Y');
+                            $dateFrom = $dateFrom->format('d.m.Y');
                        } else {
-                            $dateFrom = '00/00/0000';
+                            $dateFrom = '00.00.0000';
                        }
                        if ($user->dateTo != null) {                           
                             $dateTo = $user->dateTo;
-                            $dateTo = $dateTo->format('d/m/Y');                            
+                            $dateTo = $dateTo->format('d.m.Y');                            
                        } else {
-                            $dateTo = '00/00/0000';
+                            $dateTo = '00.00.0000';
                        }                       
                       
                        if ($user->dateOfRegistration) {
-                           $dateOfRegistration = date_format($user->dateOfRegistration, 'd/m/Y H:i:s');
+                           $dateOfRegistration = date_format($user->dateOfRegistration, 'd.m.Y H:i:s');
                        } else {
                            $dateOfRegistration = NULL;
                        }                
                        if ($user->dateOfActivation) {
-                           $dateOfActivation = date_format($user->dateOfActivation, 'd/m/Y H:i:s');
+                           $dateOfActivation = date_format($user->dateOfActivation, 'd.m.Y H:i:s');
                        } else {
                            $dateOfActivation = NULL;
                        }
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
                             $user->subdomain, $dateOfRegistration, $user->accountStatus, $dateFrom, $dateTo, 
-                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, $dateOfActivation, $user->advertisement);                
+                            $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, 
+                            $dateOfActivation, $user->advertisement, $user->program);                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminUsers presenter).', 404);                    
                     }
@@ -82,7 +80,7 @@ class AdminUsersPresenter extends AdminPresenter {
         $columnId = $_REQUEST['columnId'];
         
         // status and subdomain data
-        if ($columnId == 4) {
+        if ($columnId == 5) {
             $newStatusId = $_REQUEST['value'];               
             $newStatus = null;
             switch ($newStatusId) {
@@ -197,25 +195,25 @@ class AdminUsersPresenter extends AdminPresenter {
         }
 
         // dateFrom
-        if ($columnId == 6) {
+        if ($columnId == 7) {
             $dateFromAdmin = $_REQUEST['value'];                             
-            $dateFrom = date_create_from_format('d/m/Y', $dateFromAdmin);
+            $dateFrom = date_create_from_format('d.m.Y', $dateFromAdmin);
             $dateFrom = $dateFrom->format('Y-m-d');
             
             $this->db_users->setUserDateFrom(intval($id), $dateFrom);
         }        
 
         // dateTo
-        if ($columnId == 7) {
+        if ($columnId == 8) {
             $dateToAdmin = $_REQUEST['value'];                             
-            $dateTo = date_create_from_format('d/m/Y', $dateToAdmin);
+            $dateTo = date_create_from_format('d.m.Y', $dateToAdmin);
             $dateTo = $dateTo->format('Y-m-d');
             
             $this->db_users->setUserDateTo(intval($id), $dateTo);
         }                
         
         // maintenance mode
-        if ($columnId == 9) {
+        if ($columnId == 10) {
             $mmodeId = $_REQUEST['value'];               
             $mmNewStatus = null;
             switch ($mmodeId) {
@@ -267,7 +265,7 @@ class AdminUsersPresenter extends AdminPresenter {
         }        
         
         // advertisement
-        if ($columnId == 10) {
+        if ($columnId == 11) {
             $newAdvertisement = $_REQUEST['value'];                             
             
             if ($newAdvertisement == '') {

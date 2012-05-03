@@ -362,6 +362,13 @@ class AdminDefaultPresenter extends AdminPresenter {
             //7. set subdomain status from N/A -> to valid
             $this->db_users->updateSubdomainStatus($user->id, 'Valid');
 
+            //8. send user reg request to mudrweb@gmail.com
+            $mail = new \Nette\Mail\Message;
+            $mail->setFrom('MUDRweb.cz - user reg request <admin@mudrweb.cz>')
+                    ->addTo('mudrweb@gmail.com')
+                    ->setSubject('Žádost o registraci nového uživatele')
+                    ->send();
+            
             $this->flashMessage('Registrace uživatele proběhla úspěšně.', 'info');
 
             if (!$this->isAjax()) {
@@ -491,21 +498,7 @@ class AdminDefaultPresenter extends AdminPresenter {
         } catch (Exception $e) {
             throw new \Nette\Application\ToolException('Unable to register user (www part) (AdminModule - adminDefault presenter). ' . $e, 500);
         }        
-    }
-    
-    /**
-     * Delete directory and its subdirectories.
-     * 
-     * @param string $dir 
-     */
-//    function rmdir_recursive($dir) {
-//        foreach(scandir($dir) as $file) {
-//            if ('.' === $file || '..' === $file) continue;
-//            if (is_dir("$dir/$file")) $this->rmdir_recursive("$dir/$file");
-//            else unlink("$dir/$file");
-//        }
-//        rmdir($dir);
-//    }    
+    }     
     
     /**
      * Layout preview handler.

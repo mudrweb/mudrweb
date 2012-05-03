@@ -441,7 +441,14 @@ class RegistrationPresenter extends BasePresenter {
                 ->addTo($user_data->email)                
                 ->setHtmlBody($template)
                 ->send();        
-        
+
+        //9. send user reg request to mudrweb@gmail.com
+        $mail = new \Nette\Mail\Message;
+        $mail->setFrom('MUDRweb.cz - user reg request <admin@mudrweb.cz>')
+                ->addTo('mudrweb@gmail.com')
+                ->setSubject('Žádost o registraci nového uživatele')
+                ->send();
+
         $this->redirect('this');
     }        
     

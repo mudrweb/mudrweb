@@ -2,7 +2,7 @@
 @import url("GuestBook_1_white.css");
 
 /*Basic*/
-html, body {background-color: transparent; color: #000; background-image: url(''); background-repeat: repeat;}
+html, body {background-color: transparent; color: #000; background-image: url('../../images/layouts/bck1.png'); background-repeat: repeat;}
 
 /*Topspace*/
 #topspace {background-color: transparent; color: #000;}
