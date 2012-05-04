@@ -536,7 +536,7 @@
         onblur     : 'cancel',
         loadtype   : 'GET',
         loadtext   : 'Loading...',
-        placeholder: 'Click to edit',
+        placeholder: 'Double-click to edit',
 	maxlength  : '9999',
         loaddata   : {},
         submitdata : {},

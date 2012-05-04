@@ -368,6 +368,21 @@ class UsersManager extends Nette\Object {
         }
     }       
     
+    /**
+     * Update FTP password.
+     * 
+     * @param int $id
+     * @param string $newFTPpassword 
+     */    
+    public function updateFTPPassword($id, $newFTPpassword) {
+        if (is_numeric($id) && is_string($newFTPpassword)) {            
+            $this->database->exec('UPDATE users SET passwordFTP=? WHERE id=?', $newFTPpassword, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update user FTP password.
+                    Wrong input. method: updateFTPPassword($id, $newFTPpassword)', 500);
+        }
+    }         
+    
     /**************************** UsersData ***********************************/           
     
     /**

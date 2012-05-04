@@ -75,6 +75,27 @@ class ExtraMethods extends Nette\Object {
         $password = $data->get_password();
         return $password;
     }       
+
+    /**
+     * Generates dummy string (for example for temp password and 
+     * FTP password builder)
+     * 
+     * @param int $numberOfChars
+     * @return type 
+     */
+    public function generateDummyString($numberOfChars) {
+        $args = array(
+        'length'                =>   $numberOfChars,
+        'alpha_upper_include'   =>   TRUE,
+        'alpha_lower_include'   =>   TRUE,
+        'number_include'        =>   TRUE,
+        'symbol_include'        =>   TRUE,
+        );
+        $data = new chip_password_generator($args);
+        
+        $dummyString = $data->get_password();
+        return $dummyString;
+    }           
     
     /**
      * Copy current file to real subdomain (in ftp root):

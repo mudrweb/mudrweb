@@ -19,6 +19,7 @@
                         <th>Real Subd.</th>
                         <th>Údržba</th>
                         <th>Reklama</th>
+                        <th>FTP passw</th>
                     </tr>
                 </thead>
                 <tbody align="center">
@@ -74,7 +75,8 @@
                                     <td id="mmode{$user[0]}" class="red bold">    
                                 {/if}                                        
                                     {$user[8]}</td> 
-                                <td>{$user[12]}</td>    
+                                <td class="advert">{$user[12]}</td>    
+                                <td class="advert">{$user[14]}</td>    
                             </tr>
                         {/foreach}  
                     {/if}
@@ -114,7 +116,8 @@
                     { "asSorting": [ "desc", "asc" ] },                    
                     { "bSortable": false },
                     { "asSorting": [ "desc", "asc" ] },                                        
-                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' }                                        
+                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' },                                        
+                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' }                                                            
                 ]
             }).makeEditable({
                 sUpdateURL: "/admin/admin-users?do=submitChanges",
@@ -157,16 +160,27 @@
                     submit: 'OK&nbsp'                    
                 },
                 {                           
-                    cssclass: 'advert',
+//                    cssclass: 'advert',
                     maxlength: 25,   
 //                    cssclass  : "required",                                        
                     indicator : 'Saving ...',     
                     cancel    : 'Cancel',
                     submit    : 'OK'                   
-                }
+                },
+                {                           
+//                    cssclass: 'advert',
+                    maxlength: 25,                       
+//                    cssclass  : "required",                                        
+                    indicator : 'Saving ...',     
+                    cancel    : 'Cancel',
+                    submit    : 'OK'                   
+                }                
                 ]
         });
     } );
+    
+    $(":button").addClass("advert");
+    
     </script>
     
 {/snippet}    

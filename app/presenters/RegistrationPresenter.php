@@ -293,7 +293,9 @@ class RegistrationPresenter extends BasePresenter {
 
                 // store data to session
                 $section->username = $data->username;
-                $section->passwordTemp = 'am' . $data->newPassword . '!2p';
+                $dummyStringPre = $this->extraMethods->generateDummyString(2);
+                $dummyStringPost = $this->extraMethods->generateDummyString(3);                        
+                $section->passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
                 $section->hashedPassword = $hashedPassword;
                 $section->salt = $salt;
                 $section->subdomain = $data->subdomain;

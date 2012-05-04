@@ -318,7 +318,9 @@ class AdminDefaultPresenter extends AdminPresenter {
             if ($usersSponsor == 0) {
                 $usersSponsor = NULL;
             }
-            $passwordTemp = 'm7' . $data->newPassword . '4.?';
+            $dummyStringPre = $this->extraMethods->generateDummyString(2);
+            $dummyStringPost = $this->extraMethods->generateDummyString(3);
+            $passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
             $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
                 $data->program, $regToken, $sponsoringNumber, $usersSponsor, $passwordTemp);
             $this->db_users->addUser($dataArray_user);

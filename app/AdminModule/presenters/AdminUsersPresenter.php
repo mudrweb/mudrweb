@@ -56,10 +56,11 @@ class AdminUsersPresenter extends AdminPresenter {
                        } else {
                            $dateOfActivation = NULL;
                        }
+                       // 13 array items
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
                             $user->subdomain, $dateOfRegistration, $user->accountStatus, $dateFrom, $dateTo, 
                             $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, 
-                            $dateOfActivation, $user->advertisement, $user->program);                
+                            $dateOfActivation, $user->advertisement, $user->program, $user->passwordFTP);                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminUsers presenter).', 404);                    
                     }
@@ -274,6 +275,21 @@ class AdminUsersPresenter extends AdminPresenter {
                 $this->db_users->updateAdvertisement(intval($id), $newAdvertisement);
             }
         }         
+        
+        // FTP password
+        if ($columnId == 12) {
+            $newFTPpassword = $_REQUEST['value'];                             
+              
+            if ($newFTPpassword != '') {
+                $dummyStringPre = $this->extraMethods->generateDummyString(2);
+                $dummyStringPost = $this->extraMethods->generateDummyString(3);                                      
+                $newFTPpassword = $dummyStringPre . $newFTPpassword . $dummyStringPost;
+            } else {
+                $newFTPpassword = $newFTPpassword;                
+            }
+            
+            $this->db_users->updateFTPPassword(intval($id), $newFTPpassword);            
+        }            
         
         if (!$this->isAjax()) {
             $this->redirect('this');
