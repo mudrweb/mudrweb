@@ -1,3 +1,8 @@
+{block head}
+    <link rel="stylesheet" href="../../css/TableTools.css" type="text/css">                
+    <script type="text/javascript" src="../../js/TableTools.min.js"></script>
+    <script type="text/javascript" src="../../js/ZeroClipboard.js"></script>        
+{/block}
 {block content}
               
     <h2>Správa uživatelů</h2>    
@@ -90,6 +95,9 @@
             $('.js_table').dataTable({
                 bJQueryUI: true,
                 "sPaginationType": "full_numbers",
+//                "sDom": '<"H"Tfr>t<"F"ip>',
+//                "sDom": '<"H"Tfr>lfrtip<"clear spacer">T',
+                "sDom": 'T<"H"lf>rt<"F"ip>',
                 "oLanguage": {
                         "sLengthMenu": "Zobrazit _MENU_ záznamů na stránku",
                         "sZeroRecords": "Nebyly nalezeny žádné záznamy",
@@ -118,7 +126,28 @@
                     { "asSorting": [ "desc", "asc" ] },                                        
                     { "asSorting": [ "desc", "asc" ], sWidth: '12%' },                                        
                     { "asSorting": [ "desc", "asc" ], sWidth: '12%' }                                                            
-                ]
+                ],
+		"oTableTools": {
+                        "sSwfPath": "../../js/copy_cvs_xls_pdf.swf",
+			"aButtons": [
+				"copy",
+				"csv",
+				"xls",
+				{
+					"sExtends": "pdf",
+					"sPdfOrientation": "landscape"					
+				},
+                                "print"				
+			]                        
+//			"aButtons": [
+//				"copy", "csv", "xls", "pdf",
+//				{
+//					"sExtends":    "collection",
+//					"sButtonText": "Save",
+//					"aButtons":    [ "csv", "xls", "pdf" ]
+//				}
+//			]
+		}                
             }).makeEditable({
                 sUpdateURL: "/admin/admin-users?do=submitChanges",
                 "aoColumns": [ 
