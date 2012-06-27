@@ -92,9 +92,31 @@
                                 <br /><br />
                                 Objednávka bude zpracována do 48 hodin od provedení registrace a splnění všech podmínek pro 
                                 registraci.
-                                <br />
+                                {if $program=='DEMOverze'}
+                                <br /><br />
                                 Vážíme si Vašeho rozhodnutí stát se klientem serveru MUDRweb.cz a rádi bychom Vás u nás přivítali.
+                                <br />                                
+                                {elseif $program=='Základní verze'}
+                                <br /><br />
+                                V zápětí Vám bude zaslána zálohová faktura s 3 měsíční splatností. Pokud tuto zálohovou fakturu 
+                                do 3 měsíců neuhradíte, zkušební provoz Vaší internetové prezentace zdarma bude ukončen. 
+                                V opačném případě, po uhrazení zálohové faktury se Váš účet automaticky aktivuje na dobu jednoho roku. 
+                                Měsíc před uplynutím této doby (1 rok) bude vystavena nová zálohová faktura se splatností 30 dnů. 
+                                Rádi bychom Vás také upozornili na možnost slevy – viz poznámka pod textem.                                
                                 <br />
+                                Veškeré informace o způsobech úhrady budou uvedeny na zálohové faktuře.
+                                <br /><br />                                
+                                {elseif $program=='Premium verze'}
+                                <br /><br />
+                                V zápětí Vám bude zaslána zálohová faktura s 3 měsíční splatností. Pokud tuto zálohovou fakturu 
+                                do 3 měsíců neuhradíte, zkušební provoz Vaší internetové prezentace zdarma bude ukončen. 
+                                V opačném případě, po uhrazení zálohové faktury se Váš účet automaticky aktivuje na dobu jednoho roku. 
+                                Měsíc před uplynutím této doby (1 rok) bude vystavena nová zálohová faktura se splatností 30 dnů. 
+                                Rádi bychom Vás také upozornili na možnost slevy – viz poznámka pod textem.                                                                
+                                <br />
+                                Veškeré informace o způsobech úhrady budou uvedeny na zálohové faktuře.
+                                <br /><br />                                 
+                                {/if}                               
                                 Smluvní podmínky je možné nalézt na hlavní stránce v sekci <a href="http://mudrweb.cz/smluvni-podminky">Smluvní podmínky</a>.
                                 <br /><br />
                                 V případě jakýchkoliv dotazů nás neváhejte kontaktovat na adrese <a href="mailto:office@mudrweb.cz">office@mudrweb.cz</a> nebo telefonicky na čísle 777 861 159 (Po - Pá: 18:00 - 22:00).                                
@@ -102,6 +124,16 @@
                                 S pozdravem
                                 <br /><br />
                                 Váš MUDRweb tým
+                                {if $program=='Základní verze' || $program=='Premium verze'}
+                                <br /><br />
+                                <i>Poznámka: <b>Slevový program</b>
+                                <br />
+                                Při aktivaci Vašeho účtu obdržíte referenční číslo, které můžete poskytnout jinému lékaři 
+                                jemuž jste doporučili naše služby. Bude-li toto číslo použito při registraci následujícím
+                                uživatelem, obdržíte slevu v hodnotě 20% na následující rok. Slevy se sčítají, doporučíte-li
+                                naše služby například 10 lékařům, kteří si u nás také vytvoří svojí internetovou prezentaci 
+                                získáte slevu 200% (2 krát 100% sleva to znamená, že další dva roky neplatíte vůbec nic).</i>
+                                {/if}
                                 <br /><br />
                                 <div style="font-family:Verdana, Arial; font-size:8px; font-weight:normal;">                                    
                                     Tento email byl vygenerován automaticky, prosíme, neodpovídejte na něj.

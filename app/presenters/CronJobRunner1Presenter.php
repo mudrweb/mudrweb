@@ -16,6 +16,7 @@ class CronJobRunner1Presenter extends BasePresenter
             $this->redirect('Default:default');
         }
 
+        $listOfInvoiceRecipients = array();
         $users = $this->db_users->getUsers();
         if ($users) {
             foreach ($users as $user) {
@@ -240,7 +241,7 @@ class CronJobRunner1Presenter extends BasePresenter
                     }
                     // account deactivation END ////////////////////////////////
                                         
-                    // account archivation /////////////////////////////////////
+                    // account archivation START ///////////////////////////////
                     // after 1 month of inactive status move from inactive->archive
                     $dateForArchivation = strtotime($dateTo);
                     $dateForArchivation = strtotime("+1 month", $dateForArchivation);
@@ -253,12 +254,42 @@ class CronJobRunner1Presenter extends BasePresenter
                         
                         $this->logger->logMessage(ILogger::INFO, '>>> Subodmain ' . $user->subdomain . ' successfuly archived. [cron]');
                     }
+                    // account archivation END /////////////////////////////////
+                    
+                    // invoice recipient list START ////////////////////////////
+                    $dateForInvoiceResend = strtotime($dateTo);
+                    $dateForInvoiceResend = strtotime("-1 month", $dateForInvoiceResend);
+                    $dateForInvoiceResend = date('Y-m-d', $dateForInvoiceResend);
+                    if ($dateForInvoiceResend == $todaysDate) {
+                        $user_data = $this->db_users->getUsersDataById(intval($user->id));
+                        $listOfInvoiceRecipients[] = array($user_data->name, $user_data->surname, $user_data->email); 
+                    }
+                    // invoice recipient list END //////////////////////////////
                 }
             }
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load users (MainModule - default presenter).', 404);        
         }
-
+        
+        // invoice resend remainder START //////////////////////////////////////
+        if ($listOfInvoiceRecipients) {
+            $template = "Zalohovou fakturu je dnes potreba zaslat uzivatelum (kterym platnost uctu vyprsi za 30 dni):\n\n";
+            $counter = 0;
+            foreach ($listOfInvoiceRecipients as $recipient) {
+                $template .= $counter . '. ' . $recipient[0] . ' ' . $recipient[1] . ' - ' . $recipient[2];
+                $template .= "\n";
+                $counter++;
+            }            
+                        
+            $mail = new \Nette\Mail\Message;
+            $mail->setFrom('MUDRweb.cz - invoice resend reminder <admin@mudrweb.cz>')
+                    ->addTo('mudrweb@gmail.com')
+                    ->setSubject('Seznam uživatelů pro zaslání zálohové faktury')
+                    ->setBody($template)
+                    ->send();
+        }        
+        // invoice resend remainder END ////////////////////////////////////////
+        
         $this->terminate();
     }    
 }

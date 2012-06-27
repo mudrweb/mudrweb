@@ -290,7 +290,7 @@ class MenuItemsManager extends Nette\Object {
                         &nbsp;</p>
                 <p>
                         <span style="color:#ff0000;"><em>(nehod&iacute;c&iacute; smažte)</em></span></p>
-                <table border="0" cellpadding="1" cellspacing="1" style="width: 723px; height: 336px;">
+                <table border="0" cellpadding="1" cellspacing="1" style="width: 700px; height: 336px;">
                         <tbody>
                                 <tr>
                                         <td>

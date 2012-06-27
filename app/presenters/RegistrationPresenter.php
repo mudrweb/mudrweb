@@ -29,7 +29,7 @@ class RegistrationPresenter extends BasePresenter {
         $section = $session->getSection('Reg');
         $section->step1Completed = 0;        
         $section->step2Completed = 0; 
-        $section->step3Completed = 0;      
+        $section->step3Completed = 0;            
     }                
     
     /**
@@ -404,7 +404,9 @@ class RegistrationPresenter extends BasePresenter {
         // actual user's data
         $user_data = $this->db_users->getUsersDataById(intval($user->id));        
         $dataArray_users_websiteData = array($user->id, 'layout_A1', 'all',
-            $user_data->name . ' ' . $user_data->surname, 'Ambulance', $user_data->name . ' ' . $user_data->surname . ' - ' . 'Ambulance',
+            $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ', ' . $user_data->titleAfter, 
+            'Ambulance', 
+            $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ', ' . $user_data->titleAfter . ' - ' . 'Ambulance',
             '', '');
         $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
 
@@ -449,6 +451,7 @@ class RegistrationPresenter extends BasePresenter {
         $mail->setFrom('MUDRweb.cz - user reg request <admin@mudrweb.cz>')
                 ->addTo('mudrweb@gmail.com')
                 ->setSubject('Žádost o registraci nového uživatele')
+                ->setBody("Uživatel: " . $user_data->name . ' ' . $user_data->surname . "\nSubdoména: " . $user->subdomain)
                 ->send();
 
         $this->redirect('this');
