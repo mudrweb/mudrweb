@@ -273,12 +273,14 @@ class CronJobRunner1Presenter extends BasePresenter
         
         // invoice resend remainder START //////////////////////////////////////
         if ($listOfInvoiceRecipients) {
+            $this->logger->logMessage(ILogger::INFO, '>>> List of users to resend invoice: [cron]');
             $template = "Zalohovou fakturu je dnes potreba zaslat uzivatelum (kterym platnost uctu vyprsi za 30 dni):\n\n";
             $counter = 0;
             foreach ($listOfInvoiceRecipients as $recipient) {
                 $template .= $counter . '. ' . $recipient[0] . ' ' . $recipient[1] . ' - ' . $recipient[2];
                 $template .= "\n";
-                $counter++;
+                $this->logger->logMessage(ILogger::INFO, '>>>>>> ' . $counter . '. ' . $recipient[0] . ' ' . $recipient[1] . ' - ' . $recipient[2]);                
+                $counter++;                
             }            
                         
             $mail = new \Nette\Mail\Message;

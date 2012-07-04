@@ -58,6 +58,9 @@ border-width: 1px; border-color: #000; border-style: solid}
  * Footer
  */
 #foot { width: 850px; height: 50px; margin-left:auto; margin-right:auto; padding: 5px 5px 5px 5px;}
+.foot_l{text-align: left;}
+.foot_r{text-align: right;}
+#foot a {font-family: "Lucida Grande", Arial, sans-serif; font-size: 10px; font-weight: normal; text-decoration: none;}
 
 /**
 * GuestBook

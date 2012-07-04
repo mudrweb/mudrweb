@@ -134,7 +134,7 @@ browser.hideAlert = function(shadow) {
         this.unshadow();
     $('#alert').css('display', 'none');
     $('#alert').html('');
-    $('#alert').data('title', null);
+    $('#alert').data('title', null);    
 };
 
 browser.alert = function(msg, shadow) {
@@ -143,6 +143,9 @@ browser.alert = function(msg, shadow) {
     $('#alert').html('<div class="title"><span class="close"></span>' + title + '</div><div class="message">' + msg + '</div><div class="ok"><button>' + browser.label("OK") + '</button></div>');
     $('#alert div.ok button').click(function() {
         browser.hideAlert(shadow);
+        // gallery addon start
+        browser.refresh();
+        // gallery addon end
     });
     $('#alert div.title span.close').mousedown(function() {
         $(this).addClass('clicked');
@@ -152,6 +155,9 @@ browser.alert = function(msg, shadow) {
     });
     $('#alert div.title span.close').click(function() {
         browser.hideAlert(shadow);
+        // gallery addon start
+        browser.refresh();
+        // gallery addon end
     });
     $('#alert').drag(browser.drag, {handle: "#alert div.title"});
     browser.showAlert(shadow);

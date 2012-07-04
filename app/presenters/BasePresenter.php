@@ -71,7 +71,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->sharedBasePath = Nette\Environment::getVariable('sharedBasePath');      
         
         // select layout - default / user specific 
-        if (DOMAIN != 'main' && DOMAIN != 'index.cronjobrunner1') {                        
+        if (DOMAIN != 'main' && DOMAIN != 'index.cronjobrunner1' && DOMAIN != 'index.cronjobrunner2') {                        
             // get user by domain name
             $user = $this->db_users->getUserBySubdomain(DOMAIN);                                                
             

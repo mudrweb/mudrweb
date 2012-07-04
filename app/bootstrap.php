@@ -51,6 +51,11 @@ if ($container->params['consoleMode']) {
                     'action' => 'CronJobRunner1:statusCheck',
                     ));
     }    
+    else if (DOMAIN == 'index.cronjobrunner2') {
+        $router[] = new CliRouter(array(
+                    'action' => 'CronJobRunner2:backupDB',
+                    ));
+    }       
 } else {
     
 $router[] = new Route('index.php', array(            

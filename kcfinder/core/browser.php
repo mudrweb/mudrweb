@@ -1522,7 +1522,7 @@ class browser extends uploader {
                 $matchCounterIllustrativeImagesEndFolders++;
             }        
         }
-        // end fodlers from ikony
+        // end folder from ikony
         $matchCounterIconsEndFolders = 0;        
         if (strpos($dir, 'ikony')) {        
             if (in_array(substr($stringAfterLastSlash, 1), $this->iconsEndFolders)) {

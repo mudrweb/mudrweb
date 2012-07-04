@@ -9,7 +9,7 @@ html, body {background-color: transparent; color: #000; background-image: url('.
 
 /*Main Box*/
 #wrapper {background-color: transparent; color: #000; 
-border-radius: 10px; box-shadow: #00709D 4px 4px 8px;}
+border-radius: 10px; box-shadow: #00709D 4px 4px 18px;}
 
 /*Header*/
 #header {background-image: url('../../images/layouts/header_default_blue.jpg'); background-color: #fff ; color: #000;
@@ -20,7 +20,9 @@ border-top-right-radius: 10px;}
 #header h2 {background-color: transparent; color: #000;}
 
 /*Main*/
-#main {background-color: #fff; color: #000;}
+#main {background-color: #fff; color: #000;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;}
 
 /*Menu*/ 
 #menu {background-color: #0088BF; color: #fff;
@@ -40,4 +42,4 @@ border-radius: 7px; box-shadow: #00709D 2px 2px 4px;}
 #content li {background-color: transparent; color: #000;}
  
 /*Footer*/
-#foot {background-color: #fff; color: #000;}
+#foot {background-color: transparent; color: #000;}

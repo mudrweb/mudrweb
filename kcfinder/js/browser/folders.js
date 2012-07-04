@@ -242,6 +242,10 @@ browser.statusDir = function() {
                 ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
             }        
         }
+    } else if (this.dir == 'dokumenty') {
+        document.getElementById("upload_mod").style.display = 'block';
+        document.getElementById("upload").style.display = 'block';        
+        $('#fileinfo').html('');        
     } else {
         document.getElementById("upload_mod").style.display = 'none';
         document.getElementById("upload").style.display = 'none';

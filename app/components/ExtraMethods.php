@@ -416,4 +416,152 @@ class ExtraMethods extends Nette\Object {
             rmdir($dir);
         }
     }
+       
+    /**
+     * Backup the db OR just a table.
+     * 
+     * @param type $host
+     * @param type $user
+     * @param type $pass
+     * @param type $name
+     * @param type $tables 
+     */
+    public function backup_tables($host, $user, $pass, $name, $tables = '*') {
+
+        $link = mysql_connect($host, $user, $pass);
+        mysql_select_db($name, $link);
+
+        //get all of the tables
+        if ($tables == '*') {
+            $tables = array();
+            $result = mysql_query('SHOW TABLES');
+            while ($row = mysql_fetch_row($result)) {
+                $tables[] = $row[0];
+            }
+        } else {
+            $tables = is_array($tables) ? $tables : explode(',', $tables);
+        }
+
+        // find 'users' table and swap it with the last table (foreign keys
+        // and dropping workaround as users table needs to be dropped as very
+        // last one)
+        $usersTableIndexInArray = array_search('users', $tables);
+        $indexOfLastTableInArray = count($tables) - 1;
+        $tmp = $tables[$usersTableIndexInArray];
+        $tables[$usersTableIndexInArray] = $tables[$indexOfLastTableInArray];
+        $tables[$indexOfLastTableInArray] = $tmp;
+
+        $return = null;
+        //cycle through
+        foreach ($tables as $table) {
+            // set coding to avoid diacritics problem
+            mysql_query("SET character_set_client=utf8");
+            mysql_query("SET character_set_connection=utf8");
+            mysql_query("SET character_set_results=utf8");
+            $result = mysql_query('SELECT * FROM ' . $table);
+            $num_fields = mysql_num_fields($result);
+
+            $return.= 'DROP TABLE IF EXISTS mudr.' . $table . ';';
+
+            $row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE mudr.' . $table));
+            // add table existence check
+            $row2[1] = str_replace("CREATE TABLE", "CREATE TABLE IF NOT EXISTS", $row2[1]);
+
+            // find last ','
+            $start = strrpos($row2[1], ",");
+            // find 'CONSTRAINT' string to identify part to be removed
+            $constraintStrinFound = strrpos($row2[1], "CONSTRAINT");
+            // if 'CONSTRAINT' string was found -> remove foreign keys 
+            // conditions
+            if ($start > 0 && $constraintStrinFound > 0) {
+                $end = strpos($row2[1], "ENGINE=InnoDB");
+                $stringToDelete = substr($row2[1], $start, $end - $start - 3);
+                $row2[1] = str_replace($stringToDelete, "", $row2[1]);
+            }
+            $return.= "\n\n" . $row2[1] . ";\n\n";
+
+            for ($i = 0; $i < $num_fields; $i++) {
+                while ($row = mysql_fetch_row($result)) {
+                    $return.= 'INSERT INTO ' . $table . ' VALUES(';
+                    for ($j = 0; $j < $num_fields; $j++) {
+                        $row[$j] = addslashes($row[$j]);
+                        $row[$j] = str_replace("\n", "\\n", $row[$j]);
+                        if (isset($row[$j])) {
+                            $return.= '"' . $row[$j] . '"';
+                        } else {
+                            $return.= '""';
+                        }
+                        if ($j < ($num_fields - 1)) {
+                            $return.= ',';
+                        }
+                    }
+                    $return.= ");\n";
+                }
+            }
+            $return.="\n\n\n";
+        }
+
+        // add foreign keys conditions at the end
+        $return.= "
+        --
+        -- `guestBook`
+        --
+        ALTER TABLE `guestBook`
+        ADD CONSTRAINT `fk_questBook_users1` FOREIGN KEY (`idusers`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+        --
+        -- `guestBook_a`
+        --
+        ALTER TABLE `guestBook_a`
+        ADD CONSTRAINT `fk_guestBook_a_guestBook_q1` FOREIGN KEY (`idguestBook_q`) REFERENCES `guestBook_q` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+        --
+        -- `menuItems`
+        --
+        ALTER TABLE `menuItems`
+        ADD CONSTRAINT `fk_menuItem_users1` FOREIGN KEY (`idusers`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+        --
+        -- `users_data`
+        --
+        ALTER TABLE `users_data`
+        ADD CONSTRAINT `fk_users_data_users1` FOREIGN KEY (`idusers`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+        --
+        -- `users_websiteData`
+        --
+        ALTER TABLE `users_websiteData`
+        ADD CONSTRAINT `fk_users_websiteData_users1` FOREIGN KEY (`idusers`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;            
+        \n\n\n        
+        ";
+
+        //save file
+        $exportedDataFilename = "mudrwebDBBackup-" . time() . "-" . (md5(implode(',', $tables))) . ".sql";
+        $handle = fopen('/CORE/mudrweb.cz/www/log_cron/' . $exportedDataFilename, 'w+');
+        fwrite($handle, $return);
+        fclose($handle);
+        
+        return $exportedDataFilename;
+    }
+    
+    /**
+     * Add file with defined name and path to new zip archive with defined name 
+     * and location
+     * 
+     * @param type $pathToStoreArchive
+     * @param string $archiveName
+     * @param type $pathToFileToBeAddedToArchive
+     * @param type $fileToBeAddedToArchive 
+     */
+    public function addFileToZipArchive($pathToStoreArchive, $archiveName, $pathToFileToBeAddedToArchive, $fileToBeAddedToArchive) {
+        // create zip package
+        $zip = new ZipArchive();
+        
+        $archiveName = $pathToStoreArchive . $archiveName . ".zip";  
+        if ($zip->open($archiveName, \ZipArchive::CREATE)!==TRUE) {
+            exit("cannot open <$archiveName>\n");
+        }        
+        $zip->addFile($pathToFileToBeAddedToArchive . $fileToBeAddedToArchive, $fileToBeAddedToArchive);
+        $zip->close();                  
+    }     
 }    

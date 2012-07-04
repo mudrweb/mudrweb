@@ -53,20 +53,23 @@ $_CONFIG = array(
     'types' => array(
 
         // CKEditor & FCKEditor types
-//        'files'   =>  "",
-//        'flash'   =>  "swf",
-        'galerie'  =>  "*img",
-
+        'dokumenty' =>  array(
+            'type' => "pdf xls xlsx doc docx",
+            'thumbWidth' => 100,
+            'thumbHeight' => 100
+        ),
+        'galerie'   =>  "*img"
+        
         // TinyMCE types
 //        'file'    =>  "",
 //        'media'   =>  "swf flv avi mpg mpeg qt mov wmv asf rm",
 //        'image'   =>  "*img",
     ),
 
-    'filenameChangeChars' => array(/*
+    'filenameChangeChars' => array(
         ' ' => "_",
         ':' => "."
-    */),
+    ),
 
     'dirnameChangeChars' => array(/*
         ' ' => "_",

@@ -25,11 +25,11 @@ CKEDITOR.editorConfig = function( config )
         ];
 
         // KCFinder configuration.
-        config.filebrowserBrowseUrl = '../../kcfinder/browse.php?type=files';
-        config.filebrowserImageBrowseUrl = '../../kcfinder/browse.php?type=images';
+        config.filebrowserBrowseUrl = '../../kcfinder/browse.php?type=dokumenty';
+        config.filebrowserImageBrowseUrl = '../../kcfinder/browse.php?type=galerie';
         config.filebrowserFlashBrowseUrl = '../../kcfinder/browse.php?type=flash';
-        config.filebrowserUploadUrl = '../../kcfinder/upload.php?type=files';
-        config.filebrowserImageUploadUrl = '../../kcfinder/upload.php?type=images';
+        config.filebrowserUploadUrl = '../../kcfinder/upload.php?type=dokumenty';
+        config.filebrowserImageUploadUrl = '../../kcfinder/upload.php?type=galerie';
         config.filebrowserFlashUploadUrl = '../../kcfinder/upload.php?type=flash';
         config.filebrowserWindowWidth = '1000';
  	config.filebrowserWindowHeight = '600';
