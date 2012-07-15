@@ -96,7 +96,7 @@ class CronJobRunner1Presenter extends BasePresenter
                             $renewTo = strtotime($user->dateTo);
                             $renewTo = strtotime("+1 month", $renewTo);
                             $renewTo = date('d.m.Y', $renewTo);                
-                            $this->template->renewTo = $renewTo;                            
+                            $template->renewTo = $renewTo;                            
                             $template->token = 'ad' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
@@ -139,7 +139,7 @@ class CronJobRunner1Presenter extends BasePresenter
                             $renewTo = strtotime($user->dateTo);
                             $renewTo = strtotime("+1 month", $renewTo);
                             $renewTo = date('d.m.Y', $renewTo);                
-                            $this->template->renewTo = $renewTo;                            
+                            $template->renewTo = $renewTo;                            
                             $template->token = 'an' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
@@ -182,7 +182,7 @@ class CronJobRunner1Presenter extends BasePresenter
                             $renewTo = strtotime($user->dateTo);
                             $renewTo = strtotime("+1 month", $renewTo);
                             $renewTo = date('d.m.Y', $renewTo);                
-                            $this->template->renewTo = $renewTo;                            
+                            $template->renewTo = $renewTo;                            
                             $template->token = 'an' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
@@ -225,7 +225,7 @@ class CronJobRunner1Presenter extends BasePresenter
                             $renewTo = strtotime($user->dateTo);
                             $renewTo = strtotime("+1 month", $renewTo);
                             $renewTo = date('d.m.Y', $renewTo);                
-                            $this->template->renewTo = $renewTo;                            
+                            $template->renewTo = $renewTo;                            
                             $template->token = 'an' . $user->registrationToken;
 
                             $mail = new \Nette\Mail\Message;
