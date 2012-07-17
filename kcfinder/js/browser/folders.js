@@ -198,20 +198,53 @@ browser.statusDir = function() {
     size_real = size;
     size = this.humanSize(size);        
 
+    // check if value occurs in input field 'a'
+    function oc(a)
+    {
+        var o = {};
+        for(var i=0;i<a.length;i++)
+        {
+            o[a[i]]='';
+        }
+        return o;
+    }
+
+    //premiumUsers = ['/user_uploads/xa'];
+    premiumUsers = [''];
+        
     // gallery addon start
     if (this.dir == 'galerie/vlastni_obrazky') {        
-        function oc(a)
-        {
-            var o = {};
-            for(var i=0;i<a.length;i++)
-            {
-                o[a[i]]='';
-            }
-            return o;
+        // check if current user is in premuium users pool
+        if (this.uploadURL in oc(premiumUsers) == true) {    
+                size_left_real = 20971520 - size_real;
+                size_left = this.humanSize(size_left_real);
+                document.getElementById("upload_mod").style.display = 'block';
+                document.getElementById("upload").style.display = 'block';                
+                $('#fileinfo').html(
+                'Počet souborů: ' +
+                this.files.length + ' ' +         
+                ' (' + size + ') . <span style="color: green;">Kapacita Vaší stránky není omezena.</span>');
+        } else {
+            if (size_real > 20971520) {
+                // hide upload button
+                document.getElementById("upload_mod").style.display = 'none';
+                document.getElementById("upload").style.display = 'none';                
+                $('#fileinfo').html(
+                'Počet souborů: ' +
+                this.files.length + ' ' + 
+                ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (20MB) určenou pro uložení obrázků!</span>');
+            } else {
+                size_left_real = 20971520 - size_real;
+                size_left = this.humanSize(size_left_real);
+                document.getElementById("upload_mod").style.display = 'block';
+                document.getElementById("upload").style.display = 'block';                                
+                $('#fileinfo').html(
+                'Počet souborů: ' +
+                this.files.length + ' ' +         
+                ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
+            }        
         }
-//        premiumUsers = ['/user_uploads/xa'];
-        premiumUsers = [''];
-
+    } else if (this.dir == 'dokumenty') {
         // check if current user is in premuium users pool
         if (this.uploadURL in oc(premiumUsers) == true) {    
                 size_left_real = 52428800 - size_real;
@@ -230,7 +263,7 @@ browser.statusDir = function() {
                 $('#fileinfo').html(
                 'Počet souborů: ' +
                 this.files.length + ' ' + 
-                ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (50MB)!</span>');
+                ' (' + size + '). <span style="color: red;">Dosáhli jste maximální povolenou kapacitu Vaší stránky (50MB) pro uložení souborů!</span>');
             } else {
                 size_left_real = 52428800 - size_real;
                 size_left = this.humanSize(size_left_real);
@@ -241,11 +274,7 @@ browser.statusDir = function() {
                 this.files.length + ' ' +         
                 ' (' + size + ') . <span style="color: green;">Volná kapacita Vaší stránky: ' + size_left + '.</span>');
             }        
-        }
-    } else if (this.dir == 'dokumenty') {
-        document.getElementById("upload_mod").style.display = 'block';
-        document.getElementById("upload").style.display = 'block';        
-        $('#fileinfo').html('');        
+        }       
     } else {
         document.getElementById("upload_mod").style.display = 'none';
         document.getElementById("upload").style.display = 'none';

@@ -29,7 +29,9 @@ CKEDITOR.editorConfig = function( config )
         config.filebrowserImageBrowseUrl = '../../kcfinder/browse.php?type=galerie';
         config.filebrowserFlashBrowseUrl = '../../kcfinder/browse.php?type=flash';
         config.filebrowserUploadUrl = '../../kcfinder/upload.php?type=dokumenty';
-        config.filebrowserImageUploadUrl = '../../kcfinder/upload.php?type=galerie';
+        // used 'galerie/forbidden' to disable option to upload images to root of galerie folder 
+        // -> user needs to use kcfinder explorer and upload image to vlastni_obrazky
+        config.filebrowserImageUploadUrl = '../../kcfinder/upload.php?type=galerie/forbidden';
         config.filebrowserFlashUploadUrl = '../../kcfinder/upload.php?type=flash';
         config.filebrowserWindowWidth = '1000';
  	config.filebrowserWindowHeight = '600';

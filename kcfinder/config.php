@@ -54,7 +54,7 @@ $_CONFIG = array(
 
         // CKEditor & FCKEditor types
         'dokumenty' =>  array(
-            'type' => "pdf xls xlsx doc docx",
+            'type' => "pdf xls xlsx doc docx ppt pptx",
             'thumbWidth' => 100,
             'thumbHeight' => 100
         ),
