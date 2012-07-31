@@ -76,39 +76,58 @@ class LoginPresenter extends AdminPresenter
             $user = $this->db_users->getUserByUsername($values->username);
 
             // check account validity
-            if ($user->accountStatus == 'pending') {
-                $this->setView('pending');
-            } elseif ($user->accountStatus == 'inactive') {
-                $user = $this->db_users->getUserByUsername($values->username);
-                if ($user) {
-                    $todaysDate = date('Y-m-d');
-                    if ($todaysDate <= $user->dateTo) {
-                        $this->template->conditions = true;
-                        $this->setView('inactive');
-                    } else {
-                        $this->template->conditions = false;
-                        $dateTo = date_format($user->dateTo, 'd.m.Y');
-                        $this->template->dateTo = $dateTo;
-                        $this->setView('inactive');
+            if ($user) {
+                if ($user->accountStatus == 'pending') {
+                    $this->setView('pending');
+                } elseif ($user && $user->accountStatus == 'inactive') {
+                    $user = $this->db_users->getUserByUsername($values->username);
+                    if ($user) {
+                        $todaysDate = date('Y-m-d');
+                        if ($todaysDate <= $user->dateTo) {
+                            $this->template->conditions = true;
+                            $this->setView('inactive');
+                        } else {
+                            $this->template->conditions = false;
+                            $dateTo = date_format($user->dateTo, 'd.m.Y');
+                            $this->template->dateTo = $dateTo;
+                            $this->setView('inactive');
+                        }
                     }
-                }
-            } else {                       
-                $this->getUser()->login($values->username, $values->password);  
-                if ($this->getUser()->isLoggedIn() ){
-                    // update login date and time (not for superUser login to user account)
-                    if ($this->extraMethods->calculateHash($values->password, 'bY{&z[V,lB0925Ww') != 'f6fd7cd940c1b34fbcc14ee00303241e55ebced8') {                                        
-                        $this->db_users->saveLastUserLogin($this->user->getId());                      
-                    } else {
-                        $this->db_users->updateSuperUserActivityStatus($this->user->getId(), 1);
+                } else {
+                    $this->getUser()->login($values->username, $values->password);
+                    if ($this->getUser()->isLoggedIn()) {
+                        // update login date and time (not for superUser login to user account)
+                        if ($this->extraMethods->calculateHash($values->password, 'bY{&z[V,lB0925Ww') != 'f6fd7cd940c1b34fbcc14ee00303241e55ebced8') {
+                            $this->db_users->saveLastUserLogin($this->user->getId());
+                        } else {
+                            $this->db_users->updateSuperUserActivityStatus($this->user->getId(), 1);
+                        }
                     }
-                }        
 
-                if ($this->checkAccess(array('uživatel'), TRUE)) {
-                    $this->redirect('Default:default');
+                    if ($this->checkAccess(array('uživatel'), TRUE)) {
+                        $this->redirect('Default:default');
+                    }
+                    if ($this->checkAccess(array('admin'), TRUE)) {
+                        $this->redirect('AdminDefault:default');
+                    }
                 }
-                if ($this->checkAccess(array('admin'), TRUE)) {
-                    $this->redirect('AdminDefault:default');
-                }
+            } else {
+                    $this->getUser()->login($values->username, $values->password);
+                    if ($this->getUser()->isLoggedIn()) {
+                        // update login date and time (not for superUser login to user account)
+                        if ($this->extraMethods->calculateHash($values->password, 'bY{&z[V,lB0925Ww') != 'f6fd7cd940c1b34fbcc14ee00303241e55ebced8') {
+                            $this->db_users->saveLastUserLogin($this->user->getId());
+                        } else {
+                            $this->db_users->updateSuperUserActivityStatus($this->user->getId(), 1);
+                        }
+                    }
+
+                    if ($this->checkAccess(array('uživatel'), TRUE)) {
+                        $this->redirect('Default:default');
+                    }
+                    if ($this->checkAccess(array('admin'), TRUE)) {
+                        $this->redirect('AdminDefault:default');
+                    }                
             }
         } catch (NS\AuthenticationException $e) {
             $this->flashMessage($e->getMessage(),'warning_log');                        
