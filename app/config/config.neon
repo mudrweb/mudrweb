@@ -14,8 +14,8 @@ common:
 			password: OKStFYCmq
 
 		globalSettings:
-			compatibleBrowsers: 'Optimalizováno pro prohlížeče IE9+, Firefox 13+ a Google Chrome 19+'
-			lastUpdate: 'Aktualizováno dne 27.06.2012; rc1'
+			compatibleBrowsers: 'Optimalizováno pro prohlížeče IE9+, Firefox 13+ a Google Chrome 20+'
+			lastUpdate: 'Aktualizováno dne 31.07.2012; rc2'
 			regionList: { jihocesky : Jihočeský, 
                                     jihomoravsky : Jihomoravský, 
                                     karlovarsky : Karlovarský, 
