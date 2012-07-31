@@ -174,8 +174,8 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 .terms { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 0px;
     -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 }
-.td_input_terms { padding-left: 20px; padding-bottom: 15px; width: 445px; }
-.terms_text { padding-left: 40px; }
+.td_input_terms { padding-left: 20px; padding-bottom: 15px; width: 360px; }
+.terms_text { padding-left: 40px; width: 10px; }
 
 /** personal info */
 .td_input_label_pinfo { padding-bottom: 15px; padding-left: 20px; }
