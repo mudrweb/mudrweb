@@ -130,32 +130,37 @@ class AdminDefaultPresenter extends AdminPresenter {
         $form->addText('username', 'Uživatelské jméno:', 20, 20)                
                 ->addRule(Form::FILLED, 'Musíte zadat uživatelské jméno.')
                 ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka uživatelského jména je 8 znaků.', 8)                
-                ->addRule(Form::MAX_LENGTH, 'Uživatelské jméno: Maximální povolená délka uživatelského jména je 20 znaků.', 20)               
+                ->addRule(Form::MAX_LENGTH, 'Maximální povolená délka uživatelského jména je 20 znaků.', 20)               
+                ->addRule(Form::REGEXP, 'Uživatelské jméno obsahuje nepovolené znaky.', '/^[a-z][a-zA-Z0-9\.]*$/')                
 //                ->addRule(
 //                    function (\Nette\Forms\Controls\TextInput $control) { 
 //                        return (bool) (false);
 //                    }, 'asdf')                
 //                    
                 ->addRule(callback('\AdminModule\AdminDefaultPresenter::userexists'),'Jméno je již použito, zvolte prosím jiné.')                                
+//                ->addRule(callback('\AdminModule\AdminDefaultPresenter::usernameHasRightForm'),'Název stránky obsahuje nepovolené znaky.')                                                                                                
                 ->setAttribute('class', 'input_style_pinfo');               
         
         $form->addText('subdomain', 'Název stránky:', 30, 30)                
                 ->addRule(Form::FILLED, 'Musíte zadat název stránky.')                
                 ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka názvu stránky je 6 znaků.', 6)                
-                ->addRule(Form::MAX_LENGTH, 'Název stránky: Maximální povolená délka názvu stránky je 30 znaků.', 30)               
+                ->addRule(Form::MAX_LENGTH, 'Maximální povolená délka názvu stránky je 30 znaků.', 30)               
+                ->addRule(Form::REGEXP, 'Název stránky obsahuje nepovolené znaky.', '/^[a-z][a-z0-9\.]*$/')                
                 ->addRule(callback('\AdminModule\AdminDefaultPresenter::subdomainexists'),'Název stránky je již použit, zvolte prosím jiný.')                                                
+//                ->addRule(callback('\AdminModule\AdminDefaultPresenter::subdomainHasRightForm'),'Název stránky obsahuje nepovolené znaky.')                                                                                
                 ->setAttribute('class', 'input_style_pinfo');                                      
         
         $form->addText('email', 'Kontaktní e-mail:', 30, 30)       
                 ->addRule(Form::FILLED, 'Musíte zadat kontaktní e-mail.')
                 ->addRule(Form::EMAIL, 'Musíte zadat existující e-mail v platném formátu (napr. jozef.novak@gmail.com).')                
-                ->addRule(Form::MAX_LENGTH, 'Kontaktní e-mail: Maximální povolená kontaktního e-mailu je 30 znaků.', 30)                                                             
+                ->addRule(Form::MAX_LENGTH, 'Maximální povolená kontaktního e-mailu je 30 znaků.', 30)                                                             
                 ->setAttribute('class', 'input_style_pinfo');                  
 
         $form->addPassword('newPassword', 'Heslo:', 52, 40)                
                 ->addRule(Form::FILLED, 'Zadejte prosím heslo.')  
-                ->addRule(Form::MIN_LENGTH, 'Heslo: Minimální požadovaná délka hesla je 8 znaků.', 8)
-                ->addRule(Form::MAX_LENGTH, 'Heslo: Maximální povolená délka hesla je 40 znaků.', 40)                             
+                ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka hesla je 8 znaků.', 8)
+                ->addRule(Form::MAX_LENGTH, 'Maximální povolená délka hesla je 40 znaků.', 40)                             
+                ->addRule(Form::REGEXP, 'Zadané heslo obsahuje nepovolené znaky.', '/^[a-z][a-zA-Z0-9\.\-\_\^\~\&\=\+\;\!\,\(\)\{\}\[\]\.\?\%\*\#]*$/')                                
                 ->setAttribute('class', 'password_regUserPanel');        
 
 //        $form->addPassword('newPassword1', 'Heslo (zopakovat):', 52, 40)                

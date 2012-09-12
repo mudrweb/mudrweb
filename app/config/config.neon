@@ -15,7 +15,7 @@ common:
 
 		globalSettings:
 			compatibleBrowsers: 'Optimalizováno pro prohlížeče IE9+, Firefox 13+ a Google Chrome 20+'
-			lastUpdate: 'Aktualizováno dne 31.07.2012; rc2'
+			lastUpdate: 'Aktualizováno dne 12.09.2012'
 			regionList: { jihocesky : Jihočeský, 
                                     jihomoravsky : Jihomoravský, 
                                     karlovarsky : Karlovarský, 
@@ -58,9 +58,9 @@ common:
                                         202 : 202 klinická hematologie,
                                         203 : 203 přenosné nemoce,
                                         204 : 204 tělovýchovné lékařství,
-                                        205 : 205 tuberkulóza a respirační nemoce,
+                                        205 : 205 tuberkulóza a respir. nemoce,
                                         206 : 206 klinická farmakologie,
-                                        207 : 207 alergologie a klinická imunologie,
+                                        207 : 207 alergologie a klin. imunologie,
                                         208 : 208 lékařská genetika,
                                         209 : 209 neurologie,
                                         222 : 222 transfúzní služba
@@ -77,7 +77,7 @@ common:
                                     }, skupina 4 : {
                                         401 : 401 pracovní lékařství,
                                         402 : 402 klinická onkologie
-                                        403 : 403 radioterapie a radiační onkologie,
+                                        403 : 403 radioterapie a rad. onkologie,
                                         404 : 404 dermatovenerologie,
                                         405 : 405 dětská dermatologie,
                                         406 : 406 korektivní dermatologie,
@@ -96,7 +96,7 @@ common:
                                         602 : 602 popáleninová medicína,
                                         603 : 603 gynekologie a porodnictví,
                                         604 : 604 dětská gynekologie,
-                                        605 : 605 čelistní a obličejová chirurgie,
+                                        605 : 605 čelistní a obličej. chirurgie,
                                         606 : 606 ortopedie,
                                         607 : 607 5ortopedická protetika,
                                         613 : 613 asistovaná reprodukce

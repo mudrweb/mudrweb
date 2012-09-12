@@ -113,8 +113,8 @@ class Compiler extends Nette\Object
 
 	public function processExtensions()
 	{
-		foreach ($this->extensions as $name => $extension) {
-			$extension->loadConfiguration();
+		for ($i = 0; $slice = array_slice($this->extensions, $i, 1); $i++) {
+			reset($slice)->loadConfiguration();
 		}
 
 		if ($extra = array_diff_key($this->config, self::$reserved, $this->extensions)) {
@@ -177,6 +177,9 @@ class Compiler extends Nette\Object
 				$class->documents = preg_replace("#\S+(?= \\$$name$)#", $def->class, $class->documents);
 				$classes[] = $accessor = new Nette\Utils\PhpGenerator\ClassType($def->class);
 				foreach ($found as $item) {
+					if ($defs[$item]->internal) {
+						continue;
+					}
 					$short = substr($item, strlen($name)  + 1);
 					$accessor->addDocument($defs[$item]->shared
 						? "@property {$defs[$item]->class} \$$short"

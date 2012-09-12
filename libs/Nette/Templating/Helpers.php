@@ -61,7 +61,7 @@ final class Helpers
 	public static function loader($helper)
 	{
 		if (method_exists(__CLASS__, $helper)) {
-			return callback(__CLASS__, $helper);
+			return new Nette\Callback(__CLASS__, $helper);
 		} elseif (isset(self::$helpers[$helper])) {
 			return self::$helpers[$helper];
 		}

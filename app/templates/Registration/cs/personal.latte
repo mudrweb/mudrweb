@@ -57,7 +57,7 @@
                     <td class="td_input_regUserPanel">{input newPassword1}</td>
                 </tr>     
                 <tr>                    
-                    <td class="td_input_generatePass" colspan="2">*Délka hesla musí být minimálně 8 znaků.                    
+                    <td class="td_input_generatePass" colspan="2">*Délka hesla musí být minimálně 8 znaků. Povolené znaky jsou malá a velká písmena (bez diakritiky), číslice a znaky "-", "_", "^", "~", "&", "=", "+", ";", "!", ",", "(", ")", "{", "}", "[", "]", ".", "?", "%", "*", "#".                   
                         <br />
                         <a href="{link generatePass!}" class="ajax">Generovat heslo</a>
                         <div class="generatedPass">{snippet dispPass}{$passwordToDisplay}{/snippet}</div>
@@ -144,7 +144,7 @@
         {           
            $('#frmregUserForm2-username').qtip({
                 content: {
-                    text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu.</span>',
+                    text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá a velká písmena (bez diakritiky), číslice a znak "." (bodka).</span>',
                     width: '200'                    
                 },
                 position: { my: 'left top', at: 'right top', target: $('#tip_username') }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
@@ -152,7 +152,7 @@
            
            $('#frmregUserForm2-subdomain').qtip({
                 content: {
-                             text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší internetové prezentace, proto jeho výběr pečlivě zvažte. <br /><br /> \n\
+                             text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší internetové prezentace, proto jeho výběr pečlivě zvažte. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá písmena (bez diakritiky), číslice a znak "." (bodka). <br /><br /> \n\
                              Uvedeme příklad: Pan MUDr. Richard Pokorný zadal při registraci název ve tvaru "richard.pokorny", \n\
                              adresa jeho stránky bude tedy "richard.pokorny.mudrweb.cz".</span>',
                     width: '200'                    

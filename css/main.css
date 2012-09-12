@@ -198,7 +198,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 }
 .td_verticalSeparator { width: 120px; padding-right: 10px; border-right: 1px dotted #8C8989; }
 .generatedPass { display:inline; float:right; padding-right: 80px; font-size: 130%; color: red; }
-.td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; }
+.td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; width: 100px; }
 .td_input_changePass { padding-left: 150px; padding-bottom: 15px; padding-top: 5px; }
 .td_right_img {  padding-left: 40px; }
 .td_input_referral_regUserPanel { padding-left: 30px; padding-bottom: 15px; width: 20px; }

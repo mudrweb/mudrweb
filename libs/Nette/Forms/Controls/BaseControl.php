@@ -389,7 +389,7 @@ abstract class BaseControl extends Nette\ComponentModel\Component implements ICo
 		$control->required = $this->isRequired();
 
 		$rules = self::exportRules($this->rules);
-		$rules = substr(json_encode($rules), 1, -1);
+		$rules = substr(PHP_VERSION_ID >= 50400 ? json_encode($rules, JSON_UNESCAPED_UNICODE) : json_encode($rules), 1, -1);
 		$rules = preg_replace('#"([a-z0-9_]+)":#i', '$1:', $rules);
 		$rules = preg_replace('#(?<!\\\\)"(?!:[^a-z])([^\\\\\',]*)"#i', "'$1'", $rules);
 		$control->data('nette-rules', $rules ? $rules : NULL);
@@ -536,7 +536,7 @@ abstract class BaseControl extends Nette\ComponentModel\Component implements ICo
 		$payload = array();
 		foreach ($rules as $rule) {
 			if (!is_string($op = $rule->operation)) {
-				$op = callback($op);
+				$op = new Nette\Callback($op);
 				if (!$op->isStatic()) {
 					continue;
 				}

@@ -113,10 +113,10 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 
-	public function __construct(Nette\DI\Container $context)
+	public function __construct(Nette\DI\Container $context = NULL)
 	{
 		$this->context = $context;
-		if ($this->invalidLinkMode === NULL) {
+		if ($context && $this->invalidLinkMode === NULL) {
 			$this->invalidLinkMode = $context->parameters['productionMode'] ? self::INVALID_LINK_SILENT : self::INVALID_LINK_WARNING;
 		}
 	}
@@ -537,7 +537,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 		$dir = dirname($this->getReflection()->getFileName());
 		$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
 		return array(
-			"$dir/templates/$presenter/$this->lang/$this->view.latte",
+			"$dir/templates/$presenter/$this->lang/$this->view.latte",                    
 //			"$dir/templates/$presenter.$this->view.latte",
 //			"$dir/templates/$presenter/$this->view.phtml",
 //			"$dir/templates/$presenter.$this->view.phtml",
@@ -1347,6 +1347,16 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 	/********************* services ****************d*g**/
+
+
+
+	/**
+	 * @return void
+	 */
+	final public function injectPrimary(Nette\DI\Container $context)
+	{
+		$this->context = $context;
+	}
 
 
 

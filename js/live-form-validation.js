@@ -449,6 +449,16 @@ Nette.validators = {
         AdminModuleAdminDefaultPresenter_subdomainexists: function(elem, args, val) {
             return true;
         },
+        
+//        AdminModuleAdminDefaultPresenter_usernameHasRightForm: function(elem, args, val) {
+//            var usernameHasRightForm = (val.match(new RegExp(/^[a-z][a-zA-Z0-9\.]*$/))) ? true : false;             
+//            return(usernameHasRightForm);                        
+//        },          
+//        
+//        AdminModuleAdminDefaultPresenter_subdomainHasRightForm: function(elem, args, val) {
+//            var subdomainHasRightForm = (val.match(new RegExp(/^[a-z][a-z0-9\.]*$/))) ? true : false;             
+//            return(subdomainHasRightForm);                        
+//        },        
 
         filled: function(elem, arg, val) {                
                 return val !== '' && val !== false && val !== null;

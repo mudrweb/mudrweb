@@ -283,7 +283,7 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 }
 .generatedPass { display:inline; float:right; padding-right: 80px; font-size: 130%; color: red; }
-.td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; }
+.td_input_generatePass { padding-left: 20px; padding-bottom: 15px; padding-top: 5px; font-size: 70%; width: 100px; }
 .td_input_program_regUserPanel { padding-left: 18px; padding-bottom: 0px; width: 250px; }
 .programs { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 2px; margin-left: 65px;
     -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
