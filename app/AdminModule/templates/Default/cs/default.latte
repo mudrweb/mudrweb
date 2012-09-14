@@ -20,14 +20,14 @@
                     <td class="layoutPreviewRight" rowspan="2">
                         {snippet layoutPreview}                            
                             <div id="layoutPreview">
-                            <a id="single_i" href="../../images/layouts_preview/{$layoutToDisplay}" title="{$layoutDesc}"><img src="../../images/layouts_preview/{$layoutToDisplay}" width=130px alt="" class="noborder"/></a>                            
+                            <a id="single_i" href="../../images/layouts_preview/{$layoutToDisplay}" title="{$layoutDesc}"><img src="../../images/layouts_preview/{$layoutToDisplay}" width=130px alt="" class="noborder" style="padding-left: 25px;"/><br />Kliknutím zvětšíte náhled vzledu</a>                            
                             <script type="text/javascript">      
                                 $(document).ready(function() { $("#single_i").fancybox({
                                         titlePosition : 'over'
                                     }); 
                                 }); 
-                            </script>
-                            </div>
+                            </script>                                                        
+                            </div>                               
                         {/snippet}                    
                     </td>                      
                 </tr>
@@ -57,9 +57,9 @@
                 <tr>                                        
                     <td class="td_input_label_default" colspan="3">                    
                     <div id="headerImageId">
-                        <div id="image" onclick="openKCFinder(this)"><div id="image_blank" style="margin-left: 200px; margin-top: 90px; font-weight: bold;">
-                            Vyberte prosím obrázek záhlaví z galerie <br/> 
-                            &nbsp;&nbsp;&nbsp;(Optimální rozměry jsou 800x150 px)</div>
+                        <div id="image" onclick="openKCFinder(this)"><div id="image_blank" style="margin-left: 50px; margin-top: 80px; font-weight: bold;">
+                            Kliknutím otevřete galerii, kde ve složce 'záhlaví' naleznete předchystaná záhlaví, nebo si můžete nahrát záhlaví vlastní 
+                            (Optimální rozměry pro vlastní záhlaví jsou 800x150 px).</div>
                         </div>
                     </div>                        
                     </td>

@@ -19,10 +19,10 @@ hr { border: 0; border-bottom: 1px solid #003366; height: 1px; }
 
 strong { font-weight: bold; }
 
-#wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px;}
-.container{margin-left:auto;margin-right:auto;width:920px;}
-.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
-.noborder { border-style: none;}
+#wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px; }
+.container { margin-left:auto; margin-right:auto; width:920px; }
+.clear { clear:both;display:block; overflow:hidden; visibility:hidden; width:0; height:0; }
+.noborder { border-style: none; }
 * :focus { outline: 0; }
 
 /**************************************
@@ -230,7 +230,7 @@ a.lang span { background-image: url('../images/main/czech_republic_flag.png'); f
 * Icons
 */
 .icon { float: left; margin: 0px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; } 
-.icon.icon-help{ background-image: url('../images/icons/help_ico.png'); background-size: 100%; } 
+.icon.icon-help { background-image: url('../images/icons/help_ico.png'); background-size: 100%; } 
 .icon-ui { background-image: url('images/ui-icons_888888_256x240.png'); float: left; margin: 2px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }
 .icon-ui-key { background-position: -112px -128px; }
 .icon-ui-black { background-image: url('images/ui-icons_222222_256x240.png'); float: left; margin: 2px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }

@@ -35,12 +35,14 @@
                     
                     <td class="td_input_label_pinfo">{label username /} &nbsp</td>                    
                     <td class="td_input_username_regUserPanel">{input username}</td>
-                    <td width="1" id="tip_username"></td>
+                    <td id="username_help" class="icon icon-help"></td>
+                    <td width="1" id="tip_username"></td>                    
                     <td width="300" align="left" valign="top"><div id="usernameAvailableStatus"></div></td>
                 </tr>                 
                 <tr>
                     <td class="td_input_label_changePass">{label subdomain /} &nbsp</td>                    
                     <td class="td_input_subdomain_regUserPanel">{input subdomain}</td>
+                    <td id="subdomain_help" class="icon icon-help"></td>                    
                     <td width="1" id="tip_subdomain"></td>
                     <td width="300" align="left" valign="top"><div id="subdomainAvailableStatus"></div></td>                    
                 </tr>
@@ -125,8 +127,10 @@
                     <td class="td_verticalSeparator" rowspan="1">Reference</td>
                     
                     <td class="td_input_label_pinfo">{label referral /} <br /> prosím jeho referenční číslo:
-                        {input referral}
-                    </td>                                                                              
+                        {input referral}                        
+                    </td>               
+                    <td id="referral_help" class="icon icon-help" style="margin-top: 18px;"></td>
+                    <td width="1" id="tip_referral"></td>
                 </tr>  
                 <tr class="tr_reg_height15"><td></td></tr>
          </table>         
@@ -144,21 +148,50 @@
         {           
            $('#frmregUserForm2-username').qtip({
                 content: {
-                    text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá a velká písmena (bez diakritiky), číslice a znak "." (bodka).</span>',
+                    text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá písmena (bez diakritiky), číslice a znaky "." (bodka) a "_" (podtržítko).</span>',
                     width: '200'                    
                 },
-                position: { my: 'left top', at: 'right top', target: $('#tip_username') }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
-           });             
+                position: { my: 'left top', at: 'right top', target: $('#tip_username') }, show: { event: 'focus', ready: false }, hide: { event: 'unfocus' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }                
+           });       
+           
+           $('#username_help').qtip({
+                content: {
+                    text: '<span class="qtip_content">Uživatelské jméno budete využívat pro přihlášení do Admin Panelu. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá písmena (bez diakritiky), číslice a znaky "." (bodka) a "_" (podtržítko).</span>',
+                    width: '200'                    
+                },
+                position: { my: 'left top', at: 'right top', target: $('#tip_username') }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }                
+           });              
            
            $('#frmregUserForm2-subdomain').qtip({
                 content: {
-                             text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší internetové prezentace, proto jeho výběr pečlivě zvažte. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá písmena (bez diakritiky), číslice a znak "." (bodka). <br /><br /> \n\
+                             text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší internetové prezentace, proto jeho výběr pečlivě zvažte. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá písmena (bez diakritiky), číslice a znaky "." (bodka) a "_" (podtržítko). <br /><br /> \n\
+                             Uvedeme příklad: Pan MUDr. Richard Pokorný zadal při registraci název ve tvaru "richard.pokorny", \n\
+                             adresa jeho stránky bude tedy "richard.pokorny.mudrweb.cz".</span>',
+                    width: '200'                    
+                },
+                position: { my: 'left top', at: 'right top', target: $('#tip_subdomain') }, show: { event: 'focus', ready: false }, hide: { event: 'unfocus' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
+           });         
+           
+           $('#subdomain_help').qtip({
+                content: {
+                             text: '<span class="qtip_content">Název stránky bude použitý pro tvorbu adresy Vaší internetové prezentace, proto jeho výběr pečlivě zvažte. Pamatujte také, že musí začínat malým písmenem a jediné povolené znaky jsou malá písmena (bez diakritiky), číslice a znaky "." (bodka) a "_" (podtržítko). <br /><br /> \n\
                              Uvedeme příklad: Pan MUDr. Richard Pokorný zadal při registraci název ve tvaru "richard.pokorny", \n\
                              adresa jeho stránky bude tedy "richard.pokorny.mudrweb.cz".</span>',
                     width: '200'                    
                 },
                 position: { my: 'left top', at: 'right top', target: $('#tip_subdomain') }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
-           });            
+           });      
+           
+           $('#referral_help').qtip({
+                content: {
+                             text: '<span class="qtip_content">Referenční číslo slouží jako identifikátor slevy. \n\
+                             Můžete jej poskytnout jinému lékaři jemuž jste doporučili naše služby. \n\
+                             Použije-li tento lékař Vaše referenční číslo při své registraci, obdržíte slevu v hodnotě 20% \n\
+                             na následující rok.</span>',
+                    width: '200'                    
+                },
+                position: { my: 'left top', at: 'right top', target: $('#tip_referral'), adjust: { x: 0, y: 19 } }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }            
+           });              
         });        
     
     $('#frmregUserForm2-username').change(function(event) { if ($('#frmregUserForm2-username').val().length >= 8) { $.getJSON({link availCheck!},{'text':$('#frmregUserForm2-username').val(), 'flag':'username'},function(payload) { if (payload.availCheck[0] == 'notok') { $("#frmregUserForm2-username").removeClass("object_ok"); $("#frmregUserForm2-username").addClass("object_error"); $("#usernameAvailableStatus").html('&nbsp;<span id="username_stats" class="icon-ui-red icon-ui-red-close"></span><span>Jméno je již použito, zvolte prosím jiné</span>');                

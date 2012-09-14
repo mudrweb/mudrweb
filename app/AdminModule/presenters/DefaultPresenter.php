@@ -109,9 +109,9 @@ class DefaultPresenter extends AdminPresenter {
                 ->addRule(Form::MAX_LENGTH, 'Hlavní nadpis: Maximální povolená délka hlavního nadpisu je 40 znaků.', 40)
                 ->setValue($this->header1)
                 ->setAttribute('class', 'textarea_default_header1');                                        
-        $form->addTextArea('header2', 'Podnadpis:', 52, 40)                
+        $form->addTextArea('header2', 'Nadpis 2:', 52, 40)                
 //                ->addRule(Form::FILLED, 'Musíte zadat podnadpis.')                
-                ->addRule(Form::MAX_LENGTH, 'Podnadpis: Maximální povolená délka podnadpisu je 40 znaků.', 40)
+                ->addRule(Form::MAX_LENGTH, 'Nadpis 2: Maximální povolená délka podnadpisu je 40 znaků.', 40)
                 ->setValue($this->header2)
                 ->setAttribute('class', 'textarea_default_header2');     
         
@@ -139,7 +139,7 @@ class DefaultPresenter extends AdminPresenter {
         } else {
             $colourScheme = 'default';
         }          
-        $form->addRadioList('colourScheme', 'Barva textu (hlavní nadpis, podnadpis):', array(
+        $form->addRadioList('colourScheme', 'Barva textu (hlavní nadpis, nadpis 2):', array(
                 'default' => 'výchozí',
                 'userSpecific' => 'vlastní',
                 ))
@@ -174,7 +174,7 @@ class DefaultPresenter extends AdminPresenter {
                 ->setAttribute('class', 'color-picker');                   
 
         $form->addText('colour2', 'Barva podnadpisu:')                
-                ->addRule(Form::FILLED, 'Musíte vybrat barvu podnadpisu.')                                                
+                ->addRule(Form::FILLED, 'Musíte vybrat barvu nadpisu 2.')                                                
                 ->setDefaultValue($colour2)
                 ->setAttribute('class', 'color-picker');                           
         

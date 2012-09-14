@@ -394,7 +394,7 @@ a.isNotPublished { background-color: transparent; color: #000; font-weight: bold
 * Icons
 */
 .icon { float: left; margin: 0px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; } 
-.icon.icon-help{ background-image: url('../images/icons/help_ico.png'); background-size: 100%; } 
+.icon.icon-help { background-image: url('../images/icons/help_ico.png'); background-size: 100%; } 
 .icon-ui { background-image: url('images/ui-icons_888888_256x240.png'); float: left; margin: 2px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }
 .icon-ui-key { background-position: -112px -128px; }
 .icon-ui-black { background-image: url('images/ui-icons_222222_256x240.png'); float: left; margin: 2px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }
