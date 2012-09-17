@@ -147,6 +147,7 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
 #headerImageId { display: none; }
 #colourSchemeId, #colourSchemeId1 { display: none; }
 .layoutPreviewRight { padding-left: 60px; }
+a.cursor_mag:hover { cursor:url(images/magnify.cur),auto; }
 
 /* admin default settings - title */
 #title_help_click { vertical-align: top; cursor: hand; cursor: pointer; }
