@@ -383,6 +383,21 @@ class UsersManager extends Nette\Object {
         }
     }         
     
+    /**
+     * Update program type.
+     * 
+     * @param int $id
+     * @param string $program 
+     */    
+    public function updateProgramType($id, $program) {
+        if (is_numeric($id) && is_string($program)) {            
+            $this->database->exec('UPDATE users SET program=? WHERE id=?', $program, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update program type.
+                    Wrong input. method: updateProgramType($id, $program)', 500);
+        }
+    }       
+    
     /**************************** UsersData ***********************************/           
     
     /**
@@ -411,8 +426,15 @@ class UsersManager extends Nette\Object {
             $changeDateTime = date("Y-m-d H:i:s");
             $this->database->exec('
                 UPDATE users_data SET 
-                name=?, surname=?, titleBefore=?, titleAfter=?, doctorGroup=?, street=?, city=?, zip=?, region=?, phone=?, email=?, lastChange=? WHERE idusers=?', 
-                $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5], $dataArray[6], $dataArray[7], $dataArray[8], $dataArray[9], $dataArray[10], $dataArray[11], $changeDateTime, $dataArray[0]);            
+                name=?, surname=?, titleBefore=?, titleAfter=?, doctorGroup=?, 
+                street=?, city=?, zip=?, region=?, phone=?, email=?, 
+                ic=?, dic=?, streetInvoice=?, cityInvoice=?, zipInvoice=?, 
+                addressMatch=?, lastChange=?
+                WHERE idusers=?', 
+                $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5], 
+                $dataArray[6], $dataArray[7], $dataArray[8], $dataArray[9], $dataArray[10], 
+                $dataArray[11], $dataArray[12], $dataArray[13], $dataArray[14], $dataArray[15],
+                $dataArray[16], $dataArray[17], $changeDateTime, $dataArray[0]);            
         } else {            
             throw new \Nette\Application\ToolException('Unable to update user profile info.
                     Wrong input. method: changeUserProfileInfo($dataArray)', 500);
@@ -438,7 +460,10 @@ class UsersManager extends Nette\Object {
                'city' => $dataArray[7],                
                'zip' => $dataArray[8],  
                'region' => $dataArray[9],  
-               'phone' => $dataArray[10]                
+               'phone' => $dataArray[10],
+               'ic' => $dataArray[12],
+               'dic' => $dataArray[13],
+               'addressMatch' => 1
             ));                 
         } else {            
             throw new \Nette\Application\ToolException('Unable to add new user data.
@@ -692,5 +717,23 @@ class UsersManager extends Nette\Object {
             throw new \Nette\Application\ToolException('Unable to perform search procedure.
                     Wrong input. method: searchForSomething($queryString)', 500);
         }             
+    }
+    
+    /**
+     * Return number of user's referrers (referrer = person who used user's 
+     * ref. number in registration process).
+     * 
+     * @param int $id
+     * @return number of users
+     * @throws \Nette\Application\ToolException 
+     */    
+    public function getNumberOfUsersReferrers($id) {
+        if (is_numeric($id)) {                      
+            $results = $this->database->exec('SELECT COUNT(id) FROM `users` WHERE usersSponsor=? GROUP BY id', $id);                        
+            return $results;
+        } else {
+            throw new \Nette\Application\ToolException('Unable to get number of referrers for current user.
+                    Wrong input. method: getNumberOfUsersReferrers($id)', 500);
+        }
     }
 }

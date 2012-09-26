@@ -1,0 +1,258 @@
+{block content}
+              
+    <h2>Správa uživatelů</h2>    
+
+{snippet jEditable}
+        <div class="js_table_wrapper ajax" style="width:860px;">
+            <table class="table js_table" style="width:860px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Jméno</th>
+                        <th>Subd.</th>
+                        <th>Registrace</th>
+                        <th>Status</th>                        
+                        <th>Platnost od</th>
+                        <th>Platnost do</th>                        
+                        <th>Real Subd.</th>
+                        <th>Údržba</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    {if $users}
+                        {foreach $users as $user}
+                            <tr id="{$user[0]}">
+                                <td>{$user[0]}</td>
+                                <td>{$user[1] . ' ' . $user[2]}</td>
+                                <td>
+                                    <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
+                                    <br />
+                                    Satus: 
+                                    {if $user[9] == 'Valid'}
+                                        <span class="green">{$user[9]}</span>
+                                    {elseif $user[9] == 'N/A'}
+                                        <span class="orange">{$user[9]}</span>                                        
+                                    {elseif $user[9] == 'Invalid'}
+                                        <span class="red">{$user[9]}</span>                                        
+                                    {/if}
+                                </td>
+                                <td>{$user[4]}</td>                                
+                                {if $user[5] == 'active'}
+                                    <td id="status" class="green bold">
+                                {elseif $user[5] == 'pending'}
+                                    <td id="status" class="orange bold">    
+                                {elseif $user[5] == 'inactive'}
+                                    <td id="status" class="red bold">
+                                {/if}
+                                    {$user[5]}</td>                                
+                                <td>{$user[6]}</td>                                
+                                <td>{$user[7]}</td>
+                                <td>
+                                    <a href="https://admin.securitynet.cz/" class="user_list" target="_blank">Vytvořit real sub</a>
+                                    <br />
+                                    <a href="{link copyFilesToRealSubdomain! $user[0], $user[3]}" class="user_list ajax">Kopírovat data</a>
+                                    <br />
+<!--                                    { snippet realSubStatus}-->
+                                    Satus: 
+                                    {if $user[10] == 'Valid'}
+                                        <span class="green">{$user[10]}</span>
+                                    {elseif $user[10] == 'N/A'}
+                                        <span class="orange">{$user[10]}</span>                                        
+                                    {elseif $user[10] == 'Invalid'}
+                                        <span class="red">{$user[10]}</span>                                        
+                                    {/if}
+<!--                                    { /snippet}-->
+                                </td>                                
+                                {if $user[8] == 'on'}
+                                    <td id="mmode" class="green bold">
+                                {elseif $user[8] == 'off'}
+                                    <td id="mmode" class="red bold">    
+                                {/if}                                        
+                                    {$user[8]}</td>                                
+                            </tr>
+                        {/foreach}  
+                    {/if}
+                </tbody>
+            </table>
+        </div>       
+    
+    <script type="text/Javascript">
+        $(document).ready( function () {
+            var id = -1;//simulation of id
+            $('.js_table').dataTable({
+                bJQueryUI: true,
+                "sPaginationType": "full_numbers",
+                "oLanguage": {
+                        "sLengthMenu": "Zobrazit _MENU_ záznamů na stránku",
+                        "sZeroRecords": "Nebyly nalezeny žádné záznamy",
+                        "sInfo": "Zobrazeno _START_ do _END_ z celkového počtu _TOTAL_ záznamů",
+                        "sInfoEmpty": "Zobrazeno 0 do 0 z celkového počtu 0 záznamů",
+                        "sInfoFiltered": "(filtrováno z celkového počtu _MAX_ záznamů)",
+                        "sSearch": "Hledat:",
+                        "oPaginate": {
+                            "sFirst": "První",
+                            "sLast": "Posl.",
+                            "sNext": "Další",
+                            "sPrevious": "Předch."
+                        }                        
+                },                
+                "aoColumns": [
+                    { "asSorting": [ "desc", "asc" ], sWidth: '6%'},
+                    { "asSorting": [ "desc", "asc" ] },                    
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },                    
+                    { "bSortable": false },
+                    { "asSorting": [ "desc", "asc" ] }                                        
+//                    { "bSortable": false },
+//                    { "bSortable": false },
+//                    { "bSortable": false },
+//                    { "bSortable": false }
+                ]
+            }).makeEditable({
+                sUpdateURL: "/admin/admin-users?do=submitChanges",
+                "aoColumns": [ 
+                    null,
+                    null,
+                    null,
+                    null,                    
+                {
+                    cssclass: 'status_change',
+                    indicator: 'Saving ...',
+                    type: 'select',
+                    data: "{'0':'active', '1':'pending', '2':'inactive'}",
+                    submit: 'OK'                    
+                },
+                {
+                    type      : "masked",
+                    cssclass  : "dateITA",
+                    mask      : "99/99/9999",
+                    submit    : 'OK'                     
+                },
+                {
+                    type      : "masked",
+                    cssclass  : "dateITA",
+                    mask      : "99/99/9999",
+                    submit    : 'OK'                     
+                },
+                null,
+                {
+                    cssclass: 'status_change',
+                    indicator: 'Saving ...',
+                    type: 'select',
+                    data: "{'0':'on', '1':'off'}",
+                    submit: 'OK'                    
+                }
+                ]
+        });
+    } );
+    </script>
+    
+{/snippet}    
+
+    <script type="text/Javascript">
+//        $(document).ready( function () {
+//            var id = -1;//simulation of id
+//            $('.js_table').dataTable({
+//                bJQueryUI: true,
+//                "sPaginationType": "full_numbers",
+//                "oLanguage": {
+//                        "sLengthMenu": "Zobrazit _MENU_ záznamů na stránku",
+//                        "sZeroRecords": "Nebyly nalezeny žádné záznamy",
+//                        "sInfo": "Zobrazeno _START_ do _END_ z celkového počtu _TOTAL_ záznamů",
+//                        "sInfoEmpty": "Zobrazeno 0 do 0 z celkového počtu 0 záznamů",
+//                        "sInfoFiltered": "(filtrováno z celkového počtu _MAX_ záznamů)",
+//                        "sSearch": "Hledat:",
+//                        "oPaginate": {
+//                            "sFirst": "První",
+//                            "sLast": "Posl.",
+//                            "sNext": "Další",
+//                            "sPrevious": "Předch."
+//                        }                        
+//                },                
+//                "aoColumns": [
+//                    { "asSorting": [ "desc", "asc" ], sWidth: '6%'},
+//                    { "asSorting": [ "desc", "asc" ] },                    
+//                    { "asSorting": [ "desc", "asc" ] },
+//                    { "asSorting": [ "desc", "asc" ] },
+//                    { "asSorting": [ "desc", "asc" ] },
+//                    { "asSorting": [ "desc", "asc" ] },
+//                    { "asSorting": [ "desc", "asc" ] },                    
+//                    { "bSortable": false },
+//                    { "asSorting": [ "desc", "asc" ] }                                        
+////                    { "bSortable": false },
+////                    { "bSortable": false },
+////                    { "bSortable": false },
+////                    { "bSortable": false }
+//                ]
+//            }).makeEditable({
+//                sUpdateURL: "/admin/admin-users?do=submitChanges",
+//                "aoColumns": [ 
+//                    null,
+//                    null,
+//                    null,
+//                    null,                    
+//                {
+//                    cssclass: 'status_change',
+//                    indicator: 'Saving ...',
+//                    type: 'select',
+//                    data: "{'0':'active', '1':'pending', '2':'inactive'}",
+//                    submit: 'OK'                    
+//                },
+//                {
+//                    type      : "masked",
+//                    cssclass  : "dateITA",
+//                    mask      : "99/99/9999",
+//                    submit    : 'OK'                     
+//                },
+//                {
+//                    type      : "masked",
+//                    cssclass  : "dateITA",
+//                    mask      : "99/99/9999",
+//                    submit    : 'OK'                     
+//                },
+//                null,
+//                {
+//                    cssclass: 'status_change',
+//                    indicator: 'Saving ...',
+//                    type: 'select',
+//                    data: "{'0':'on', '1':'off'}",
+//                    submit: 'OK'                    
+//                }
+//                ]
+//        });
+//    } );
+        
+      $("select").live("click", function () {  
+        if (this.parentNode.parentNode.id == 'status') {
+            if ($(this).val() == '0') {
+                $("#status").css("color","#3CE01B");
+                $("#status").addClass("bold");
+            }
+            if ($(this).val() == '1') {            
+                $("#status").css("color","#E0771B");
+                $("#status").addClass("bold");
+            }
+            if ($(this).val() == '2') {
+                $("#status").css("color","#ff0000");
+                $("#status").addClass("bold");
+            }       
+        }
+        
+        if (this.parentNode.parentNode.id == 'mmode') {
+            if ($(this).val() == '0') {
+                $("#mmode").css("color","#3CE01B");
+                $("#mmode").addClass("bold");
+            }            
+            if ($(this).val() == '1') {
+                $("#mmode").css("color","#ff0000");
+                $("#mmode").addClass("bold");
+            }       
+        }        
+      });        
+        
+    </script>
+
+{/block}

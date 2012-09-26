@@ -1,0 +1,126 @@
+{block content}
+              
+    <h2>Správa vzhledů</h2>    
+
+{snippet formLayout}
+{form layoutForm}   
+    
+         <table cellspacing="0">          
+                <tr style="height: 5px;"><td></td></tr>
+                <tr>
+                    <td class="td_input_label_pinfo">{label layoutName /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input layoutName}</td>                                                      
+                </tr>             
+                <tr>
+                    <td class="td_input_label_pinfo">{label layoutGroup /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input layoutGroup}</td>                                                      
+                </tr>   
+                <tr>
+                    <td class="td_input_label_pinfo">{label layoutDesc /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input layoutDesc}</td>                                                      
+                </tr>                   
+                <tr style="height: 15px;"><td></td></tr>
+         </table>             
+         <h2></h2>         
+         <table cellspacing="0">                
+                <tr>                            
+                    <td class="td_input_addLayout">{input submit} &nbsp&nbsp </td> 
+                </tr>
+         </table>
+         <h2></h2>    
+         
+{/form layoutForm}   
+{/snippet}  
+         
+{snippet jEditable}
+        <div class="js_table_wrapper ajax" style="width:860px;">
+            <table class="table js_table" style="width:860px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vzhled</th>
+                        <th>Skupina</th>
+                        <th>Popis vzhledu</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    {if $layouts}
+                        {foreach $layouts as $layout}
+                            <tr id="{$layout[0]}">
+                                <td>{$layout[0]}</td>
+                                <td>{$layout[1]}</td>
+                                <td>{$layout[2]}</td>                                
+                                <td>{$layout[3]}</td>  
+                                <td>                                    
+                                    <a href="{link deleteLayout! id => $layout[0]}" class="icon-ui-red icon-ui-red-close" title="Smazat vzhled">&nbsp;</a>                                    
+                                </td>                                
+                            </tr>
+                        {/foreach}  
+                    {/if}
+                </tbody>
+            </table>
+        </div>       
+    
+    <script type="text/Javascript">
+        $(document).ready( function () {
+            var id = -1;//simulation of id
+            $('.js_table').dataTable({
+                bJQueryUI: true,
+                "iDisplayLength" : 50,                
+                "sPaginationType": "full_numbers",
+                "oLanguage": {
+                        "sLengthMenu": "Zobrazit _MENU_ záznamů na stránku",
+                        "sZeroRecords": "Nebyly nalezeny žádné záznamy",
+                        "sInfo": "Zobrazeno _START_ do _END_ z celkového počtu _TOTAL_ záznamů",
+                        "sInfoEmpty": "Zobrazeno 0 do 0 z celkového počtu 0 záznamů",
+                        "sInfoFiltered": "(filtrováno z celkového počtu _MAX_ záznamů)",
+                        "sSearch": "Hledat:",
+                        "oPaginate": {
+                            "sFirst": "První",
+                            "sLast": "Posl.",
+                            "sNext": "Další",
+                            "sPrevious": "Předch."
+                        }                        
+                },                
+                "aoColumns": [
+                    { "asSorting": [ "desc", "asc" ], sWidth: '6%'},
+                    { "asSorting": [ "desc", "asc" ], sWidth: '30%' },                    
+                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' },
+                    { "asSorting": [ "desc", "asc" ] },                                     
+                    { "asSorting": false },
+                ]
+            }).makeEditable({
+                sUpdateURL: "/admin/admin-layouts?do=submitChanges",
+                "aoColumns": [ 
+                    null,
+                    {                
+                        maxlength : '45',                         
+                        cssclass  : "required",                                        
+                        indicator : 'Saving ...',     
+                        cancel    : 'Cancel',
+                        submit    : 'OK'                   
+                    },
+                    {                           
+                        maxlength : '30',   
+                        cssclass  : "required",                                        
+                        indicator : 'Saving ...',     
+                        cancel    : 'Cancel',
+                        submit    : 'OK'                   
+                    },
+                    {                           
+                        maxlength : '130',   
+                        cssclass  : "required",                                        
+                        indicator : 'Saving ...',     
+                        cancel    : 'Cancel',
+                        submit    : 'OK'                   
+                    },
+                    null,
+                ]
+        });
+    } );
+    </script>
+    
+{/snippet}    
+
+{/block}

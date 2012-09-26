@@ -6,12 +6,12 @@ use Nette\Forms\Form;
 use \AdminPresenter as AdminPresenter;
 
 /**
- * AdminModule admin layouts presenter.
+ * AdminModule admin resellers presenter.
  *
  * @author     Zippo
  * @package    AdminModule
  */
-class AdminLayoutsPresenter extends AdminPresenter {            
+class AdminResellersPresenter extends AdminPresenter {            
     
     /**
      * Check access and rights here only
@@ -32,13 +32,13 @@ class AdminLayoutsPresenter extends AdminPresenter {
                     $layout->layout_desc);
             }
         } else {
-            throw new \Nette\Application\BadRequestException('Unable to load layouts (AdminModule - adminLayouts presenter).', 404);
+            throw new \Nette\Application\BadRequestException('Unable to load layouts (AdminModule - adminResellers presenter).', 404);
         }
         $this->template->layouts = $layoutsArray;          
     }        
     
     /**
-     * Create form for addition of new layout.
+     * Create form for addition of new reseller.
      * 
      * @return \Nette\Application\UI\Form 
      */
@@ -46,7 +46,7 @@ class AdminLayoutsPresenter extends AdminPresenter {
         $form = new \Nette\Application\UI\Form;       
         
         // layout name
-        $form->addText('layoutName', 'Název vzhledu:', 30, 30)                
+        $form->addText('layoutName', 'Jméno resellera:', 30, 30)                
                 ->addRule(Form::FILLED, 'Musíte zadat název vzhledu.')                
                 ->addRule(Form::MAX_LENGTH, 'Název vzhledu: Maximální povolená délka názvu je 45 znaků.', 45)               
                 ->setAttribute('class', 'input_style_layoutName');  
@@ -71,7 +71,7 @@ class AdminLayoutsPresenter extends AdminPresenter {
     }            
     
     /**
-     * Add layout.
+     * Add reseller.
      * 
      * @param \Nette\Forms\Controls\Button $button 
      */

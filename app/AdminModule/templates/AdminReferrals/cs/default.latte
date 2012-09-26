@@ -1,0 +1,164 @@
+{block head}
+    <link rel="stylesheet" href="../../css/TableTools.css" type="text/css">                
+    <script type="text/javascript" src="../../js/TableTools.min.js"></script>
+    <script type="text/javascript" src="../../js/ZeroClipboard.js"></script>        
+{/block}
+{block content}
+              
+    <h2>Správa bonusů</h2>    
+
+{snippet jEditable}
+        <div class="js_table_wrapper ajax" style="width:860px;">
+            <table class="table js_table" style="width:860px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Jméno</th>
+                        <th>Info</th>
+                        <th>Subd.</th>
+                        <th>Program</th>
+                        <th>Registrace</th>
+                        <th>Status</th>                        
+                        <th>Aktivace</th>
+                        <th>Platnost od</th>
+                        <th>Platnost do</th>                        
+                        <th>Ref. bonus</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    {if $users}
+                        {foreach $users as $user}
+                            <tr id="{$user[0]}">
+                                <td>#{$user[0]}</td>
+                                <td>{$user[1] . ' ' . $user[2]}</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- titleBefor name surname titleAfter -->
+                                                {$user[10] . ' ' . $user[1] . ' ' . $user[2] . ' ' . $user[11]}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- street -->
+                                                {$user[12]}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- PSC city -->
+                                                {$user[14] . ' ' . $user[13]}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- subdomain -->
+                                                <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- IC -->
+                                                {$user[15]}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
+                                </td>
+                                <td>{$user[4]}</td>                                
+                                <td>{$user[5]}</td>                                
+                                {if $user[6] == 'active'}
+                                    <td id="status{$user[0]}" class="green bold">
+                                {elseif $user[6] == 'pending'}
+                                    <td id="status{$user[0]}" class="orange bold">    
+                                {elseif $user[6] == 'inactive'}
+                                    <td id="status{$user[0]}" class="red bold">
+                                {elseif $user[6] == 'archive'}
+                                    <td id="status{$user[0]}" class="bold">                                        
+                                {/if}
+                                    {$user[6]}</td>                                
+                                <td>{$user[7]}</td>                                    
+                                <td>{$user[8]}</td>                                                                
+                                <td>{$user[9]}</td>   
+                                <td>{$user[16]} %</td>
+                            </tr>
+                        {/foreach}  
+                    {/if}
+                </tbody>
+            </table>
+        </div>       
+    
+    <script type="text/Javascript">
+        $(document).ready( function () {
+            var id = -1;//simulation of id
+            $('.js_table').dataTable({
+                bJQueryUI: true,
+                "sPaginationType": "full_numbers",
+                "sDom": 'T<"H"lf>rt<"F"ip>',
+                "oLanguage": {
+                        "sLengthMenu": "Zobrazit _MENU_ záznamů na stránku",
+                        "sZeroRecords": "Nebyly nalezeny žádné záznamy",
+                        "sInfo": "Zobrazeno _START_ do _END_ z celkového počtu _TOTAL_ záznamů",
+                        "sInfoEmpty": "Zobrazeno 0 do 0 z celkového počtu 0 záznamů",
+                        "sInfoFiltered": "(filtrováno z celkového počtu _MAX_ záznamů)",
+                        "sSearch": "Hledat:",
+                        "oPaginate": {
+                            "sFirst": "První",
+                            "sLast": "Posl.",
+                            "sNext": "Další",
+                            "sPrevious": "Předch."
+                        }                        
+                },                
+                "aoColumns": [
+                    { "asSorting": [ "desc", "asc" ], sWidth: '6%'},
+                    { "asSorting": [ "desc", "asc" ] },     
+                    { "bSortable": false },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] }                
+                ],
+		"oTableTools": {
+                        "sSwfPath": "../../js/copy_cvs_xls_pdf.swf",
+			"aButtons": [
+				"copy",
+				"csv",
+				"xls",
+				{
+					"sExtends": "pdf",
+					"sPdfOrientation": "landscape"					
+				},
+                                "print"				
+			]                        
+		}                
+            }).makeEditable({
+                sUpdateURL: "/admin/admin-users?do=submitChanges",
+                "aoColumns": [ 
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,                    
+                    null,
+                    null, 
+                    null,
+                    null,
+                    null,                    
+                    null
+                ]
+        });
+    } );
+    
+    $(":button").addClass("advert");
+    
+    </script>
+    
+{/snippet}    
+{/block}

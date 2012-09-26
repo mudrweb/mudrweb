@@ -564,4 +564,24 @@ class ExtraMethods extends Nette\Object {
         $zip->addFile($pathToFileToBeAddedToArchive . $fileToBeAddedToArchive, $fileToBeAddedToArchive);
         $zip->close();                  
     }     
+    
+    public function validIc($ic) {
+        if (!ctype_digit($ic) || $ic > 99999999)
+            return false;
+        $ic = sprintf("%08s", $ic);
+        $a = 0;
+        for ($i = 0; $i < 7; $i++)
+            $a += $ic[$i] * (8 - $i);
+        $a = $a % 11;
+        $c = 11 - $a;
+        if ($a == 1)
+            $c = 0;
+        if ($a == 0)
+            $c = 1;
+        if ($a == 10)
+            $c = 1;
+        if ($ic[7] != $c)
+            return false;
+        return true;
+    }        
 }    

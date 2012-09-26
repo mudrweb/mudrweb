@@ -225,6 +225,14 @@ class AdminDefaultPresenter extends AdminPresenter {
                 ->addRule(Form::MAX_LENGTH, 'Telefon: Maximální povolená délka telefonního čísla je 9 znaků.', 9)                
                 ->setAttribute('class', 'input_style_pinfo');                 
         
+        $form->addText('ic', 'IČ:', 8, 8)                                
+                ->addRule(Form::MAX_LENGTH, 'IČ: Maximální povolená délka IČ je 8 znaků.', 8)                                
+                ->setAttribute('class', 'input_style_pinfo');     
+        
+        $form->addText('dic', 'DIČ:', 10, 10)                                
+                ->addRule(Form::MAX_LENGTH, 'DIČ: Maximální povolená délka DIČ je 10 znaků.', 10)                                
+                ->setAttribute('class', 'input_style_pinfo');           
+        
         $form->addRadioList('program', 'Program:', array(
                 'demo' => 'DEMOverze - 3 měsíce - ZDARMA',
                 'basic' => 'Základní verze - 1 rok - 990 Kč',
@@ -314,103 +322,131 @@ class AdminDefaultPresenter extends AdminPresenter {
         $salt = $this->extraMethods->generateSalt();
         $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));
 
-        // check if there is the user with filled Sponsoring Number
-        if ($data->referral != '') {
-            $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
-            if ($sponsor) {
-                $usersSponsor = $sponsor->id;
+        // check if user filled in IC
+        if ($data->ic != '') {
+            $icIsOk = $this->extraMethods->validIc($data->ic);
+            // preg_match("/^[0-9 ]+$/", $data->ic);
+        } else {
+            $icIsOk = true;
+        }
+        // check if user filled in DIC
+        if ($data->dic != '') {
+            if (strlen($data->dic) >= 8) {
+                $dicIsOk = preg_match("/^[0-9 ]+$/", $data->dic);
             } else {
-                $usersSponsor = -1;
+                $dicIsOk = false;
             }
         } else {
-            $usersSponsor = 0;
+            $dicIsOk = true;
         }
-        
-        if ($usersSponsor >= 0) {
-            //1. user
-            $token = $this->extraMethods->generatePassword();
-            $salt = $this->extraMethods->generateSalt();
-            $regToken = $this->extraMethods->calculateHash($token, $salt);
-            $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
-            // check if generated sponsoring number does not already exist (3 check)
-            // 14,776,336 unique combinations -> long way to catch them all
-            $users = $this->db_users->getUsers();
-            $sponsoringNumbersList = array();
-            foreach ($users as $user) {
-                $sponsoringNumbersList[] = $user->usersSponsoringNumber;
-            }
-            // check until generated one is unique
-            while (in_array($sponsoringNumber, $sponsoringNumbersList)) {
-                $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
-            }
-            
-            if ($usersSponsor == 0) {
-                $usersSponsor = NULL;
-            }
-            $dummyStringPre = $this->extraMethods->generateDummyString(2);
-            $dummyStringPost = $this->extraMethods->generateDummyString(3);
-            $passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
-            $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
-                $data->program, $regToken, $sponsoringNumber, $usersSponsor, $passwordTemp);
-            $this->db_users->addUser($dataArray_user);
 
-            //2. users_data
-            $user = $this->db_users->getUserBySubdomain($data->subdomain);
-            $doctorGroupFoundById = null;
-            // doctor group chosen from list or set manually?
-            if ($data->doctorGroup != 'xxx') {
-                // found group by id in 2D array
-                foreach ($this->doctorGroupsList as $doctorGroup => $value) {
-                    if (array_key_exists($data->doctorGroup, $this->doctorGroupsList[$doctorGroup])) {
-                        $doctorGroupFoundById = $this->doctorGroupsList[$doctorGroup][$data->doctorGroup];
+        // if IC has max 8 chars and contains only numbers
+        if ($icIsOk) {
+            // if DIC has max 10 chars and contains only numbers            
+            if ($dicIsOk) {
+                // check if there is the user with filled Sponsoring Number
+                if ($data->referral != '') {
+                    $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
+                    if ($sponsor) {
+                        $usersSponsor = $sponsor->id;
+                    } else {
+                        $usersSponsor = -1;
                     }
+                } else {
+                    $usersSponsor = 0;
+                }
+
+                if ($usersSponsor >= 0) {
+                    //1. user
+                    $token = $this->extraMethods->generatePassword();
+                    $salt = $this->extraMethods->generateSalt();
+                    $regToken = $this->extraMethods->calculateHash($token, $salt);
+                    $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
+                    // check if generated sponsoring number does not already exist (3 check)
+                    // 14,776,336 unique combinations -> long way to catch them all
+                    $users = $this->db_users->getUsers();
+                    $sponsoringNumbersList = array();
+                    foreach ($users as $user) {
+                        $sponsoringNumbersList[] = $user->usersSponsoringNumber;
+                    }
+                    // check until generated one is unique
+                    while (in_array($sponsoringNumber, $sponsoringNumbersList)) {
+                        $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
+                    }
+
+                    if ($usersSponsor == 0) {
+                        $usersSponsor = NULL;
+                    }
+                    $dummyStringPre = $this->extraMethods->generateDummyString(2);
+                    $dummyStringPost = $this->extraMethods->generateDummyString(3);
+                    $passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
+                    $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
+                        $data->program, $regToken, $sponsoringNumber, $usersSponsor, $passwordTemp);
+                    $this->db_users->addUser($dataArray_user);
+
+                    //2. users_data
+                    $user = $this->db_users->getUserBySubdomain($data->subdomain);
+                    $doctorGroupFoundById = null;
+                    // doctor group chosen from list or set manually?
+                    if ($data->doctorGroup != 'xxx') {
+                        // found group by id in 2D array
+                        foreach ($this->doctorGroupsList as $doctorGroup => $value) {
+                            if (array_key_exists($data->doctorGroup, $this->doctorGroupsList[$doctorGroup])) {
+                                $doctorGroupFoundById = $this->doctorGroupsList[$doctorGroup][$data->doctorGroup];
+                            }
+                        }
+                    } else {
+                        $doctorGroupFoundById = $data->extraDoctorGroup;
+                    }
+                    $dataArray_users_data = array($user->id, $data->name, $data->surname,
+                        $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
+                        $data->region, $data->phone, $doctorGroupFoundById, $data->ic, $data->dic);
+                    $this->db_users->addUserData($dataArray_users_data);
+
+                    //3. users_websiteData
+                    $layout = $this->db_users->getLayoutById($data->layouts);
+                    $dataArray_users_websiteData = array($user->id, $layout->layout, 'all',
+                        $data->header1, $data->header2, $data->pageTitle, $data->description,
+                        $data->keywords);
+                    $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
+
+                    //4. menuItems set
+                    $this->db_menuItems->addNewMenuItemsSet($user->id);
+
+                    //5. guestBook                      
+                    $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
+                    $this->db_guestBook->addGuestBook($dataArray_guestBook);
+
+                    //6. www part - folders, files
+                    $this->registerUserWWW($data->subdomain);
+
+                    //7. set subdomain status from N/A -> to valid
+                    $this->db_users->updateSubdomainStatus($user->id, 'Valid');
+
+                    //8. send user reg request to mudrweb@gmail.com
+                    $mail = new \Nette\Mail\Message;
+                    $mail->setFrom('MUDRweb.cz - user reg request <admin@mudrweb.cz>')
+                            ->addTo('mudrweb@gmail.com')
+                            ->setSubject('Žádost o registraci nového uživatele')
+                            ->send();
+
+                    $this->flashMessage('Registrace uživatele proběhla úspěšně.', 'info');
+
+                    if (!$this->isAjax()) {
+                        $this->redirect('this');
+                    } else {
+                        $this->invalidateControl('formRegUser');
+                        $this->invalidateControl('dispPass');
+                        $button->getForm()->setValues(array(), TRUE);
+                    }
+                } else {
+                    $this->flashMessage('Zadané referenční číslo je neplatné (nebyl použit správný formát nebo dané referenční číslo neexistuje)!', 'warning');
                 }
             } else {
-                $doctorGroupFoundById = $data->extraDoctorGroup;
-            }
-            $dataArray_users_data = array($user->id, $data->name, $data->surname,
-                $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                $data->region, $data->phone, $doctorGroupFoundById);
-            $this->db_users->addUserData($dataArray_users_data);
-
-            //3. users_websiteData
-            $layout = $this->db_users->getLayoutById($data->layouts);
-            $dataArray_users_websiteData = array($user->id, $layout->layout, 'all',
-                $data->header1, $data->header2, $data->pageTitle, $data->description,
-                $data->keywords);
-            $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
-
-            //4. menuItems set
-            $this->db_menuItems->addNewMenuItemsSet($user->id);
-
-            //5. guestBook                      
-            $dataArray_guestBook = array($user->id, $data->name . ' ' . $data->surname);
-            $this->db_guestBook->addGuestBook($dataArray_guestBook);
-
-            //6. www part - folders, files
-            $this->registerUserWWW($data->subdomain);
-
-            //7. set subdomain status from N/A -> to valid
-            $this->db_users->updateSubdomainStatus($user->id, 'Valid');
-
-            //8. send user reg request to mudrweb@gmail.com
-            $mail = new \Nette\Mail\Message;
-            $mail->setFrom('MUDRweb.cz - user reg request <admin@mudrweb.cz>')
-                    ->addTo('mudrweb@gmail.com')
-                    ->setSubject('Žádost o registraci nového uživatele')
-                    ->send();
-            
-            $this->flashMessage('Registrace uživatele proběhla úspěšně.', 'info');
-
-            if (!$this->isAjax()) {
-                $this->redirect('this');
-            } else {
-                $this->invalidateControl('formRegUser');
-                $this->invalidateControl('dispPass');
-                $button->getForm()->setValues(array(), TRUE);
+                $this->flashMessage('Zadané DIČ je neplatné (nebyl použit správný formát - DIČ může obsahovat pouze číslice a musí mít 8 až 10 znakú)!', 'warning');
             }
         } else {
-            $this->flashMessage('Zadané referenční číslo je neplatné (nebyl použit správný formát nebo dané referenční číslo neexistuje)!', 'warning');
+            $this->flashMessage('Zadané IČ je neplatné (nebyl použit správný formát)!', 'warning');
         }
     }
 

@@ -25,7 +25,7 @@ require APP_DIR . '/components/ExtraMethods.php';
 $configurator = new Nette\Config\Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
-$configurator->setProductionMode(TRUE);//$configurator::AUTO);
+$configurator->setProductionMode(FALSE);//$configurator::AUTO);
 $configurator->enableDebugger(__DIR__ . '/../log');
 
 // Enable RobotLoader - this will load all classes automatically

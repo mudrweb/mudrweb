@@ -31,7 +31,7 @@
                     {if $users}
                         {foreach $users as $user}
                             <tr id="{$user[0]}">
-                                <td>{$user[0]}</td>
+                                <td>#{$user[0]}</td>
                                 <td>{$user[1] . ' ' . $user[2]}</td>
                                 <td>
                                     <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
@@ -154,7 +154,13 @@
                     null,
                     null,
                     null,
-                    null,
+                {
+                    cssclass: 'status_change',
+                    indicator: 'Saving ...',
+                    type: 'select',
+                    data: "{'0':'demo', '1':'basic', '2':'premium'}",
+                    submit: 'OK&nbsp'                    
+                },
                     null,                    
                 {
                     cssclass: 'status_change',

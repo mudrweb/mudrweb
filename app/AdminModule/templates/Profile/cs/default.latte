@@ -40,7 +40,7 @@
 	 <table cellspacing="0">          
                 <tr style="height: 5px;"><td></td></tr>
                 <tr>
-                    <td class="td_verticalSeparator" id="regArea" rowspan="12">Změna osobních údajů</td>
+                    <td class="td_verticalSeparator" id="regArea" rowspan="18">Změna osobních údajů</td>
                     
                     <td class="td_input_label_pinfo">{label name /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input name}</td>                    
@@ -81,6 +81,23 @@
                     <td class="td_input_label_pinfo">{label region /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input region}</td>                                                      
                 </tr>                   
+                
+                <tr>                    
+                    <td class="td_input_addressMatch" colspan="2">{input addressMatch} &nbsp; Fakturační adresa se zhoduje s kontaktní adresou.</td>
+                </tr>
+                <tr>
+                    <td id="invoiceData" class="td_input_label_pinfo">{label streetInvoice /} <br/> (faktura): &nbsp</td>                    
+                    <td id="invoiceData1" class="td_input_pinfo">{input streetInvoice}</td>                                                      
+                </tr>
+                <tr>
+                    <td id="invoiceData2" class="td_input_label_pinfo">{label cityInvoice /} &nbsp</td>                    
+                    <td id="invoiceData3" class="td_input_pinfo">{input cityInvoice}</td>                                                      
+                </tr>
+                <tr>
+                    <td id="invoiceData4" class="td_input_label_pinfo">{label zipInvoice /} &nbsp</td>                    
+                    <td id="invoiceData5" class="td_input_pinfo">{input zipInvoice}</td>                                                      
+                </tr>                   
+                
                 <tr>
                     <td class="td_input_label_pinfo">{label phone /} &nbsp</td>                                        
                     <td class="td_input_pinfo_phone">+420 &nbsp{input phone}</td>                                                      
@@ -88,6 +105,14 @@
                 <tr>
                     <td class="td_input_label_pinfo">{label email /} &nbsp</td>                    
                     <td class="td_input_pinfo">{input email}</td>                                                    
+                </tr>        
+                <tr>
+                    <td class="td_input_label_pinfo">{label ic /} &nbsp</td>                    
+                    <td class="td_input_pinfo">{input ic}</td>                       
+                </tr>  
+                <tr>
+                    <td class="td_input_label_pinfo">{label dic /} &nbsp</td>                    
+                    <td class="td_input_pinfo_dic">CZ &nbsp;{input dic}</td>    
                 </tr>                   
                 <tr style="height: 15px;"><td></td></tr>
          </table>    
@@ -103,6 +128,15 @@
         if ($('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $("#extraDoctorGroup").animate({ opacity: "show"}, 800); $("#extraDoctorGroup1").animate({ opacity: "show"}, 800); } else { $('#extraDoctorGroup').hide(); $('#extraDoctorGroup1').hide(); }
         $('#frmeditPInfoForm-doctorGroup').live("change", function () {
             if ($(this).attr('value') == 'xxx') { $("#extraDoctorGroup").animate({ opacity: "show"}, 800); $("#extraDoctorGroup1").animate({ opacity: "show"}, 800); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val(''); } } else { $('#extraDoctorGroup').hide(); $('#extraDoctorGroup1').hide(); if (!$('#frmeditPInfoForm-usedUserSpecificDoctorGroup').val()) { $('#frmeditPInfoForm-extraDoctorGroup').val('Vaše odbornost'); } }
+        })
+        
+        if (!$('#frmeditPInfoForm-addressMatch').is(':checked')) { $("#invoiceData, #invoiceData1, #invoiceData2, #invoiceData3, #invoiceData4, #invoiceData5").animate({ opacity: "show"}, 800); } else { $("#invoiceData, #invoiceData1, #invoiceData2, #invoiceData3, #invoiceData4, #invoiceData5").hide();}
+        $('#frmeditPInfoForm-addressMatch').live("change", function () {
+            if (!$(this).is(':checked')) {
+                $("#invoiceData, #invoiceData1, #invoiceData2, #invoiceData3, #invoiceData4, #invoiceData5").animate({ opacity: "show"}, 800);
+            } else {
+                $("#invoiceData, #invoiceData1, #invoiceData2, #invoiceData3, #invoiceData4, #invoiceData5").hide();
+            }
         })
     </script> 
     {/snippet}          

@@ -265,6 +265,16 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
                 $nav->setCurrent($sec);
             }            
             
+            $sec = $nav->add("Správa bonusů", $this->link(":Admin:AdminReferrals:"), 'no');
+            if ($this->name === 'Admin:AdminReferrals') {
+                $nav->setCurrent($sec);
+            }                  
+
+            $sec = $nav->add("Správa obch. zástupců", $this->link(":Admin:AdminResellers:"), 'no');
+            if ($this->name === 'Admin:AdminResellers') {
+                $nav->setCurrent($sec);
+            }              
+            
             $sec = $nav->add("Správa vzhledů", $this->link(":Admin:AdminLayouts:"), 'no');
             if ($this->name === 'Admin:AdminLayouts') {
                 $nav->setCurrent($sec);

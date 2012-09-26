@@ -56,7 +56,7 @@ class AdminUsersPresenter extends AdminPresenter {
                        } else {
                            $dateOfActivation = NULL;
                        }
-                       // 13 array items
+                       // 15 array items
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
                             $user->subdomain, $dateOfRegistration, $user->accountStatus, $dateFrom, $dateTo, 
                             $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, 
@@ -80,6 +80,27 @@ class AdminUsersPresenter extends AdminPresenter {
         $id = $_REQUEST['id'];
         $columnId = $_REQUEST['columnId'];
         
+        //program type
+        if ($columnId == 3) {
+            $newProgramId = $_REQUEST['value'];
+            $newProgram = null;
+            switch ($newProgramId) {
+                case 0:
+                    $newProgram = 'demo';
+                    break;
+                case 1:
+                    $newProgram = 'basic';
+                    break;
+                case 2:
+                    $newProgram = 'premium';
+                    break;                
+            }
+            
+            // actual user            
+            $user = $this->db_users->getUserById(intval($id));                
+            $this->db_users->updateProgramType(intval($id), $newProgram);            
+        }
+        
         // status and subdomain data
         if ($columnId == 5) {
             $newStatusId = $_REQUEST['value'];               
@@ -99,14 +120,15 @@ class AdminUsersPresenter extends AdminPresenter {
                     break;                
             }           
             
-            // actual user
-            $user = $this->db_users->getUserById(intval($id));            
-            if ($newStatus == 'active') {
-                if ($user && !$user->dateOfActivation) {      
+            // actual user            
+            $user = $this->db_users->getUserById(intval($id));                        
+            if ($newStatus == 'active') {                
+                if ($user) {      
                     // if archived, it cannot be changed manually via admin menu
                     if ($user->accountStatus != 'archive') {                    
                         $user_data = $this->db_users->getUsersDataById(intval($id));
 
+                        
                         // send email
                         $template = parent::createTemplate();
                         $template->setFile($this->getContext()->params['appDir'] . '/templates/xemails/acc_active.latte');

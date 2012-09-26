@@ -263,8 +263,13 @@ a.cursor_mag:hover { cursor:url(images/magnify.cur),auto; }
 .input_style_pinfo { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 220px; border: 1px solid #000000;
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;    
 }
+.input_style_pinfo_invoice { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 220px; border: 1px solid #000000;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;    
+    background-color: #3EABCF;
+}
 .td_input_pinfo { padding-left: 73px; padding-bottom: 15px; width: 20px; }
 .td_input_pinfo_phone { padding-left: 36px; padding-bottom: 15px; }
+.td_input_pinfo_dic { padding-left: 48px; padding-bottom: 15px; }
 .td_input_label_pinfo { padding-bottom: 15px; padding-left: 20px; }
 
 /* user registration - admin panel */
@@ -275,6 +280,7 @@ a.cursor_mag:hover { cursor:url(images/magnify.cur),auto; }
 .td_input_referral_regUserPanel { padding-left: 0px; padding-bottom: 5px; width: 20px; }
 .td_input_label_referral_regUserPanel { padding-bottom: 0px; padding-left: 0px; width: 350px; }
 .td_input_phone_regUserPanel { padding-left: 46px; padding-bottom: 15px; width: 20px; }
+.td_input_dic_regUserPanel { padding-left: 58px; padding-bottom: 15px; width: 20px; }
 .td_input_top_regUserPanel { padding-left: 48px; padding-bottom: 15px; padding-top: 7px; width: 20px; }
 .td_input_settings_regUserPanel { padding-bottom: 15px; width: 10px; }
 .password_regUserPanel { font-size: 90%; padding: 3px; height: 20px; width: 220px; border: 1px solid #000000;    
@@ -290,6 +296,11 @@ a.cursor_mag:hover { cursor:url(images/magnify.cur),auto; }
     -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
 }
 #extraDoctorGroup, #extraDoctorGroup1 { display: none; }
+#invoiceData, #invoiceData1, #invoiceData2, #invoiceData3, #invoiceData4, #invoiceData5 { display: none; }
+.addressMatch { resize: none; overflow: auto; font-size: 90%; font-family: arial; margin-right: 0px;
+    -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;
+}
+.td_input_addressMatch { padding-left: 20px; padding-bottom: 15px; width: 360px; }
 
 /* user list - admin panel */
 a.user_list:link {text-decoration: underline;}

@@ -47,7 +47,7 @@ common:
                                         102 : 102 angiologie,
                                         103 : 103 diabetologie,
                                         104 : 104 endokrinologie,
-                                        105 : 105 gastroenterologie a hepatologie,
+                                        105 : 105 gastroenterologie a hepatol.,
                                         106 : 106 geriatrie,
                                         107 : 107 kardiologie,
                                         108 : 108 nefrologie,
@@ -60,7 +60,7 @@ common:
                                         204 : 204 tělovýchovné lékařství,
                                         205 : 205 tuberkulóza a respir. nemoce,
                                         206 : 206 klinická farmakologie,
-                                        207 : 207 alergologie a klin. imunologie,
+                                        207 : 207 alerg. a klin. imunologie,
                                         208 : 208 lékařská genetika,
                                         209 : 209 neurologie,
                                         222 : 222 transfúzní služba
@@ -72,7 +72,7 @@ common:
                                         305 : 305 psychiatrie,
                                         306 : 306 dětská psychiatrie,
                                         307 : 307 gerontopsychiatrie,
-                                        308 : 308 léčba alkoholismu a toxikomanií,
+                                        308 : 308 léčba alkohol. a toxikomanií,
                                         309 : 309 sexuologie
                                     }, skupina 4 : {
                                         401 : 401 pracovní lékařství,
@@ -109,7 +109,7 @@ common:
                                         706 : 706 urologie,
                                         707 : 707 dětská urologie,
                                         708 : 708 ARO a intenzivní péče,
-                                        709 : 709 zdravotnická záchranná služba,
+                                        709 : 709 zdravotnická zách. služba,
                                         710 : 710 léčba bolesti
                                     }, skupina 8 : {
                                         801 : 801 klinická biochemie,

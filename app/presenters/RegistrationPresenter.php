@@ -18,7 +18,7 @@ class RegistrationPresenter extends BasePresenter {
      */
     public function startup()
     {
-        parent::startup();        
+        parent::startup();    
     }
     
     /**
@@ -250,7 +250,15 @@ class RegistrationPresenter extends BasePresenter {
                 ->addRule(Form::INTEGER, 'Telefonní číslo musí být číslo.')                
                 ->addRule(Form::MAX_LENGTH, 'Telefon: Maximální povolená délka telefonního čísla je 9 znaků.', 9)                
                 ->setAttribute('class', 'input_style_pinfo');                 
-                     
+               
+        $form->addText('ic', 'IČ:', 8, 8)                                
+                ->addRule(Form::MAX_LENGTH, 'IČ: Maximální povolená délka IČ je 8 znaků.', 8)                                
+                ->setAttribute('class', 'input_style_pinfo');         
+
+        $form->addText('dic', 'DIČ:', 10, 10)                                
+                ->addRule(Form::MAX_LENGTH, 'DIČ: Maximální povolená délka DIČ je 10 znaků.', 10)                                
+                ->setAttribute('class', 'input_style_pinfo');                 
+        
         $form->addText('referral', 'Pokud jste se o nás dozvědeli od známého, zadejte ', 50, 40)                
                 ->addRule(Form::MAX_LENGTH, 'Referenční číslo: Maximální povolená délka referral number je 4 znaků.', 4)                
                 ->setAttribute('class', 'input_style_pinfo');           
@@ -282,65 +290,96 @@ class RegistrationPresenter extends BasePresenter {
         $hashedPassword = sha1($data->newPassword . str_repeat($salt, 10));                
                         
         if ($data->newPassword == $data->newPassword1) {
-            // check if there is the user with filled Sponsoring Number
-            if ($data->referral != '') {
-                $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
-                if ($sponsor) {
-                    $usersSponsor = $sponsor->id;
+            // check if user filled in IC
+            if ($data->ic != '')
+            {                
+                $icIsOk = $this->extraMethods->validIc($data->ic);
+                // preg_match("/^[0-9 ]+$/", $data->ic);
+            } else {
+                $icIsOk = true;
+            }
+            // check if user filled in DIC
+            if ($data->dic != '')
+            {                
+                if (strlen($data->dic) >= 8) 
+                {
+                    $dicIsOk = preg_match("/^[0-9 ]+$/", $data->dic);
                 } else {
-                    $usersSponsor = -1;
+                    $dicIsOk = false;
+                }                
+            } else {
+                $dicIsOk = true;
+            }            
+            
+            // if IC has max 8 chars and contains only numbers
+            if ($icIsOk) {
+                // if DIC has max 10 chars and contains only numbers            
+                if ($dicIsOk) {
+                    // check if there is the user with filled Sponsoring Number
+                    if ($data->referral != '') {
+                        $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
+                        if ($sponsor) {
+                            $usersSponsor = $sponsor->id;
+                        } else {
+                            $usersSponsor = -1;
+                        }
+                    } else {
+                        $usersSponsor = 0;
+                    }         
+
+                    if ($usersSponsor >= 0) {
+                        $section->step2Completed = 1;            
+
+                        // store data to session
+                        $section->username = $data->username;
+                        $dummyStringPre = $this->extraMethods->generateDummyString(2);
+                        $dummyStringPost = $this->extraMethods->generateDummyString(3);                        
+                        $section->passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
+                        $section->hashedPassword = $hashedPassword;
+                        $section->salt = $salt;
+                        $section->subdomain = $data->subdomain;
+                        $section->usersSponsor = $usersSponsor;                                                                                         
+
+                        $doctorGroupFoundById = null;
+                        // doctor group chosen from list or set manually?
+                        if ($data->doctorGroup != 'xxx') {               
+                            // found group by id in 2D array
+                            foreach ($this->doctorGroupsList as $doctorGroup=>$value) {
+                                if (array_key_exists($data->doctorGroup, $this->doctorGroupsList[$doctorGroup])) {                        
+                                    $doctorGroupFoundById = $this->doctorGroupsList[$doctorGroup][$data->doctorGroup];
+                                }                   
+                            }                                        
+                        } else {
+                            $doctorGroupFoundById = $data->extraDoctorGroup;
+                        }                            
+
+                        $dataArray_users_data = array('', $data->name, $data->surname,
+                            $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
+                            $data->region, $data->phone, $doctorGroupFoundById, $data->ic, $data->dic);
+
+                        $section->dataArray_users_data = $dataArray_users_data;                                                        
+
+            //            if (!$this->isAjax()) {
+            //                $this->redirect('this');
+            //            } else {
+                        $this->invalidateControl('formRegUser');
+                        $this->invalidateControl('dispPass');
+                        $button->getForm()->setValues(array(), TRUE);
+                        $this->redirect('Registration:final');
+            //            }        
+                    } else {
+                        $this->flashMessage('Zadané referenční číslo je neplatné (nebyl použit správný formát nebo dané referenční číslo neexistuje)!', 'warning');
+                    }
+                } else {
+                    $this->flashMessage('Zadané DIČ je neplatné (nebyl použit správný formát - DIČ může obsahovat pouze číslice a musí mít 8 až 10 znakú)!', 'warning');
                 }
             } else {
-                $usersSponsor = 0;
-            }         
-            
-            if ($usersSponsor >= 0) {
-                $section->step2Completed = 1;            
-
-                // store data to session
-                $section->username = $data->username;
-                $dummyStringPre = $this->extraMethods->generateDummyString(2);
-                $dummyStringPost = $this->extraMethods->generateDummyString(3);                        
-                $section->passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
-                $section->hashedPassword = $hashedPassword;
-                $section->salt = $salt;
-                $section->subdomain = $data->subdomain;
-                $section->usersSponsor = $usersSponsor;                                             
-                                
-                $doctorGroupFoundById = null;
-                // doctor group chosen from list or set manually?
-                if ($data->doctorGroup != 'xxx') {               
-                    // found group by id in 2D array
-                    foreach ($this->doctorGroupsList as $doctorGroup=>$value) {
-                        if (array_key_exists($data->doctorGroup, $this->doctorGroupsList[$doctorGroup])) {                        
-                            $doctorGroupFoundById = $this->doctorGroupsList[$doctorGroup][$data->doctorGroup];
-                        }                   
-                    }                                        
-                } else {
-                    $doctorGroupFoundById = $data->extraDoctorGroup;
-                }                            
-                
-                $dataArray_users_data = array('', $data->name, $data->surname,
-                    $data->titleBefore, $data->titleAfter, $data->email, $data->street, $data->city, $data->zip,
-                    $data->region, $data->phone, $doctorGroupFoundById);
-
-                $section->dataArray_users_data = $dataArray_users_data;                                                        
-                
-    //            if (!$this->isAjax()) {
-    //                $this->redirect('this');
-    //            } else {
-                $this->invalidateControl('formRegUser');
-                $this->invalidateControl('dispPass');
-                $button->getForm()->setValues(array(), TRUE);
-                $this->redirect('Registration:final');
-    //            }        
-            } else {
-                $this->flashMessage('Zadané referenční číslo je neplatné (nebyl použit správný formát nebo dané referenční číslo neexistuje)!', 'warning');
-            }
+                $this->flashMessage('Zadané IČ je neplatné (nebyl použit správný formát)!', 'warning');
+            }                
         } else {                
             $this->flashMessage('Zadané heslo se nezhoduje se zopakovaným heslem!', 'warning');                         
         }       
-    }      
+    }        
     
     /**
      * Create form for order confirmation.

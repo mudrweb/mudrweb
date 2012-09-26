@@ -22,9 +22,16 @@ class ProfilePresenter extends AdminPresenter {
     private $city;
     private $zip;
     private $region;
+    
+    private $addressMatch;
+    private $streetInvoice;
+    private $cityInvoice;
+    private $zipInvoice;
+    
     private $phone;
     private $email;
-
+    private $ic;
+    private $dic;    
 
     /**
      * Check access and rights here only
@@ -49,10 +56,16 @@ class ProfilePresenter extends AdminPresenter {
             $this->doctorGroup = $userData->doctorGroup;
             $this->street = $userData->street;
             $this->city = $userData->city;
-            $this->zip = $userData->zip;
-            $this->region = $userData->region;
+            $this->zip = $userData->zip;            
+            $this->region = $userData->region;                           
+            $this->addressMatch = $userData->addressMatch;
+            $this->streetInvoice = $userData->streetInvoice;
+            $this->cityInvoice = $userData->cityInvoice;
+            $this->zipInvoice = $userData->zipInvoice;            
             $this->phone = $userData->phone;
             $this->email = $userData->email;
+            $this->ic = $userData->ic;
+            $this->dic = $userData->dic;
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load user data (AdminModule - profile presenter).', 404);
         }  
@@ -178,6 +191,30 @@ class ProfilePresenter extends AdminPresenter {
                 ->setDefaultValue($this->region)
                 ->setAttribute('class', 'input_style_select');                
         
+        $form->addCheckbox('addressMatch')
+                ->setValue($this->addressMatch)
+                ->setAttribute('class', 'addressMatch');          
+        
+        $form->addText('streetInvoice', 'Ulice a číslo', 50, 50)                
+                ->addRule(Form::FILLED, 'Musíte zadat ulici a číslo (faktura).')                
+                ->addRule(Form::MAX_LENGTH, 'Ulice a číslo (faktura): Maximální povolená délka ulice s číslem je 50 znaků.', 50)
+                ->setDefaultValue($this->streetInvoice)
+                ->setAttribute('class', 'input_style_pinfo_invoice');         
+        
+        $form->addText('cityInvoice', 'Město (faktura):', 50, 50)                
+                ->addRule(Form::FILLED, 'Musíte zadat město (faktura).')                
+                ->addRule(Form::MAX_LENGTH, 'Město (faktura): Maximální povolená délka města je 50 znaků.', 50)
+                ->setDefaultValue($this->cityInvoice)
+                ->setAttribute('class', 'input_style_pinfo_invoice');         
+        
+        $form->addText('zipInvoice', 'PSČ (faktura):', 5, 5)                
+                ->addRule(Form::FILLED, 'Musíte zadat PSČ (faktura).')  
+                ->addRule(Form::INTEGER, 'PSČ (faktura) musí být číslo.')
+                ->addRule(Form::MAX_LENGTH, 'PSČ (faktura): Minimální požadovaná délka PSČ je 5 znaků.', 5)                
+                ->addRule(Form::MAX_LENGTH, 'PSČ (faktura): Maximální povolená délka PSČ je 5 znaků.', 5)
+                ->setDefaultValue($this->zipInvoice)
+                ->setAttribute('class', 'input_style_pinfo_invoice');          
+        
         $form->addText('phone', 'Telefon:', 9, 9)                
                 ->addRule(Form::FILLED, 'Musíte zadat telefonní číslo.')                                                
                 ->addRule(Form::INTEGER, 'Telefonní číslo musí být číslo.')                                
@@ -191,6 +228,16 @@ class ProfilePresenter extends AdminPresenter {
                 ->addRule(Form::MAX_LENGTH, 'Kontaktní e-mail: Maximální povolená kontaktního e-mailu je 30 znaků.', 30)                                             
                 ->setDefaultValue($this->email)                
                 ->setAttribute('class', 'input_style_pinfo');             
+        
+        $form->addText('ic', 'IČ:', 8, 8)                                
+                ->addRule(Form::MAX_LENGTH, 'IČ: Maximální povolená délka IČ je 8 znaků.', 8)                                
+                ->setDefaultValue($this->ic)
+                ->setAttribute('class', 'input_style_pinfo');         
+
+        $form->addText('dic', 'DIČ:', 10, 10)                                
+                ->addRule(Form::MAX_LENGTH, 'DIČ: Maximální povolená délka DIČ je 10 znaků.', 10)                                
+                ->setDefaultValue($this->dic)
+                ->setAttribute('class', 'input_style_pinfo');         
         
         $form->addSubmit('submit', 'Změnit osobní údaje')
                 ->setAttribute('class', 'button')
@@ -253,7 +300,7 @@ class ProfilePresenter extends AdminPresenter {
     {   
         // get data from form
         $data = $button->form->getValues();                                   
-        
+
         $doctorGroupFoundById = null;
         // doctor group chosen from list or set manually?
         if ($data->doctorGroup != 'xxx') {
@@ -267,14 +314,53 @@ class ProfilePresenter extends AdminPresenter {
             $doctorGroupFoundById = $data->extraDoctorGroup;
         }
 
-        // prepare data for update
-        $dataArray = array(intval($data->userId), $data->name, $data->surname, 
-                     $data->titleBefore, $data->titleAfter, $doctorGroupFoundById, $data->street, $data->city, $data->zip,
-                     $data->region, $data->phone, $data->email);  
-        
-        // update user profile        
-        $this->db_users->changeUserProfileInfo($dataArray);
-        $this->flashMessage('Osobní údaje byly úspěšně změněny.', 'info');            
-        $this->redirect('this');             
+        // check if user filled in IC
+        if ($data->ic != '') {
+            $icIsOk = $this->extraMethods->validIc($data->ic);
+            // preg_match("/^[0-9 ]+$/", $data->ic);
+        } else {
+            $icIsOk = true;
+        }
+        // check if user filled in DIC
+        if ($data->dic != '') {
+            if (strlen($data->dic) >= 8) {
+                $dicIsOk = preg_match("/^[0-9 ]+$/", $data->dic);
+            } else {
+                $dicIsOk = false;
+            }
+        } else {
+            $dicIsOk = true;
+        }
+
+        // if IC has max 8 chars and contains only numbers
+        if ($icIsOk) {
+            // if DIC has max 10 chars and contains only numbers            
+            if ($dicIsOk) {        
+                // prepare data for update                
+                if ($data->addressMatch) {
+                    dump($data->street);
+                    $dataArray = array(intval($data->userId), $data->name, $data->surname, 
+                                $data->titleBefore, $data->titleAfter, $doctorGroupFoundById, 
+                                $data->street, $data->city, $data->zip, $data->region, 
+                                $data->phone, $data->email, $data->ic, $data->dic,
+                                $data->street, $data->city, $data->zip, $data->addressMatch);                      
+                } else {
+                    $dataArray = array(intval($data->userId), $data->name, $data->surname, 
+                                $data->titleBefore, $data->titleAfter, $doctorGroupFoundById, 
+                                $data->street, $data->city, $data->zip, $data->region, 
+                                $data->phone, $data->email, $data->ic, $data->dic,
+                                $data->streetInvoice, $data->cityInvoice, $data->zipInvoice, $data->addressMatch);  
+                }
+                
+                // update user profile        
+                $this->db_users->changeUserProfileInfo($dataArray);
+                $this->flashMessage('Osobní údaje byly úspěšně změněny.', 'info');            
+                $this->redirect('this');       
+            } else {
+                $this->flashMessage('Zadané DIČ je neplatné (nebyl použit správný formát - DIČ může obsahovat pouze číslice a musí mít 8 až 10 znakú)!', 'warning');
+            }
+        } else {
+            $this->flashMessage('Zadané IČ je neplatné (nebyl použit správný formát)!', 'warning');
+        }
     }   
 }
