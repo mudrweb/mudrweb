@@ -3,6 +3,7 @@
 namespace AdminModule;
 
 use Nette\Forms\Form;
+use Nette\Utils\Strings;
 use \AdminPresenter as AdminPresenter;
 
 /**
@@ -58,13 +59,20 @@ class AdminReferralsPresenter extends AdminPresenter {
                        }
                        
                        $numberOfReferrers = $this->db_users->getNumberOfUsersReferrers($user->id);
-                       $referralBonus = $numberOfReferrers * 20;
+                       $referralBonus = $numberOfReferrers * $this->referralBonusValuePerItem;
                        
-                       // array items
+                       $remainingReferralBonus = $referralBonus - $user->usedReferralBonus;
+                       
+                       // check id length and create default format
+                       $idLength = Strings::length($user->id);                       
+                       $idToBeDisplayed = Strings::padLeft($user->id, 5, '0');                                              
+                       
+                       // 20 array items
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
-                            $user->subdomain, $user->program, $dateOfRegistration, $user->accountStatus, 
+                            $user->usersSponsoringNumber, $user->program, $dateOfRegistration, $user->accountStatus, 
                             $dateOfActivation, $dateFrom, $dateTo, $users_data->titleBefore, $users_data->titleAfter,
-                            $users_data->street, $users_data->city, $users_data->zip, $users_data->ic, $referralBonus);                
+                            $users_data->street, $users_data->city, $users_data->zip, $users_data->ic, $referralBonus,
+                            $user->usedReferralBonus, $remainingReferralBonus, $idToBeDisplayed);                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminReferrals presenter).', 404);                    
                     }
@@ -74,5 +82,32 @@ class AdminReferralsPresenter extends AdminPresenter {
             throw new \Nette\Application\BadRequestException('Unable to load user profile (AdminModule - adminUsers presenter).', 404);
         }
         $this->template->users = $usersArray;          
-    }                  
+    }           
+    
+    /**
+     * Submit changes event handler (called by jQuery dataTable)
+     */
+    public function handleSubmitChanges() {
+        //get data
+        $id = $_REQUEST['id'];
+        $columnId = $_REQUEST['columnId'];
+        
+        //program type
+        if ($columnId == 11) {
+            $newValue = $_REQUEST['value'];
+            
+            $numberOfReferrers = $this->db_users->getNumberOfUsersReferrers(intval($id));
+            $referralBonus = $numberOfReferrers * $this->referralBonusValuePerItem;
+            if (($referralBonus - $newValue) > 0) {
+                $this->db_users->updateUsersUsedReferralBonus(intval($id), $newValue);
+            }
+        }                         
+        
+        if (!$this->isAjax()) {
+            $this->redirect('this');
+        } else {                            
+            $this->terminate();      
+            $this->invalidateControl('jEditable');
+        }        
+    }
 }

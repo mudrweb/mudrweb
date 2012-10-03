@@ -35,7 +35,9 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users` (
   `salt` VARCHAR(20) NULL ,
   `role` ENUM('uživatel','admin') NULL ,
   `usersSponsor` INT NULL ,
-  `usersSponsoringNumber` VARCHAR(4) NULL ,
+  `usersSponsorIsReseller` INT NULL ,
+  `usersSponsoringNumber` VARCHAR(5) NULL ,
+  `usedReferralBonus` INT NULL ,
   `superUserActive` TINYINT(1)  NULL ,
   `subdomain` VARCHAR(30) NULL ,
   `dateOfRegistration` DATETIME NULL ,
@@ -43,6 +45,8 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users` (
   `advertisement` VARCHAR(25) NULL ,
   `registrationToken` VARCHAR(45) NULL ,
   `dateOfActivation` DATETIME NULL ,
+  `paymentReceived` ENUM('yes','no') NULL ,
+  `dateOfPayment` DATE NULL ,
   `dateFrom` DATE NULL ,
   `dateTo` DATE NULL ,
   `passwordChanged` DATETIME NULL ,
@@ -101,7 +105,13 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users_data` (
   `city` VARCHAR(50) NULL ,
   `zip` VARCHAR(8) NULL ,
   `region` VARCHAR(30) NULL ,
+  `streetInvoice` VARCHAR(50) NULL ,
+  `cityInvoice` VARCHAR(50) NULL ,
+  `zipInvoice` VARCHAR(8) NULL ,
   `phone` INT NULL ,
+  `ic` VARCHAR(10) NULL ,
+  `dic` VARCHAR(10) NULL ,
+  `addressMatch` TINYINT(1)  NULL ,
   `lastChange` DATETIME NULL ,
   PRIMARY KEY (`id`, `idusers`) ,
   INDEX `fk_users_data_users1` (`idusers` ASC) ,
@@ -211,6 +221,23 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`guestBook` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `mudr`.`resellers`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mudr`.`resellers` ;
+
+CREATE  TABLE IF NOT EXISTS `mudr`.`resellers` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `fullName` VARCHAR(100) NULL ,
+  `fullAddress` TEXT NULL ,
+  `accountNumber` VARCHAR(45) NULL ,
+  `phone` INT NULL ,
+  `email` VARCHAR(50) NULL ,
+  `resellersSponsoringNumber` VARCHAR(5) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -266,11 +293,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (0, '', 'admin', 'e18290be7eb5f8be11bb4c9ed494f354f3915c4f', NULL, NULL, '@Xw^~Mr4L60o;E1n', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (1, 'active', 'xa', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1234', 0, 'xa', '2011-12-01 00:00:00', 'demo', 'zentiva', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2011-10-01', '2012-09-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (2, 'active', 'mskdfdj', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '5678', 0, 'tutururu', '2011-04-01 00:00:00', 'basic', 'no', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-01-17', '2012-10-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (3, 'active', 'tester', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1222', 0, 'tester11', '2011-12-17 00:00:00', 'premium', 'no', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-01-27', '2012-11-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (4, 'active', 'ester1', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1344', 0, 'mrkva321', '2011-12-01 00:00:00', 'demo', 'wallmark', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2012-02-04', '2012-12-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (0, '', 'admin', 'e18290be7eb5f8be11bb4c9ed494f354f3915c4f', NULL, NULL, '@Xw^~Mr4L60o;E1n', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (1, 'active', 'xa', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, NULL, '1234', NULL, 0, 'xa', '2011-12-01 00:00:00', 'demo', 'zentiva', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', '1971-00-00', 'yes', '2011-12-02', '2011-10-01', '2012-09-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (2, 'active', 'mskdfdj', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, NULL, '5678', NULL, 0, 'tutururu', '2011-04-01 00:00:00', 'basic', 'no', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', '1971-00-00', 'no', '1971-00-00', '2012-01-17', '2012-10-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (3, 'active', 'tester', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, NULL, '1222', NULL, 0, 'tester11', '2011-12-17 00:00:00', 'premium', 'no', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', '1971-00-00', 'no', '1971-00-00', '2012-01-27', '2012-11-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (4, 'active', 'ester1', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, NULL, '1344', NULL, 0, 'mrkva321', '2011-12-01 00:00:00', 'demo', 'wallmark', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', '1971-00-00', 'no', '1971-00-00', '2012-02-04', '2012-12-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
 
 COMMIT;
 
@@ -293,10 +320,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (1, 1, 'Martin', 'Test', 'Ing.', 'Phd.', '302 dětská kardiologie', 'muž', 'zvak.martin@gmail.com', 'Vachova 36/1', 'Brno', '60200', 'jihomoravsky', 737104133, NULL);
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (2, 2, 'Frantisek', 'Buksantl', 'MUDR.', 'Phd.', '302 dětská kardiologie', NULL, 'zvak.martin@gmail.com', 'Siroka', 'Praha', '66789', 'praha', 998000222, NULL);
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (3, 3, 'Jozef', 'Kukuricudus', 'Mgr.', 'Phd.', '309 sexuologie', NULL, 'zvak.martin@gmail.com', 'Dlha', 'Ostrava', '44556', 'moravskoslezsky', 222333444, NULL);
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (5, 4, 'Peter', 'Nagy', 'Bc.', 'Phd.', '208 lékařská genetika', NULL, 'zvak.martin@gmail.com', 'Uzka', 'Plzen', '12345', 'plzensky', 666555777, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `streetInvoice`, `cityInvoice`, `zipInvoice`, `phone`, `ic`, `dic`, `addressMatch`, `lastChange`) VALUES (1, 1, 'Martin', 'Test', 'Ing.', 'Phd.', '302 dětská kardiologie', 'muž', 'zvak.martin@gmail.com', 'Vachova 36/1', 'Brno', '60200', 'jihomoravsky', 'Vachova 36/1', 'Brno', '60200', 737104133, NULL, NULL, NULL, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `streetInvoice`, `cityInvoice`, `zipInvoice`, `phone`, `ic`, `dic`, `addressMatch`, `lastChange`) VALUES (2, 2, 'Frantisek', 'Buksantl', 'MUDR.', 'Phd.', '302 dětská kardiologie', NULL, 'zvak.martin@gmail.com', 'Siroka', 'Praha', '66789', 'praha', NULL, NULL, NULL, 998000222, NULL, NULL, NULL, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `streetInvoice`, `cityInvoice`, `zipInvoice`, `phone`, `ic`, `dic`, `addressMatch`, `lastChange`) VALUES (3, 3, 'Jozef', 'Kukuricudus', 'Mgr.', 'Phd.', '309 sexuologie', NULL, 'zvak.martin@gmail.com', 'Dlha', 'Ostrava', '44556', 'moravskoslezsky', NULL, NULL, NULL, 222333444, NULL, NULL, NULL, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `streetInvoice`, `cityInvoice`, `zipInvoice`, `phone`, `ic`, `dic`, `addressMatch`, `lastChange`) VALUES (5, 4, 'Peter', 'Nagy', 'Bc.', 'Phd.', '208 lékařská genetika', NULL, 'zvak.martin@gmail.com', 'Uzka', 'Plzen', '12345', 'plzensky', NULL, NULL, NULL, 666555777, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -337,5 +364,16 @@ COMMIT;
 START TRANSACTION;
 USE `mudr`;
 INSERT INTO `mudr`.`guestBook` (`id`, `idusers`, `guestBookUserName`, `guestBookPublished`, `lastChange`) VALUES (1, 1, 'Martin Test', 'no', NULL);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `mudr`.`resellers`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mudr`;
+INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (0, 'admin', 'hidden', '132456789', 123456, 'hidden', NULL);
+INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (1, 'Mgr. Martin Test', 'Muchova 1234/11, 62700 Brno', '132456', 7891011, 'aa@sdf.sl', 'sa34');
+INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (2, 'Ing. Peter Pok', 'Buchalova 23/4, 60200 Brno', '456789', 123456, 'test@sfs.sk', 'le12');
 
 COMMIT;

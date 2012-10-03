@@ -5,7 +5,7 @@
 {/block}
 {block content}
               
-    <h2>Správa bonusů</h2>    
+    <h2>Správa faktur</h2>    
 
 {snippet jEditable}
         <div class="js_table_wrapper ajax" style="width:860px;">
@@ -15,21 +15,23 @@
                         <th>ID</th>
                         <th>Jméno</th>
                         <th>Info</th>
-                        <th>Subd.</th>
+                        <th>RefČ</th>
                         <th>Program</th>
                         <th>Registrace</th>
                         <th>Status</th>                        
                         <th>Aktivace</th>
                         <th>Platnost od</th>
                         <th>Platnost do</th>                        
-                        <th>Ref. bonus</th>
+                        <th>RefB [%]</th>
+                        <th>Použ. refB [%]</th>
+                        <th>Zost. refB [%]</th>
                     </tr>
                 </thead>
                 <tbody align="center">
                     {if $users}
                         {foreach $users as $user}
                             <tr id="{$user[0]}">
-                                <td>#{$user[0]}</td>
+                                <td>{$user[19]}</td>
                                 <td>{$user[1] . ' ' . $user[2]}</td>
                                 <td>
                                     <table>
@@ -66,7 +68,7 @@
                                     </table>
                                 </td>
                                 <td>
-                                    <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
+                                    {$user[3]}
                                 </td>
                                 <td>{$user[4]}</td>                                
                                 <td>{$user[5]}</td>                                
@@ -83,7 +85,9 @@
                                 <td>{$user[7]}</td>                                    
                                 <td>{$user[8]}</td>                                                                
                                 <td>{$user[9]}</td>   
-                                <td>{$user[16]} %</td>
+                                <td>{$user[16]}</td>
+                                <td>{$user[17]}</td>
+                                <td>{$user[18]} </td>
                             </tr>
                         {/foreach}  
                     {/if}
@@ -123,6 +127,8 @@
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] }                
                 ],
 		"oTableTools": {
@@ -139,7 +145,7 @@
 			]                        
 		}                
             }).makeEditable({
-                sUpdateURL: "/admin/admin-users?do=submitChanges",
+                sUpdateURL: "/admin/admin-referrals?do=submitChanges",
                 "aoColumns": [ 
                     null,
                     null,
@@ -151,6 +157,14 @@
                     null,
                     null,
                     null,                    
+                    null,
+                    {        
+                        cssclass: 'advert',                        
+                        maxlength: 4,   
+                        indicator : 'Saving ...',     
+                        cancel    : 'Cancel',
+                        submit    : 'OK'                   
+                    },
                     null
                 ]
         });

@@ -1,3 +1,6 @@
+{block #title}
+    Hledat lékaře |
+{/block}
 {block content}
        
     <div id="search">    
@@ -102,17 +105,17 @@
                         {$stringToSearchFor}    
                     </span>
                     <img src="../images/main/man_search_result.png"  alt="MUDRweb.cz - Místo pro Váš web" width="190" />
-                </div>
+                </div>                
                 <div class="grid_search_r"> 
                 {foreach $data as $dat}
                     <div class="search_results">
                         <div class="search_result">
-                            <span class="credents">{$dat[0]} {$dat[1]} {$dat[2]}, {$dat[3]}</span> - <a href='http://{$dat[9]}.mudrweb.cz' target="_blank">{$dat[9]}.mudrweb.cz</a>
-                            <br />
-                            {if $dat[7] == 'Hlavní město Praha'}
+                            <span class="credents">{$dat[0]} {$dat[1]} {$dat[2]}, {$dat[3]}</span> - <a href='http://{$dat[10]}.mudrweb.cz' target="_blank">{$dat[10]}.mudrweb.cz</a>
+                            <br />                            
+                            {if $dat[8] == 'Hlavní město Praha'}
                                 {$dat[5]}, {$dat[6]}, {$dat[7]}, Hlavní město Praha
-                            {elseif $dat[7] == 'Vysočina'}
-                                {$dat[5]}, {$dat[6]}, {$dat[7]}, Kraj {$dat[7]}
+                            {elseif $dat[8] == 'Vysočina'}
+                                {$dat[5]}, {$dat[6]}, {$dat[7]}, Kraj {$dat[8]}
                             {else}
                                 {$dat[5]}, {$dat[6]}, {$dat[7]}, {$dat[8]} kraj
                             {/if}

@@ -3,6 +3,7 @@
 namespace AdminModule;
 
 use Nette\Forms\Form;
+use Nette\Utils\Strings;
 use \AdminPresenter as AdminPresenter;
 
 /**
@@ -28,8 +29,13 @@ class AdminLayoutsPresenter extends AdminPresenter {
         $layoutsArray = array();
         if ($layouts) {
             foreach ($layouts as $layout) {
+                
+                // check id length and create default format
+                $idLength = Strings::length($layout->id);
+                $idToBeDisplayed = Strings::padLeft($layout->id, 5, '0');
+
                 $layoutsArray[] = array(intval($layout->id), $layout->layout, $layout->layout_group,
-                    $layout->layout_desc);
+                    $layout->layout_desc, $idToBeDisplayed);
             }
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load layouts (AdminModule - adminLayouts presenter).', 404);
@@ -58,7 +64,7 @@ class AdminLayoutsPresenter extends AdminPresenter {
                 ->setDefaultValue('all')
                 ->setAttribute('class', 'input_style_layoutName');         
 
-        $form->addTextArea('layoutDesc', 'Popis vzhledu', 52, 40)                
+        $form->addTextArea('layoutDesc', 'Popis vzhledu:', 52, 40)                
                 ->addRule(Form::FILLED, 'Musíte zadat popis vzhledu.')                                
                 ->addRule(Form::MAX_LENGTH, 'Popis stránky: Maximální povolená délka popisu vzhledu je 130 znaků.', 130)                
                 ->setAttribute('class', 'textarea_layout_desc');                

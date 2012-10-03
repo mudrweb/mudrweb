@@ -278,15 +278,13 @@ class DefaultPresenter extends AdminPresenter {
                 $this->layoutDesc = $layoutData->layout_desc;
             }
         }
+        
         $layout = $layoutFromSelect . '.jpg';        
         $this->layout = $layout;
-//        $this->layoutDesc = $layoutData->layout_desc;
-        \Nette\Diagnostics\Debugger::firelog($this->layout);
         if (!$this->isAjax()) {                        
             $this->redirect('this');
         } else {            
             $this->invalidateControl('layoutPreview');
-//            $this->invalidateControl('form');            
         }                
     }      
 }

@@ -308,6 +308,17 @@ a.user_list:visited {text-decoration: underline;}
 a.user_list:active {text-decoration: underline;}
 a.user_list:hover {text-decoration: underline; color: black;}
 
+/* resellers - admin panel */
+.input_style_resellerName { font-size: 90%; font-family: arial; padding: 3px; height: 20px; width: 370px; border: 1px solid #000000;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 8px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 8px; box-shadow: rgba(200,200,200,1) 0 1px 8px;    
+}
+.textarea_resellerAddress { overflow: auto; font-size: 90%; font-family: arial; padding: 4px; height: 67px; max-height: 67px; width: 368px; border: 1px solid #000000; max-width: 368px;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 1px 10px; -webkit-box-shadow: rgba(200,200,200,1) 0 1px 10px; box-shadow: rgba(200,200,200,1) 0 1px 10px;    
+}
+.td_input_addReseller { padding-left: 129px; padding-bottom: 15px; padding-top: 5px; }
+#editArea { display: none; }
+#editOnOff { cursor: pointer; padding-bottom: 5px; }
+
 /* layout list - admin panel */
 .required label.error { background: url("../images/unchecked.gif") no-repeat scroll 0 0 transparent; color: #EA5200; font-weight: bold; padding-bottom: 2px; padding-left: 16px; padding-right: 15px; }
 .required { font-size: 95%; padding-right: 8px; } 
@@ -411,6 +422,7 @@ a.isNotPublished { background-color: transparent; color: #000; font-weight: bold
 .icon-ui-key { background-position: -112px -128px; }
 .icon-ui-black { background-image: url('images/ui-icons_222222_256x240.png'); float: left; margin: 2px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: block; overflow: hidden; }
 .icon-ui-black-user { background-position: -144px -96px; margin: 0px 2px; }
+.icon-ui-black-gear { background-position: -192px -112px; margin: 0px 2px; }
 .icon-ui-red { background-image: url('images/ui-icons_cd0a0a_256x240.png'); float: none; margin: -3px 2px; height: 16px; width: 16px; background-repeat: no-repeat; display: inline-block; overflow: hidden; }
 .icon-ui-red-alert { background-position: 0 -144px; }
 .icon-ui-red-close { background-position: -80px -128px; }
@@ -493,6 +505,12 @@ a.isNotPublished { background-color: transparent; color: #000; font-weight: bold
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 2px 6px; -webkit-box-shadow: rgba(200,200,200,1) 0 2px 6px; box-shadow: rgba(200,200,200,1) 0 2px 6px;
 }
 .advert button:hover { border-color: #FFF #AFAFB4 #AFAFB4 #FFF; color: #333; }
+
+.advertStats { width: 85px; font-size: 95%; }
+.advertStats button { font-size: 85%; font-family: arial; background-color: #F3F3F3; border: 2px solid #D1D1D1; color: #767A7C; cursor: pointer; display: inline; font-weight: bold; margin: 0px; padding: 2px 2px;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 2px 6px; -webkit-box-shadow: rgba(200,200,200,1) 0 2px 6px; box-shadow: rgba(200,200,200,1) 0 2px 6px;
+}
+.advertStats button:hover { border-color: #FFF #AFAFB4 #AFAFB4 #FFF; color: #333; }
 
 /**
 * validation

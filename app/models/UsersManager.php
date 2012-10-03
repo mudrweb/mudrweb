@@ -193,6 +193,7 @@ class UsersManager extends Nette\Object {
                'salt' => $dataArray[2],
                'role' => 'uživatel',   
                'usersSponsor' => $dataArray[7],
+               'usersSponsorIsReseller' => $dataArray[9],
                'usersSponsoringNumber' => $dataArray[6],
                'superUserActive' => 0,
                'subdomain' => $dataArray[3],
@@ -200,7 +201,10 @@ class UsersManager extends Nette\Object {
                'program' => $dataArray[4],
                'advertisement' => 'no',
                'registrationToken' => $dataArray[5],
+               'dateOfActivation' => '1971-00-00 00:00:00',
                'passwordResent' => '1971-00-00 00:00:00',
+               'paymentReceived' => 'no',
+               'dateOfPayment' => '1971-00-00', 
                'maintenanceMode' => 'off',
                'subdomainStatus' => 'N/A',
                'realSubdomainStatus' => 'N/A',
@@ -397,6 +401,36 @@ class UsersManager extends Nette\Object {
                     Wrong input. method: updateProgramType($id, $program)', 500);
         }
     }       
+    
+    /**
+     * Update users used referral bonus value.
+     * 
+     * @param int $id
+     * @param string $usedReferralBonusValue
+     */    
+    public function updateUsersUsedReferralBonus($id, $usedReferralBonusValue) {
+        if (is_numeric($id) && is_numeric($usedReferralBonusValue)) {            
+            $this->database->exec('UPDATE users SET usedReferralBonus=? WHERE id=?', $usedReferralBonusValue, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update users used referral bonus value.
+                    Wrong input. method: updateUsersUsedReferralBonus($id, $usedReferralBonusValue)', 500);
+        }
+    }          
+    
+    /**
+     * Update payment received status.
+     * 
+     * @param int $id
+     * @param string $status 
+     */    
+    public function updatePaymentStatus($id, $status, $dateOfPayment) {
+        if (is_numeric($id) && is_string($status) && is_string($dateOfPayment)) {            
+            $this->database->exec('UPDATE users SET paymentReceived=?, dateOfPayment=? WHERE id=?', $status, $dateOfPayment, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update user payment status.
+                    Wrong input. method: updatePaymentStatus($id, $status, $dateOfPayment)', 500);
+        }
+    }        
     
     /**************************** UsersData ***********************************/           
     
@@ -729,11 +763,148 @@ class UsersManager extends Nette\Object {
      */    
     public function getNumberOfUsersReferrers($id) {
         if (is_numeric($id)) {                      
-            $results = $this->database->exec('SELECT COUNT(id) FROM `users` WHERE usersSponsor=? GROUP BY id', $id);                        
+            $results = $this->database->exec('SELECT COUNT(id) FROM `users` WHERE (usersSponsor=? AND paymentReceived="yes") GROUP BY id', $id);                        
             return $results;
         } else {
             throw new \Nette\Application\ToolException('Unable to get number of referrers for current user.
                     Wrong input. method: getNumberOfUsersReferrers($id)', 500);
         }
     }
+    
+    /**************************** Resellers **********************************/    
+    
+    /**
+     * Get reseller by $resellersSponsoringNumber.
+     * 
+     * @param string $resellersSponsoringNumber
+     * @return reseller
+     * @throws \Nette\Application\ToolException 
+     */
+    public function getResellerBySponsoringNumber($resellersSponsoringNumber) {
+        if ($resellersSponsoringNumber) {
+            $reseller = $this->database->table('resellers')
+                    ->where('resellersSponsoringNumber', $resellersSponsoringNumber)->fetch();
+            return $reseller;
+        } else {
+            throw new \Nette\Application\ToolException('Unable to get Reseller.
+                    Wrong input. method: getResellerBySponsoringNumber($resellersSponsoringNumber)', 500);
+        }
+    }      
+    
+    /**
+     * Get all resellers from DB.
+     * 
+     * @return resellers
+     */
+    public function getResellers() {
+        return $this->database->table('resellers');
+    }  
+    
+    /**
+     * Add new reseller.
+     * 
+     * @param data $dataArray 
+     */
+    public function addReseller($dataArray) {
+        if (isset($dataArray)) {              
+            $this->database->exec('INSERT INTO resellers', array(               
+               'fullName' => $dataArray[0],
+               'fullAddress' => $dataArray[1],
+               'accountNumber' => $dataArray[2],
+               'phone' => $dataArray[3],
+               'email' => $dataArray[4],                
+               'resellersSponsoringNumber' => $dataArray[5]                                
+            ));                 
+        } else {            
+            throw new \Nette\Application\ToolException('Unable to add new reseller.
+                    Wrong input. method: addReseller($dataArray)', 500);
+        }
+    }      
+    
+    /**
+     * Delete reseller.
+     */
+    public function deleteReseller($id) {
+        if (is_numeric($id)) {        
+            $this->database->table('resellers')->find($id)->delete();                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to delete reseller.
+                    Wrong input. method: deleteReseller($id)', 500);  
+        }              
+    }      
+    
+    /**
+     * Update reseller name.
+     * 
+     * @param int $id
+     * @param string $name 
+     */    
+    public function updateResellerName($id, $name) {
+        if (is_numeric($id) && is_string($name)) {            
+            $this->database->exec('UPDATE resellers SET fullName=? WHERE id=?', $name, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update reseller name.
+                    Wrong input. method: updateResellerName($id, $name)', 500);
+        }
+    }     
+    
+    /**
+     * Update reseller address.
+     * 
+     * @param int $id
+     * @param string $address 
+     */    
+    public function updateResellerAddress($id, $address) {
+        if (is_numeric($id) && is_string($address)) {            
+            $this->database->exec('UPDATE resellers SET fullAddress=? WHERE id=?', $address, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update reseller address.
+                    Wrong input. method: updateResellerAddress($id, $address)', 500);
+        }
+    }     
+    
+    /**
+     * Update reseller account number.
+     * 
+     * @param int $id
+     * @param string $accountNumber 
+     */    
+    public function updateResellerAccountNumber($id, $accountNumber) {
+        if (is_numeric($id) && is_string($accountNumber)) {            
+            $this->database->exec('UPDATE resellers SET accountNumber=? WHERE id=?', $accountNumber, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update reseller account number.
+                    Wrong input. method: updateResellerAccountNumber($id, $accountNumber)', 500);
+        }
+    }         
+    
+    /**
+     * Update reseller phone.
+     * 
+     * @param int $id
+     * @param string $phone 
+     */    
+    public function updateResellerPhone($id, $phone) {
+        if (is_numeric($id) && is_string($phone)) {            
+            $this->database->exec('UPDATE resellers SET phone=? WHERE id=?', $phone, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update reseller phone.
+                    Wrong input. method: updateResellerPhone($id, $phone)', 500);
+        }
+    }       
+    
+    /**
+     * Update reseller email.
+     * 
+     * @param int $id
+     * @param string $email
+     */    
+    public function updateResellerEmail($id, $email) {
+        if (is_numeric($id) && is_string($email)) {            
+            $this->database->exec('UPDATE resellers SET email=? WHERE id=?', $email, $id);                        
+        } else {
+            throw new \Nette\Application\ToolException('Unable to update reseller email.
+                    Wrong input. method: updateResellerEmail($id, $email)', 500);
+        }
+    }       
 }

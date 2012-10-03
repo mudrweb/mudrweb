@@ -1,36 +1,60 @@
+{block head}
+    <link rel="stylesheet" href="../../css/TableTools.css" type="text/css">                
+    <script type="text/javascript" src="../../js/TableTools.min.js"></script>
+    <script type="text/javascript" src="../../js/ZeroClipboard.js"></script>        
+{/block}
 {block content}
               
-    <h2>Správa vzhledů</h2>    
+    <h2>Správa obchodních zástupců</h2>   
 
+<div id="editOnOff">
+    <span class="icon-ui-black icon-ui-black-gear"></span>Zobrazit panel pro přidávání
+</div>    
+    
+<div id="editArea">
 {snippet formLayout}
 {form layoutForm}   
     
+         <h2></h2>
          <table cellspacing="0">          
-                <tr style="height: 5px;"><td></td></tr>
+                <tr style="height: 5px;"><td></td></tr>                          
                 <tr>
-                    <td class="td_input_label_pinfo">{label layoutName /} &nbsp</td>                    
-                    <td class="td_input_settings_regUserPanel">{input layoutName}</td>                                                      
+                    <td class="td_input_label_pinfo">{label resellerName /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input resellerName}</td>                                                      
                 </tr>             
                 <tr>
-                    <td class="td_input_label_pinfo">{label layoutGroup /} &nbsp</td>                    
-                    <td class="td_input_settings_regUserPanel">{input layoutGroup}</td>                                                      
+                    <td class="td_input_label_pinfo">{label resellerAddress /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input resellerAddress}</td>                                                      
+                </tr>                  
+                <tr>
+                    <td class="td_input_label_pinfo">{label resellerAccount /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input resellerAccount}</td>                                                      
                 </tr>   
                 <tr>
-                    <td class="td_input_label_pinfo">{label layoutDesc /} &nbsp</td>                    
-                    <td class="td_input_settings_regUserPanel">{input layoutDesc}</td>                                                      
+                    <td class="td_input_label_pinfo">{label resellerPhone /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input resellerPhone}</td>                                                      
+                </tr>   
+                <tr>
+                    <td class="td_input_label_pinfo">{label resellerEmail /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input resellerEmail}</td>                                                      
+                </tr>       
+                <tr>
+                    <td class="td_input_label_pinfo">{label resellerSponsoringNumber /} &nbsp</td>                    
+                    <td class="td_input_settings_regUserPanel">{input resellerSponsoringNumber}</td>                                                      
                 </tr>                   
                 <tr style="height: 15px;"><td></td></tr>
          </table>             
          <h2></h2>         
          <table cellspacing="0">                
                 <tr>                            
-                    <td class="td_input_addLayout">{input submit} &nbsp&nbsp </td> 
+                    <td class="td_input_addReseller">{input submit} &nbsp&nbsp </td> 
                 </tr>
          </table>
          <h2></h2>    
          
 {/form layoutForm}   
 {/snippet}  
+</div>    
          
 {snippet jEditable}
         <div class="js_table_wrapper ajax" style="width:860px;">
@@ -38,22 +62,28 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Vzhled</th>
-                        <th>Skupina</th>
-                        <th>Popis vzhledu</th>
+                        <th>Jméno</th>
+                        <th>Adresa</th>
+                        <th>Číslo účtu</th>
+                        <th>Telefon</th>
+                        <th>E-mail</th>
+                        <th>Ref. číslo</th>                        
                         <th>Akce</th>
                     </tr>
                 </thead>
                 <tbody align="center">
-                    {if $layouts}
-                        {foreach $layouts as $layout}
-                            <tr id="{$layout[0]}">
-                                <td>{$layout[0]}</td>
-                                <td>{$layout[1]}</td>
-                                <td>{$layout[2]}</td>                                
-                                <td>{$layout[3]}</td>  
+                    {if $resellers}
+                        {foreach $resellers as $reseller}
+                            <tr id="{$reseller[0]}">
+                                <td>{$reseller[7]}</td>
+                                <td>{$reseller[1]}</td>
+                                <td>{!$reseller[3]}</td>                                
+                                <td>{$reseller[2]}</td>  
+                                <td>{$reseller[4]}</td>  
+                                <td>{$reseller[5]}</td>  
+                                <td>{$reseller[6]}</td>  
                                 <td>                                    
-                                    <a href="{link deleteLayout! id => $layout[0]}" class="icon-ui-red icon-ui-red-close" title="Smazat vzhled">&nbsp;</a>                                    
+                                    <a href="{link deleteReseller! id => $reseller[0]}" class="icon-ui-red icon-ui-red-close" title="Smazat zástupce">&nbsp;</a>                                    
                                 </td>                                
                             </tr>
                         {/foreach}  
@@ -69,6 +99,7 @@
                 bJQueryUI: true,
                 "iDisplayLength" : 50,                
                 "sPaginationType": "full_numbers",
+                "sDom": 'T<"H"lf>rt<"F"ip>',
                 "oLanguage": {
                         "sLengthMenu": "Zobrazit _MENU_ záznamů na stránku",
                         "sZeroRecords": "Nebyly nalezeny žádné záznamy",
@@ -84,37 +115,69 @@
                         }                        
                 },                
                 "aoColumns": [
-                    { "asSorting": [ "desc", "asc" ], sWidth: '6%'},
-                    { "asSorting": [ "desc", "asc" ], sWidth: '30%' },                    
-                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' },
+                    { "asSorting": [ "desc", "asc" ] },
+                    { "asSorting": [ "desc", "asc" ] },                    
+                    { "asSorting": [ "desc", "asc" ] },
                     { "asSorting": [ "desc", "asc" ] },                                     
+                    { "asSorting": [ "desc", "asc" ] },                                     
+                    { "asSorting": [ "desc", "asc" ] },                                                         
+                    { "asSorting": [ "desc", "asc" ] },                                                                             
                     { "asSorting": false },
-                ]
+                ],
+		"oTableTools": {
+                        "sSwfPath": "../../js/copy_cvs_xls_pdf.swf",
+			"aButtons": [
+				"copy",
+				"csv",
+				"xls",
+				{
+					"sExtends": "pdf",
+					"sPdfOrientation": "landscape"					
+				},
+                                "print"				
+			]
+                }
             }).makeEditable({
-                sUpdateURL: "/admin/admin-layouts?do=submitChanges",
+                sUpdateURL: "/admin/admin-resellers?do=submitChanges",
                 "aoColumns": [ 
                     null,
                     {                
-                        maxlength : '45',                         
+                        maxlength : '100',                         
                         cssclass  : "required",                                        
                         indicator : 'Saving ...',     
                         cancel    : 'Cancel',
                         submit    : 'OK'                   
                     },
                     {                           
-                        maxlength : '30',   
+                        maxlength : '250',   
+                        cssclass  : "required",                                        
+                        type      : 'textarea',
+                        indicator : 'Saving ...',     
+                        cancel    : 'Cancel',
+                        submit    : 'OK'                   
+                    },
+                    {                           
+                        maxlength : '45',   
                         cssclass  : "required",                                        
                         indicator : 'Saving ...',     
                         cancel    : 'Cancel',
                         submit    : 'OK'                   
                     },
                     {                           
-                        maxlength : '130',   
+                        maxlength : '11',   
                         cssclass  : "required",                                        
                         indicator : 'Saving ...',     
                         cancel    : 'Cancel',
                         submit    : 'OK'                   
                     },
+                    {                           
+                        maxlength : '50',   
+                        cssclass  : "required",                                        
+                        indicator : 'Saving ...',     
+                        cancel    : 'Cancel',
+                        submit    : 'OK'                   
+                    },                    
+                    null,        
                     null,
                 ]
         });
@@ -122,5 +185,28 @@
     </script>
     
 {/snippet}    
+
+    <script type="text/javascript">        
+        jQuery(document).ready(function() { CKEDITOR.replace('frmlayoutForm-resellerAddress', { toolbarStartupExpanded : false, width : 378, height : 100, extraPlugins : 'autogrow', autoGrow_minHeight : 100 }); });       
+        var clicked = 0;
+        $("#editOnOff").live("click", function () {                                                                     
+        if (clicked == 0) {        
+            $("#editArea").animate({ opacity: "show"}, 800);
+            clicked = 1;
+            $("#editOnOff").html('<span class="icon-ui-black icon-ui-black-gear"></span>Skrýt panel pro přidávání');
+        } else {
+            $("#editArea").hide();
+            clicked = 0;
+            $("#editOnOff").html('<span class="icon-ui-black icon-ui-black-gear"></span>Zobrazit panel pro přidávání');
+        }
+        });   
+      
+        $('form').submit(function() {
+            if ($('#frmlayoutForm-resellerAddress').val() == "") {
+                $('#frmlayoutForm-resellerAddress_message').css('display', 'inline');
+                $('#cke_frmlayoutForm-resellerAddress').css('border', 'solid 1px red');
+            }
+        });
+    </script>    
 
 {/block}

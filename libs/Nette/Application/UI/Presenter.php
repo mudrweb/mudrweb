@@ -160,7 +160,6 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 	/**
-	 * @param  Nette\Application\Request
 	 * @return Nette\Application\IResponse
 	 */
 	public function run(Application\Request $request)
@@ -266,7 +265,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 	/**
-	 * @param  Nette\Application\IResponse  optional catched exception
+	 * @param  Nette\Application\IResponse
 	 * @return void
 	 */
 	protected function shutdown($response)
@@ -537,7 +536,8 @@ abstract class Presenter extends Control implements Application\IPresenter
 		$dir = dirname($this->getReflection()->getFileName());
 		$dir = is_dir("$dir/templates") ? $dir : dirname($dir);
 		return array(
-			"$dir/templates/$presenter/$this->lang/$this->view.latte",                    
+                        "$dir/templates/$presenter/$this->lang/$this->view.latte",                    
+//			"$dir/templates/$presenter/$this->view.latte",
 //			"$dir/templates/$presenter.$this->view.latte",
 //			"$dir/templates/$presenter/$this->view.phtml",
 //			"$dir/templates/$presenter.$this->view.phtml",
@@ -616,7 +616,6 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 	/**
 	 * Sends response and terminates presenter.
-	 * @param  Nette\Application\IResponse
 	 * @return void
 	 * @throws Nette\Application\AbortException
 	 */
@@ -1054,7 +1053,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 				continue;
 			}
 
-			$def = $param->isDefaultValueAvailable() ? $param->getDefaultValue() : NULL;
+			$def = $param->isDefaultValueAvailable() && $param->isOptional() ? $param->getDefaultValue() : NULL; // see PHP bug #62988
 			$type = $param->isArray() ? 'array' : gettype($def);
 			if (!PresenterComponentReflection::convertType($args[$name], $type)) {
 				throw new InvalidLinkException("Invalid value for parameter '$name' in method $class::$method(), expected " . ($type === 'NULL' ? 'scalar' : $type) . ".");
@@ -1075,11 +1074,10 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 	/**
 	 * Invalid link handler. Descendant can override this method to change default behaviour.
-	 * @param  InvalidLinkException
 	 * @return string
 	 * @throws InvalidLinkException
 	 */
-	protected function handleInvalidLink($e)
+	protected function handleInvalidLink(InvalidLinkException $e)
 	{
 		if ($this->invalidLinkMode === self::INVALID_LINK_SILENT) {
 			return '#';

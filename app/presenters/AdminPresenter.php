@@ -45,6 +45,9 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
     protected $doctorGroupsList;
  
     protected $logger;
+    
+    // % value gained for each referrer
+    protected $referralBonusValuePerItem;
 
     /**
      * Startup settings.
@@ -68,6 +71,9 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
         // define basic layout groups
         $this->layout_groups = $this->context->container->parameters['globalSettings']['layoutGroups'];
         sort($this->layout_groups);
+        
+        // % value gained for each referrer
+        $this->referralBonusValuePerItem = $this->context->container->parameters['globalSettings']['referralBonusValuePerItem'];
         
         // ********************************************************************
         // Website settings end
@@ -265,7 +271,7 @@ abstract class AdminPresenter extends Nette\Application\UI\Presenter
                 $nav->setCurrent($sec);
             }            
             
-            $sec = $nav->add("Správa bonusů", $this->link(":Admin:AdminReferrals:"), 'no');
+            $sec = $nav->add("Správa faktur", $this->link(":Admin:AdminReferrals:"), 'no');
             if ($this->name === 'Admin:AdminReferrals') {
                 $nav->setCurrent($sec);
             }                  

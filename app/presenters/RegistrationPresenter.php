@@ -316,12 +316,28 @@ class RegistrationPresenter extends BasePresenter {
                 // if DIC has max 10 chars and contains only numbers            
                 if ($dicIsOk) {
                     // check if there is the user with filled Sponsoring Number
+                    $usersSponsor = 0;
+                    $usersSponsorIsReseller = false;
                     if ($data->referral != '') {
+                        // does user with this ref number exist?
                         $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
+                        // yes
                         if ($sponsor) {
                             $usersSponsor = $sponsor->id;
-                        } else {
-                            $usersSponsor = -1;
+                        } 
+                        // no 
+                        else {
+                            // does reseller with this ref number exist?
+                            $reseller = $this->db_users->getResellerBySponsoringNumber($data->referral);
+                            // yes
+                            if ($reseller) {
+                                $usersSponsor = $reseller->id;
+                                $usersSponsorIsReseller = true;
+                            } 
+                            // no
+                            else {
+                                $usersSponsor = -1;
+                            }
                         }
                     } else {
                         $usersSponsor = 0;
@@ -338,7 +354,8 @@ class RegistrationPresenter extends BasePresenter {
                         $section->hashedPassword = $hashedPassword;
                         $section->salt = $salt;
                         $section->subdomain = $data->subdomain;
-                        $section->usersSponsor = $usersSponsor;                                                                                         
+                        $section->usersSponsor = $usersSponsor; 
+                        $section->usersSponsorIsReseller = $usersSponsorIsReseller;
 
                         $doctorGroupFoundById = null;
                         // doctor group chosen from list or set manually?
@@ -429,14 +446,25 @@ class RegistrationPresenter extends BasePresenter {
             $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
         }   
         
+        // no ref number entered in reg process
         if ($section->usersSponsor == 0) {
             $usersSponsor = NULL;
+            $usersSponsorIsResellerWithId = NULL;
         } else {
-            $usersSponsor = $section->usersSponsor;
-        }
+            // users sponsor is reseller
+            if ($section->usersSponsorIsReseller) {
+                $usersSponsorIsResellerWithId = $section->usersSponsor;
+                $usersSponsor = NULL;
+            } 
+            // users sponsor is another user
+            else {
+                $usersSponsorIsResellerWithId = NULL;
+                $usersSponsor = $section->usersSponsor;
+            }
+        }       
         $dataArray_user = array($section->username, $section->hashedPassword, $section->salt, 
             $section->subdomain, $section->program, $regToken, $sponsoringNumber, $usersSponsor,
-            $section->passwordTemp);
+            $section->passwordTemp, $usersSponsorIsResellerWithId);
         $this->db_users->addUser($dataArray_user);
 
         //2. users_data
@@ -447,12 +475,21 @@ class RegistrationPresenter extends BasePresenter {
         
         //3. users_websiteData        
         // actual user's data
-        $user_data = $this->db_users->getUsersDataById(intval($user->id));        
-        $dataArray_users_websiteData = array($user->id, 'layout_A1', 'all',
-            $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ', ' . $user_data->titleAfter, 
-            'Ambulance', 
-            $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ', ' . $user_data->titleAfter . ' - ' . 'Ambulance',
-            '', '');
+        $user_data = $this->db_users->getUsersDataById(intval($user->id));    
+        // user defined title after
+        if ($user_data->titleAfter != '') {
+            $dataArray_users_websiteData = array($user->id, 'layout_A1', 'all',
+                $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ', ' . $user_data->titleAfter, 
+                'Ambulance', 
+                $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ', ' . $user_data->titleAfter . ' - ' . 'Ambulance',
+                '', '');
+        } else {
+            $dataArray_users_websiteData = array($user->id, 'layout_A1', 'all',
+                $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname, 
+                'Ambulance', 
+                $user_data->titleBefore . ' ' . $user_data->name . ' ' . $user_data->surname . ' - ' . 'Ambulance',
+                '', '');            
+        }
         $this->db_users->addUserWebsiteData($dataArray_users_websiteData);
 
         //4. menuItems set

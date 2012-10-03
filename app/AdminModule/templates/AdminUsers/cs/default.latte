@@ -1,7 +1,9 @@
 {block head}
     <link rel="stylesheet" href="../../css/TableTools.css" type="text/css">                
     <script type="text/javascript" src="../../js/TableTools.min.js"></script>
-    <script type="text/javascript" src="../../js/ZeroClipboard.js"></script>        
+    <script type="text/javascript" src="../../js/ZeroClipboard.js"></script>    
+    <link rel="stylesheet" href="../css/jquery.qtip.css" type="text/css">
+    <script type="text/javascript" src="../js/jquery.qtip.js"></script>    
 {/block}
 {block content}
               
@@ -20,18 +22,19 @@
                         <th>Status</th>                        
                         <th>Aktivace</th>
                         <th>Platnost od</th>
-                        <th>Platnost do</th>                        
+                        <th>Platnost do</th>    
                         <th>Real Subd.</th>
                         <th>Údržba</th>
                         <th>Reklama</th>
-                        <th>FTP passw</th>
+                        <th>FTP pss</th>
+                        <th>Zapl.</th>    
                     </tr>
                 </thead>
                 <tbody align="center">
                     {if $users}
                         {foreach $users as $user}
                             <tr id="{$user[0]}">
-                                <td>#{$user[0]}</td>
+                                <td>{$user[15]}</td>
                                 <td>{$user[1] . ' ' . $user[2]}</td>
                                 <td>
                                     <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
@@ -82,6 +85,7 @@
                                     {$user[8]}</td> 
                                 <td class="advert">{$user[12]}</td>    
                                 <td class="advert">{$user[14]}</td>    
+                                <td id="{$user[0]}" class="advertStats">{$user[16]}</td>
                             </tr>
                         {/foreach}  
                     {/if}
@@ -125,7 +129,8 @@
                     { "bSortable": false },
                     { "asSorting": [ "desc", "asc" ] },                                        
                     { "asSorting": [ "desc", "asc" ], sWidth: '12%' },                                        
-                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' }                                                            
+                    { "asSorting": [ "desc", "asc" ], sWidth: '12%' },                                                            
+                    { "asSorting": [ "desc", "asc" ] }
                 ],
 		"oTableTools": {
                         "sSwfPath": "../../js/copy_cvs_xls_pdf.swf",
@@ -209,7 +214,14 @@
                     indicator : 'Saving ...',     
                     cancel    : 'Cancel',
                     submit    : 'OK'                   
-                }                
+                },
+                {
+                    cssclass: 'status_change',
+                    indicator: 'Saving ...',
+                    type: 'select',
+                    data: "{'0':'no', '1':'yes'}",
+                    submit: 'OK&nbsp'                    
+                }
                 ]
         });
     } );
@@ -264,6 +276,21 @@
             }
         }        
       });        
+            
+      var userPaymentStatus;
+      userPaymentStatus = {$userPaymentStatus};      
+      
+      $('.advertStats').each(function() {              
+            $(this).qtip({
+                content: {
+                    text: '<span class="qtip_content">Zaplaceno dne: ' + userPaymentStatus[$(this).attr("id")] + '. \n\
+                           <br/>Do not forget to refresh the page \n\
+                           <br />once the status has changed.</span>',
+                    width: '100'                    
+                },
+                position: { my: 'left bottom', at: 'right center', target: $(this), adjust: { x: 0, y: 1 } }, show: { event: 'mouseenter', ready: false }, hide: { event: 'mouseleave' }, style: { classes: 'ui-tooltip-shadow ui-tooltip-blue' }                
+            });  
+       });      
         
     </script>
 

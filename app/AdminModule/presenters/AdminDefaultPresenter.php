@@ -345,12 +345,27 @@ class AdminDefaultPresenter extends AdminPresenter {
             // if DIC has max 10 chars and contains only numbers            
             if ($dicIsOk) {
                 // check if there is the user with filled Sponsoring Number
+                $usersSponsor = 0;
+                $usersSponsorIsReseller = false;                
                 if ($data->referral != '') {
                     $sponsor = $this->db_users->getUserBySponsoringNumber($data->referral);
+                    // yes
                     if ($sponsor) {
                         $usersSponsor = $sponsor->id;
-                    } else {
-                        $usersSponsor = -1;
+                    }
+                    // no 
+                    else {
+                        // does reseller with this ref number exist?
+                        $reseller = $this->db_users->getResellerBySponsoringNumber($data->referral);
+                        // yes
+                        if ($reseller) {
+                            $usersSponsor = $reseller->id;
+                            $usersSponsorIsReseller = true;
+                        }
+                        // no
+                        else {
+                            $usersSponsor = -1;
+                        }
                     }
                 } else {
                     $usersSponsor = 0;
@@ -374,14 +389,29 @@ class AdminDefaultPresenter extends AdminPresenter {
                         $sponsoringNumber = $this->extraMethods->generateSponsoringNumber();
                     }
 
+                    // no ref number entered in reg process
                     if ($usersSponsor == 0) {
                         $usersSponsor = NULL;
-                    }
+                        $usersSponsorIsResellerWithId = NULL;
+                    } else {
+                        // users sponsor is reseller
+                        if ($usersSponsorIsReseller) {
+                            $usersSponsorIsResellerWithId = $usersSponsor;
+                            $usersSponsor = NULL;
+                        } 
+                        // users sponsor is another user
+                        else {
+                            $usersSponsorIsResellerWithId = NULL;
+                            $usersSponsor = $usersSponsor;
+                        }
+                    }                      
+                    
                     $dummyStringPre = $this->extraMethods->generateDummyString(2);
                     $dummyStringPost = $this->extraMethods->generateDummyString(3);
                     $passwordTemp = $dummyStringPre . $data->newPassword . $dummyStringPost;
                     $dataArray_user = array($data->username, $hashedPassword, $salt, $data->subdomain,
-                        $data->program, $regToken, $sponsoringNumber, $usersSponsor, $passwordTemp);
+                        $data->program, $regToken, $sponsoringNumber, $usersSponsor, $passwordTemp,
+                        $usersSponsorIsResellerWithId);
                     $this->db_users->addUser($dataArray_user);
 
                     //2. users_data

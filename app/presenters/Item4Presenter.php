@@ -30,6 +30,7 @@ class Item4Presenter extends BasePresenter {
                 
                 // prepare itemContent for output
                 $this->template->content = $this->menuItem->itemContent;
+                $this->template->itemTitle = $this->menuItem->itemName;
             } else {
                 $this->template->status = null;
             }

@@ -3,6 +3,7 @@
 namespace AdminModule;
 
 use Nette\Forms\Form;
+use Nette\Utils\Strings;
 use \AdminPresenter as AdminPresenter;
 
 /**
@@ -13,13 +14,30 @@ use \AdminPresenter as AdminPresenter;
  */
 class AdminUsersPresenter extends AdminPresenter {            
     
+    private $datesOfPayment;
+    
     /**
      * Check access and rights here only
      */
     public function startup()
     {
         parent::startup();
-        $this->checkAccess(array('admin'));                            
+        $this->checkAccess(array('admin'));                   
+        
+        $users = $this->db_users->getUsers();                   
+        $usersArray = array();
+        $datesOfPaymentArray = array();
+        if ($users) {
+            foreach ($users as $user) {
+                if ($user->dateOfPayment && date_format($user->dateOfPayment, 'd.m.Y') != '30.11.1970' && $user->paymentReceived == 'yes') {
+                    $dateOfPayment = date_format($user->dateOfPayment, 'd.m.Y');
+                } else {
+                    $dateOfPayment = "N/A";
+                }
+                $datesOfPaymentArray[intval($user->id)] = $dateOfPayment;
+            }   
+        }
+        $this->datesOfPayment = $datesOfPaymentArray;
     }      
  
     public function renderDefault() {      
@@ -37,13 +55,13 @@ class AdminUsersPresenter extends AdminPresenter {
                             $dateFrom = $user->dateFrom;
                             $dateFrom = $dateFrom->format('d.m.Y');
                        } else {
-                            $dateFrom = '00.00.0000';
+                            $dateFrom = '30.11.1970';
                        }
                        if ($user->dateTo != null) {                           
                             $dateTo = $user->dateTo;
                             $dateTo = $dateTo->format('d.m.Y');                            
                        } else {
-                            $dateTo = '00.00.0000';
+                            $dateTo = '30.11.1970';
                        }                       
                       
                        if ($user->dateOfRegistration) {
@@ -51,16 +69,28 @@ class AdminUsersPresenter extends AdminPresenter {
                        } else {
                            $dateOfRegistration = NULL;
                        }                
-                       if ($user->dateOfActivation) {
+                       if ($user->dateOfActivation && date_format($user->dateOfActivation, 'd.m.Y H:i:s') != '30.11.1970 00:00:00') {
                            $dateOfActivation = date_format($user->dateOfActivation, 'd.m.Y H:i:s');
                        } else {
                            $dateOfActivation = NULL;
                        }
-                       // 15 array items
+                                              
+                       if ($user->dateOfPayment && date_format($user->dateOfPayment, 'd.m.Y') != '30.11.1970') {
+                           $dateOfPayment = date_format($user->dateOfPayment, 'd.m.Y');
+                       } else {
+                           $dateOfPayment = NULL;
+                       }
+                       
+                       // check id length and create default format
+                       $idLength = Strings::length($user->id);                       
+                       $idToBeDisplayed = Strings::padLeft($user->id, 5, '0');                       
+                       
+                       // 16 array items
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
                             $user->subdomain, $dateOfRegistration, $user->accountStatus, $dateFrom, $dateTo, 
                             $user->maintenanceMode, $user->subdomainStatus, $user->realSubdomainStatus, 
-                            $dateOfActivation, $user->advertisement, $user->program, $user->passwordFTP);                
+                            $dateOfActivation, $user->advertisement, $user->program, $user->passwordFTP,
+                            $idToBeDisplayed, $user->paymentReceived, $dateOfPayment);                                       
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminUsers presenter).', 404);                    
                     }
@@ -68,8 +98,9 @@ class AdminUsersPresenter extends AdminPresenter {
             }
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load user profile (AdminModule - adminUsers presenter).', 404);
-        }
+        }        
         $this->template->users = $usersArray;          
+        $this->template->userPaymentStatus = $this->datesOfPayment;   
     }        
     
     /**
@@ -146,7 +177,14 @@ class AdminUsersPresenter extends AdminPresenter {
                         $template->subdomain_name = $user->subdomain . '.mudrweb.cz';        
                         $template->token = 'aa' . $user->registrationToken;
                         $template->username = $user->username;
-                        $template->password = substr($user->passwordTemp, 2, - 3);                        
+                        // 1st activation, we know the pass
+                        if ($user->passwordTemp) {
+                            $template->password = substr($user->passwordTemp, 2, - 3);                        
+                        } 
+                        // reactivation, we don't know the pass
+                        else {
+                            $template->password = 'heslo zadané v objednávce';
+                        }
                         $template->usersSponsoringNumber = $user->usersSponsoringNumber;
                         
                         $mail = new \Nette\Mail\Message;
@@ -311,7 +349,29 @@ class AdminUsersPresenter extends AdminPresenter {
             }
             
             $this->db_users->updateFTPPassword(intval($id), $newFTPpassword);            
-        }            
+        }      
+        
+        // payment received
+        if ($columnId == 13) {
+            $newPaymentStatusId = $_REQUEST['value'];                             
+            $newPaymentStatus = null;
+            switch ($newPaymentStatusId) {
+                case 0:
+                    $newPaymentStatus = 'no';
+                    break;
+                case 1:
+                    $newPaymentStatus = 'yes';
+                    break;          
+            }           
+                        
+            if ($newPaymentStatusId == 0) {
+                $dateOfPayment = "1970-00-00";           
+            } else {
+                $dateOfPayment = date("Y-m-d");           
+            }
+                    
+            $this->db_users->updatePaymentStatus(intval($id), $newPaymentStatus, $dateOfPayment);            
+        }        
         
         if (!$this->isAjax()) {
             $this->redirect('this');
