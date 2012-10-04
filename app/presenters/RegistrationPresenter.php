@@ -169,7 +169,7 @@ class RegistrationPresenter extends BasePresenter {
                 ->addRule(Form::FILLED, 'Musíte zadat název stránky.')                
                 ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka názvu stránky je 6 znaků.', 6)                
                 ->addRule(Form::MAX_LENGTH, 'Maximální povolená délka názvu stránky je 30 znaků.', 30)                                 
-                ->addRule(Form::REGEXP, 'Název stránky obsahuje nepovolené znaky.', '/^[a-z][a-z0-9\.\_]*$/')                
+                ->addRule(Form::REGEXP, 'Název stránky obsahuje nepovolené znaky.', '/^[a-z][a-z0-9\-]*$/')                
                 ->addRule(callback('\AdminModule\AdminDefaultPresenter::subdomainexists'),'Název stránky je již použit, zvolte prosím jiný.')                                                
 //                ->addRule(callback('\AdminModule\AdminDefaultPresenter::subdomainHasRightForm'),'Název stránky obsahuje nepovolené znaky.')                                                                
                 ->setAttribute('class', 'input_style_pinfo');                                      

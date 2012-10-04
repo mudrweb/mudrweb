@@ -189,6 +189,8 @@ common:
 
 		guestbookmanager: GuestBookManager ( @database )
 
+		lastSearchItemsRepository: MudrwebDB\LastSearchItemsRepository ( @database )
+
 		logger:
 			factory: FileLogger::createFileLogger	
 

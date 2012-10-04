@@ -55,7 +55,11 @@
     <body>	
         <div id="wrapper">
             <div id="header">
-                <div class="container">
+                {if $user->isLoggedIn() && $userRole == 'admin'}
+                    <div class="container_admin">
+                {else}
+                    <div class="container">
+                {/if}
                     <div class="grid_header_l">
                     {if $user->isLoggedIn() && $userRole != 'admin'}
                         <a href="{link :Default:default}">Návrat na hlavní stránku</a> <span>|</span> <a href="{link :Admin:Default:}">Admin panel</a> {if $user->isLoggedIn()} <span>|</span> <a href="{$preview}" target="_blank">Náhled stránky</a>{/if}
@@ -84,13 +88,23 @@
             {/snippet}
             {/if}
 
-            <div id="main" class="container">
-                {if $user->isLoggedIn()}
+            {if $user->isLoggedIn() && $userRole == 'admin'}
+                <div id="main" class="container_admin">
+            {else}
+                <div id="main" class="container">
+            {/if}
+                {if $user->isLoggedIn() && $userRole == 'admin'}
+                <div class="grid_content_admin">
+                    <div id="content">                
+                            {include #content}                        
+                    </div>
+                </div>                                
+                {elseif $user->isLoggedIn()}
                 <div class="grid_content">
                     <div id="content">                
                             {include #content}                        
                     </div>
-                </div>                   
+                </div>                                   
                 {elseif $presenter_name === 'ForgottenPassword'}
                 <div class="grid_content_fpass">                                                                           
                     <div id="content_fpass">                            
@@ -108,7 +122,11 @@
             </div>	        
 
             <div id="footer">   
-                <div class="container">
+                {if $user->isLoggedIn() && $userRole == 'admin'}
+                    <div class="container_admin">
+                {else}
+                    <div class="container">
+                {/if}
                     <div class="grid_footer_l">
                         {!$compatibleBrowsers}<br />
                         {if $user->isLoggedIn()}

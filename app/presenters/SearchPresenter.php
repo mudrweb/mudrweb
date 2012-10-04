@@ -13,12 +13,18 @@ class SearchPresenter extends BasePresenter
 {    
     private $isNotFirstSearch = null;
     private $searchResultsForUser;
+    /** @var MudrwebDB\LastSearchItemsRepository */
+    private $lastSearchItemsRepository;    
+    private $lastSearchDataInArray;
     
     /**
      * Startup settings.
      */    
     public function startup() {
         parent::startup();                           
+        
+        $this->lastSearchItemsRepository = $this->context->lastSearchItemsRepository;
+        $this->lastSearchDataInArray = $this->getLastSearchsDataFromDB();            
     }        
     
     /**
@@ -27,8 +33,48 @@ class SearchPresenter extends BasePresenter
     public function renderDefault() {
         $this->template->data = $this->searchResultsForUser;                
         $this->template->isNotFirstSearch = $this->isNotFirstSearch;
-        $this->invalidateControl();
+        if ($this->lastSearchDataInArray[0] != 'dummy') {
+            $this->template->lastSearchsData = $this->lastSearchDataInArray;
+        } else {
+            $this->template->lastSearchsData = null;
+        }
+
+        $this->invalidateControl();                   
     }    
+    
+    /**
+     * Get lastSearchData from DB.
+     * 
+     * @return lastSearchData array
+     */
+    public function getLastSearchsDataFromDB() {
+        $lastSearchsData = $this->lastSearchItemsRepository->findAll()->fetch();
+        $lastSearchDataInArray = null;
+        if ($lastSearchsData) {
+            $lastSearchDataInArray = explode(';', $lastSearchsData->searchData);
+        }
+        return $lastSearchDataInArray;
+    }
+    
+    /**
+     * Add actual lastSearchData array to DB;
+     * 
+     * @param string array $lastSearchDataInArray 
+     */
+    public function addLastSearchsDataToDB($lastSearchDataInArray) {
+        $counter = 0;
+        $itemsCount = count($lastSearchDataInArray);        
+        $lastSearchDataString = null;
+        foreach ($lastSearchDataInArray as $lastSearchDataItem) {
+            $counter++;
+            if ($counter < $itemsCount) {
+                $lastSearchDataString = $lastSearchDataString . $lastSearchDataItem . ';';
+            } else {
+                $lastSearchDataString = $lastSearchDataString . $lastSearchDataItem;
+            }
+        }
+        $this->lastSearchItemsRepository->findBy(array('id' => 1))->update(array('searchData' => $lastSearchDataString));
+    }
     
     /**
      * Create paginator component.
@@ -52,6 +98,7 @@ class SearchPresenter extends BasePresenter
         $form->addText('searchInput', 'Hledaný výraz:', 50, 50)                
                 ->addRule(Form::FILLED, 'Musíte zadat hledaný výraz.')                
                 ->addRule(Form::MIN_LENGTH, 'Minimální požadovaná délka hledaného výrazu jsou 3 znaky.', 3)                
+                ->addRule(Form::REGEXP, 'Hledaný výraz obsahuje nepovolený znak ";" (středník).', '/^[^\;]*$/')
                 ->setAttribute('class', 'input_style_pinfo');  
         
         $form->addSubmit('submit', 'Hledej')
@@ -71,6 +118,25 @@ class SearchPresenter extends BasePresenter
         // preprocess input data
         $stringToSearchFor = $data->searchInput;
         $this->template->stringToSearchFor = $stringToSearchFor;
+        
+        // add last search data to lastSearchData array
+        // if there is no data in DB (default value is dummy at row with index 1)
+        if ($this->lastSearchDataInArray[0] == 'dummy') {            
+            array_unshift($this->lastSearchDataInArray, $stringToSearchFor);
+            $this->lastSearchDataInArray = array_reverse($this->lastSearchDataInArray);
+            array_shift($this->lastSearchDataInArray);
+            $this->lastSearchDataInArray = array_reverse($this->lastSearchDataInArray);                    
+        } else {
+            array_unshift($this->lastSearchDataInArray, $stringToSearchFor);
+        }
+        // if array items count > 20, remove the oldest item
+        if (count($this->lastSearchDataInArray) > 20) {
+            $this->lastSearchDataInArray = array_reverse($this->lastSearchDataInArray);
+            array_shift($this->lastSearchDataInArray);
+            $this->lastSearchDataInArray = array_reverse($this->lastSearchDataInArray);                    
+        }
+        $this->addLastSearchsDataToDB($this->lastSearchDataInArray);
+        
         $inputItems = $data->searchItems;        
         $dbInputs = explode(',', $inputItems);        
         unset($dbInputs[0]);                               

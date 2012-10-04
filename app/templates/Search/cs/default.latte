@@ -31,7 +31,6 @@
         </map>
         </div>
       
-<!--        { snippet formSearchForm}-->
         {form searchForm}        
             <script language="javaScript" type="text/javascript">
                 var regions = ['', 'Hlavní město Praha', 'Jihočeský', 'Jihomoravský', 'Karlovarský', 'Královéhradecký', 'Liberecký', 'Moravskoslezský', 'Olomoucký', 'Pardubický', 'Plzeňský', 'Středočeský', 'Ústecký', 'Vysočina', 'Zlínský'];
@@ -75,7 +74,6 @@
             </table>                                                  
             
         {/form searchForm} 
-<!--        { /snippet}         -->
               
         </td>
         <td valign="top" id="search_area_cell">
@@ -153,6 +151,16 @@
         </script>-->
     {/if}      
 </div>
+{/snippet}
+
+{snippet lastSearchsData}
+{if $lastSearchsData}
+<div class="lastSearchData">Poslední hledané výrazy: 
+    {foreach $lastSearchsData as $lastSearchData}
+        {$lastSearchData}{sep}, {/sep}
+    {/foreach}              
+</div>
+{/if}
 {/snippet}
 
 {/block}

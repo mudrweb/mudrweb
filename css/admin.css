@@ -41,9 +41,12 @@ h3 { font-family: "Lucida Grande", Arial, sans-serif; color: #000; font-size: 16
 
 #wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto 0px;}
 .container { margin-left: auto; margin-right: auto; width: 920px; }
+.container_admin { margin-left: auto; margin-right: auto; width: 980px; }
 .grid_header_l { display: inline; float: left; margin-left: 10px; }
-.grid_header_r { display: inline; float: right; margin-right: 10px  }
-.grid_content { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 900px }
+.grid_header_r { display: inline; float: right; margin-right: 10px;  }
+.grid_content { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 900px; }
+.grid_content_admin { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 960px; }
+
 /* login start */
 .grid_content_log { display: inline; float: left; margin-left: 10px; margin-right: auto; width: 900px; }
 .grid_content_log_l { display: inline; float: left; margin-left: 10px; }
