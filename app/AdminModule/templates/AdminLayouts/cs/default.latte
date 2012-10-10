@@ -11,6 +11,14 @@
     <span class="icon-ui-black icon-ui-black-gear"></span>Zobrazit panel pro přidávání
 </div>    
     
+<div class="confirmDiag">
+{widget confirmForm}
+{snippet links}
+{if $showAjaxLinks}
+{/if}
+{/snippet}
+</div>      
+    
 <div id="editArea">        
 {snippet formLayout}
 {form layoutForm}   
@@ -65,7 +73,7 @@
                                 <td>{$layout[2]}</td>                                
                                 <td>{$layout[3]}</td>  
                                 <td>                                    
-                                    <a href="{link deleteLayout! id => $layout[0]}" class="icon-ui-red icon-ui-red-close" title="Smazat vzhled">&nbsp;</a>                                    
+                                    <a href="{link confirmForm:confirmDelete!! id => $layout[0], name => $layout[1]}" class="icon-ui-red icon-ui-red-close ajax" title="Smazat vzhled">&nbsp;</a>                                    
                                 </td>                                
                             </tr>
                         {/foreach}  

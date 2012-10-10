@@ -48,7 +48,7 @@ class SearchPresenter extends BasePresenter
      * @return lastSearchData array
      */
     public function getLastSearchsDataFromDB() {
-        $lastSearchsData = $this->lastSearchItemsRepository->findAll()->fetch();
+        $lastSearchsData = $this->lastSearchItemsRepository->getLastSearchItems();
         $lastSearchDataInArray = null;
         if ($lastSearchsData) {
             $lastSearchDataInArray = explode(';', $lastSearchsData->searchData);
@@ -73,7 +73,7 @@ class SearchPresenter extends BasePresenter
                 $lastSearchDataString = $lastSearchDataString . $lastSearchDataItem;
             }
         }
-        $this->lastSearchItemsRepository->findBy(array('id' => 1))->update(array('searchData' => $lastSearchDataString));
+        $this->lastSearchItemsRepository->updateLastSearchItems($lastSearchDataString);
     }
     
     /**

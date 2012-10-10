@@ -7,10 +7,10 @@
 @import url("jquery-ui-1.8.16.custom.css");
  
 * { margin: 0;}
-html, body { font-size: 13px; font-family: Arial, sans-serif; background-color: #ffffff; background-image: url("../images/b.jpg"); background-repeat: no-repeat; line-height:1.5; height: 100%; }
+html, body { font-size: 13px; font-family: Arial, sans-serif; background-color: #ffffff; background-image: url("../images/b1.jpg"); background-repeat: no-repeat; line-height:1.5; height: 100%; }
 
-div.flash, div.info { color: #000; background: #FFF9D7; border: 1px solid #E2C822; padding: 0.6em; margin-top: 20px; margin-left:auto; margin-right:auto; width: 920px; }
-div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; padding: 0.6em; margin-top: 20px; margin-left:auto; margin-right:auto; width: 920px; }
+div.flash, div.info { color: #000; background: #FFF9D7; border: 1px solid #E2C822; padding: 0.6em; margin-top: 20px; margin-left:auto; margin-right:auto; width: 960px; }
+div.warning { color: #000; background: #ffcdcd; border: 1px solid #a60000; padding: 0.6em; margin-top: 20px; margin-left:auto; margin-right:auto; width: 960px; }
 div.info_log { color: #000; background: #FFF4B8; border: 1px solid #E2C822; padding: 0.5em; margin-top: 0px; margin-bottom: 20px; margin-left:auto; margin-right:auto; width: 250px; }
 div.warning_log { color: #000; background: #ffcdcd; border: 1px solid #a60000; padding: 0.5em; margin-top: 0px; margin-bottom: 20px; margin-left:auto; margin-right:auto; width: 250px; }
 div.info_fpass { color: #000; background: #FFF9D7; border: 1px solid #E2C822; padding: 0.6em; margin-top: 0px; margin-bottom: 20px; margin-left:auto; margin-right:auto; width: 305px; }
@@ -321,6 +321,11 @@ a.user_list:hover {text-decoration: underline; color: black;}
 .td_input_addReseller { padding-left: 129px; padding-bottom: 15px; padding-top: 5px; }
 #editArea { display: none; }
 #editOnOff { cursor: pointer; padding-bottom: 5px; }
+div.static_dialog { padding: 10px; width: 896px; background-color: #FFF9D7; border: 2px solid #E2C822; text-align: center;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -moz-box-shadow: rgba(200,200,200,1) 0 2px 6px; -webkit-box-shadow: rgba(200,200,200,1) 0 2px 6px; box-shadow: rgba(200,200,200,1) 0 2px 6px;
+}
+div.static_dialog form table { margin-left: auto; margin-right: auto; padding-top: 5px; }
+.confirmDiag { padding-bottom: 5px; }
 
 /* layout list - admin panel */
 .required label.error { background: url("../images/unchecked.gif") no-repeat scroll 0 0 transparent; color: #EA5200; font-weight: bold; padding-bottom: 2px; padding-left: 16px; padding-right: 15px; }

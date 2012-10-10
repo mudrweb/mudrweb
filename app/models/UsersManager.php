@@ -801,6 +801,22 @@ class UsersManager extends Nette\Object {
     }  
     
     /**
+     * Get reseller by reseller $id.
+     *
+     * @param int $id
+     * @return reseller 
+     */
+    public function getResellerById($id) {         
+        if (is_numeric($id)) {            
+            $reseller = $this->database->query('SELECT * FROM resellers WHERE id=?', $id)->fetch();
+            return $reseller;            
+        } else {            
+            throw new \Nette\Application\ToolException('Unable to get Reseller.
+                    Wrong input. method: getResellerById($id)', 500);
+        }      
+    }     
+    
+    /**
      * Add new reseller.
      * 
      * @param data $dataArray 

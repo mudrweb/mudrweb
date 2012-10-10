@@ -43,7 +43,10 @@ class AdminResellersPresenter extends AdminPresenter {
         } else {
             throw new \Nette\Application\BadRequestException('Unable to load resellers (AdminModule - adminResellers presenter).', 404);
         }
-        $this->template->resellers = $resellersArray;          
+        $this->template->resellers = $resellersArray; 
+        
+        $this->template->showAjaxLinks = !$this['confirmForm']->isVisible();
+        $this->invalidateControl('links');        
     }        
     
     /**
@@ -122,17 +125,7 @@ class AdminResellersPresenter extends AdminPresenter {
             $this->flashMessage('Zadané referenční číslo již existuje!', 'warning');
         }
     }    
-    
-    /**
-     * Delete row event handler (called by jQuery datatable)
-     */
-    public function handleDeleteReseller($id) {     
-        $this->db_users->deleteReseller($id);
-
-        $this->flashMessage('Zvolený zástupce byl úspěšně odstraněn z databázy.', 'info');
-        $this->redirect('this');
-    }        
-    
+        
     /**
      * Submit changes event handler (called by jQuery dataTable)
      */
@@ -177,6 +170,37 @@ class AdminResellersPresenter extends AdminPresenter {
         } else {        
             $this->terminate();            
             $this->invalidateControl('jEditable');
-        }        
-    }         
+        }
+    }
+
+    /**
+     * Create confirmation dialog form.
+     * 
+     * @return \ConfirmationDialog 
+     */
+    public function createComponentConfirmForm() {
+        $form = new \ConfirmationDialog();
+
+        $form->getFormElementPrototype()->addClass('ajax');
+        $form->dialogClass = 'static_dialog';      
+
+        $form->addConfirmer(
+                'delete', array($this, 'confirmedDelete'), function ($dialog, $params) {        
+                    return sprintf('Opravdu chcete odstranit obchodního zástupce \'%s\'?', $params['name']);
+                });
+
+        return $form;
+    }
+
+    /**
+     * Delete row event handler
+     */
+    function confirmedDelete($id) {
+        $this->db_users->deleteReseller($id);
+        
+        $this->flashMessage('Zvolený zástupce byl úspěšně odstraněn z databázy.', 'info');        
+        
+        if (!$this->isAjax())
+            $this->redirect('this');        
+    }    
 }

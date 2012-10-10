@@ -9,6 +9,14 @@
 
 <div id="editOnOff">
     <span class="icon-ui-black icon-ui-black-gear"></span>Zobrazit panel pro přidávání
+</div>                                         
+
+<div class="confirmDiag">
+{widget confirmForm}
+{snippet links}
+{if $showAjaxLinks}
+{/if}
+{/snippet}
 </div>    
     
 <div id="editArea">
@@ -83,15 +91,15 @@
                                 <td>{$reseller[5]}</td>  
                                 <td>{$reseller[6]}</td>  
                                 <td>                                    
-                                    <a href="{link deleteReseller! id => $reseller[0]}" class="icon-ui-red icon-ui-red-close" title="Smazat zástupce">&nbsp;</a>                                    
+                                    <a href="{link confirmForm:confirmDelete! id => $reseller[0], name => $reseller[1]}" class="icon-ui-red icon-ui-red-close ajax" title="Smazat zástupce">&nbsp;</a>                                    
                                 </td>                                
                             </tr>
                         {/foreach}  
                     {/if}
                 </tbody>
             </table>
-        </div>       
-    
+        </div>          
+
     <script type="text/Javascript">
         $(document).ready( function () {
             var id = -1;//simulation of id
@@ -206,7 +214,7 @@
                 $('#frmlayoutForm-resellerAddress_message').css('display', 'inline');
                 $('#cke_frmlayoutForm-resellerAddress').css('border', 'solid 1px red');
             }
-        });
+        });                                                       
     </script>    
 
 {/block}

@@ -41,6 +41,9 @@ class AdminLayoutsPresenter extends AdminPresenter {
             throw new \Nette\Application\BadRequestException('Unable to load layouts (AdminModule - adminLayouts presenter).', 404);
         }
         $this->template->layouts = $layoutsArray;          
+        
+        $this->template->showAjaxLinks = !$this['confirmForm']->isVisible();
+        $this->invalidateControl('links');          
     }        
     
     /**
@@ -91,16 +94,6 @@ class AdminLayoutsPresenter extends AdminPresenter {
         
         $this->flashMessage('Nový vzhled byl úspěšně přidán do databázy.', 'info');
         $this->redirect('this');
-    }    
-    
-    /**
-     * Delete row event handler (called by jQuery datatable)
-     */
-    public function handleDeleteLayout($id) {     
-        $this->db_users->deleteLayout($id);
-
-        $this->flashMessage('Zvolený vzhled byl úspěšně odstraněn z databázy.', 'info');
-        $this->redirect('this');
     }        
     
     /**
@@ -137,4 +130,35 @@ class AdminLayoutsPresenter extends AdminPresenter {
             $this->invalidateControl('jEditable');
         }        
     }         
+    
+    /**
+     * Create confirmation dialog form.
+     * 
+     * @return \ConfirmationDialog 
+     */
+    public function createComponentConfirmForm() {
+        $form = new \ConfirmationDialog();
+
+        $form->getFormElementPrototype()->addClass('ajax');
+        $form->dialogClass = 'static_dialog';      
+
+        $form->addConfirmer(
+                'delete', array($this, 'confirmedDelete'), function ($dialog, $params) {        
+                    return sprintf('Opravdu chcete odstranit vzhled \'%s\'?', $params['name']);
+                });
+
+        return $form;
+    }
+
+    /**
+     * Delete row event handler
+     */
+    function confirmedDelete($id) {
+        $this->db_users->deleteLayout($id);
+        
+        $this->flashMessage('Zvolený vzhled byl úspěšně odstraněn z databázy.', 'info');        
+        
+        if (!$this->isAjax())
+            $this->redirect('this');        
+    }        
 }
