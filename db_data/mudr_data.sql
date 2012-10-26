@@ -238,6 +238,18 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`resellers` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `mudr`.`lastSearchItems`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mudr`.`lastSearchItems` ;
+
+CREATE  TABLE IF NOT EXISTS `mudr`.`lastSearchItems` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `searchData` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -375,5 +387,14 @@ USE `mudr`;
 INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (0, 'admin', 'hidden', '132456789', 123456, 'hidden', NULL);
 INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (1, 'Mgr. Martin Test', 'Muchova 1234/11, 62700 Brno', '132456', 7891011, 'aa@sdf.sl', 'sa34');
 INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (2, 'Ing. Peter Pok', 'Buchalova 23/4, 60200 Brno', '456789', 123456, 'test@sfs.sk', 'le12');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `mudr`.`lastSearchItems`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mudr`;
+INSERT INTO `mudr`.`lastSearchItems` (`id`, `searchData`) VALUES (1, 'dummy');
 
 COMMIT;

@@ -46,7 +46,13 @@ class AdminResellersPresenter extends AdminPresenter {
         $this->template->resellers = $resellersArray; 
         
         $this->template->showAjaxLinks = !$this['confirmForm']->isVisible();
-        $this->invalidateControl('links');        
+        $this->invalidateControl('links');     
+        
+        
+        $template = $this->createTemplate()->setFile(APP_DIR . "/templates/invoice.latte");
+        $pdf = new \PdfResponse($template, $this->context);
+        $pdf->test();
+//        $pdf->save(WWW_DIR . "/generated/", "testFile123");
     }        
     
     /**

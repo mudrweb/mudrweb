@@ -30,16 +30,23 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users` (
   `accountStatus` ENUM('active','pending','inactive','archive') NULL ,
   `username` VARCHAR(20) NULL ,
   `password` VARCHAR(45) NULL ,
+  `passwordTemp` VARCHAR(50) NULL ,
+  `passwordFTP` VARCHAR(50) NULL ,
   `salt` VARCHAR(20) NULL ,
   `role` ENUM('uživatel','admin') NULL ,
   `usersSponsor` INT NULL ,
-  `usersSponsoringNumber` VARCHAR(4) NULL ,
+  `usersSponsorIsReseller` INT NULL ,
+  `usersSponsoringNumber` VARCHAR(5) NULL ,
+  `usedReferralBonus` INT NULL ,
   `superUserActive` TINYINT(1)  NULL ,
   `subdomain` VARCHAR(30) NULL ,
   `dateOfRegistration` DATETIME NULL ,
   `program` VARCHAR(25) NULL ,
+  `advertisement` VARCHAR(25) NULL ,
   `registrationToken` VARCHAR(45) NULL ,
   `dateOfActivation` DATETIME NULL ,
+  `paymentReceived` ENUM('yes','no') NULL ,
+  `dateOfPayment` DATE NULL ,
   `dateFrom` DATE NULL ,
   `dateTo` DATE NULL ,
   `passwordChanged` DATETIME NULL ,
@@ -91,13 +98,20 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`users_data` (
   `surname` VARCHAR(45) NULL ,
   `titleBefore` VARCHAR(12) NULL ,
   `titleAfter` VARCHAR(12) NULL ,
+  `doctorGroup` VARCHAR(40) NULL ,
   `gender` ENUM('muž','žena') NULL ,
   `email` VARCHAR(50) NULL ,
   `street` VARCHAR(50) NULL ,
   `city` VARCHAR(50) NULL ,
   `zip` VARCHAR(8) NULL ,
   `region` VARCHAR(30) NULL ,
+  `streetInvoice` VARCHAR(50) NULL ,
+  `cityInvoice` VARCHAR(50) NULL ,
+  `zipInvoice` VARCHAR(8) NULL ,
   `phone` INT NULL ,
+  `ic` VARCHAR(10) NULL ,
+  `dic` VARCHAR(10) NULL ,
+  `addressMatch` TINYINT(1)  NULL ,
   `lastChange` DATETIME NULL ,
   PRIMARY KEY (`id`, `idusers`) ,
   INDEX `fk_users_data_users1` (`idusers` ASC) ,
@@ -207,6 +221,35 @@ CREATE  TABLE IF NOT EXISTS `mudr`.`guestBook` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `mudr`.`resellers`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mudr`.`resellers` ;
+
+CREATE  TABLE IF NOT EXISTS `mudr`.`resellers` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `fullName` VARCHAR(100) NULL ,
+  `fullAddress` TEXT NULL ,
+  `accountNumber` VARCHAR(45) NULL ,
+  `phone` INT NULL ,
+  `email` VARCHAR(50) NULL ,
+  `resellersSponsoringNumber` VARCHAR(5) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mudr`.`lastSearchItems`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mudr`.`lastSearchItems` ;
+
+CREATE  TABLE IF NOT EXISTS `mudr`.`lastSearchItems` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `searchData` TEXT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -217,15 +260,43 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (1, 'layout_kardio1', 'kardio', 'Kardio vzhled 1 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (2, 'layout_kardio2', 'kardio', 'Kardio vzhled 2 - šedá, modrá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (3, 'layout_kardio1_specific', 'xa', 'Uživatelsky specifický vzhled - menu vlevo');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (4, 'layout_gyneko1', 'gyneko', NULL);
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (5, 'layout_opto1', 'opto', NULL);
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (6, 'layout_kardio3', 'kardio', 'Kardio vzhled 3 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (7, 'layout_kardio4', 'kardio', 'Kardio vzhled 4 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (8, 'layout_kardio5', 'kardio', 'Kardio vzhled 5 - šedá, černá');
-INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (9, 'layout_kardio6', 'kardio', 'Kardio vzhled 6 - šedá, černá');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (1, 'layout_A1', 'all', 'A - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (2, 'layout_A2', 'all', 'A - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (3, 'layout_A1_specific', 'xa', 'A - Uživatelsky specifický vzhled');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (4, 'layout_A3', 'all', 'A - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (5, 'layout_A4', 'all', 'A - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (6, 'layout_A5', 'all', 'A - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (7, 'layout_A6', 'all', 'A - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (8, 'layout_B1', 'all', 'B - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (9, 'layout_B2', 'all', 'B - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B3', 'all', 'B - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B4', 'all', 'B - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B5', 'all', 'B - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_B6', 'all', 'B - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C1', 'all', 'C - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C2', 'all', 'C - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C3', 'all', 'C - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C4', 'all', 'C - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C5', 'all', 'C - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_C6', 'all', 'C - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D1', 'all', 'D - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D2', 'all', 'D - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D3', 'all', 'D - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D4', 'all', 'D - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D5', 'all', 'D - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_D6', 'all', 'D - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E1', 'all', 'E - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E2', 'all', 'E - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E3', 'all', 'E - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E4', 'all', 'E - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E5', 'all', 'E - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_E6', 'all', 'E - modra');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F1', 'all', 'F - bila');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F2', 'all', 'F - cerna');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F3', 'all', 'F - zelena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F4', 'all', 'F - cervena');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F5', 'all', 'F - zluta');
+INSERT INTO `mudr`.`layouts` (`id`, `layout`, `layout_group`, `layout_desc`) VALUES (NULL, 'layout_F6', 'all', 'F - modra');
 
 COMMIT;
 
@@ -234,8 +305,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (0, '', 'admin', 'e18290be7eb5f8be11bb4c9ed494f354f3915c4f', '@Xw^~Mr4L60o;E1n', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `salt`, `role`, `usersSponsor`, `usersSponsoringNumber`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `registrationToken`, `dateOfActivation`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (1, 'active', 'xa', '7afa699467e313cd534eed0dcd24291e6071d25a', 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, '1234', 0, 'xa', '2011-12-01 00:00:00', 'demo', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', NULL, '2011-09-01', '2012-09-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (0, '', 'admin', 'e18290be7eb5f8be11bb4c9ed494f354f3915c4f', NULL, NULL, '@Xw^~Mr4L60o;E1n', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `mudr`.`users` (`id`, `accountStatus`, `username`, `password`, `passwordTemp`, `passwordFTP`, `salt`, `role`, `usersSponsor`, `usersSponsorIsReseller`, `usersSponsoringNumber`, `usedReferralBonus`, `superUserActive`, `subdomain`, `dateOfRegistration`, `program`, `advertisement`, `registrationToken`, `dateOfActivation`, `paymentReceived`, `dateOfPayment`, `dateFrom`, `dateTo`, `passwordChanged`, `lastLogin`, `lastLogout`, `passwordResent`, `maintenanceMode`, `subdomainStatus`, `realSubdomainStatus`, `notificationCounter`, `notificationDate`) VALUES (1, 'active', 'xa', '7afa699467e313cd534eed0dcd24291e6071d25a', NULL, NULL, 'C(l2=iW4HN;9zr1!', 'uživatel', NULL, NULL, '1234', NULL, 0, 'xa', '2011-12-01 00:00:00', 'demo', 'zentiva', 'f8f1259025b54faeeceb5acb7c55ff5ceee122da', '1971-00-00', 'yes', '2011-12-02', '2011-10-01', '2012-09-27', NULL, NULL, NULL, '1971-00-00 00:00:00', 'off', 'Valid', 'Valid', NULL, NULL);
 
 COMMIT;
 
@@ -244,12 +315,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (2, 1, 2, 'Tým', '<p><span class=\"Apple-style-span\" style=\"font-family: Verdana, Arial, sans-serif; font-size: x-small;\"><br /><img style=\"float: left; margin-left: 7px; margin-right: 7px;\" src=\"http://www.kardiologie-pokorny.ic.cz/img/1_RP.jpg\" alt=\"\" width=\"96\" height=\"117\" /></span></p>', 'yes', 'tym', NULL);
-INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (3, 1, 3, 'Smluvní pojišťovny', '<h2>Smluvn&iacute; poji&scaron;ťovny</h2><p>&nbsp;</p><p>Jsme smluvn&iacute;m partnerem těchto zdravotn&iacute;ch poji&scaron;ťoven:<br /><br />111 &ndash; V&scaron;eobecn&aacute; zdravotn&iacute; poji&scaron;ťovna&nbsp;<br /><br />201 &ndash; Vojensk&aacute; zdravotn&iacute; poji&scaron;ťovna&nbsp;<br /><br />205 &ndash; Česk&aacute; průmyslov&aacute; zdravotn&iacute; poji&scaron;ťovna&nbsp;<br /><br />207 &ndash; Oborov&aacute; zdravotn&iacute; poji&scaron;ťovna zaměstnanců bank, poji&scaron;ťoven a stavebnictv&iacute;&nbsp;<br /><br />211 &ndash; Zdravotn&iacute; poji&scaron;ťovna Ministerstva vnitra&nbsp;<br /><br />217 &ndash; Zdravotn&iacute; poji&scaron;ťovna METAL-ALIANCE&nbsp;<br /><br />Po předchoz&iacute; domluvě o&scaron;etř&iacute;me i pacienty ostatn&iacute;ch zdravotn&iacute;ch poji&scaron;ťoven</p>', 'yes', 'smluvni-pojistovny', NULL);
-INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (4, 1, 4, 'Vizitka', '<h2>MUDr. Richard Pokorn&yacute;</h2><p>&nbsp;</p><p>Jasm&iacute;nov&aacute; 1145/4<br />251 01 Ř&iacute;čany u Prahy<br />e-mail: mudr.pokorny(at)gmail.com<br />tel.: +420 323 631 945&nbsp;<br /><br /></p><h2>Ordinačn&iacute; doba</h2><p>&nbsp;</p><p>Po 7:30 &mdash; 13:00<br />&Uacute;t 7:30 &mdash; 13:00<br />St pouze objednan&iacute; pacienti<br />Čt 7:30 &mdash; 12:00 13:30 &mdash; 16:30 echo 17:00 &mdash; 21:00<br />P&aacute; 7:30 &mdash; 13:00<br /><br /></p><h2>Smluvn&iacute; poji&scaron;ťovny</h2><p>&nbsp;</p><p>111, 201, 205, 207, 211, 217<br />Přij&iacute;m&aacute;me i nepoji&scaron;těn&eacute; pacienty za př&iacute;mou &uacute;hradu. Ceny za jednotliv&eacute; v&yacute;kony odpov&iacute;daj&iacute; &uacute;hradě VZP.</p>', 'yes', 'vizitka', NULL);
-INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (5, 1, 5, 'P5', '1234', 'no', 'polozka5', NULL);
-INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (6, 1, 6, 'P6', '5678', 'no', 'polozka6', NULL);
-INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (8, 1, 1, 'Úvod', '<p>V&iacute;t&aacute;me V&aacute;s na str&aacute;nk&aacute;ch na&scaron;&iacute; kardiologick&eacute; ambulance. Dovolte abychom představili portfolio na&scaron;ich činnost&iacute;.<br /><br /></p><h2>Klinick&eacute; vy&scaron;etřen&iacute;</h2><p>&nbsp;</p><p>pohovor s pacientem - zji&scaron;těn&iacute; rizikov&yacute;ch faktorů, zji&scaron;těn&iacute; prodělan&yacute;ch chorob a l&eacute;čby, rozbor obt&iacute;ž&iacute; objektivn&iacute; vy&scaron;etřen&iacute;&nbsp;<br /><br /></p><h2>EKG</h2><p>&nbsp;</p><p>metoda, kter&aacute; sn&iacute;m&aacute; z povrchu těla elektrick&eacute; potenci&aacute;ly přenesen&eacute; ze srdce, a na jejich z&aacute;kladě zji&scaron;ťuje př&iacute;padn&eacute; poruchy srdečn&iacute;ho rytmu, poruchy veden&iacute; srdečn&iacute;ch vzruchů a změny tvaru křivky, kter&eacute; způsobuj&iacute; někter&eacute; choroby&nbsp;<br /><br /></p><h2>Z&aacute;těžov&eacute; EKG (ergometrie)</h2><p>&nbsp;</p><p>sn&iacute;m&aacute;n&iacute; ekg, měřen&iacute; krevn&iacute;ho tlaku a sledov&aacute;n&iacute; obt&iacute;ž&iacute; pacienta při postupně se zvy&scaron;uj&iacute;c&iacute; z&aacute;těži na bicyklov&eacute;m ergometru a pot&eacute; v zotavovac&iacute; f&aacute;zi v klidu, vy&scaron;etřen&iacute; se prov&aacute;d&iacute; hlavně v r&aacute;mci diagnostiky ischemick&eacute; choroby srdečn&iacute; a při zji&scaron;ťov&aacute;n&iacute; poruch rytmu při z&aacute;těži u někter&yacute;ch chorob&nbsp;<br /><br /><span class=\"bold\">Echokardiografick&eacute; vy&scaron;etřen&iacute;</span>&nbsp;ultrazvukov&eacute; tj. neinvazivn&iacute; vy&scaron;etřen&iacute; srdce, kter&eacute; měř&iacute; velikost srdečn&iacute;ch odd&iacute;lů, hodnot&iacute; v&yacute;konnost srdce, hodnot&iacute; funkci chlopn&iacute;, zji&scaron;ťuje patologick&eacute; &uacute;tvary v srdci...&nbsp;<br /><br /><span class=\"bold\">24 hodinov&aacute; monitorace krevn&iacute;ho tlaku a ekg (holter)</span>&nbsp;vy&scaron;etřen&iacute; smluvně zaji&scaron;těno v Ř&iacute;čanech&nbsp;<br /><br /><span class=\"bold\">Dispenzarizace pacientů (tj. sledov&aacute;n&iacute; a l&eacute;čba)</span><br />pacienti se srdečn&iacute;mi vadami a po operaci srdečn&iacute;ch vad&nbsp;<br />pacienti s ischemickou chorobou srdečn&iacute;, stavy po revaskularizačn&iacute;ch v&yacute;konech (aortokoron&aacute;rn&iacute;m bypassu a angioplastice)&nbsp;<br />pacienti s kardiomyopatiemi&nbsp;<br />pacienti s implantovan&yacute;m kardiostimul&aacute;torem&nbsp;<br />pacienti s poruchami srdečn&iacute;ho rytmu&nbsp;<br />pacienti s vysok&yacute;m krevn&iacute;m tlakem&nbsp;<br />pacienti s poruchou metabolizmu tuků&nbsp;<br /><br />Spolupr&aacute;ce s vět&scaron;inou kardiocenter v Praze</p>', 'yes', 'uvod', NULL);
+INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (2, 1, 2, 'O nás', '<h1>Person&aacute;l</h1><p>	&nbsp;</p><p>	<em><span style=\"color:#ff0000;\">Zde můžete um&iacute;stit V&aacute;&scaron; stručn&yacute; životopis, jak rovněž životopisy Va&scaron;ich zaměstnaců.</span></em></p><p>&nbsp;</p><p><em><span style=\"color:#ff0000;\">Pro zpestřen&iacute; Va&scaron;&iacute; prezentace je vhodn&eacute; um&iacute;stit Va&scaron;i fotografii, popř. fotografie Va&scaron;&iacute;ch zaměstnanců.</span></em></p>', 'yes', 'o-nas', NULL);
+INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (3, 1, 3, 'Služby', '<h1>Služby</h1><p>&nbsp;</p><p>	<span style=\"color:#ff0000;\"><em>Vložte popis poskytovan&yacute;ch služeb, popř&iacute;padě cen&iacute;k. Můžete popis doplnit ilustračn&iacute;mi obr&aacute;zky z na&scaron;&iacute; galerie.</em></span></p>', 'no', 'sluzby', NULL);
+INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (4, 1, 4, 'Smluvní pojišťovny', '<h1>Smluvn&iacute; poji&scaron;ťovny</h1><p>na&scaron;e pracovi&scaron;tě je smluvn&iacute;m partnerem n&aacute;sleduj&iacute;c&iacute;h poji&scaron;ťoven:</p><p>&nbsp;</p><p><span style=\"color:#ff0000;\"><em>(nehod&iacute;c&iacute; smažte)</em></span></p>', 'yes', 'smluvni-pojistovny', NULL);
+INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (5, 1, 5, 'Kontakt', '...', 'yes', 'kontakt', NULL);
+INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (6, 1, 6, 'Volná položka', '...', 'no', 'volna-polozka', NULL);
+INSERT INTO `mudr`.`menuItems` (`id`, `idusers`, `itemId`, `itemName`, `itemContent`, `itemPublished`, `itemNameRouteCs`, `lastChange`) VALUES (8, 1, 1, 'Úvod', '<p><span style=\"color:#ff0000;\"><em>Na prvn&iacute; str&aacute;nce je vhodn&eacute; stručn&eacute; uv&eacute;st z&aacute;kladni informace o V&aacute;s, Va&scaron;&iacute; ambulanci, poskytovan&yacute;ch služb&aacute;ch. Např.:</em></span></p><p>&nbsp;</p><h2><strong>V&iacute;tejte na na&scaron;ich str&aacute;nk&aacute;ch!</strong></h2><p>&nbsp;</p><p>Na&scaron;e ambulance poskytuje zdravotn&iacute; p&eacute;či již od roku 2000. Na&scaron;im c&iacute;lem jsou spokojen&iacute; pacienti, kter&yacute;m se vždy dostane odpovědn&eacute; p&eacute;če.</p><p>&nbsp;</p><p>Pokud m&aacute;te nějak&eacute; zdrvotn&iacute; pot&iacute;že nev&aacute;hejte n&aacute;s nav&scaron;t&iacute;vit na adrese uveden&eacute; v sekci Kontakt. Jme V&aacute;m k dispozici každ&yacute; v&scaron;edn&iacute; den od 7:00 do 16:00, viz Ordinačn&iacute; hodiny (n&iacute;že)</p><p>&nbsp;</p><p>&nbsp;</p><p><span style=\"color:#ff0000;\"><em>Můžete tak&eacute; uv&eacute;st např.</em></span></p><h1><img alt=\"\" src=\"http://mudrweb.cz/images/commonGallery/galerie/ilustracni_obrazky/3Dman/3DMUZ_004.jpg\" style=\"width: 147px; height: 252px; float: right;\" /></h1><h2><strong>Ordinačn&iacute; hodiny</strong></h2>', 'yes', 'uvod', NULL);
 
 COMMIT;
 
@@ -258,7 +329,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `gender`, `email`, `street`, `city`, `zip`, `region`, `phone`, `lastChange`) VALUES (1, 1, 'Martin', 'Test', 'Ing.', 'Phd.', 'muž', 'zvak.martin@gmail.com', 'Vachova 36/1', 'Brno', '60200', 'jihomoravsky', 737104133, NULL);
+INSERT INTO `mudr`.`users_data` (`id`, `idusers`, `name`, `surname`, `titleBefore`, `titleAfter`, `doctorGroup`, `gender`, `email`, `street`, `city`, `zip`, `region`, `streetInvoice`, `cityInvoice`, `zipInvoice`, `phone`, `ic`, `dic`, `addressMatch`, `lastChange`) VALUES (1, 1, 'Martin', 'Test', 'Ing.', 'Phd.', '302 dětská kardiologie', 'muž', 'zvak.martin@gmail.com', 'Vachova 36/1', 'Brno', '60200', 'jihomoravsky', 'Vachova 36/1', 'Brno', '60200', 737104133, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -267,7 +338,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mudr`;
-INSERT INTO `mudr`.`users_websiteData` (`id`, `idusers`, `layout`, `layout_group`, `header1`, `header2`, `title`, `description`, `keywords`, `headerImage`, `colourScheme`, `lastChange`) VALUES (1, 1, 'layout_kardio1', 'kardio', 'MUDr. Richard Pokorný', 'Kardiologická ambulance', 'MUDr. Richard Pokorný - Kardiologická ambulance', 'Ordinace kardiologie - MUDr. Richard Pokorný', 'EKG, kardiologie, interní, interna, MUDr., lékař, ambulance, ordinace', NULL, NULL, NULL);
+INSERT INTO `mudr`.`users_websiteData` (`id`, `idusers`, `layout`, `layout_group`, `header1`, `header2`, `title`, `description`, `keywords`, `headerImage`, `colourScheme`, `lastChange`) VALUES (1, 1, 'layout_A1', 'all', 'MUDr. Richard Pokorný', 'Kardiologická ambulance', 'MUDr. Richard Pokorný - Kardiologická ambulance', 'Ordinace kardiologie - MUDr. Richard Pokorný', 'EKG, kardiologie, interní, interna, MUDr., lékař, ambulance, ordinace', NULL, NULL, NULL);
 
 COMMIT;
 
@@ -299,5 +370,23 @@ COMMIT;
 START TRANSACTION;
 USE `mudr`;
 INSERT INTO `mudr`.`guestBook` (`id`, `idusers`, `guestBookUserName`, `guestBookPublished`, `lastChange`) VALUES (1, 1, 'Martin Test', 'no', NULL);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `mudr`.`resellers`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mudr`;
+INSERT INTO `mudr`.`resellers` (`id`, `fullName`, `fullAddress`, `accountNumber`, `phone`, `email`, `resellersSponsoringNumber`) VALUES (0, 'admin', 'hidden', '132456789', 123456, 'hidden', NULL);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `mudr`.`lastSearchItems`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mudr`;
+INSERT INTO `mudr`.`lastSearchItems` (`id`, `searchData`) VALUES (1, 'dummy');
 
 COMMIT;
