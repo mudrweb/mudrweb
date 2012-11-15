@@ -288,60 +288,32 @@ class MenuItemsManager extends Nette\Object {
                         na&scaron;e pracovi&scaron;tě je smluvn&iacute;m partnerem n&aacute;sleduj&iacute;c&iacute;h poji&scaron;ťoven:</p>
                 <p>
                         &nbsp;</p>
-                <p>
-                        <span style="color:#ff0000;"><em>(nehod&iacute;c&iacute; smažte)</em></span></p>
-                <table border="0" cellpadding="1" cellspacing="1" style="width: 700px; height: 336px;">
+                <table border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
                         <tbody>
                                 <tr>
                                         <td>
-                                                <h3>
-                                                        <a href="http://www.ozp.cz/" target="_blank">Oborov&aacute; zdravotn&iacute; poji&scaron;ťovna zaměstnanců bank, poji&scaron;ťoven a stavebnictv&iacute; (207)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.rbp-zp.cz/" target="_blank">Rev&iacute;rn&iacute; bratrsk&aacute; pokladna (213)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.vozp.cz/default.aspx" target="_blank">Vojensk&aacute; zdravotn&iacute; poji&scaron;ťovna ČR (201)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.vzp.cz/cms/internet/cz/" target="_blank">V&scaron;eobecn&aacute; zdravotn&iacute; poji&scaron;ťovna ČR (111)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.zpskoda.cz/cs/" target="_blank">Zaměstnaneck&aacute; poji&scaron;ťovna &Scaron;KODA (209)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.zpagel.cz/" target="_blank">Zdravotn&iacute; poji&scaron;ťovna AGEL (227)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.zpma.cz/" target="_blank">Zdravotn&iacute; poji&scaron;ťovna METAL-ALIANCE (217)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.zpmvcr.cz/" target="_blank">Zdravotn&iacute; poji&scaron;ťovna ministerstva vnitra ČR (211)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.mediazp.cz/" target="_blank">Zdravotn&iacute; poji&scaron;ťovna M&eacute;dia (228)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.cnzp.cz/" target="_blank">Česk&aacute; n&aacute;rodn&iacute; zdravotn&iacute; poji&scaron;ťovna (222)</a></h3>
-                                                <h3>
-                                                        &nbsp;</h3>
-                                                <h3>
-                                                        <a href="http://www.hzp.cz/main/index.php" target="_blank">Česk&aacute; průmyslov&aacute; zdravotn&iacute; poji&scaron;ťovna (205)</a></h3>
-                                        </td>
+                                                <a href="http://www.cpzp.cz/" target="_blank"><img alt="Česká průmyslová zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/cpzp.gif" style="width: 196px; height: 121px;" /></a></td>
                                         <td>
-                                                <img alt="" src="http://mudrweb.cz/images/commonGallery/galerie/ilustracni_obrazky/3Dman/3DMUZ_008.jpg" style="width: 346px; height: 346px;" /></td>
+                                                <a href="http://www.ozp.cz/" target="_blank"><img alt="Oborová zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/ozp.gif" style="width: 196px; height: 121px;" /></a></td>
+                                        <td>
+                                                <a href="http://www.rbp-zp.cz/" target="_blank"><img alt="Revírní bratrská pokladna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/rbp.gif" style="width: 196px; height: 121px;" /></a></td>
+                                        <td>
+                                                <a href="http://www.vozp.cz/" target="_blank"><img alt="Vojenská zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/vozp.gif" style="width: 196px; height: 121px;" /></a></td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <a href="http://www.vzp.cz/" target="_blank"><img alt="Všeobecná zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/vzp.gif" style="width: 196px; height: 121px;" /></a></td>
+                                        <td>
+                                                <a href="http://www.zpmvcr.cz/" target="_blank"><img alt="Zdravotní pojišťovna ministerstva vnitra" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/zpmv.gif" style="width: 196px; height: 121px;" /></a></td>
+                                        <td>
+                                                <a href="http://www.zpskoda.cz/" target="_blank"><img alt="Zaměstnanecká pojišťovna Škoda" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/zps.gif" style="width: 196px; height: 121px;" /></a></td>
+                                        <td>
+                                                &nbsp;</td>
                                 </tr>
                         </tbody>
                 </table>
+                <p>
+                        &nbsp;</p>                
                 <p>
                         &nbsp;</p>
                ',              

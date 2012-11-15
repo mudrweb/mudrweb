@@ -249,7 +249,11 @@
     'galerie/ikony/KAT13',
     'galerie/ikony/KAT14',
     'galerie/ikony/KAT15'            
-    ];        
+    ];       
+    
+    galleryPathsInsuranceCompanyComplete = [
+    'galerie/pojistovny'
+    ];    
 
 browser.initFiles = function() {
     $(document).unbind('keydown');
@@ -425,6 +429,11 @@ browser.returnFile = function(file) {
                 ? file : 'http://mudrweb.cz/images/commonGallery/' + browser.dir + '/' + file.data('name');
         fileURL = _.escapeDirs(fileURL);                
     }
+    else if (browser.dir in oc(galleryPathsInsuranceCompanyComplete) == true) {
+        fileURL = file.substr
+                ? file : 'http://mudrweb.cz/images/commonGallery/' + browser.dir + '/' + file.data('name');
+        fileURL = _.escapeDirs(fileURL);                
+    }        
     // gallery addon end
     
     if (this.opener.CKEditor) {
@@ -799,7 +808,10 @@ browser.menuFile = function(file, e) {
             } 
             else if (this.browser.dir in oc(galleryPathsIconsComplete) == true) {
                 url = _.escapeDirs('/images/commonGallery/' + this.browser.dir + '/' + data.name) + '?ts=' + ts;
-            }             
+            }      
+            else if (this.browser.dir in oc(galleryPathsInsuranceCompanyComplete) == true) {
+                url = _.escapeDirs('/images/commonGallery/' + this.browser.dir + '/' + data.name) + '?ts=' + ts;
+            }            
             else {
             // gallery addon end
                 url = _.escapeDirs(browser.uploadURL + '/' + browser.dir + '/' + data.name) + '?ts=' + ts;                

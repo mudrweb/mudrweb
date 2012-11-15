@@ -20,7 +20,7 @@ class MailingsPresenter extends BasePresenter
         $identifier = substr($inputToken, 0, 2);
         $token = substr($inputToken, 3);
         
-        // reg confirmation (rc)
+        // 1st mailing
         if ($token == '201210') {               
             $this->setView('201210');            
         } else {

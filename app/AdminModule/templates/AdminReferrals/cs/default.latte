@@ -38,7 +38,11 @@
                                         <tr>
                                             <td style="text-align: left; border: none;">
                                                 <!-- titleBefor name surname titleAfter -->
-                                                {$user[10] . ' ' . $user[1] . ' ' . $user[2] . ' ' . $user[11]}
+                                                {if $user[11] != ''}
+                                                    {$user[10] . ' ' . $user[1] . ' ' . $user[2] . ', ' . $user[11]}
+                                                {else}
+                                                    {$user[10] . ' ' . $user[1] . ' ' . $user[2]}
+                                                {/if}
                                             </td>
                                         </tr>
                                         <tr>
@@ -56,15 +60,31 @@
                                         <tr>
                                             <td style="text-align: left; border: none;">
                                                 <!-- subdomain -->
-                                                <a href="http://www.mudrweb.cz/{$user[3]}" class="user_list" target="_blank">{$user[3]}</a>
+                                                <a href="http://www.mudrweb.cz/{$user[20]}" class="user_list" target="_blank">{$user[20]}</a>
                                             </td>
                                         </tr>
+                                        {if $user[15] != ''}
                                         <tr>
                                             <td style="text-align: left; border: none;">
                                                 <!-- IC -->
                                                 {$user[15]}
                                             </td>
                                         </tr>
+                                        {/if}
+                                        {if $user[21] != ''}
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- DIC -->
+                                                {$user[21]}
+                                            </td>
+                                        </tr>        
+                                        {/if}
+                                        <tr>
+                                            <td style="text-align: left; border: none;">
+                                                <!-- Date from -->
+                                                {$user[8]}
+                                            </td>
+                                        </tr>                                               
                                     </table>
                                 </td>
                                 <td>

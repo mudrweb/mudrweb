@@ -581,7 +581,7 @@ class RegistrationPresenter extends BasePresenter {
         
         $this->template->done = $section->step3Completed;        
         $this->template->program = $section->program;        
-        $this->template->name = $section->dataArray_users_data[1] . $section->dataArray_users_data[2];
+        $this->template->name = $section->dataArray_users_data[1] . ' ' . $section->dataArray_users_data[2];
         $this->template->email = $section->dataArray_users_data[5];
         $this->template->subdomain = $section->subdomain;
     }      

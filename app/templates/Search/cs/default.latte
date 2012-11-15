@@ -69,7 +69,7 @@
         
             <table cellspacing="0">          
                     <tr>                            
-                        <td class="td_input_search"><div class="search_h3">a zadejte hledaný výraz:</div>{input searchInput} &nbsp; {input submit}</td>
+                        <td class="td_input_search"><div class="search_h3">a zadejte hledaný text:</div>{input searchInput} &nbsp; {input submit}</td>
                     </tr>    
             </table>                                                  
             
@@ -108,14 +108,20 @@
                 {foreach $data as $dat}
                     <div class="search_results">
                         <div class="search_result">
-                            <span class="credents">{$dat[0]} {$dat[1]} {$dat[2]}, {$dat[3]}</span> - <a href='http://{$dat[10]}.mudrweb.cz' target="_blank">{$dat[10]}.mudrweb.cz</a>
+                            <span class="credents">
+                                {if $dat[3] != ''}
+                                    {$dat[0]} {$dat[1]} {$dat[2]}, {$dat[3]}
+                                {else}
+                                    {$dat[0]} {$dat[1]} {$dat[2]}
+                                {/if}
+                            </span> - <a href='http://{$dat[10]}.mudrweb.cz' target="_blank">{$dat[10]}.mudrweb.cz</a>
                             <br />                            
-                            {if $dat[8] == 'Hlavní město Praha'}
-                                {$dat[5]}, {$dat[6]}, {$dat[7]}, Hlavní město Praha
+                            {if $dat[8] == 'Hlavní město Praha'}                                
+                                {$dat[4]}, {$dat[7]}, Hlavní město Praha
                             {elseif $dat[8] == 'Vysočina'}
-                                {$dat[5]}, {$dat[6]}, {$dat[7]}, Kraj {$dat[8]}
+                                {$dat[4]}, {$dat[7]}, Kraj {$dat[8]}
                             {else}
-                                {$dat[5]}, {$dat[6]}, {$dat[7]}, {$dat[8]} kraj
+                                {$dat[4]}, {$dat[7]}, {$dat[8]} kraj
                             {/if}
                             <br />
                         </div>

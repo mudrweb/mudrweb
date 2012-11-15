@@ -541,6 +541,10 @@ class browser extends uploader {
     '/galerie/ikony/KAT15'            
     );    
     
+    protected $galleryPathsInsuranceCompanyComplete = array(
+    '/galerie/pojistovny'
+    );       
+    
     public function __construct() {
         parent::__construct();
 
@@ -637,7 +641,14 @@ class browser extends uploader {
                         @mkdir($galleryDir, $this->config['dirPerms']);
                     }
                 }
-            }                       
+            }
+            
+        // pojistovny    
+        $galleryDir = $this->config['uploadDir'] . "/galerie/pojistovny";
+        if (is_dir($galleryDir)) {            
+        } else {
+            @mkdir($galleryDir, $this->config['dirPerms']);
+        } 
         // gallery addon end                
                 
         $this->thumbsDir = $thumbsDir;
@@ -880,6 +891,9 @@ class browser extends uploader {
         else if (in_array($dir_tmp, $this->galleryPathsIconsComplete)) {
             $dir = "/CORE/mudrweb.cz/www/images/commonGallery/" . $dir_tmp;
         }             
+        else if (in_array($dir_tmp, $this->galleryPathsInsuranceCompanyComplete)) {
+            $dir = "/CORE/mudrweb.cz/www/images/commonGallery/" . $dir_tmp;
+        }              
         // gallery addon end
         
         if (!isset($this->post['dir']) ||
@@ -1377,6 +1391,13 @@ class browser extends uploader {
             $commonGalleryPath = 'commonGallery' . $tmp_dir;
             $tumbsPath = '/.thumbs' . $tmp_dir . '/';        
         }             
+        else if (in_array($tmp_dir, $this->galleryPathsInsuranceCompanyComplete)) {                 
+            $thumbDir_cgallery = "{$this->config['uploadDir']}/{$this->config['thumbsDir']}/galerie";
+            $dir_cgallery = "/CORE/mudrweb.cz/www/images/commonGallery" . $tmp_dir;        
+            $files_cgallery = dir::content($dir_cgallery, array('types' => "file"));                             
+            $commonGalleryPath = 'commonGallery' . $tmp_dir;
+            $tumbsPath = '/.thumbs' . $tmp_dir . '/';        
+        }           
 //        $myFile = "testFile.txt";
 //        $fh = fopen($myFile, 'w');
 //        fwrite($fh, count($files_cgallery)); 
@@ -1529,8 +1550,14 @@ class browser extends uploader {
                 $matchCounterIconsEndFolders++;
             }        
         }        
-                     
-        if ($matchCounterColours > 0 || $matchCounterIllustrativeImagesEndFolders > 0 || $matchCounterIconsEndFolders > 0) {
+        // end folder pojistovny            
+        $matchCounterInsuranceCompanyEndFolders = 0;        
+        if (strpos($dir, 'pojistovny')) {        
+            $matchCounterInsuranceCompanyEndFolders++;
+        }                
+        
+        if ($matchCounterColours > 0 || $matchCounterIllustrativeImagesEndFolders > 0 
+                || $matchCounterIconsEndFolders > 0) {
             $writable = dir::isWritable($dir);
             $info = array(
                 'name' => stripslashes(basename($dir)),

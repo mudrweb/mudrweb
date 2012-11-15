@@ -67,12 +67,13 @@ class AdminReferralsPresenter extends AdminPresenter {
                        $idLength = Strings::length($user->id);                       
                        $idToBeDisplayed = Strings::padLeft($user->id, 5, '0');                                              
                        
-                       // 20 array items
+                       // 22 array items
                        $usersArray[] = array(intval($user->id), $users_data->name, $users_data->surname,
                             $user->usersSponsoringNumber, $user->program, $dateOfRegistration, $user->accountStatus, 
                             $dateOfActivation, $dateFrom, $dateTo, $users_data->titleBefore, $users_data->titleAfter,
                             $users_data->street, $users_data->city, $users_data->zip, $users_data->ic, $referralBonus,
-                            $user->usedReferralBonus, $remainingReferralBonus, $idToBeDisplayed);                
+                            $user->usedReferralBonus, $remainingReferralBonus, $idToBeDisplayed,
+                            $user->subdomain, $users_data->dic);                
                     } else {
                         throw new \Nette\Application\BadRequestException('Unable to load user websiteData (AdminModule - adminReferrals presenter).', 404);                    
                     }
