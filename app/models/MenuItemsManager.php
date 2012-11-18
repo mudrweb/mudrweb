@@ -288,7 +288,7 @@ class MenuItemsManager extends Nette\Object {
                         na&scaron;e pracovi&scaron;tě je smluvn&iacute;m partnerem n&aacute;sleduj&iacute;c&iacute;h poji&scaron;ťoven:</p>
                 <p>
                         &nbsp;</p>
-                <table border="0" cellpadding="1" cellspacing="1" style="width: 500px;">
+                <table border="0" cellpadding="1" cellspacing="1" height="381" width="606">
                         <tbody>
                                 <tr>
                                         <td>
@@ -297,25 +297,29 @@ class MenuItemsManager extends Nette\Object {
                                                 <a href="http://www.ozp.cz/" target="_blank"><img alt="Oborová zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/ozp.gif" style="width: 196px; height: 121px;" /></a></td>
                                         <td>
                                                 <a href="http://www.rbp-zp.cz/" target="_blank"><img alt="Revírní bratrská pokladna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/rbp.gif" style="width: 196px; height: 121px;" /></a></td>
-                                        <td>
-                                                <a href="http://www.vozp.cz/" target="_blank"><img alt="Vojenská zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/vozp.gif" style="width: 196px; height: 121px;" /></a></td>
                                 </tr>
                                 <tr>
+                                        <td>
+                                                <a href="http://www.vozp.cz/" target="_blank"><img alt="Vojenská zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/vozp.gif" style="width: 196px; height: 121px;" /></a></td>
                                         <td>
                                                 <a href="http://www.vzp.cz/" target="_blank"><img alt="Všeobecná zdravotní pojišťovna" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/vzp.gif" style="width: 196px; height: 121px;" /></a></td>
                                         <td>
                                                 <a href="http://www.zpmvcr.cz/" target="_blank"><img alt="Zdravotní pojišťovna ministerstva vnitra" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/zpmv.gif" style="width: 196px; height: 121px;" /></a></td>
+                                </tr>
+                                <tr>
                                         <td>
                                                 <a href="http://www.zpskoda.cz/" target="_blank"><img alt="Zaměstnanecká pojišťovna Škoda" src="http://mudrweb.cz/images/commonGallery/galerie/pojistovny/zps.gif" style="width: 196px; height: 121px;" /></a></td>
+                                        <td>
+                                                &nbsp;</td>
                                         <td>
                                                 &nbsp;</td>
                                 </tr>
                         </tbody>
                 </table>
                 <p>
-                        &nbsp;</p>                
-                <p>
                         &nbsp;</p>
+                <p>
+                        &nbsp;</p>                
                ',              
                'itemPublished' => 'yes', 
                'itemNameRouteCs' => 'smluvni-pojistovny'

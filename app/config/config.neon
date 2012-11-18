@@ -15,8 +15,8 @@ common:
 
 		globalSettings:
 			referralBonusValuePerItem: '20'
-			compatibleBrowsers: 'Optimalizováno pro prohlížeče IE9+, Firefox 13+ a Google Chrome 20+'
-			lastUpdate: 'Aktualizováno dne 12.09.2012'
+			compatibleBrowsers: 'Optimalizováno pro prohlížeče IE9+, Firefox 16+ a Google Chrome 23+'
+			lastUpdate: 'Aktualizováno dne 18.11.2012'
 			regionList: { jihocesky : Jihočeský, 
                                     jihomoravsky : Jihomoravský, 
                                     karlovarsky : Karlovarský, 

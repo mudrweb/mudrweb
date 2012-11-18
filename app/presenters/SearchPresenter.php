@@ -212,11 +212,13 @@ class SearchPresenter extends BasePresenter
                 foreach ($serachResults as $serachResult) {
                     $user = $this->db_users->getUserById(intval($serachResult));
                     $users_data = $this->db_users->getUsersDataById(intval($serachResult));
-                    if ($user && $users_data) {                    
-                        $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
-                                $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup, 
-                                $users_data->email, $users_data->street, $users_data->city, 
-                                $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);                            
+                    if ($user && $users_data) {
+                        if ($user->id != 0 && $user->id != 1) {
+                            $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
+                                    $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup, 
+                                    $users_data->email, $users_data->street, $users_data->city, 
+                                    $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);                            
+                        }
                     }
                 }            
 
@@ -275,10 +277,12 @@ class SearchPresenter extends BasePresenter
                 $user = $this->db_users->getUserById(intval($serachResult));
                 $users_data = $this->db_users->getUsersDataById(intval($serachResult));
                 if ($user && $users_data) {
-                    $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
-                            $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup,
-                            $users_data->email, $users_data->street, $users_data->city, 
-                            $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);
+                    if ($user->id != 0 && $user->id != 1) {
+                        $searchResultsPostProcessing[] = array($users_data->titleBefore, $users_data->name, 
+                                $users_data->surname, $users_data->titleAfter, $users_data->doctorGroup,
+                                $users_data->email, $users_data->street, $users_data->city, 
+                                $this->regionsList[$users_data->region], $users_data->phone, $user->subdomain);
+                    }
                 }
             }            
             
